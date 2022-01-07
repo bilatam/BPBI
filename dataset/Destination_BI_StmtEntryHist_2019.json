@@ -1,0 +1,24 @@
+{
+	"name": "Destination_BI_StmtEntryHist_2019",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "TransT24.BI_StmtEntryHist_2019.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

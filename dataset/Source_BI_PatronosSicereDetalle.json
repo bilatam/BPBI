@@ -1,0 +1,82 @@
+{
+	"name": "Source_BI_PatronosSicereDetalle",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Ptd_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Ptd_Pk_NumPatronal",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_FK_CedulaJuridica",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_FK_CodActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_NombreJuriObrero",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_NombreJuriPatrono",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_NombreComercialPatrono",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_Ubicacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ptd_Direccion",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_Telefono1",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_Telefono2",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_LugarActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "Ptd_FechaActualizacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ptr_CodUbicacion",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "Sicere",
+			"table": "BI_PatronosSicereDetalle"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

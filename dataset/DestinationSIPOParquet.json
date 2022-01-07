@@ -1,0 +1,284 @@
+{
+	"name": "DestinationSIPOParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sipo"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "TIPO",
+				"type": "INT32"
+			},
+			{
+				"name": "ORIGEN",
+				"type": "INT32"
+			},
+			{
+				"name": "OPERACION",
+				"type": "INT64"
+			},
+			{
+				"name": "PATRONO",
+				"type": "INT32"
+			},
+			{
+				"name": "NCUOTA",
+				"type": "INT32"
+			},
+			{
+				"name": "CAJERO",
+				"type": "UTF8"
+			},
+			{
+				"name": "CPTE",
+				"type": "INT32"
+			},
+			{
+				"name": "AGENCIAR",
+				"type": "INT32"
+			},
+			{
+				"name": "MONTO",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "IMORA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "GASTOS",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "COSTAS",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "HONORARIOS",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "MULTAS",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "COMISION",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "OTRO0",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "OTRO1",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "OTRO2",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "SALDO",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "CUOTA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "ICORR",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "IGAN",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "AMORT",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "PVIDA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "PINC",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "PVEH",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "PGAN",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "EXCESO",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "FRACCION",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "REF",
+				"type": "INT32"
+			},
+			{
+				"name": "TERM",
+				"type": "UTF8"
+			},
+			{
+				"name": "LIBR",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "CEDULA",
+				"type": "INT64"
+			},
+			{
+				"name": "TASA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "CPAG",
+				"type": "INT32"
+			},
+			{
+				"name": "FCONST",
+				"type": "INT32"
+			},
+			{
+				"name": "FVENC",
+				"type": "INT32"
+			},
+			{
+				"name": "FAPLIC",
+				"type": "INT32"
+			},
+			{
+				"name": "FEFEC",
+				"type": "INT32"
+			},
+			{
+				"name": "FPLAN",
+				"type": "INT32"
+			},
+			{
+				"name": "FCALC",
+				"type": "INT32"
+			},
+			{
+				"name": "STATUS",
+				"type": "INT32"
+			},
+			{
+				"name": "CONSEC",
+				"type": "INT32"
+			},
+			{
+				"name": "PRINCIPAL",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "REMANENTE",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "NCUENTA",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "PLAZO",
+				"type": "INT32"
+			},
+			{
+				"name": "REFERENCIA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "NOMBRE",
+				"type": "UTF8"
+			},
+			{
+				"name": "ESTADO",
+				"type": "UTF8"
+			},
+			{
+				"name": "AGECON",
+				"type": "INT32"
+			},
+			{
+				"name": "CTACRX",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "CTACRV",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "CTAPXC",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "CTAIGA",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "HORA",
+				"type": "INT32"
+			},
+			{
+				"name": "CLASIFICAC",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "STATUS206",
+				"type": "UTF8"
+			},
+			{
+				"name": "LIBRETA",
+				"type": "UTF8"
+			},
+			{
+				"name": "TIPO_TASA",
+				"type": "UTF8"
+			},
+			{
+				"name": "GEN_PEND",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "COD_ARCH",
+				"type": "INT32"
+			},
+			{
+				"name": "SELF_AUX",
+				"type": "UTF8"
+			},
+			{
+				"name": "MONEDA",
+				"type": "INT32"
+			},
+			{
+				"name": "RESTO",
+				"type": "DOUBLE"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

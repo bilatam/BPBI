@@ -1,0 +1,106 @@
+{
+	"name": "Run-SessionCustomer-2017-2020-NULL",
+	"properties": {
+		"activities": [
+			{
+				"name": "SessionCustomer-2017",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist_2017",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SessionCustomer-2018",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SessionCustomer-2017",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist_2018",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SessionCustomer-2019",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SessionCustomer-2018",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist_2019",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SessionCustomer-2020",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SessionCustomer-2019",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist_2020",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SessionCustomer-NULL",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SessionCustomer-2020",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist_NULL",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-08T21:54:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

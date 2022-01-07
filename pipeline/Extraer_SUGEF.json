@@ -1,0 +1,104 @@
+{
+	"name": "Extraer_SUGEF",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_SISBI_BI_CICDeudores",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_CICDeudores",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_CICSugef",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_CICSugef",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_DetalleGIEDeudor",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_DetalleGIEDeudor",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_OperacionesActivas",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_OperacionesActivas",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_OperacionesActivasDeudor",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_OperacionesActivasDeudor",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_OperacionesHistoricas",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_OperacionesHistoricas",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_OperacionesHistoricasDeudor",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_OperacionesHistoricasDeudor",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "SUGEF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

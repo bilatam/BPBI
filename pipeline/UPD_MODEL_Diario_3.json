@@ -1,0 +1,138 @@
+{
+	"name": "UPD_MODEL_Diario_3",
+	"properties": {
+		"activities": [
+			{
+				"name": "Partition Datos Segmenta Cliente Ultimo Cierre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Captacion Ultimo Cierre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Datos Segmenta Cliente",
+						"AnalysisServicesParititionName": "Datos Segmenta Cliente Ultimo Cierre",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Captacion Ultimo Cierre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Credito Ultimo Cierre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Captación",
+						"AnalysisServicesParititionName": "Captación Ultimo Cierre",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Credito Ultimo Cierre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Segmenta Cliente Ultimo Cierre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Crédito",
+						"AnalysisServicesParititionName": "Crédito Ultimo Cierre",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Segmenta Cliente Ultimo Cierre",
+				"type": "WebHook",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Segmenta Cliente",
+						"AnalysisServicesParititionName": "Segmenta Cliente Último Cierre",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00",
+					"reportStatusOnCallBack": false
+				}
+			}
+		],
+		"parameters": {
+			"Database": {
+				"type": "string",
+				"defaultValue": "AS_Popular"
+			},
+			"CredentialName": {
+				"type": "string",
+				"defaultValue": "SQLDW-Cred-cjavier"
+			},
+			"AnalysisService": {
+				"type": "string",
+				"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+			},
+			"PartitionRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=dN5LvKfZP64EjHbGwueI%2beawl%2bXbzMdFwVEZ7eaBlPI%3d"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-24T04:14:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

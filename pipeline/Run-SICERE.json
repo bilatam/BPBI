@@ -1,0 +1,126 @@
+{
+	"name": "Run-SICERE",
+	"properties": {
+		"activities": [
+			{
+				"name": "SP_DWH_Carga_DIM_SICEREObrero",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Extraer_SICERE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SICEREObrero",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_SICEREPatron",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SICEREObrero",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SICEREPatron",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_SICEREAntiguedad",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SICEREPatron",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_SICEREAntiguedad",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_SICEREPeriodo",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_FACT_SICEREAntiguedad",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_SICEREPeriodo",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Extraer_SICERE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer_SICERE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Extraer_SICERE",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer_SICERE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extraer_SICERE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

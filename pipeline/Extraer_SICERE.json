@@ -1,0 +1,117 @@
+{
+	"name": "Extraer_SICERE",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_SISBI_SICERE_BI_ActEconomicaPatSicere",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_SICERE_BI_ActEconomicaPatSicere",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_PatronosSicere",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_PatronosSicere",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_SICERE_BI_PatronosSicereDetalle",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_SICERE_BI_PatronosSicereDetalle",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_PeriodosSalariosSicere",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_PeriodosSalariosSicere",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_BI_ResuSICERE",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_ResuSICERE",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_SICERE_BI_TipoIdnTrabSicere",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_SICERE_BI_TipoIdnTrabSicere",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_SICERE_BI_TrabajadoresSicere",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_SICERE_BI_TrabajadoresSicere",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_SISBI_SICERE_BI_TrabajadoresSicResumen",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_SICERE_BI_TrabajadoresSicResumen",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

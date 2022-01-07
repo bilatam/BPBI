@@ -1,0 +1,41 @@
+{
+	"name": "Source_BI_EBAfiliaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Afl_FK_Usuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Afl_FechaAfiliacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Afl_SistemaAfiliado",
+				"type": "varchar"
+			},
+			{
+				"name": "Afl_FechaCarga",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_EBAfiliaciones"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

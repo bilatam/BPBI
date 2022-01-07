@@ -1,0 +1,26 @@
+{
+	"name": "01-Diario",
+	"properties": {
+		"activities": [
+			{
+				"name": "011-Diario-STARH",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "011-Diario-STARH",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-18T16:48:26Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

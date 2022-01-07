@@ -1,0 +1,32 @@
+{
+	"name": "TRG_DIARIO",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "01-Diario",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2021-06-07T02:55:00Z",
+				"timeZone": "UTC",
+				"schedule": {
+					"minutes": [
+						1
+					],
+					"hours": [
+						0
+					]
+				}
+			}
+		}
+	}
+}

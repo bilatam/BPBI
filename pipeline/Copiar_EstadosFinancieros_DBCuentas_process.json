@@ -1,0 +1,476 @@
+{
+	"name": "Copiar_EstadosFinancieros_DBCuentas_process",
+	"properties": {
+		"activities": [
+			{
+				"name": "ForEach2",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator2",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"2',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach1",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator1",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"1',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach3",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator3",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"3',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach4",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator4",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"4',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach5",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator5",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"5',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach6",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator6",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"6',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach7",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator7",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"7',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach8",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator8",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"8',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "ForEach9",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Clean Date",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@range(0,10)",
+						"type": "Expression"
+					},
+					"batchCount": 3,
+					"activities": [
+						{
+							"name": "CCDatabaseGenerator9",
+							"type": "AzureFunctionActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "7.00:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"functionName": "CCDatabaseGenerator",
+								"method": "POST",
+								"body": {
+									"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"9',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+									"type": "Expression"
+								}
+							},
+							"linkedServiceName": {
+								"referenceName": "AF_AuditoriaInterna",
+								"type": "LinkedServiceReference"
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Clean Date",
+				"type": "Delete",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "DBCuentasParquet",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": {
+							"value": "@{concat(pipeline().parameters.filedate, '.*.BDCuentas.xlsx.parquet')}",
+							"type": "Expression"
+						},
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"parameters": {
+			"filedate": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"counter1": {
+				"type": "String",
+				"defaultValue": "1"
+			}
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-01T03:59:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

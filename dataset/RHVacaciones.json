@@ -1,0 +1,20 @@
+{
+	"name": "RHVacaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "STARH",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/STARH"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "RH",
+			"table": "SRH125"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

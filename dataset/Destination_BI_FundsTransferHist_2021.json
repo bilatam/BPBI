@@ -1,0 +1,24 @@
+{
+	"name": "Destination_BI_FundsTransferHist_2021",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "TransT24.BI_FundsTransferHist_2021.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

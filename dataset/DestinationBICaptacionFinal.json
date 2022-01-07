@@ -1,0 +1,28 @@
+{
+	"name": "DestinationBICaptacionFinal",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.BI_CaptacionFinal.parquet')\n\n",
+					"type": "Expression"
+				},
+				"folderPath": "captacionfinal",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

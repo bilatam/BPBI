@@ -1,0 +1,216 @@
+{
+	"name": "Copiar_TSE_NACIMIENTOS",
+	"properties": {
+		"activities": [
+			{
+				"name": "DeleteNacimiento",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Split_Nacimientos",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceMatrimonioTXT",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.MOVWEBNAC.txt",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Unzip",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "Rename_Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "unzip",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "nacimientos/*.zip",
+						"fileToUnzipName": "MOVWEBNAC.txt",
+						"deleteFile": "yes"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteNacimiento",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "TSE/Nacimientos",
+						"cant": 1
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Rename_Files",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "SharepointDownloadFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "addDateToFile",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "nacimientos/*.zip"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Split_Nacimientos",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "Unzip",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_SPLIT_NACIMIENTO",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "SharepointDownloadFiles",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointDownloadFiles",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "TSE/Nacimientos",
+						"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"pathDestiny": "nacimientos"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

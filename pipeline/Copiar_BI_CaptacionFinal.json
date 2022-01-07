@@ -1,0 +1,3558 @@
+{
+	"name": "Copiar_BI_CaptacionFinal",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_BI_CaptacionFinal",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.BI_CaptacionFinal"
+					},
+					{
+						"name": "Destination",
+						"value": "captacionfinal//BI.CaptacionFinal"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT \n [PVS_FechCarga]\n      ,[Pvo_FK_UICT24]\n      ,[VCPF_ContadorProducto]\n      ,[Pvs_PK_IDProducto]\n      ,[Pvs_FK_CategPasivo]\n      ,[Pvs_Saldo]\n      ,[VCPF_SaldoColonizado]\n      ,[Pvs_IntereGanados]\n      ,[Pvs_IntereGanadsColoniz]\n      ,[Pvs_FechUltModificacion]\n      ,[Pvs_AnoUltiModificacion]\n      ,[Pvs_MesUltiModificacion]\n      ,[Pvs_DiaUltiModificacion]\n      ,[Pvo_FK_IDCliente]\n      ,[Pvo_Moneda]\n      ,[Pvo_TipoMoneda]\n      ,[Pvo_FK_OficinaProd]\n      ,[Pvo_ProductoOCuenta390]\n      ,[CertificadoOCuenta]\n      ,[Pvo_ReferenciaLocal]\n      ,[Pvo_FechUltiAcreditacion]\n      ,[Pvo_AnoUltiacreditacion]\n      ,[Pvo_MesUltiacreditacion]\n      ,[Pvo_DiaUltiacreditacion]\n      ,[Pvo_UltiMontAcreditado]\n      ,[Pvo_CodUltiAcreditacion]\n      ,[Pvo_FechUltimAcrediBanco]\n      ,[Pvo_AnoUltimAcrediBanco]\n      ,[Pvo_MesUltimAcrediBanco]\n      ,[Pvo_DiaUltimAcrediBanco]\n      ,[Pvo_MontUltiAcredBanco]\n      ,[Pvo_CodUltiAcredManco]\n      ,[Pvo_FechUltiDebito]\n      ,[Pvo_AnoUltiDebito]\n      ,[Pvo_MesUltiDebito]\n      ,[Pvo_DiaUltiDebito]\n      ,[Pvo_MontUltDebito]\n      ,[Pvo_CodUltDebito]\n      ,[Pvo_FechUltDebiBanco]\n      ,[Pvo_MontUltDebiBanco]\n      ,[Pvo_CodUltDebiBanco]\n      ,[Pvo_FechsCargoAcreditac]\n      ,[Pvo_FechsCargoInters1]\n      ,[Pvo_FechsCargoInters2]\n      ,[Pvo_FechsDebitInters1]\n      ,[Pvo_FechsDebitInters2]\n      ,[Pvo_CodCategContable]\n      ,[Pvo_CodPagoInteres]\n      ,[Pvo_FechAperProducto]\n      ,[Pvo_AnoAperProducto]\n      ,[Pvo_MesAperProducto]\n      ,[Pvo_DiaAperProducto]\n      ,[VCPF_ProductoEstatus]\n      ,[VCPF_ProductoNuevo]\n      ,[VCPF_FechEmisiProduct]\n      ,[VCPF_DiaEmisiProduct]\n      ,[VCPF_MesEmisiProduct]\n      ,[VCPF_AnoEmisiProduct]\n      ,[VCPF_Mesactual]\n      ,[VCPF_TipoMonePagInteres]\n      ,[l_auto]\n      ,[Pvo_IdentifiAutorizados]\n      ,[Pvo_CodParentAutorizados]\n      ,[Pvo_Observaciones]\n      ,[Pvo_FechaBloqueo]\n      ,[Pvo_AnoBloqueo]\n      ,[Pvo_MesBloqueo]\n      ,[Pvo_DiaBloqueo]\n      ,[Pvo_MontoBloqueado]\n      ,[Pvo_NumCuentaOProducto]\n      ,[Pvo_TotalModificaciones]\n      ,[Pvo_CodEstadoProducto]\n      ,[Pvo_EstadoProducto]\n      ,[Psf_MontoPrincipal]\n      ,[VCPF_MontPrinciColonizado]\n      ,[Psf_MontOriginalProducto]\n      ,[Psf_MontOrigProduColoniza]\n      ,[Psf_FechConstitucion]\n      ,[Psf_FechConstitucion2]\n      ,[Psf_AnoConstitucion]\n      ,[Psf_MesConstitucion]\n      ,[Psf_DiaConstitucion]\n      ,[Psf_FechVencimiento]\n      ,[Psf_AnoVencimiento]\n      ,[Psf_MesVencimiento]\n      ,[Psf_DiaVencimiento]\n      ,[L_FV]\n      ,[VCPF_DiasXVencer]\n      ,[VCPF_EstadoVenciProduc]\n      ,[VCPF_PlazoProducto]\n      ,[Psf_TasInterAnual]\n      ,[Psf_TasInterMensual]\n      ,[Psf_TasaCastigo]\n      ,[Psf_MontInterFinalizPlazo]\n      ,[VCPF_MontIntFinPlazColoniz]\n      ,[PSF_CuentaCupon]\n      ,[Psf_CuentaDeposito]\n      ,[Psf_CuentaOrigen]\n      ,[VCPF_FechVenciFinal]\n      ,[VCPF_AnoVenciFinal]\n      ,[VCPF_MesVenciFinal]\n      ,[VCPF_DiaVenciFinal]\n      ,[Psf_FrecuenciaCupon]\n      ,[L_PC]\n      ,[VALIDADOR]\n      ,[VCPF_FrecPagoCupones]\n      ,[Psf_TasaInterOriginal]\n      ,[Cat_DescripProducto]\n      ,[Cat_TipoProducto]\n      ,[Cat_pk_idCategoria]\n      ,[Tcb_FechTipoCambio]\n      ,[Tcb_TipoCambio]\n      ,[Cat_CodProducto]\n      ,[spc_SaldoTotal]\n      ,[VCPF_Rango]\n      ,[Pvo_UsuarioAutoriza]\n      ,[l_usu]\n      ,[Pvo_CodUsuario]\n      ,[Pvo_Usuario]\n      ,[Pbp_NombreUsuario]\n      ,[VCPF_MedioFormalProduc]\n      ,[TMFPROD]\n      ,[Age_PK_CodAgencia]\n      ,[Age_OficinaNombre]\n      ,[Age_Sucursal]\n      ,[Zon_Division]\n      ,[Tpa_TipoOficina]\n      ,[Reg_REGION]\n      ,[CLF_EstadoProducto]\n      ,[Psf_CuotaAhorro]\n      ,[Psf_CantCuotas]\n      ,[l_cuotas]\n      ,[Clc_FK_ClienteCorporativo]\n      ,[CLF_CodEjecBPGlobal]\n      ,[CLF_PK_IdClienteCorto]\n      ,[Cat_CodProducto2]\n      ,[CLF_CedCorta]\n      ,[CLF_CedLarga]\n      ,[BC_PK_IdCliente]\n      ,[CLF_TipDocIdentificacion]\n      ,[CLF_TipoCliente]\n      ,[CLF_Nombre]\n      ,[CLF_CcNombre]\n      ,[CLF_Apellidos]\n      ,[CLF_Apellido1]\n      ,[CLF_Apellido2]\n      ,[CLF_Direccion]\n      ,[CLF_ProvinciaCliente]\n      ,[CLF_CantonCliente]\n      ,[CLF_DistritoCliente]\n      ,[CLF_SectorCliente]\n      ,[CLF_ActivEconomCliente]\n      ,[CLF_FechaNacimiento]\n      ,[CLF_AnoNacimiento]\n      ,[CLF_MesNacimiento]\n      ,[CLF_DiaNacimiento]\n      ,[CLF_FechVenceCedula]\n      ,[CLF_TipoNacionalidad]\n      ,[CLF_DiasXVenceCedu]\n      ,[CLF_EstadVEnciCedula]\n      ,[CLF_PaisOrigen]\n      ,[CLF_EstadoCivil]\n      ,[CLF_PuestLaborCliente]\n      ,[BC_EmpresaTrabaja]\n      ,[CLF_EgresoNeto]\n      ,[CLF_IngresoNeto]\n      ,[CLF_SalarioBruto]\n      ,[CLF_MicrSegSICEREDIM]\n      ,[CLF_TipoMicrSegSICEREDIM]\n      ,[CLF_MicroSegSICEREIngres]\n      ,[CLF_MSGIngreso]\n      ,[CLF_SalarioLiquido]\n      ,[CLF_TelefonosCliente]\n      ,[CLF_TELEFONO1]\n      ,[CLF_TELEFONO2]\n      ,[CLF_TIPOSEXO]\n      ,[CLF_HistoSUGEF]\n      ,[CLF_RegisHistoSUGEF]\n      ,[CLF_HistoBP]\n      ,[CLF_EmailCliente]\n      ,[CLF_PAS]\n      ,[CLF_EstatusAfiliacion]\n      ,[CLF_EstatusCliente]\n      ,[CLFC_Edad]\n      ,[CLF_RangoEdad]\n      ,[CLF_CumplAñosActu]\n      ,[CLF_CumplAñosPoste]\n      ,[CLF_DescriLarga]\n      ,[CLF_NombreCompleto]\n      ,[CLF_ClientSujetArti15]\n      ,[CLF_ClientAseguCCSS]\n      ,[CLF_Patrono]\n      ,[CLF_NumPatronal]\n      ,[CLF_PuntoRef1]\n      ,[CLF_PuntoRef2]\n      ,[CLF_TelOficina1]\n      ,[CLF_TelOficina2]\n      ,[CLF_TelOficina3]\n      ,[CLF_Fax]\n      ,[CLF_LugarNacimiento]\n      ,[CLF_OperadPensiones]\n      ,[CLF_OcupLaboClient]\n      ,[CLF_ClientFuePEP]\n      ,[CLF_ClientEsPEP]\n      ,[CLF_ClientePEP]\n      ,[CLF_DiasXVencerPolitica]\n      ,[CLF_EstatusPolitica]\n      ,[CLF_CodUsuarioCORE]\n      ,[CLF_UsuarioCORE]\n      ,[CLF_NombUsuarioCORE]\n      ,[CLF_PK_CodAgenAsigCORE]\n      ,[CLF_OficiNombreAsigCORE]\n      ,[CLF_SucursalAsigCORE]\n      ,[CLF_DivisionAsiCORE]\n      ,[CLF_TipOficinaAsigCORE]\n      ,[CLF_RegionAsigCORE]\n      ,[CLF_BC_TipoSexo]\n      ,[CLF_TieneAhPlazo]\n      ,[CLF_SaldoPlazo]\n      ,[CLF_TieneAhProgra]\n      ,[CLF_SaldoAhProgramado]\n      ,[CLF_TieneAhVol]\n      ,[CLF_SladoAhVol]\n      ,[Clf_TieneCC]\n      ,[CLF_SSaldoCtasCorri]\n      ,[CLF_TienePAS]\n      ,[CLF_TieneVISA]\n      ,[CLF_SaldoVisa]\n      ,[CLF_NombrePatrono]\n      ,[CLF_SalarioSICERE]\n      ,[CLF_SectorPatrono]\n      ,[CLF_SectorEmpresa]\n      ,[CLF_SegBancaria]\n      ,[VSGC_SegIngresos]\n      ,[Psf_CantiCuotas]\n      ,[Psf_CantRenov]\n      ,[VCPF_PlazoProducto2]\n      ,[VCPF_MontCuotMensual]\n      ,[VCPF_ContadorColones]\n      ,[VCPF_ContadorDolares]\n      ,[VCPF_SaldoSoloColones]\n      ,[VCPF_SaldoSoloDolares]\n      ,[VCPF_ClienteDol]\n      ,[VCPF_ClienteCol]\n      ,[EBG_EjecuBPGlobal]\n      ,[EBG_FK_IdejecBPGlobal]\n      ,[Clc_EjecuCorporativo]\n      ,[Clc_FK_IdCorporativo]\n      ,[VCPF_OficinaCanal]\n      ,[VCPF_CodCanalColocado]\n      ,[spc_MontoSaldo]\n      ,[MDF_ClienteDifunto]\n      ,[PSF_IDPasivo]\n      ,[CKC_CtaCupon]\n      ,[CKC_TotalCupones]\n      ,[CKC_FchIniCUP]\n      ,[CKC_FchVncUltCup]\n      ,[CKC_TotPagoAproxiCup]\n      ,[CKC_CupAvenOvenci]\n      ,[CKC_FechCupActu]\n      ,[CKC_MontCupAct]\n      ,[CKC_CuponSiguiente]\n      ,[CKC_FechVencCupSig]\n      ,[CKC_MontCupSigui]\n      ,[CertificadosPB]\n      ,[SegGeneracional]\n      ,[VCPF_TCumpleaños]\n      ,[VCPF_CumpleAños]\n      ,[Psf_CuotaAhorros]\n      ,[Psf_CantCuotass]\n      ,[CantCuota1]\n      ,[MontoCuota1]\n      ,[CantCuota2]\n      ,[MontoCuota2]\n      ,[Ctc_CtaContSUGEF]\n      ,[CantCuotasFinal]\n      ,[MontoCuotasFinal]\n      ,[FINANCIERO]\n      ,[VCSG_Banca]\n      ,[Pvs_FechPrimAperCapBP]\n      ,[Pvs_RangoAfiCapBP]\n      ,[Pvs_DiasAfiliCapBP]\n      ,[Pvs_MesesAfiliCapBP]\n      ,[Pvs_AñosAfiliCapBP]\n      ,[Pvs_ClieNueCapBP]\n      ,[Pvs_FechPrimAperCapAg]\n      ,[Pvs_RangoAfiCapAg]\n      ,[Pvs_DiasAfiliCapAg]\n      ,[Pvs_MesesAfiliCapAg]\n      ,[Pvs_AñosAfiliCapAg]\n      ,[Pvs_ClieNueCapAg]\n      ,[DESCPRODFINAN]\n      ,[TipoProdFinanciero]\n      ,[CODPROFINAN]\n      ,[BC_EstadoCliente]\n      ,[BC_CodEstadoCli]\n      ,[CEC_DescripEstaCli]\n      ,[Pvo_UltDebFecha]\n      ,[IMF_Age]\n      ,[Fech_MaxMovimiento]\n      ,[Dla_CtaClienteC]\n      ,[Dla_CtaClienteA]\n      ,[Dla_CtaClienteB]\n      ,[Dla_CtaClienteD]\n      ,[Dla_TotalIntereses]\n      ,[Dla_TotalImpuestos]\n      ,[Psf_ClaveImpuesto]\n      ,[Psf_AplicaImpuesto]\n      ,[PSF_TasInteres]\n      ,[PSF_TasIntereOrigi]\n      ,[PSF_TasCastig]\n      ,[Pvo_Restricciones]\n      ,[PSF_CuentDeposit]\n      ,[PSF_CuentOrig]\n      ,[PSF_%Ahorro] AS [PSF_Por_Ahorro]\n      ,[IMF_IUC]\n      ,[Cod_FK_Banca]\n      ,[Banca]\n      ,[SEG_CelularCli]\n      ,[T_tarjeDebito]\n      ,[CantBeneficiarios]\n      ,[TieneBeneficiarios]\n      ,[CedulasBeneficiarios]\n      ,[NombresBeneficiarios]\n      ,[PorcentajesBeneficiarios]\n      ,[ClienteInstitucional]\n      ,[CodMeta]\n      ,[TipoProdFinanciero2]\n      ,[TieneCtaNaranja]\n      ,[SaldoCtaNarana]\n      ,[TienePlanNaranja]\n      ,[SaldoPlanNaranja]\n      ,[TieneTransProgramada]\n      ,[RangoSC]\n      ,[TotalSaldoColozMesanterior]\n      ,[Prt_Descripcion]\n      ,[Prt_Tipo Descripcion] as [Prt_Tipo_Descripcion]\n      ,[ContactarCli]\n      ,[SaldColonizDiciembre] as [SaldColDic] \n      ,[Fech_Mesanterior]\n      ,[Tel1]\n      ,[Tel2]\n      ,[Tel3]\n      ,[Tel4]\n      ,[Te15]\n      ,[Tel6]\n      ,[Tel7]\n      ,[CtaIBAN]\n      , GETDATE() DATE_LOADED\nFROM [dbo].[BI_CaptacionFinal]\n",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "PVS_FechCarga",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "PVS_FechCarga",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FK_UICT24",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_FK_UICT24",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ContadorProducto",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_ContadorProducto",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_PK_IDProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_PK_IDProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_FK_CategPasivo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvs_FK_CategPasivo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_Saldo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvs_Saldo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_SaldoColonizado",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_SaldoColonizado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_IntereGanados",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvs_IntereGanados",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_IntereGanadsColoniz",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvs_IntereGanadsColoniz",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_FechUltModificacion",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvs_FechUltModificacion",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_AnoUltiModificacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_AnoUltiModificacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_MesUltiModificacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_MesUltiModificacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_DiaUltiModificacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_DiaUltiModificacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FK_IDCliente",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_FK_IDCliente",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_Moneda",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_Moneda",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_TipoMoneda",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_TipoMoneda",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FK_OficinaProd",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_FK_OficinaProd",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_ProductoOCuenta390",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_ProductoOCuenta390",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CertificadoOCuenta",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CertificadoOCuenta",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_ReferenciaLocal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_ReferenciaLocal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechUltiAcreditacion",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechUltiAcreditacion",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_AnoUltiacreditacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_AnoUltiacreditacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MesUltiacreditacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_MesUltiacreditacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_DiaUltiacreditacion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_DiaUltiacreditacion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_UltiMontAcreditado",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_UltiMontAcreditado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodUltiAcreditacion",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_CodUltiAcreditacion",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechUltimAcrediBanco",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechUltimAcrediBanco",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_AnoUltimAcrediBanco",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_AnoUltimAcrediBanco",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MesUltimAcrediBanco",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_MesUltimAcrediBanco",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_DiaUltimAcrediBanco",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_DiaUltimAcrediBanco",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MontUltiAcredBanco",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_MontUltiAcredBanco",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodUltiAcredManco",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_CodUltiAcredManco",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechUltiDebito",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechUltiDebito",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_AnoUltiDebito",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_AnoUltiDebito",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MesUltiDebito",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_MesUltiDebito",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_DiaUltiDebito",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_DiaUltiDebito",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MontUltDebito",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_MontUltDebito",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodUltDebito",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_CodUltDebito",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechUltDebiBanco",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechUltDebiBanco",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MontUltDebiBanco",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_MontUltDebiBanco",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodUltDebiBanco",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_CodUltDebiBanco",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechsCargoAcreditac",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_FechsCargoAcreditac",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechsCargoInters1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_FechsCargoInters1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechsCargoInters2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_FechsCargoInters2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechsDebitInters1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_FechsDebitInters1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechsDebitInters2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_FechsDebitInters2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodCategContable",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_CodCategContable",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodPagoInteres",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_CodPagoInteres",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechAperProducto",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechAperProducto",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_AnoAperProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_AnoAperProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MesAperProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_MesAperProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_DiaAperProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_DiaAperProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ProductoEstatus",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_ProductoEstatus",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ProductoNuevo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_ProductoNuevo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_FechEmisiProduct",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VCPF_FechEmisiProduct",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_DiaEmisiProduct",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_DiaEmisiProduct",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MesEmisiProduct",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_MesEmisiProduct",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_AnoEmisiProduct",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_AnoEmisiProduct",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_Mesactual",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_Mesactual",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_TipoMonePagInteres",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_TipoMonePagInteres",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "l_auto",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "l_auto",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_IdentifiAutorizados",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_IdentifiAutorizados",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodParentAutorizados",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_CodParentAutorizados",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_Observaciones",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_Observaciones",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_FechaBloqueo",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_FechaBloqueo",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_AnoBloqueo",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_AnoBloqueo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MesBloqueo",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_MesBloqueo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_DiaBloqueo",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvo_DiaBloqueo",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_MontoBloqueado",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Pvo_MontoBloqueado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_NumCuentaOProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_NumCuentaOProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_TotalModificaciones",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Pvo_TotalModificaciones",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodEstadoProducto",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "Pvo_CodEstadoProducto",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_EstadoProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_EstadoProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MontoPrincipal",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_MontoPrincipal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MontPrinciColonizado",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_MontPrinciColonizado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MontOriginalProducto",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_MontOriginalProducto",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MontOrigProduColoniza",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_MontOrigProduColoniza",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_FechConstitucion",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Psf_FechConstitucion",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_FechConstitucion2",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Psf_FechConstitucion2",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_AnoConstitucion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_AnoConstitucion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MesConstitucion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_MesConstitucion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_DiaConstitucion",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_DiaConstitucion",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_FechVencimiento",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Psf_FechVencimiento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_AnoVencimiento",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_AnoVencimiento",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MesVencimiento",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_MesVencimiento",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_DiaVencimiento",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Psf_DiaVencimiento",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "L_FV",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "L_FV",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_DiasXVencer",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_DiasXVencer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_EstadoVenciProduc",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_EstadoVenciProduc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_PlazoProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_PlazoProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_TasInterAnual",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_TasInterAnual",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_TasInterMensual",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_TasInterMensual",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_TasaCastigo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Psf_TasaCastigo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_MontInterFinalizPlazo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_MontInterFinalizPlazo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MontIntFinPlazColoniz",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_MontIntFinPlazColoniz",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_CuentaCupon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PSF_CuentaCupon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CuentaDeposito",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CuentaDeposito",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CuentaOrigen",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CuentaOrigen",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_FechVenciFinal",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "VCPF_FechVenciFinal",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_AnoVenciFinal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_AnoVenciFinal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MesVenciFinal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_MesVenciFinal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_DiaVenciFinal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_DiaVenciFinal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_FrecuenciaCupon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_FrecuenciaCupon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "L_PC",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "L_PC",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VALIDADOR",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VALIDADOR",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_FrecPagoCupones",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_FrecPagoCupones",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_TasaInterOriginal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_TasaInterOriginal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cat_DescripProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Cat_DescripProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cat_TipoProducto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Cat_TipoProducto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Cat_pk_idCategoria",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Cat_pk_idCategoria",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Tcb_FechTipoCambio",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Tcb_FechTipoCambio",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Tcb_TipoCambio",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Tcb_TipoCambio",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Cat_CodProducto",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Cat_CodProducto",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "spc_SaldoTotal",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "spc_SaldoTotal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_Rango",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_Rango",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_UsuarioAutoriza",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_UsuarioAutoriza",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "l_usu",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "l_usu",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_CodUsuario",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_CodUsuario",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_Usuario",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_Usuario",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pbp_NombreUsuario",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pbp_NombreUsuario",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MedioFormalProduc",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_MedioFormalProduc",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TMFPROD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TMFPROD",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Age_PK_CodAgencia",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Age_PK_CodAgencia",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Age_OficinaNombre",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Age_OficinaNombre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Age_Sucursal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Age_Sucursal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Zon_Division",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Zon_Division",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tpa_TipoOficina",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tpa_TipoOficina",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Reg_REGION",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Reg_REGION",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstadoProducto",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "CLF_EstadoProducto",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CuotaAhorro",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CuotaAhorro",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CantCuotas",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CantCuotas",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "l_cuotas",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "l_cuotas",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Clc_FK_ClienteCorporativo",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Clc_FK_ClienteCorporativo",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CodEjecBPGlobal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CodEjecBPGlobal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PK_IdClienteCorto",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_PK_IdClienteCorto",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Cat_CodProducto2",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Cat_CodProducto2",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CedCorta",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CedCorta",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CedLarga",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CedLarga",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BC_PK_IdCliente",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "BC_PK_IdCliente",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TipDocIdentificacion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TipDocIdentificacion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TipoCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TipoCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Nombre",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Nombre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CcNombre",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CcNombre",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Apellidos",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Apellidos",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Apellido1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Apellido1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Apellido2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Apellido2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Direccion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Direccion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ProvinciaCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ProvinciaCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CantonCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CantonCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DistritoCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DistritoCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SectorCliente",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SectorCliente",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ActivEconomCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ActivEconomCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_FechaNacimiento",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "CLF_FechaNacimiento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_AnoNacimiento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_AnoNacimiento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_MesNacimiento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_MesNacimiento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DiaNacimiento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DiaNacimiento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_FechVenceCedula",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_FechVenceCedula",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TipoNacionalidad",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TipoNacionalidad",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DiasXVenceCedu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DiasXVenceCedu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstadVEnciCedula",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EstadVEnciCedula",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PaisOrigen",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_PaisOrigen",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstadoCivil",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EstadoCivil",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PuestLaborCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_PuestLaborCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BC_EmpresaTrabaja",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BC_EmpresaTrabaja",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EgresoNeto",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_EgresoNeto",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_IngresoNeto",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_IngresoNeto",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SalarioBruto",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SalarioBruto",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_MicrSegSICEREDIM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_MicrSegSICEREDIM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TipoMicrSegSICEREDIM",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TipoMicrSegSICEREDIM",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_MicroSegSICEREIngres",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_MicroSegSICEREIngres",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_MSGIngreso",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_MSGIngreso",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SalarioLiquido",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SalarioLiquido",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TelefonosCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TelefonosCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TELEFONO1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TELEFONO1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TELEFONO2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TELEFONO2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TIPOSEXO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TIPOSEXO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_HistoSUGEF",
+									"type": "Byte"
+								},
+								"sink": {
+									"name": "CLF_HistoSUGEF",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_RegisHistoSUGEF",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_RegisHistoSUGEF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_HistoBP",
+									"type": "Byte"
+								},
+								"sink": {
+									"name": "CLF_HistoBP",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EmailCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EmailCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PAS",
+									"type": "Boolean"
+								},
+								"sink": {
+									"name": "CLF_PAS",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstatusAfiliacion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EstatusAfiliacion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstatusCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EstatusCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLFC_Edad",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLFC_Edad",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_RangoEdad",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_RangoEdad",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CumplAñosActu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CumplAñosActu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CumplAñosPoste",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CumplAñosPoste",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DescriLarga",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DescriLarga",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_NombreCompleto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_NombreCompleto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ClientSujetArti15",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ClientSujetArti15",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ClientAseguCCSS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ClientAseguCCSS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Patrono",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Patrono",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_NumPatronal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_NumPatronal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PuntoRef1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_PuntoRef1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PuntoRef2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_PuntoRef2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TelOficina1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TelOficina1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TelOficina2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TelOficina2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TelOficina3",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TelOficina3",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_Fax",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_Fax",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_LugarNacimiento",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_LugarNacimiento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_OperadPensiones",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_OperadPensiones",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_OcupLaboClient",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_OcupLaboClient",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ClientFuePEP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ClientFuePEP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ClientEsPEP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ClientEsPEP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_ClientePEP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_ClientePEP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DiasXVencerPolitica",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DiasXVencerPolitica",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_EstatusPolitica",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_EstatusPolitica",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_CodUsuarioCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_CodUsuarioCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_UsuarioCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_UsuarioCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_NombUsuarioCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_NombUsuarioCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_PK_CodAgenAsigCORE",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CLF_PK_CodAgenAsigCORE",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_OficiNombreAsigCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_OficiNombreAsigCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SucursalAsigCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_SucursalAsigCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_DivisionAsiCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_DivisionAsiCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TipOficinaAsigCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TipOficinaAsigCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_RegionAsigCORE",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_RegionAsigCORE",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_BC_TipoSexo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_BC_TipoSexo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TieneAhPlazo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TieneAhPlazo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SaldoPlazo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SaldoPlazo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TieneAhProgra",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TieneAhProgra",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SaldoAhProgramado",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SaldoAhProgramado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TieneAhVol",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TieneAhVol",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SladoAhVol",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SladoAhVol",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Clf_TieneCC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Clf_TieneCC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SSaldoCtasCorri",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SSaldoCtasCorri",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TienePAS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TienePAS",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_TieneVISA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_TieneVISA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SaldoVisa",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SaldoVisa",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_NombrePatrono",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_NombrePatrono",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SalarioSICERE",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CLF_SalarioSICERE",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SectorPatrono",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_SectorPatrono",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SectorEmpresa",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_SectorEmpresa",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CLF_SegBancaria",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CLF_SegBancaria",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VSGC_SegIngresos",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VSGC_SegIngresos",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CantiCuotas",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CantiCuotas",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CantRenov",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CantRenov",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_PlazoProducto2",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_PlazoProducto2",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_MontCuotMensual",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_MontCuotMensual",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ContadorColones",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_ContadorColones",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ContadorDolares",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_ContadorDolares",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_SaldoSoloColones",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_SaldoSoloColones",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_SaldoSoloDolares",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_SaldoSoloDolares",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ClienteDol",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_ClienteDol",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_ClienteCol",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "VCPF_ClienteCol",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "EBG_EjecuBPGlobal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EBG_EjecuBPGlobal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "EBG_FK_IdejecBPGlobal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "EBG_FK_IdejecBPGlobal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Clc_EjecuCorporativo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Clc_EjecuCorporativo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Clc_FK_IdCorporativo",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "Clc_FK_IdCorporativo",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_OficinaCanal",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_OficinaCanal",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_CodCanalColocado",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_CodCanalColocado",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "spc_MontoSaldo",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "spc_MontoSaldo",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "MDF_ClienteDifunto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MDF_ClienteDifunto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_IDPasivo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PSF_IDPasivo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_CtaCupon",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_CtaCupon",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_TotalCupones",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CKC_TotalCupones",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_FchIniCUP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_FchIniCUP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_FchVncUltCup",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_FchVncUltCup",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_TotPagoAproxiCup",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CKC_TotPagoAproxiCup",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_CupAvenOvenci",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_CupAvenOvenci",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_FechCupActu",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_FechCupActu",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_MontCupAct",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CKC_MontCupAct",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_CuponSiguiente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_CuponSiguiente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_FechVencCupSig",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CKC_FechVencCupSig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CKC_MontCupSigui",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CKC_MontCupSigui",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CertificadosPB",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CertificadosPB",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SegGeneracional",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SegGeneracional",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_TCumpleaños",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCPF_TCumpleaños",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCPF_CumpleAños",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "VCPF_CumpleAños",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CuotaAhorros",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CuotaAhorros",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_CantCuotass",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_CantCuotass",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CantCuota1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CantCuota1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MontoCuota1",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "MontoCuota1",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CantCuota2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CantCuota2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "MontoCuota2",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "MontoCuota2",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Ctc_CtaContSUGEF",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Ctc_CtaContSUGEF",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "CantCuotasFinal",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CantCuotasFinal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "MontoCuotasFinal",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "MontoCuotasFinal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "FINANCIERO",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FINANCIERO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "VCSG_Banca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "VCSG_Banca",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_FechPrimAperCapBP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_FechPrimAperCapBP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_RangoAfiCapBP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_RangoAfiCapBP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_DiasAfiliCapBP",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_DiasAfiliCapBP",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_MesesAfiliCapBP",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_MesesAfiliCapBP",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_AñosAfiliCapBP",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_AñosAfiliCapBP",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_ClieNueCapBP",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_ClieNueCapBP",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_FechPrimAperCapAg",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_FechPrimAperCapAg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_RangoAfiCapAg",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_RangoAfiCapAg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_DiasAfiliCapAg",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_DiasAfiliCapAg",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_MesesAfiliCapAg",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_MesesAfiliCapAg",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_AñosAfiliCapAg",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Pvs_AñosAfiliCapAg",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvs_ClieNueCapAg",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvs_ClieNueCapAg",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DESCPRODFINAN",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DESCPRODFINAN",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoProdFinanciero",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TipoProdFinanciero",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CODPROFINAN",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CODPROFINAN",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "BC_EstadoCliente",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BC_EstadoCliente",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BC_CodEstadoCli",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BC_CodEstadoCli",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CEC_DescripEstaCli",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CEC_DescripEstaCli",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_UltDebFecha",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Pvo_UltDebFecha",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "IMF_Age",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "IMF_Age",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Fech_MaxMovimiento",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Fech_MaxMovimiento",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_CtaClienteC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dla_CtaClienteC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_CtaClienteA",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dla_CtaClienteA",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_CtaClienteB",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dla_CtaClienteB",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_CtaClienteD",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Dla_CtaClienteD",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_TotalIntereses",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Dla_TotalIntereses",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Dla_TotalImpuestos",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "Dla_TotalImpuestos",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_ClaveImpuesto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_ClaveImpuesto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Psf_AplicaImpuesto",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Psf_AplicaImpuesto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_TasInteres",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PSF_TasInteres",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_TasIntereOrigi",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PSF_TasIntereOrigi",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_TasCastig",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "PSF_TasCastig",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Pvo_Restricciones",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Pvo_Restricciones",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_CuentDeposit",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PSF_CuentDeposit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_CuentOrig",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PSF_CuentOrig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PSF_Por_Ahorro",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "PSF_Por_Ahorro",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "IMF_IUC",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "IMF_IUC",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Cod_FK_Banca",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "Cod_FK_Banca",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Banca",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Banca",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SEG_CelularCli",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SEG_CelularCli",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "T_tarjeDebito",
+									"type": "String"
+								},
+								"sink": {
+									"name": "T_tarjeDebito",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CantBeneficiarios",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "CantBeneficiarios",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TieneBeneficiarios",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TieneBeneficiarios",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CedulasBeneficiarios",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CedulasBeneficiarios",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NombresBeneficiarios",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NombresBeneficiarios",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "PorcentajesBeneficiarios",
+									"type": "String"
+								},
+								"sink": {
+									"name": "PorcentajesBeneficiarios",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ClienteInstitucional",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ClienteInstitucional",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CodMeta",
+									"type": "Int32"
+								},
+								"sink": {
+									"name": "CodMeta",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoProdFinanciero2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TipoProdFinanciero2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TieneCtaNaranja",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TieneCtaNaranja",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SaldoCtaNarana",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SaldoCtaNarana",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TienePlanNaranja",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TienePlanNaranja",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SaldoPlanNaranja",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SaldoPlanNaranja",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "TieneTransProgramada",
+									"type": "String"
+								},
+								"sink": {
+									"name": "TieneTransProgramada",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "RangoSC",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RangoSC",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "TotalSaldoColozMesanterior",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "TotalSaldoColozMesanterior",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Prt_Descripcion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Prt_Descripcion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Prt_Tipo_Descripcion",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Prt_Tipo_Descripcion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ContactarCli",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ContactarCli",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SaldColDic",
+									"type": "Decimal"
+								},
+								"sink": {
+									"name": "SaldColDic",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Fech_Mesanterior",
+									"type": "DateTime"
+								},
+								"sink": {
+									"name": "Fech_Mesanterior",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel1",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel3",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel3",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel4",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel4",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Te15",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Te15",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel6",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel6",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel7",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Tel7",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CtaIBAN",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CtaIBAN",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DATE_LOADED"
+								},
+								"sink": {
+									"name": "DATE_LOADED"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceBICaptacionFinal",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationBICaptacionFinal",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

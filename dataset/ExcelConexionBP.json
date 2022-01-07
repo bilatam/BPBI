@@ -1,0 +1,22 @@
+{
+	"name": "ExcelConexionBP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Banca de Personas",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "conexionbp",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

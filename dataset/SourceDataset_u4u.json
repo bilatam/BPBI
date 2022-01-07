@@ -1,0 +1,179 @@
+{
+	"name": "SourceDataset_u4u",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Cs_PK_DeudorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_IdPersona",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Cs_TipoPersona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_IndicadoDeudor",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 4
+			},
+			{
+				"name": "Cs_NivelPaHistorico",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_IndicadorReqAut",
+				"type": "nchar"
+			},
+			{
+				"name": "Cs_IndicadorAutorizacion",
+				"type": "nchar"
+			},
+			{
+				"name": "Cs_FechaInicioReqAuto",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Cs_SaldoTotalMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_SaldoTotalME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoNoDesembolsadoMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoNoDesembolsadoME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_TotalCuotaCreditoMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_TotalCuotaCreditoME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoFiado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_IndicadorDeudorSBD",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_NivelPaHistoricoSBD",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_SaldoAdeudadoSBDMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_SaldoAdeudadoSBDME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoNoDesembolsadoSBDMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoNoDesembolsadoSBDME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_TotalCuotaCreditoSBDMN",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_TotalCuotaCreditoSBDME",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_MontoFiadoSBD",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cs_AtrasoMaximoSBD",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_AtrasoMaximoSBD12",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_AtrasoMaximoSBD24",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cs_PorcentajeDolarizacion",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "Cs_PorcentajeTasaVariable",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_CICSugef"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

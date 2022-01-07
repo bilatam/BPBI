@@ -1,0 +1,541 @@
+{
+	"name": "UPD_MODEL_Trimestral",
+	"properties": {
+		"activities": [
+			{
+				"name": "Partition Datos Segmenta Cliente Cierre Trimestre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Captacion Cierre Trimestre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Datos Segmenta Cliente",
+						"AnalysisServicesParititionName": "@concat('Datos Segmenta ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Captacion Cierre Trimestre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Credito Cierre Trimestre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Captación",
+						"AnalysisServicesParititionName": "@concat('Captación ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Credito Cierre Trimestre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Partition Segmenta Cliente Cierre Trimestre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Crédito",
+						"AnalysisServicesParititionName": "@concat('Crédito ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Partition Segmenta Cliente Cierre Trimestre",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Set Trimestre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.PartitionRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Segmenta Cliente",
+						"AnalysisServicesParititionName": "@concat('Segmenta Cliente ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "01:00:00",
+					"reportStatusOnCallBack": false
+				}
+			},
+			{
+				"name": "Set Trimestre",
+				"type": "Switch",
+				"dependsOn": [
+					{
+						"activity": "Set anio",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"on": {
+						"value": "@formatDateTime(utcnow(), 'MM')",
+						"type": "Expression"
+					},
+					"cases": [
+						{
+							"value": "01",
+							"activities": [
+								{
+									"name": "Set 1er Trimestre",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "01"
+									}
+								}
+							]
+						},
+						{
+							"value": "02",
+							"activities": [
+								{
+									"name": "Set 1er Trimestre_2",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "01"
+									}
+								}
+							]
+						},
+						{
+							"value": "03",
+							"activities": [
+								{
+									"name": "Set 1er Trimestre_3",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "01"
+									}
+								}
+							]
+						},
+						{
+							"value": "04",
+							"activities": [
+								{
+									"name": "Set 2do Trimestre",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "02"
+									}
+								}
+							]
+						},
+						{
+							"value": "05",
+							"activities": [
+								{
+									"name": "Set 2do Trimestre_2",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "02"
+									}
+								}
+							]
+						},
+						{
+							"value": "06",
+							"activities": [
+								{
+									"name": "Set 2do Trimestre_3",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "02"
+									}
+								}
+							]
+						},
+						{
+							"value": "07",
+							"activities": [
+								{
+									"name": "Set 3er Trimestre",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "03"
+									}
+								}
+							]
+						},
+						{
+							"value": "08",
+							"activities": [
+								{
+									"name": "Set 3er Trimestre_2",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "03"
+									}
+								}
+							]
+						},
+						{
+							"value": "09",
+							"activities": [
+								{
+									"name": "Set 3er Trimestre_3",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "03"
+									}
+								}
+							]
+						},
+						{
+							"value": "10",
+							"activities": [
+								{
+									"name": "Set 4to Trimestre",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "04"
+									}
+								}
+							]
+						},
+						{
+							"value": "11",
+							"activities": [
+								{
+									"name": "Set 4to Trimestre_2",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "04"
+									}
+								}
+							]
+						},
+						{
+							"value": "12",
+							"activities": [
+								{
+									"name": "Set 4to Trimestre_3",
+									"type": "SetVariable",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "Trimestre",
+										"value": "04"
+									}
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"name": "Set anio",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Reanudar DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Anio",
+					"value": {
+						"value": "@formatDateTime(utcnow(), 'yyyy')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Auth Azure Inicial",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"Accept": "*/*"
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Reanudar DB",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Auth Azure Inicial",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/resume?api-version=2021-02-01-preview')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@concat(activity('Auth Azure Inicial').output.token_type, ' ', activity('Auth Azure Inicial').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Auth Azure",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Partition Datos Segmenta Cliente Cierre Trimestre",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"Accept": "*/*"
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Pausar DB",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Auth Azure",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/pause?api-version=2021-02-01-preview')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@concat(activity('Auth Azure').output.token_type, ' ', activity('Auth Azure').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Database": {
+				"type": "string",
+				"defaultValue": "AS_Popular"
+			},
+			"CredentialName": {
+				"type": "string",
+				"defaultValue": "SQLDW-Cred-cjavier"
+			},
+			"AnalysisService": {
+				"type": "string",
+				"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+			},
+			"PartitionRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=dN5LvKfZP64EjHbGwueI%2beawl%2bXbzMdFwVEZ7eaBlPI%3d"
+			},
+			"SUSCRIPTION_ID": {
+				"type": "string",
+				"defaultValue": "51eba0b9-05dd-461f-828f-5eae2263a095"
+			},
+			"TENANT_ID": {
+				"type": "string",
+				"defaultValue": "2d4feb35-6363-4b6c-94e0-a60d04fa4f02"
+			},
+			"CLIENT_ID": {
+				"type": "string",
+				"defaultValue": "943fb614-373d-4cb8-8a30-34d893b84508"
+			},
+			"CLIENT_SECRET": {
+				"type": "string",
+				"defaultValue": "8bAD0iB.6Ut5ak~-p0w8Ph2_OGQxNCurP_"
+			},
+			"RESOURCEGROUP_NAME": {
+				"type": "string",
+				"defaultValue": "ProyectoBIRG"
+			},
+			"SERVER_NAME": {
+				"type": "string",
+				"defaultValue": "sersqldwdev"
+			},
+			"DATABASE_NAME": {
+				"type": "string",
+				"defaultValue": "SQLDWDEV"
+			}
+		},
+		"variables": {
+			"Trimestre": {
+				"type": "String"
+			},
+			"Anio": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-24T04:14:13Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

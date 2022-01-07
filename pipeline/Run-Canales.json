@@ -1,0 +1,186 @@
+{
+	"name": "Run-Canales",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extraer_Canales",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer_Canales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Extraer_Canales",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer_Canales",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extraer_Canales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_CanalesTipoTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Extraer_Canales",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_CanalesTipoTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_CanalesUsuario",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_CanalesTipoTransaccion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_CanalesUsuario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_CodigosATM",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_CanalesUsuario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_CodigosATM",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_FechaTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_CodigosATM",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_FechaTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_CanalesAfiliacionUsuario",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_FechaTransaccion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_CanalesAfiliacionUsuario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_CanalesIngresoUsuario",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_FACT_CanalesAfiliacionUsuario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_CanalesIngresoUsuario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_CanalesTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_FACT_CanalesIngresoUsuario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_CanalesTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

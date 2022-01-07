@@ -1,0 +1,112 @@
+{
+	"name": "Source_BI_VisaIncom",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Vin_PK_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Vin_IdCliente",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Vin_FechaDatos",
+				"type": "date"
+			},
+			{
+				"name": "Vin_Tarjeta",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_BinTarjeta",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Referencia",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_FechaTransaccion",
+				"type": "date"
+			},
+			{
+				"name": "Vin_Monto",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Vin_Moneda",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Mcc",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_VisaCrEst",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Razon",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Autorizacion",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_NombreAfiliado",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Ciudad",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Pais",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_MontoFuente",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Vin_MonedaFuente",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Sec",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_Reversion",
+				"type": "varchar"
+			},
+			{
+				"name": "Vin_FechaCarga",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_VisaIncom"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

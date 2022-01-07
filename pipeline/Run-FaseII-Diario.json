@@ -1,0 +1,66 @@
+{
+	"name": "Run-FaseII-Diario",
+	"properties": {
+		"activities": [
+			{
+				"name": "Run-Canales",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Run-Canales",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Run-Rentabilidad",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Run-Tarjetas-Diario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Run-Rentabilidad",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Run-Tarjetas-Diario",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Run-Canales",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Run-Tarjetas-Diario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

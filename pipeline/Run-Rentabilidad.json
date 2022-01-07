@@ -1,0 +1,206 @@
+{
+	"name": "Run-Rentabilidad",
+	"properties": {
+		"activities": [
+			{
+				"name": "Diferencial Cambiario",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_1_RentabilidadDiferencialCambiario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Tasa Ponderada",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Diferencial Cambiario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_2_RentabilidadTasaPonderada",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Tasa Activa Ponderada",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Tasa Ponderada",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_3_RentabilidadTasaActiva",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Tasa Ponderada Pasiva",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Tasa Activa Ponderada",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_4_RentabilidadTasaPonderadaPasiva",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Tasa Pasiva",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Tasa Ponderada Pasiva",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_5_RentabilidadTasaPasiva",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Precio Trans Activa Pasiva",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Tasa Pasiva",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_6_RentabilidadPrecioTransActivaPasiva",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Provisiones",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Precio Trans Activa Pasiva",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_7_RentabilidadProvisiones",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Margen Financiero Neto",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Provisiones",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_8_RentabilidadMargenFinancieroNeto",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Ingreso Gasto Operacion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Margen Financiero Neto",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_9_RentabilidadIngresosGastosDeOperacion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Fact Rentabilidad",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Ingreso Gasto Operacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_10_FACT_Rentabilidad",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Rentabilidad"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

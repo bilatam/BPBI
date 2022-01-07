@@ -1,0 +1,37 @@
+{
+	"name": "DFPRPBI",
+	"properties": {
+		"globalParameters": {
+			"SharepointAuthUri": {
+				"type": "string",
+				"value": "https://accounts.accesscontrol.windows.net/6e852f85-8b27-4c6b-8ee2-181db2a7f482/tokens/OAuth/2"
+			},
+			"SharepointAuthClientId": {
+				"type": "string",
+				"value": "e8b80854-c71f-493d-a41a-1cdea667d867@6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+			},
+			"SharepointAuthClientSecret": {
+				"type": "string",
+				"value": "2gAj0lk+sePRaZMY2y0MAZgyw1BYCobn5qCPiwhAPH8="
+			},
+			"SharepointOnlineUri": {
+				"type": "string",
+				"value": "https://bancopopularcr.sharepoint.com/sites/DATALAKEAI"
+			},
+			"SharepointAuthResource": {
+				"type": "string",
+				"value": "00000003-0000-0ff1-ce00-000000000000/bancopopularcr.sharepoint.com[AT]6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+			},
+			"storageConnectionString": {
+				"type": "string",
+				"value": "DefaultEndpointsProtocol=https;AccountName=saprpbidata;AccountKey=cYsviPKq0cZF8jjV/tmWUw142Lm/JvsKXDIHQtuNm44iiXJqunWu/0ECcL3TD06cozbGQvB+1M3FKBcOOWKyxA==;EndpointSuffix=core.windows.net"
+			}
+		}
+	},
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "dc0f5a21-8447-4860-81e0-515dce4a8bc7",
+		"tenantId": "6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+	}
+}

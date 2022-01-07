@@ -1,0 +1,683 @@
+{
+	"name": "SourceBISegmentaClientes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.BI_SegmentaClientes.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "FecActualiza",
+				"type": "DATE"
+			},
+			{
+				"name": "IdCliente",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "IUC",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "PoliticAct",
+				"type": "UTF8"
+			},
+			{
+				"name": "EstadoCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "CondicionCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "EstadoCivil",
+				"type": "UTF8"
+			},
+			{
+				"name": "ValiEstCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "CondiSegCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "FechaDefuncion",
+				"type": "DATE"
+			},
+			{
+				"name": "AñoDefuncion",
+				"type": "INT32"
+			},
+			{
+				"name": "TieneProd",
+				"type": "UTF8"
+			},
+			{
+				"name": "CodTipoCliente",
+				"type": "INT32"
+			},
+			{
+				"name": "TipoCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cedula",
+				"type": "UTF8"
+			},
+			{
+				"name": "CedLarga",
+				"type": "UTF8"
+			},
+			{
+				"name": "NombreCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "Sexo",
+				"type": "UTF8"
+			},
+			{
+				"name": "FecNacimiento",
+				"type": "DATE"
+			},
+			{
+				"name": "Edad",
+				"type": "DECIMAL",
+				"precision": 4,
+				"scale": 0
+			},
+			{
+				"name": "FecNacimientoTSE",
+				"type": "DATE"
+			},
+			{
+				"name": "EdadTSE",
+				"type": "INT32"
+			},
+			{
+				"name": "RangoEdadTSE",
+				"type": "UTF8"
+			},
+			{
+				"name": "SegGeneracional",
+				"type": "UTF8"
+			},
+			{
+				"name": "Celular",
+				"type": "UTF8"
+			},
+			{
+				"name": "OtrosTel",
+				"type": "UTF8"
+			},
+			{
+				"name": "CorreoElectronico",
+				"type": "UTF8"
+			},
+			{
+				"name": "SalarioCORE",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "SalarioSICERE",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "%Endeuda",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 21
+			},
+			{
+				"name": "%EndeudaT24",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 19
+			},
+			{
+				"name": "Apalancamiento",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 6
+			},
+			{
+				"name": "ApalancamientoT24",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 6
+			},
+			{
+				"name": "DireccionPatrono",
+				"type": "UTF8"
+			},
+			{
+				"name": "CodDistritoPatrono",
+				"type": "DECIMAL",
+				"precision": 6,
+				"scale": 0
+			},
+			{
+				"name": "Provincia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Canton",
+				"type": "UTF8"
+			},
+			{
+				"name": "Distrito",
+				"type": "UTF8"
+			},
+			{
+				"name": "OcupacionLab",
+				"type": "UTF8"
+			},
+			{
+				"name": "OrigenIngre",
+				"type": "UTF8"
+			},
+			{
+				"name": "OrigenPatri",
+				"type": "UTF8"
+			},
+			{
+				"name": "NumPatrono",
+				"type": "UTF8"
+			},
+			{
+				"name": "CedulaPatrono",
+				"type": "UTF8"
+			},
+			{
+				"name": "Patrono",
+				"type": "UTF8"
+			},
+			{
+				"name": "DeduccionPlanilla",
+				"type": "UTF8"
+			},
+			{
+				"name": "Sector",
+				"type": "UTF8"
+			},
+			{
+				"name": "SectorEmp",
+				"type": "UTF8"
+			},
+			{
+				"name": "TipoEmpresa",
+				"type": "UTF8"
+			},
+			{
+				"name": "SolicitoExclu",
+				"type": "UTF8"
+			},
+			{
+				"name": "OficinaCORE",
+				"type": "INT64"
+			},
+			{
+				"name": "CodAgencia",
+				"type": "INT32"
+			},
+			{
+				"name": "Agencia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Sucursal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Region",
+				"type": "UTF8"
+			},
+			{
+				"name": "DIVISION",
+				"type": "UTF8"
+			},
+			{
+				"name": "TipoAgen",
+				"type": "UTF8"
+			},
+			{
+				"name": "NombreEjecutivo",
+				"type": "UTF8"
+			},
+			{
+				"name": "AreaComercial",
+				"type": "UTF8"
+			},
+			{
+				"name": "Ubicacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "FechaVinculacion",
+				"type": "DATE"
+			},
+			{
+				"name": "SegBancaria",
+				"type": "UTF8"
+			},
+			{
+				"name": "SegIngresos",
+				"type": "UTF8"
+			},
+			{
+				"name": "Banca",
+				"type": "UTF8"
+			},
+			{
+				"name": "Grupo",
+				"type": "INT32"
+			},
+			{
+				"name": "TasaProm",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 6
+			},
+			{
+				"name": "CarteraActiva",
+				"type": "UTF8"
+			},
+			{
+				"name": "TotalActi",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "SaldoAct",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "CarteraPasiva",
+				"type": "UTF8"
+			},
+			{
+				"name": "TotalPasi",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "EstadoCredito",
+				"type": "UTF8"
+			},
+			{
+				"name": "NivelBCO",
+				"type": "INT32"
+			},
+			{
+				"name": "NivelSUG",
+				"type": "INT32"
+			},
+			{
+				"name": "FechaDatosCIC",
+				"type": "UTF8"
+			},
+			{
+				"name": "Ind",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 4
+			},
+			{
+				"name": "FecAutor",
+				"type": "DATE"
+			},
+			{
+				"name": "DeudaMN",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "DeudaME",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "MonFianza",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CuotaMN",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CuotaME",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "DeudaTot",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CuotaTot",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CuotaBP",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CuotaEx",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "SaldoBP",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "TienePAS",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantPAS",
+				"type": "INT32"
+			},
+			{
+				"name": "TieneCC",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantCC",
+				"type": "INT32"
+			},
+			{
+				"name": "CC",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneAhVol",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantAhVol",
+				"type": "INT32"
+			},
+			{
+				"name": "AhVol",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneAhProgra",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantAhProgra",
+				"type": "INT32"
+			},
+			{
+				"name": "AhProgra",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneAhPlazo",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantAhPlazo",
+				"type": "INT32"
+			},
+			{
+				"name": "AhPlazo",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneCkGerencia",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantCkGerencia",
+				"type": "INT32"
+			},
+			{
+				"name": "CkGerencia",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneCuponVenci",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantCuponVenci",
+				"type": "INT32"
+			},
+			{
+				"name": "CuponVenci",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneFinanciera",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantFinanciera",
+				"type": "INT32"
+			},
+			{
+				"name": "Financiera",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneDesarrollo",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantDesarrollo",
+				"type": "INT32"
+			},
+			{
+				"name": "Desarrollo",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneSocial",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantSocial",
+				"type": "INT32"
+			},
+			{
+				"name": "Social",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneVISA",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantVISA",
+				"type": "INT32"
+			},
+			{
+				"name": "VISA",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TienePerHipotec",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantPerHipotec",
+				"type": "INT32"
+			},
+			{
+				"name": "PerHipotec",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneOtros",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantOtros",
+				"type": "INT32"
+			},
+			{
+				"name": "Otros",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TienePersonalH",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantPersonalH",
+				"type": "INT32"
+			},
+			{
+				"name": "PersonalH",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneVivienda",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantVivienda",
+				"type": "INT32"
+			},
+			{
+				"name": "Vivienda",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneCtaNaranja",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantCtaNaranja",
+				"type": "INT32"
+			},
+			{
+				"name": "saldoCtaNarana",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 2
+			},
+			{
+				"name": "TieneTrjDeb",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantTrjDeb",
+				"type": "INT32"
+			},
+			{
+				"name": "TieneVehiculo",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantidadVeh",
+				"type": "INT32"
+			},
+			{
+				"name": "ContClie",
+				"type": "INT32"
+			},
+			{
+				"name": "SectorEco",
+				"type": "DECIMAL",
+				"precision": 6,
+				"scale": 0
+			},
+			{
+				"name": "DescSectorEco",
+				"type": "UTF8"
+			},
+			{
+				"name": "TieneUserWeb",
+				"type": "UTF8"
+			},
+			{
+				"name": "CantUserWeb",
+				"type": "INT32"
+			},
+			{
+				"name": "TipoClase",
+				"type": "UTF8"
+			},
+			{
+				"name": "Naturaleza",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

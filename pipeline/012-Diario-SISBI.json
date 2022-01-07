@@ -1,0 +1,52 @@
+{
+	"name": "012-Diario-SISBI",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copiar_BI_CaptacionFinal",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_BI_CaptacionFinal",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Copiar_BI_UsuariosT24",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_BI_UsuariosT24",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Copiar_BI_SBI_OficinasBP",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_BI_SBI_OficinasBP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

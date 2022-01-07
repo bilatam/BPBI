@@ -1,0 +1,63 @@
+{
+	"name": "Source_BI_TrabajadoresSicere",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Trb_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Trb_PK_CedulaTrb",
+				"type": "varchar"
+			},
+			{
+				"name": "Trb_FK_CodTipoIdn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trb_NombreTrabajador",
+				"type": "varchar"
+			},
+			{
+				"name": "Trb_PrimerApellidoTrab",
+				"type": "varchar"
+			},
+			{
+				"name": "Trb_SegApellidoTrab",
+				"type": "varchar"
+			},
+			{
+				"name": "Trb_Iuc",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Trb_IdCliente",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Trb_FechaCarga",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "Sicere",
+			"table": "BI_TrabajadoresSicere"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

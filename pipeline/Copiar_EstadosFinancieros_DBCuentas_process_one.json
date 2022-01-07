@@ -1,0 +1,52 @@
+{
+	"name": "Copiar_EstadosFinancieros_DBCuentas_process_one",
+	"properties": {
+		"activities": [
+			{
+				"name": "CCDatabaseGenerator",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "CCDatabaseGenerator",
+					"method": "POST",
+					"body": {
+						"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"',pipeline().parameters.startwith,'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+						"type": "Expression"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"filedate": {
+				"type": "string"
+			},
+			"startwith": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"counter1": {
+				"type": "String",
+				"defaultValue": "1"
+			}
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-01T03:59:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

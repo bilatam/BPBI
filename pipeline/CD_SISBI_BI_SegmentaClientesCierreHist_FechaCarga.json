@@ -1,0 +1,67 @@
+{
+	"name": "CD_SISBI_BI_SegmentaClientesCierreHist_FechaCarga",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_f89",
+				"description": "select* from BI_SegmentaClientesCierreHist where FecActualiza  = @{pipeline().parameters.FechaCarga}",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.BI_SegmentaClientesCierreHist"
+					},
+					{
+						"name": "Destination",
+						"value": "SISBI/BI_SegmentaClientesCierreHist"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_f89",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_f89",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"FechaCarga": {
+				"type": "string",
+				"defaultValue": "'2020-12-31'"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-01-20T17:57:47Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

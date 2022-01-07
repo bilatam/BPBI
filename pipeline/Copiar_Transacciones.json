@@ -1,0 +1,769 @@
+{
+	"name": "Copiar_Transacciones",
+	"properties": {
+		"activities": [
+			{
+				"name": "Rename_Files",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "SharepointDownloadFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "addDateToFile",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "t24/*.zip"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "CD_Transacciones",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Unzip",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "XmlSource",
+						"additionalColumns": [
+							{
+								"name": "FILEPATH",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.Transacciones.xml",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "XmlReadSettings",
+							"validationMode": "none",
+							"detectDataType": true,
+							"namespaces": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Transaction_Code']"
+								},
+								"sink": {
+									"name": "Transaction_Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Documentos_Banco_Popular']"
+								},
+								"sink": {
+									"name": "Documentos_Banco_Popular",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Amount_Base_Currency']"
+								},
+								"sink": {
+									"name": "Amount_Base_Currency",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Date']"
+								},
+								"sink": {
+									"name": "Date",
+									"type": "DateTime",
+									"format": "yyyyMMdd"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Identification']"
+								},
+								"sink": {
+									"name": "Identification",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Account_Number']"
+								},
+								"sink": {
+									"name": "Account_Number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Reference_Description']"
+								},
+								"sink": {
+									"name": "Reference_Description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Amount_Original_Currency']"
+								},
+								"sink": {
+									"name": "Amount_Original_Currency",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Currency_Original']"
+								},
+								"sink": {
+									"name": "Currency_Original",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Application_Code']"
+								},
+								"sink": {
+									"name": "Application_Code",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Time']"
+								},
+								"sink": {
+									"name": "Time",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Originator_ORG']"
+								},
+								"sink": {
+									"name": "Originator_ORG",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Originator_Bank_ORB']"
+								},
+								"sink": {
+									"name": "Originator_Bank_ORB",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Intermediary_Bank_IBK']"
+								},
+								"sink": {
+									"name": "Intermediary_Bank_IBK",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Beneficiary_Bank_BBK']"
+								},
+								"sink": {
+									"name": "Beneficiary_Bank_BBK",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Beneficiary_BNF']"
+								},
+								"sink": {
+									"name": "Beneficiary_BNF",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Transaction_Country']"
+								},
+								"sink": {
+									"name": "Transaction_Country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Transaction_Ref_Number']"
+								},
+								"sink": {
+									"name": "Transaction_Ref_Number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Orig_Dest']"
+								},
+								"sink": {
+									"name": "Orig_Dest",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Transaction_Detail']"
+								},
+								"sink": {
+									"name": "Transaction_Detail",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Value_Date']"
+								},
+								"sink": {
+									"name": "Value_Date",
+									"type": "DateTime",
+									"format": "yyyyMMdd"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['BNK']"
+								},
+								"sink": {
+									"name": "BNK",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['International_Bank_Acc_Number_IBAN']"
+								},
+								"sink": {
+									"name": "International_Bank_Acc_Number_IBAN",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Exchange_Rate']"
+								},
+								"sink": {
+									"name": "Exchange_Rate",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['User_Code_Cashier']"
+								},
+								"sink": {
+									"name": "User_Code_Cashier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['User_Name_Cashier']"
+								},
+								"sink": {
+									"name": "User_Name_Cashier",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Dest_Account']"
+								},
+								"sink": {
+									"name": "Dest_Account",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Office_Identification']"
+								},
+								"sink": {
+									"name": "Office_Identification",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Way_or_Channel_Code']"
+								},
+								"sink": {
+									"name": "Way_or_Channel_Code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Session_Client_Num']"
+								},
+								"sink": {
+									"name": "Session_Client_Num",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Cash_In']"
+								},
+								"sink": {
+									"name": "Cash_In",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Cash_Out']"
+								},
+								"sink": {
+									"name": "Cash_Out",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Doct_Own_In']"
+								},
+								"sink": {
+									"name": "Doct_Own_In",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Doct_Own_Out']"
+								},
+								"sink": {
+									"name": "Doct_Own_Out",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Doct_Oth_In']"
+								},
+								"sink": {
+									"name": "Doct_Oth_In",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Doct_Intl_In']"
+								},
+								"sink": {
+									"name": "Doct_Intl_In",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Bc_Number']"
+								},
+								"sink": {
+									"name": "Bc_Number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Client_Name']"
+								},
+								"sink": {
+									"name": "Client_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Last_Name_1']"
+								},
+								"sink": {
+									"name": "Last_Name_1",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Last_Name_2']"
+								},
+								"sink": {
+									"name": "Last_Name_2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Transaction_Status']"
+								},
+								"sink": {
+									"name": "Transaction_Status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Origin_of_Funds']"
+								},
+								"sink": {
+									"name": "Origin_of_Funds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Id_Benef']"
+								},
+								"sink": {
+									"name": "Id_Benef",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Tipo_Id_Benef']"
+								},
+								"sink": {
+									"name": "Tipo_Id_Benef",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Nombre_Benef']"
+								},
+								"sink": {
+									"name": "Nombre_Benef",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Apellido1_Benef']"
+								},
+								"sink": {
+									"name": "Apellido1_Benef",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Apellido2_Benef']"
+								},
+								"sink": {
+									"name": "Apellido2_Benef",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Issuer_Bnk']"
+								},
+								"sink": {
+									"name": "Issuer_Bnk",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['RCO_Tran_Reason']"
+								},
+								"sink": {
+									"name": "RCO_Tran_Reason",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Legal_Doc_Name']"
+								},
+								"sink": {
+									"name": "Legal_Doc_Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Rco_Number']"
+								},
+								"sink": {
+									"name": "Rco_Number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Rou_Number']"
+								},
+								"sink": {
+									"name": "Rou_Number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Input_Colones']"
+								},
+								"sink": {
+									"name": "Input_Colones",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Input_Dolares']"
+								},
+								"sink": {
+									"name": "Input_Dolares",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Output_Colones']"
+								},
+								"sink": {
+									"name": "Output_Colones",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Root']['Row'][0]['Output_Dolares']"
+								},
+								"sink": {
+									"name": "Output_Dolares",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['FILEPATH']"
+								},
+								"sink": {
+									"name": "FILEPATH",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceTransaccionesXML",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationTransacciones",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DeleteTransacciones",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CD_Transacciones",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceTransaccionesXML",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.Transacciones*",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteTransacciones",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "T24"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SharepointDownloadFiles",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointDownloadFiles",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "T24",
+						"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"pathDestiny": "t24"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Unzip",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "Rename_Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "unzip",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "*.Transacciones_*.zip",
+						"fileToUnzipName": ".xml",
+						"deleteFile": "yes"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-09T18:11:27Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,153 @@
+{
+	"name": "Transformacion_FACT_Historico_Mes",
+	"properties": {
+		"activities": [
+			{
+				"name": "Transformacion_FACT_CaptacionHistorico_Mes",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Transformacion_FACT_SegmentaCliente_MES",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Carga_FACT_CaptacionHistorico_MES]",
+					"storedProcedureParameters": {
+						"FechaCarga": {
+							"value": {
+								"value": "@pipeline().parameters.FechaCarga",
+								"type": "Expression"
+							},
+							"type": "Datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transformacion_FACT_SegmentaCliente_MES",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Transformacion_DIM_SegmentaCliente_Mes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Carga_DIM_SegmentaClienteHistorico_MES]",
+					"storedProcedureParameters": {
+						"FechaCarga": {
+							"value": {
+								"value": "\t\n@pipeline().parameters.FechaCarga",
+								"type": "Expression"
+							},
+							"type": "Datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transformacion_FACT_Credito_MES",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Transformacion_FACT_CaptacionHistorico_Mes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Carga_FACT_CreditoHistorico_MES]",
+					"storedProcedureParameters": {
+						"FechaCarga": {
+							"value": {
+								"value": "@pipeline().parameters.FechaCarga",
+								"type": "Expression"
+							},
+							"type": "Datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transformacion_DIM_SegmentaCliente_Mes",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Carga_DIM_SegmentaClienteHistorico_MES]",
+					"storedProcedureParameters": {
+						"FechaCarga": {
+							"value": {
+								"value": "@pipeline().parameters.FechaCarga",
+								"type": "Expression"
+							},
+							"type": "Datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"parameters": {
+			"FechaCarga": {
+				"type": "string",
+				"defaultValue": "2021-05-31"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-06-08T14:53:42Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

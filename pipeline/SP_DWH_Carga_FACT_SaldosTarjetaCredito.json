@@ -1,0 +1,33 @@
+{
+	"name": "SP_DWH_Carga_FACT_SaldosTarjetaCredito",
+	"properties": {
+		"activities": [
+			{
+				"name": "Carga_FACT_SaldosTarjetaCredito",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Carga_FACT_SaldoTarjetaCredito]"
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

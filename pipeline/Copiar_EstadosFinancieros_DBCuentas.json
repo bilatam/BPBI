@@ -1,0 +1,38 @@
+{
+	"name": "Copiar_EstadosFinancieros_DBCuentas",
+	"properties": {
+		"activities": [
+			{
+				"name": "DBCuentas_process",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_EstadosFinancieros_DBCuentas_process",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"filedate": {
+							"value": "@formatDateTime(adddays(formatDateTime(utcnow(), 'yyyy-MM-01'),-1),'yyyyMMdd')",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"variables": {
+			"counter1": {
+				"type": "String",
+				"defaultValue": "1"
+			}
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-01T03:59:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

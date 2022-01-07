@@ -1,0 +1,499 @@
+{
+	"name": "SourceBIOperacionesDiarias",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.BI_OperacionesDiarias.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Opr_PK_IdOperacion",
+				"type": "INT64"
+			},
+			{
+				"name": "Opr_PK_NumOperacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FK_IdCliente",
+				"type": "INT64"
+			},
+			{
+				"name": "Opr_FK_CodBanca",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_CodLinea",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_MontoPrincipal",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_MontoSaldo",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_MontoSaldoPasado",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_MontoCuota",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_MontoInteres",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_TasaInteres",
+				"type": "DECIMAL",
+				"precision": 15,
+				"scale": 5
+			},
+			{
+				"name": "Opr_TasaRige",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_TasaRef",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FechaFormalizacion",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_FechaConstitucion",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_FechaUltimoPago",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_FechaProximoPago",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_FechaUltimoMov",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_FK_CodDestino",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_Fk_CodPatrono",
+				"type": "INT64"
+			},
+			{
+				"name": "Opr_CuotasAtrasadas",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_DiasAtraso",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_RangoAtraso",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_RangoMora",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_RangoCancelacion",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_PlazoCredito",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_MesesGracia",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FrecuenciaPago",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_CodEstadoCredito",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FK_CodEstadoAdmin",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FK_CodTipoGarantia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Intereses180Dias",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Intereses181Dias",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_CuotasPagadas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FK_CodAnalista",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_CodigoVentanilla",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_MontoComision",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_FK_CodVendedor",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_DeudaTotal",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_MontoMitigacion",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_PorcentComision",
+				"type": "DECIMAL",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "Opr_OperacionEspecial",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Opr_FK_CodCategoriaRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FK_CodAgencia",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_Aval",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_MontoAvaluo",
+				"type": "DECIMAL",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Opr_FecAvaluo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_OperacionMadre",
+				"type": "INT64"
+			},
+			{
+				"name": "Opr_FK_CodTipDeduccion",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_FK_CodTipResumen",
+				"type": "INT32"
+			},
+			{
+				"name": "Opr_CriterioRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Fracciones",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Excesos",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Criter2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Abogado",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Entrega",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Grupo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Ahorro",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Bono",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Vencid",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Banda",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Ponder",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Girado",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Limite",
+				"type": "DECIMAL",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Mitiga",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_Estimacion",
+				"type": "DECIMAL",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Opr_CapacidadPago",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_GenDiv",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Crspec",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Reclas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FecRige",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Vale",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_TVisa",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_SaldoAvalado",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_PerdidaReal",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_PerdidaRealAnterior",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opr_CodigoDestino",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Alfa",
+				"type": "DECIMAL",
+				"precision": 12,
+				"scale": 4
+			},
+			{
+				"name": "Opr_FechaActualizacion",
+				"type": "DATE"
+			},
+			{
+				"name": "Opr_Multiple",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Tamano",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Origen",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Sexo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Cedula",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_AgeSoli",
+				"type": "UTF8"
+			},
+			{
+				"name": "opr_idcliente",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "opr_poliVida",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "opr_poliInc",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "opr_poliVeh",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "opr_poliGan",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "opr_Seguro",
+				"type": "DECIMAL",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "opr_EstadoProd",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_IUC",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Opr_E2ANT",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_TPLUS",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_Asalari",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_TP",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_TP2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_FecUltG",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_SinUso",
+				"type": "UTF8"
+			},
+			{
+				"name": "Opr_CtaIBAN",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

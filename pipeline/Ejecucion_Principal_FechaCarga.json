@@ -1,0 +1,55 @@
+{
+	"name": "Ejecucion_Principal_FechaCarga",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extraer_Principal_FechaCarga",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer_Principal_FechaCarga",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"FechaCarga": {
+							"value": "@pipeline().parameters.FechaCarga",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "SP_DWH_Extraer_Principal",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer_Principal_FechaCarga",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extraer_Principal",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"parameters": {
+			"FechaCarga": {
+				"type": "string",
+				"defaultValue": "'2021-10-31'"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-11-07T22:24:08Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

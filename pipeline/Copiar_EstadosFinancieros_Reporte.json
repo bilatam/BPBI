@@ -1,0 +1,238 @@
+{
+	"name": "Copiar_EstadosFinancieros_Reporte",
+	"properties": {
+		"activities": [
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteReporteCombinado",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "Auditoría Financiera - Estados Financieros/Reporte"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "CleanReporteCombinado",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "Rename_Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "CleanReporteCombinado",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "estadosfinancierosreporte/*.txt"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "FixedToCSV",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "CleanReporteCombinado",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "ConvertFixedtoCSV",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "@activity('CleanReporteCombinado').output.file",
+						"format": "20,40,21,23,23,23,25,22,30",
+						"encoding": "UTF-8",
+						"separator": ";"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DeleteReporteCombinado",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "DBCuentas_process",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceReporteCombinado",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": {
+							"value": "@{activity('CleanReporteCombinado').output.file}",
+							"type": "Expression"
+						},
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Rename_Files",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "addDateToFile",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "estadosfinancierosreporte/*.txt"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DF_CREATE_PARQUET",
+				"type": "ExecuteDataFlow",
+				"dependsOn": [
+					{
+						"activity": "FixedToCSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataflow": {
+						"referenceName": "DF_COPY_REPORTE_COMBINADO",
+						"type": "DataFlowReference"
+					},
+					"compute": {
+						"coreCount": 8,
+						"computeType": "General"
+					},
+					"traceLevel": "Fine"
+				}
+			},
+			{
+				"name": "DBCuentas_process",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "DF_CREATE_PARQUET",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_EstadosFinancieros_DBCuentas_process",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"filedate": {
+							"value": "@replace(split(activity('CleanReporteCombinado').output.file, '.')[0], 'estadosfinancierosreporte/', '')",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-01T03:59:31Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

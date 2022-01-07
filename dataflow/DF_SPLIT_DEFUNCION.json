@@ -1,0 +1,35 @@
+{
+	"name": "DF_SPLIT_DEFUNCION",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SourceDefuncionTXT",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DestinationDefuncionParquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SplitColumns"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['defuncion/*.txt']) ~> source1\nsource1 derive(CITA_DEFUNCION = substring({_col0_},3,12),\n\t\tCEDULA = substring({_col0_},15,20),\n\t\tCONOCIDO_COMO = substring({_col0_},146,20),\n\t\tNOMBRE = substring({_col0_},44,50),\n\t\tAPELLIDO_1_CONOCIDO = substring({_col0_},166,13),\n\t\tAPELLIDO_1 = substring({_col0_},94,26),\n\t\tAPELLIDO_2_CONOCIDO = substring({_col0_},179,13),\n\t\tAPELLIDO_2 = substring({_col0_},120,26),\n\t\tLUGAR = '',\n\t\tFECHA = substring({_col0_},36,8),\n\t\tHORA = '',\n\t\tES_EXTRANJERO = '',\n\t\tES_NACIMIENTO = '',\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/defuncion/', ''), 1, 8),\n\t\tFILE_NAME = replace(FILE_NAME, '.txt', '.parquet'),\n\t\tTIPO_MOVIMIENTO = 'U') ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tFILE_NAME,\n\t\tCITA_DEFUNCION,\n\t\tCEDULA,\n\t\tCONOCIDO_COMO,\n\t\tNOMBRE,\n\t\tAPELLIDO_1_CONOCIDO,\n\t\tAPELLIDO_1,\n\t\tAPELLIDO_2_CONOCIDO,\n\t\tAPELLIDO_2,\n\t\tLUGAR,\n\t\tFECHA,\n\t\tHORA,\n\t\tES_EXTRANJERO,\n\t\tES_NACIMIENTO,\n\t\tDATE_LOADED,\n\t\tTIPO_MOVIMIENTO\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}

@@ -1,0 +1,256 @@
+{
+	"name": "Copiar_EstadosFinancieros_XML",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_EstadosContables",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Rename_Files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "XmlSource",
+						"additionalColumns": [
+							{
+								"name": "FILEPATH",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "estadosfinancierosxml",
+							"wildcardFileName": "*.Contable_Estados.xml",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "XmlReadSettings",
+							"validationMode": "none",
+							"detectDataType": true,
+							"namespaces": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['Cuenta']"
+								},
+								"sink": {
+									"name": "Cuenta",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['TipoCatalogoSUGEF']"
+								},
+								"sink": {
+									"name": "TipoCatalogoSUGEF",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "['Debito']"
+								},
+								"sink": {
+									"name": "Debito",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "['Credito']"
+								},
+								"sink": {
+									"name": "Credito",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "['SaldoFinal']"
+								},
+								"sink": {
+									"name": "SaldoFinal",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "['NotaTexto']"
+								},
+								"sink": {
+									"name": "NotaTexto",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['NotaArchivo']"
+								},
+								"sink": {
+									"name": "NotaArchivo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['FILEPATH']"
+								},
+								"sink": {
+									"name": "DATE_LOADED",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['ArchivoSICVECA']['Datos']['Registro']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceEstadosContablesXML",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationEstadosContables",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DeleteEstadosContables",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CD_EstadosContables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceEstadosContablesXML",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": {
+							"value": "@{activity('Rename_Files').output.file}",
+							"type": "Expression"
+						},
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteEstadosContables",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "Auditoría Financiera - Estados Financieros/XML"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Rename_Files",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "addDateToFile",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "estadosfinancierosxml/*.xml"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-01T03:59:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

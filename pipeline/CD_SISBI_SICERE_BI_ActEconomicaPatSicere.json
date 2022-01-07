@@ -1,0 +1,63 @@
+{
+	"name": "CD_SISBI_SICERE_BI_ActEconomicaPatSicere",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_SISBI_SICERE_BI_ActEconomicaPatSicere",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_BI_ActEconomicaPatSicere",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_BI_ActEconomicaPatSicere",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:04Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

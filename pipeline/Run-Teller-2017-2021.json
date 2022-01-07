@@ -1,0 +1,106 @@
+{
+	"name": "Run-Teller-2017-2021",
+	"properties": {
+		"activities": [
+			{
+				"name": "Teller-2017",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_TellerHist_2017",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Teller-2018",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Teller-2017",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_TellerHist_2018",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Teller-2019",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Teller-2018",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_TellerHist_2019",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Teller-2020",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Teller-2019",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_TellerHist_2020",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Teller-2021",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Teller-2020",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_TellerHist_2021",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-04T21:31:01Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

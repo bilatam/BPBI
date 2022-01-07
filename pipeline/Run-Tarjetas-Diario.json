@@ -1,0 +1,186 @@
+{
+	"name": "Run-Tarjetas-Diario",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extraer Tarjeta Diario",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer Tarjeta Diario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Extrae_Tarjeta_Diario",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer Tarjeta Diario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extrae_Tarjeta_Diario",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_AUX_TarjetaClasificacionBIN",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Extrae_Tarjeta_Diario",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_TarjetaClasificacionBIN",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_AUX_TarjetaClasificacionEmisor",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_AUX_TarjetaClasificacionBIN",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_TarjetaClasificacionEmisor",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_AUX_TarjetaClienteApp",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_AUX_TarjetaClasificacionEmisor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_TarjetaClienteApp",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_AUX_TarjetaFormaPago",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_AUX_TarjetaClienteApp",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_TarjetaFormaPago",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_AUX_TarjetaUnificacion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_AUX_TarjetaFormaPago",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_AUX_TarjetaUnificacion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_Tarjeta",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_AUX_TarjetaUnificacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_Tarjeta",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_SaldosTarjetaCredito",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_Tarjeta",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_SaldosTarjetaCredito",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

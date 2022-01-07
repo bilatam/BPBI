@@ -1,0 +1,637 @@
+{
+	"name": "UPD_MODEL_Diario_2",
+	"properties": {
+		"activities": [
+			{
+				"name": "Table Moneda",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Meta Credito",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Moneda",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Meta Credito",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Meta Captacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Meta Crédito",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Meta Captacion",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Linea",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Meta Captación",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table FechaCIC",
+				"type": "WebHook",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "FechaCIC",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Linea",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table FechaCIC",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Línea",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Operacion",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Moneda",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Operación",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Origen",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Operacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Origen",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Patrono SICERE",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Origen",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Patrono SICERE",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Patrono SIPO",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Patrono SICERE",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Patrono SIPO",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Rango Atraso",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Patrono SIPO",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Rango Atraso",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Rango Cancelacion",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Rango Atraso",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Rango Cancelación",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Rango Mora",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Rango Cancelacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Rango Mora",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Responsable",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Rango Mora",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Responsable",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Sector Economico BCCR",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Responsable",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Sector Económico BCCR",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tamano",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Sector Economico BCCR",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tamano",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tipo Aval",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tamano",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tipo Aval",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tipo Cartera",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tipo Aval",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tipo Cartera",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tipo Deduccion",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tipo Cartera",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tipo Deduccion",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tipo Garantia",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tipo Deduccion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tipo Garantía",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Tipo Resumen",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tipo Garantia",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Tipo Resumen",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Vehiculo",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Tipo Resumen",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Vehiculo",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			},
+			{
+				"name": "Table Vendedor",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "Table Vehiculo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.TableRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"AnalysisServicesTableName": "Vendedor",
+						"DatabaseRefreshType": "Full"
+					},
+					"timeout": "00:10:00"
+				}
+			}
+		],
+		"parameters": {
+			"Database": {
+				"type": "string",
+				"defaultValue": "AS_Popular"
+			},
+			"CredentialName": {
+				"type": "string",
+				"defaultValue": "SQLDW-Cred-cjavier"
+			},
+			"AnalysisService": {
+				"type": "string",
+				"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+			},
+			"TableRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=QdCdrVanUyTh281HG0SQfXNfO2UEQMnkn3st7guYuwo%3d"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-24T04:14:11Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

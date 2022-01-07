@@ -1,0 +1,525 @@
+{
+	"name": "SourceBIClientes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.BI_Clientes.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Cli_PK_IdCliente",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Cli_IdT24",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Repetido",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Cli_CedCorta",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CedLarga",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_TipoIdCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_TipoIdDocumento",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_Nombre",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CcNombre",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Apellidos",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Apellido1",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Apellido2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Direccion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_CodDistrito",
+				"type": "DECIMAL",
+				"precision": 12,
+				"scale": 0
+			},
+			{
+				"name": "Cli_UbicacionPostal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_SectorCli",
+				"type": "DECIMAL",
+				"precision": 6,
+				"scale": 0
+			},
+			{
+				"name": "Cli_FK_CodOficina",
+				"type": "INT64"
+			},
+			{
+				"name": "Cli_OtraOficina",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_ActividadEconomica",
+				"type": "DECIMAL",
+				"precision": 8,
+				"scale": 0
+			},
+			{
+				"name": "Cli_FK_Microsegmento",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Cli_FechaNacimiento",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_FechaVenciCed",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_Nacionalidad",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_EstadoCivil",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_EstadoTrabajador",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Ocupacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_Puesto",
+				"type": "DECIMAL",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "Cli_EmpresaTrabaja",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_EmpresaADD",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FechaInicioEmpresa",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_EgresoNeto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Cli_IngresoNeto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Cli_SalBruto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Cli_SalLiquido",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Cli_FrecuenciaSalario",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_RangoSalario",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_CodOcupacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_TipoResidencia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Telefono1",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Telefono2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Telefono3",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Pasatiempos",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_OtroDetalles",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Genero",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CapPago",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_NivelHistoSugef",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_NivelHistoBco",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_GenDivisas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_CodCategRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CodGrupo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CodEstadoCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Email",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_UltSalarioPAS",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Cli_FecUltSalarioPAS",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_FK_CodPatrono",
+				"type": "INT64"
+			},
+			{
+				"name": "Cli_CodEmpresa",
+				"type": "INT32"
+			},
+			{
+				"name": "Cli_CuentaAhorro",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CuentaCorriente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Pas",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Cli_Domicilio",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_TipoRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_NivelRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_ToleranciaRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FechaRiesgo",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_ServInternetBank",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_ServCelBank",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_EstadoCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FechaContacto",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_CalificacionCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CantDependientes",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_MonedaCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CanalPreferido",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_ClienteDesde",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_TipoCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FechaUltVerificacion",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_ReferenciaLocal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_EstadoCrediticio",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_DiasVenciCed",
+				"type": "DECIMAL",
+				"precision": 6,
+				"scale": 0
+			},
+			{
+				"name": "Cli_TPersoneriaGeneral",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_TipCliente",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_AnoNaci",
+				"type": "DECIMAL",
+				"precision": 4,
+				"scale": 0
+			},
+			{
+				"name": "Cli_MesNaci",
+				"type": "DECIMAL",
+				"precision": 2,
+				"scale": 0
+			},
+			{
+				"name": "Cli_DiaNaci",
+				"type": "DECIMAL",
+				"precision": 2,
+				"scale": 0
+			},
+			{
+				"name": "Cli_Edad",
+				"type": "DECIMAL",
+				"precision": 4,
+				"scale": 0
+			},
+			{
+				"name": "Cli_CumpleActual",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_CumplePost",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_AnoAfilia",
+				"type": "DECIMAL",
+				"precision": 4,
+				"scale": 0
+			},
+			{
+				"name": "Cli_MesAfilia",
+				"type": "DECIMAL",
+				"precision": 2,
+				"scale": 0
+			},
+			{
+				"name": "Cli_DiaAfilia",
+				"type": "DECIMAL",
+				"precision": 2,
+				"scale": 0
+			},
+			{
+				"name": "Cli_AnosAfiliacion",
+				"type": "DECIMAL",
+				"precision": 4,
+				"scale": 0
+			},
+			{
+				"name": "Cli_RegistraJuridico",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_SectorJuridico",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_SectorEmpresarial",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_DeudaExterna",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_EsNuevo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_UsuarioAutoriza",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_PropRelCode",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_SegIngresos",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_SegBancaria",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FechaModificacion",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_FechaDatos",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_FechaCarga",
+				"type": "DATE"
+			},
+			{
+				"name": "Cli_PaisResidencia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_PostingRestric",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_CodAgenCri",
+				"type": "INT64"
+			},
+			{
+				"name": "Cli_CondCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_BancaCli",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_FK_NivelAcademico",
+				"type": "DECIMAL",
+				"precision": 8,
+				"scale": 0
+			},
+			{
+				"name": "Cli_CaserioBarrio",
+				"type": "UTF8"
+			},
+			{
+				"name": "cli_residencia",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Alertas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_Funcionario",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Cli_RelCustomer",
+				"type": "UTF8"
+			},
+			{
+				"name": "Cli_ReversRelCode",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

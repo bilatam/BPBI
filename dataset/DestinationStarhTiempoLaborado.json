@@ -1,0 +1,28 @@
+{
+	"name": "DestinationStarhTiempoLaborado",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/STARH"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.tiempolaborado.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": "srh036tiempolaborado",
+				"fileSystem": "starh"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

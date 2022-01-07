@@ -1,0 +1,36 @@
+{
+	"name": "Source_BI_CodigosMCC",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Cmc_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Cmc_PK_CodigoMCC",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Cmc_DescripcionMCC",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_CodigosMCC"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

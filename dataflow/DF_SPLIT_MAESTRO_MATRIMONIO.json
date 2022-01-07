@@ -1,0 +1,35 @@
+{
+	"name": "DF_SPLIT_MAESTRO_MATRIMONIO",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SourceMaestroMatrimonioTXT",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DestinationMatrimonioParquet",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SplitColumns"
+				},
+				{
+					"name": "Select1"
+				}
+			],
+			"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['tsemaestramatrimonio/*.txt']) ~> source1\nsource1 derive(CITA_MATRIMONIO = substring({_col0_},1,13),\n\t\tID_CONTRAYENTE_1 = substring({_col0_},14,20),\n\t\tNOMBRE_CONTRAYENTE_1 = substring({_col0_},34,50),\n\t\tAPELLIDO_1_CONTRAYENTE_1 = substring({_col0_},84,26),\n\t\tAPELLIDO_2_CONTRAYENTE_1 = substring({_col0_},110,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_1 = substring({_col0_},136,29),\n\t\tPROGENITOR_1_CONTRAYENTE_1 = substring({_col0_},165,50),\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_1 = substring({_col0_},215,3),\n\t\tPROGENITOR_2_CONTRAYENTE_1 = substring({_col0_},218,50),\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_1 = substring({_col0_},268,3),\n\t\tES_EXTRANJERO_CONTRAYENTE_1 = substring({_col0_},271,1),\n\t\tNACIONALIDAD_CONTRAYENTE_1 = substring({_col0_},272,3),\n\t\tESTADO_CIVIL_CONTRAYENTE_1 = substring({_col0_},275,1),\n\t\tEDAD_CONTRAYENTE_1 = substring({_col0_},276,2),\n\t\tDEFUNCION_CONTRAYENTE_1 = substring({_col0_},278,1),\n\t\tID_CONTRAYENTE_2 = substring({_col0_},279,20),\n\t\tNOMBRE_CONTRAYENTE_2 = substring({_col0_},299,50),\n\t\tAPELLIDO_1_CONTRAYENTE_2 = substring({_col0_},349,26),\n\t\tAPELLIDO_2_CONTRAYENTE_2 = substring({_col0_},375,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_2 = substring({_col0_},401,29),\n\t\tPROGENITOR_1_CONTRAYENTE_2 = substring({_col0_},430,50),\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_2 = substring({_col0_},480,3),\n\t\tPROGENITOR_2_CONTRAYENTE_2 = substring({_col0_},483,50),\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_2 = substring({_col0_},533,3),\n\t\tES_EXTRANJERO_CONTRAYENTE_2 = substring({_col0_},536,1),\n\t\tNACIONALIDAD_CONTRAYENTE_2 = substring({_col0_},537,3),\n\t\tESTADO_CIVIL_CONTRAYENTE_2 = substring({_col0_},540,1),\n\t\tEDAD_CONTRAYENTE_2 = substring({_col0_},541,2),\n\t\tDEFUNCION_CONTRAYENTE_2 = substring({_col0_},543,1),\n\t\tLUGAR_SUCESO = substring({_col0_},544,29),\n\t\tFECHA_ENTRADA = substring({_col0_},573,8),\n\t\tFECHA_SUCESO = substring({_col0_},581,8),\n\t\tPROVINCIA = substring({_col0_},589,1),\n\t\tCODIGO_CANTON = substring({_col0_},590,2),\n\t\tDISTRITO_ADMINISTRATIVO = substring({_col0_},592,2),\n\t\tTIPO_MATRIMONIO = substring({_col0_},594,1),\n\t\tTIPO_RELACION = substring({_col0_},595,1),\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/tsemaestramatrimonio/', ''), 1, 8),\n\t\tFILE_NAME = concat('/matrimonio/', replace(replace(FILE_NAME, '.txt', '.parquet'), '/tsemaestramatrimonio/', '')),\n\t\tTIPO_MOVIMIENTO = 'O') ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tCITA_MATRIMONIO,\n\t\tID_CONTRAYENTE_1,\n\t\tNOMBRE_CONTRAYENTE_1,\n\t\tAPELLIDO_1_CONTRAYENTE_1,\n\t\tAPELLIDO_2_CONTRAYENTE_1,\n\t\tCONOCIDO_COMO_CONTRAYENTE_1,\n\t\tPROGENITOR_1_CONTRAYENTE_1,\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_1,\n\t\tPROGENITOR_2_CONTRAYENTE_1,\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_1,\n\t\tES_EXTRANJERO_CONTRAYENTE_1,\n\t\tNACIONALIDAD_CONTRAYENTE_1,\n\t\tESTADO_CIVIL_CONTRAYENTE_1,\n\t\tEDAD_CONTRAYENTE_1,\n\t\tDEFUNCION_CONTRAYENTE_1,\n\t\tID_CONTRAYENTE_2,\n\t\tNOMBRE_CONTRAYENTE_2,\n\t\tAPELLIDO_1_CONTRAYENTE_2,\n\t\tAPELLIDO_2_CONTRAYENTE_2,\n\t\tCONOCIDO_COMO_CONTRAYENTE_2,\n\t\tPROGENITOR_1_CONTRAYENTE_2,\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_2,\n\t\tPROGENITOR_2_CONTRAYENTE_2,\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_2,\n\t\tES_EXTRANJERO_CONTRAYENTE_2,\n\t\tNACIONALIDAD_CONTRAYENTE_2,\n\t\tESTADO_CIVIL_CONTRAYENTE_2,\n\t\tEDAD_CONTRAYENTE_2,\n\t\tDEFUNCION_CONTRAYENTE_2,\n\t\tLUGAR_SUCESO,\n\t\tFECHA_ENTRADA,\n\t\tFECHA_SUCESO,\n\t\tPROVINCIA,\n\t\tCODIGO_CANTON,\n\t\tDISTRITO_ADMINISTRATIVO,\n\t\tTIPO_MATRIMONIO,\n\t\tTIPO_RELACION,\n\t\tDATE_LOADED,\n\t\tFILE_NAME,\n\t\tTIPO_MOVIMIENTO\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+		}
+	}
+}

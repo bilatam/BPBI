@@ -1,0 +1,16 @@
+{
+	"name": "STARH",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "Oracle",
+		"typeProperties": {
+			"connectionString": "host=10.18.78.131;port=1521;sid=STARH;user id=AZURE_FACTORY_STARH",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIwZmQ4MjI5My1lMGJhLTQ4ZDAtODFkNi05NTcyYzVmMDdmNDEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IRPRPBI",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+	"name": "Run-FundsTranfer-2021",
+	"properties": {
+		"activities": [
+			{
+				"name": "Run-FundsTranfer-2021",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_TransT24_BI_FundsTransferHist_2021",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Canales"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-10-11T17:28:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

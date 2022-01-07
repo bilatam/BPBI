@@ -1,0 +1,20 @@
+{
+	"name": "RHPlanillas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "STARH",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/STARH"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "RH",
+			"table": "SRH064"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

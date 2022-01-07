@@ -1,0 +1,21 @@
+{
+	"name": "SourceEstadosContablesXML",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sharepoint"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

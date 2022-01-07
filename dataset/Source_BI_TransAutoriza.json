@@ -1,0 +1,77 @@
+{
+	"name": "Source_BI_TransAutoriza",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Tra_PANNumeroTarjeta",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_CodigoP",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_FechaTransac",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_HoraTransac",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_FechaAdquiriente",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_NumAutorizacion",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_Moneda",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_MontoTransac",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_DescripcionAdquirente",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_NumeroReferencia",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_FK_MCC",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_PEM",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_MontoColones",
+				"type": "varchar"
+			},
+			{
+				"name": "Tra_MontoDolares",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_TransAutoriza"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

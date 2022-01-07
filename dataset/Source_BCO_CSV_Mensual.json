@@ -1,0 +1,1048 @@
+{
+	"name": "Source_BCO_CSV_Mensual",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "bcomensual",
+				"fileSystem": "sharepoint"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "D28OPERAC",
+				"type": "String"
+			},
+			{
+				"name": "D28CEDULA",
+				"type": "String"
+			},
+			{
+				"name": "D28NOMBRE",
+				"type": "String"
+			},
+			{
+				"name": "D28PRINCIP",
+				"type": "String"
+			},
+			{
+				"name": "D28SALDO",
+				"type": "String"
+			},
+			{
+				"name": "D28CUOTA",
+				"type": "String"
+			},
+			{
+				"name": "D28INTERES",
+				"type": "String"
+			},
+			{
+				"name": "D28TASA",
+				"type": "String"
+			},
+			{
+				"name": "D28FECREAL",
+				"type": "String"
+			},
+			{
+				"name": "D28FECONST",
+				"type": "String"
+			},
+			{
+				"name": "D28FECULTP",
+				"type": "String"
+			},
+			{
+				"name": "D28PROXPAG",
+				"type": "String"
+			},
+			{
+				"name": "D28FECULTM",
+				"type": "String"
+			},
+			{
+				"name": "D28DESTINO",
+				"type": "String"
+			},
+			{
+				"name": "D28PATRONO",
+				"type": "String"
+			},
+			{
+				"name": "D28CUOTATR",
+				"type": "String"
+			},
+			{
+				"name": "D28ATRASO",
+				"type": "String"
+			},
+			{
+				"name": "D28PLAZO",
+				"type": "String"
+			},
+			{
+				"name": "D28FREPAG",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTADO",
+				"type": "String"
+			},
+			{
+				"name": "D28CATRIES",
+				"type": "String"
+			},
+			{
+				"name": "D28TPSBD",
+				"type": "String"
+			},
+			{
+				"name": "D28CRITERI",
+				"type": "String"
+			},
+			{
+				"name": "D28TIPGAR",
+				"type": "String"
+			},
+			{
+				"name": "D28PROVIN",
+				"type": "String"
+			},
+			{
+				"name": "D28CANTON",
+				"type": "String"
+			},
+			{
+				"name": "D28DISTRI",
+				"type": "String"
+			},
+			{
+				"name": "D28MESANO",
+				"type": "String"
+			},
+			{
+				"name": "D28POLIZAS",
+				"type": "String"
+			},
+			{
+				"name": "D28GRACIA",
+				"type": "String"
+			},
+			{
+				"name": "D28INT180",
+				"type": "String"
+			},
+			{
+				"name": "D28INT181",
+				"type": "String"
+			},
+			{
+				"name": "D28FRAC",
+				"type": "String"
+			},
+			{
+				"name": "D28EXCESO",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTADO2",
+				"type": "String"
+			},
+			{
+				"name": "D28BAJA",
+				"type": "String"
+			},
+			{
+				"name": "D28CELULA",
+				"type": "String"
+			},
+			{
+				"name": "D28CODIGO",
+				"type": "String"
+			},
+			{
+				"name": "D28CRITER2",
+				"type": "String"
+			},
+			{
+				"name": "D28ABOGADO",
+				"type": "String"
+			},
+			{
+				"name": "D28GRUPO",
+				"type": "String"
+			},
+			{
+				"name": "D28ENTREGA",
+				"type": "String"
+			},
+			{
+				"name": "D28DEUDSFN",
+				"type": "String"
+			},
+			{
+				"name": "D28OPERSFN",
+				"type": "String"
+			},
+			{
+				"name": "D28AVALUO",
+				"type": "String"
+			},
+			{
+				"name": "D28FAVALUO",
+				"type": "String"
+			},
+			{
+				"name": "D28PARTID",
+				"type": "String"
+			},
+			{
+				"name": "D28GESTOR",
+				"type": "String"
+			},
+			{
+				"name": "D28AHORRO",
+				"type": "String"
+			},
+			{
+				"name": "D28VENT",
+				"type": "String"
+			},
+			{
+				"name": "D28PVIDA",
+				"type": "String"
+			},
+			{
+				"name": "D28PINC",
+				"type": "String"
+			},
+			{
+				"name": "D28PVEH",
+				"type": "String"
+			},
+			{
+				"name": "D28PGAN",
+				"type": "String"
+			},
+			{
+				"name": "D28COMIS",
+				"type": "String"
+			},
+			{
+				"name": "D28SEGURO",
+				"type": "String"
+			},
+			{
+				"name": "D28ADIC",
+				"type": "String"
+			},
+			{
+				"name": "D28BONO",
+				"type": "String"
+			},
+			{
+				"name": "D28VENCID",
+				"type": "String"
+			},
+			{
+				"name": "D28REMAN",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTPIG",
+				"type": "String"
+			},
+			{
+				"name": "D28BANDA",
+				"type": "String"
+			},
+			{
+				"name": "D28ALFA",
+				"type": "String"
+			},
+			{
+				"name": "D28PONDER",
+				"type": "String"
+			},
+			{
+				"name": "D28VEND",
+				"type": "String"
+			},
+			{
+				"name": "D28FULTG",
+				"type": "String"
+			},
+			{
+				"name": "D28FLAG1",
+				"type": "String"
+			},
+			{
+				"name": "D28FLAG2",
+				"type": "String"
+			},
+			{
+				"name": "D28E2ANT",
+				"type": "String"
+			},
+			{
+				"name": "D28TPLUS",
+				"type": "String"
+			},
+			{
+				"name": "D28ASALARI",
+				"type": "String"
+			},
+			{
+				"name": "D28SINUSO",
+				"type": "String"
+			},
+			{
+				"name": "D28COMPAG",
+				"type": "String"
+			},
+			{
+				"name": "D28DIASATP",
+				"type": "String"
+			},
+			{
+				"name": "D28DIASATY",
+				"type": "String"
+			},
+			{
+				"name": "D28CUOATRP",
+				"type": "String"
+			},
+			{
+				"name": "D28DEUDAT",
+				"type": "String"
+			},
+			{
+				"name": "D28MITIGA",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA3",
+				"type": "String"
+			},
+			{
+				"name": "D28PCOMIS",
+				"type": "String"
+			},
+			{
+				"name": "D28CAPPAGO",
+				"type": "String"
+			},
+			{
+				"name": "D28HSTSUG",
+				"type": "String"
+			},
+			{
+				"name": "D28HSTBCO",
+				"type": "String"
+			},
+			{
+				"name": "D28GENDIV",
+				"type": "String"
+			},
+			{
+				"name": "D28CRSPEC",
+				"type": "String"
+			},
+			{
+				"name": "D28RECLAS",
+				"type": "String"
+			},
+			{
+				"name": "D28FECRIGE",
+				"type": "String"
+			},
+			{
+				"name": "D28TASARIG",
+				"type": "String"
+			},
+			{
+				"name": "D28MADRE",
+				"type": "String"
+			},
+			{
+				"name": "D28TASAREF",
+				"type": "String"
+			},
+			{
+				"name": "D28AVAL",
+				"type": "String"
+			},
+			{
+				"name": "D28MULTIPL",
+				"type": "String"
+			},
+			{
+				"name": "D28AGSOLIC",
+				"type": "String"
+			},
+			{
+				"name": "D28SW24M",
+				"type": "String"
+			},
+			{
+				"name": "D28SWPLAN",
+				"type": "String"
+			},
+			{
+				"name": "D28SWPAS",
+				"type": "String"
+			},
+			{
+				"name": "D28SWVALE",
+				"type": "String"
+			},
+			{
+				"name": "D28SWVISA",
+				"type": "String"
+			},
+			{
+				"name": "D28TPVISA",
+				"type": "String"
+			},
+			{
+				"name": "D28SWO2",
+				"type": "String"
+			},
+			{
+				"name": "D28SWO3",
+				"type": "String"
+			},
+			{
+				"name": "D28SWEXON",
+				"type": "String"
+			},
+			{
+				"name": "D28SWAHPLA",
+				"type": "String"
+			},
+			{
+				"name": "D28FECVENC",
+				"type": "String"
+			},
+			{
+				"name": "D28FECVARR",
+				"type": "String"
+			},
+			{
+				"name": "D28FECVEDA",
+				"type": "String"
+			},
+			{
+				"name": "D28ATRASOR",
+				"type": "String"
+			},
+			{
+				"name": "D28IUC",
+				"type": "String"
+			},
+			{
+				"name": "D28FECNAC",
+				"type": "String"
+			},
+			{
+				"name": "D28SEXO",
+				"type": "String"
+			},
+			{
+				"name": "D28FECNAC2",
+				"type": "String"
+			},
+			{
+				"name": "D28TPENTID",
+				"type": "String"
+			},
+			{
+				"name": "D28TIPSOCI",
+				"type": "String"
+			},
+			{
+				"name": "D28SECTOR2",
+				"type": "String"
+			},
+			{
+				"name": "D28DIMEX",
+				"type": "String"
+			},
+			{
+				"name": "D28FALLECI",
+				"type": "String"
+			},
+			{
+				"name": "D28PADRON",
+				"type": "String"
+			},
+			{
+				"name": "D28SUBSECT",
+				"type": "String"
+			},
+			{
+				"name": "D28TPCLIEN",
+				"type": "String"
+			},
+			{
+				"name": "D28TAMANO",
+				"type": "String"
+			},
+			{
+				"name": "D28ORIGEN",
+				"type": "String"
+			},
+			{
+				"name": "D28EJECT",
+				"type": "String"
+			},
+			{
+				"name": "D28EDAD",
+				"type": "String"
+			},
+			{
+				"name": "D28TASAP",
+				"type": "String"
+			},
+			{
+				"name": "D28TASAT",
+				"type": "String"
+			},
+			{
+				"name": "D28NGAS",
+				"type": "String"
+			},
+			{
+				"name": "D28TIPOCVD",
+				"type": "String"
+			},
+			{
+				"name": "D28SBD",
+				"type": "String"
+			},
+			{
+				"name": "D28FPD",
+				"type": "String"
+			},
+			{
+				"name": "D28FRT",
+				"type": "String"
+			},
+			{
+				"name": "D28CPHSBD",
+				"type": "String"
+			},
+			{
+				"name": "D28CATSBD",
+				"type": "String"
+			},
+			{
+				"name": "D28ATRMSBD",
+				"type": "String"
+			},
+			{
+				"name": "D28IBAN",
+				"type": "String"
+			},
+			{
+				"name": "D28BASE",
+				"type": "String"
+			},
+			{
+				"name": "D28AGECNT",
+				"type": "String"
+			},
+			{
+				"name": "D28CTACNT",
+				"type": "String"
+			},
+			{
+				"name": "D28CTAPXC",
+				"type": "String"
+			},
+			{
+				"name": "D28CTAORD",
+				"type": "String"
+			},
+			{
+				"name": "D28PLANPAG",
+				"type": "String"
+			},
+			{
+				"name": "D28OPESP9",
+				"type": "String"
+			},
+			{
+				"name": "D28COVID1",
+				"type": "String"
+			},
+			{
+				"name": "D28COVID2",
+				"type": "String"
+			},
+			{
+				"name": "D28COVID3",
+				"type": "String"
+			},
+			{
+				"name": "D28COVID4",
+				"type": "String"
+			},
+			{
+				"name": "D28TP",
+				"type": "String"
+			},
+			{
+				"name": "D28TP2",
+				"type": "String"
+			},
+			{
+				"name": "D28CODEUDO",
+				"type": "String"
+			},
+			{
+				"name": "F",
+				"type": "String"
+			},
+			{
+				"name": "F2",
+				"type": "String"
+			},
+			{
+				"name": "DIAS2",
+				"type": "String"
+			},
+			{
+				"name": "C2",
+				"type": "String"
+			},
+			{
+				"name": "FEC",
+				"type": "String"
+			},
+			{
+				"name": "DIAULTPAG",
+				"type": "String"
+			},
+			{
+				"name": "CR195",
+				"type": "String"
+			},
+			{
+				"name": "CA195",
+				"type": "String"
+			},
+			{
+				"name": "MESES",
+				"type": "String"
+			},
+			{
+				"name": "INT",
+				"type": "String"
+			},
+			{
+				"name": "SALDOT",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA4",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTCONT",
+				"type": "String"
+			},
+			{
+				"name": "GRUPO",
+				"type": "String"
+			},
+			{
+				"name": "MITIG",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTGEND",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTGENC",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTSCD",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTSCC",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTSDD",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTSDC",
+				"type": "String"
+			},
+			{
+				"name": "D28ATRAMAX",
+				"type": "String"
+			},
+			{
+				"name": "SA",
+				"type": "String"
+			},
+			{
+				"name": "D28MITDIR",
+				"type": "String"
+			},
+			{
+				"name": "D28MITCON",
+				"type": "String"
+			},
+			{
+				"name": "PORC",
+				"type": "String"
+			},
+			{
+				"name": "LC",
+				"type": "String"
+			},
+			{
+				"name": "MONEDA",
+				"type": "String"
+			},
+			{
+				"name": "D28PORC2",
+				"type": "String"
+			},
+			{
+				"name": "D28HONO",
+				"type": "String"
+			},
+			{
+				"name": "D28POLINC",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA5",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA6",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA7",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA8",
+				"type": "String"
+			},
+			{
+				"name": "D28ESTIMA9",
+				"type": "String"
+			},
+			{
+				"name": "D28HIJAS",
+				"type": "String"
+			},
+			{
+				"name": "F3",
+				"type": "String"
+			},
+			{
+				"name": "CARTERA",
+				"type": "String"
+			},
+			{
+				"name": "D28SECTOR",
+				"type": "String"
+			},
+			{
+				"name": "FX4",
+				"type": "String"
+			},
+			{
+				"name": "FX5",
+				"type": "String"
+			},
+			{
+				"name": "FXF",
+				"type": "String"
+			},
+			{
+				"name": "CAR",
+				"type": "String"
+			},
+			{
+				"name": "OXCN",
+				"type": "String"
+			},
+			{
+				"name": "BAN",
+				"type": "String"
+			},
+			{
+				"name": "TCH",
+				"type": "String"
+			},
+			{
+				"name": "FTIEMPO",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISAAC",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISAAN",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISADI",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISAPAN",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISAPAC",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISAPDI",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISARC",
+				"type": "String"
+			},
+			{
+				"name": "LIMVISASG",
+				"type": "String"
+			},
+			{
+				"name": "CONTAGIO",
+				"type": "String"
+			},
+			{
+				"name": "CEDCODE",
+				"type": "String"
+			},
+			{
+				"name": "CEDCODM",
+				"type": "String"
+			},
+			{
+				"name": "D28DEUDATC",
+				"type": "String"
+			},
+			{
+				"name": "GRUPO1C",
+				"type": "String"
+			},
+			{
+				"name": "D28CATANT",
+				"type": "String"
+			},
+			{
+				"name": "NEW105",
+				"type": "String"
+			},
+			{
+				"name": "TIPOMIT",
+				"type": "String"
+			},
+			{
+				"name": "AVALUOORG",
+				"type": "String"
+			},
+			{
+				"name": "PCCSDORG",
+				"type": "String"
+			},
+			{
+				"name": "PCCSDREAL",
+				"type": "String"
+			},
+			{
+				"name": "CODGENERAD",
+				"type": "String"
+			},
+			{
+				"name": "RIESGOCAMB",
+				"type": "String"
+			},
+			{
+				"name": "TIPOINGRES",
+				"type": "String"
+			},
+			{
+				"name": "MONEDAINGR",
+				"type": "String"
+			},
+			{
+				"name": "MONTORENTA",
+				"type": "String"
+			},
+			{
+				"name": "FECHARENTA",
+				"type": "String"
+			},
+			{
+				"name": "DECLARAREN",
+				"type": "String"
+			},
+			{
+				"name": "PCESTADIC1",
+				"type": "String"
+			},
+			{
+				"name": "PCESTADIC2",
+				"type": "String"
+			},
+			{
+				"name": "CSDCM",
+				"type": "String"
+			},
+			{
+				"name": "CSDCNS",
+				"type": "String"
+			},
+			{
+				"name": "SBRUTO",
+				"type": "String"
+			},
+			{
+				"name": "PONGSPD",
+				"type": "String"
+			},
+			{
+				"name": "PONGSPC",
+				"type": "String"
+			},
+			{
+				"name": "PONNGSPD",
+				"type": "String"
+			},
+			{
+				"name": "PONNGSPC",
+				"type": "String"
+			},
+			{
+				"name": "INDLTV",
+				"type": "String"
+			},
+			{
+				"name": "INDLTVD",
+				"type": "String"
+			},
+			{
+				"name": "INDLTVC",
+				"type": "String"
+			},
+			{
+				"name": "VISA",
+				"type": "String"
+			},
+			{
+				"name": "RECNOVISA",
+				"type": "String"
+			},
+			{
+				"name": "SOLICITUD",
+				"type": "String"
+			},
+			{
+				"name": "GND0",
+				"type": "String"
+			},
+			{
+				"name": "GNC0",
+				"type": "String"
+			},
+			{
+				"name": "GND1",
+				"type": "String"
+			},
+			{
+				"name": "GND2",
+				"type": "String"
+			},
+			{
+				"name": "GNC1",
+				"type": "String"
+			},
+			{
+				"name": "GNC2",
+				"type": "String"
+			},
+			{
+				"name": "TPSECTORPR",
+				"type": "String"
+			},
+			{
+				"name": "TASAANT",
+				"type": "String"
+			},
+			{
+				"name": "VTI",
+				"type": "String"
+			},
+			{
+				"name": "ST",
+				"type": "String"
+			},
+			{
+				"name": "TPBENEF",
+				"type": "String"
+			},
+			{
+				"name": "PLZRESID",
+				"type": "String"
+			},
+			{
+				"name": "PCPLZADIC",
+				"type": "String"
+			},
+			{
+				"name": "MM",
+				"type": "String"
+			},
+			{
+				"name": "IUC",
+				"type": "String"
+			},
+			{
+				"name": "LEGAL",
+				"type": "String"
+			},
+			{
+				"name": "FECVENCO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

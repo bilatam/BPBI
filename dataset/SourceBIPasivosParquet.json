@@ -1,0 +1,233 @@
+{
+	"name": "SourceBIPasivosParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.BI_Pasivos.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Pvo_PK_Identificador",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 0
+			},
+			{
+				"name": "Pvo_FechaDatos",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_IDPasivo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_FK_IDCliente",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Pvo_Moneda",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_FK_OficinaProd",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_ID390",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_UltCredFecha",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_UltCredMonto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_UltCredCodigo",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_UltTCredBancoFecha",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_UltTCredBancoMonto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_UltTCredBancoCodigo",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_UltDebFecha",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_UltDebMonto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_UltDebCodigo",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_UltTDebBancoFecha",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_UltTDebBancoMonto",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_UltTDebBancoCodigo",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_CredCargoCapFecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_CredIntCapFecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_Cred2IntCapFecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_DebIntCapFecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_Deb2IntCapFecha",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_CategContable",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_TCodPagoInt",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_FechaApertProd",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_CatApertProd",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Pvo_MonePagoInt",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_IDAutorizados",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_CodRelacAutor",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_Observaciones",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_FechaBloqFond",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_MontoBloqFond",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_CtaCteProducto",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_CantModfCuenta",
+				"type": "INT64"
+			},
+			{
+				"name": "Pvo_FechaUltModfCta",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_Estado",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Pvo_ReferenciaLocal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_UsuarioAutoriza",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_FechaCarga",
+				"type": "DATE"
+			},
+			{
+				"name": "Pvo_SobreGiro",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 2
+			},
+			{
+				"name": "Pvo_GrupoInt",
+				"type": "DECIMAL",
+				"precision": 25,
+				"scale": 0
+			},
+			{
+				"name": "Pvo_fk_IDpasivoPadre",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_NombreCorto",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_CtaLiqInt",
+				"type": "UTF8"
+			},
+			{
+				"name": "Pvo_Restricciones",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

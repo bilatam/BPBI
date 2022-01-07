@@ -1,0 +1,20 @@
+{
+	"name": "Source_BI_OperacionesHistoricasDeudor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SUGEF"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_OperacionesHistoricasDeudor"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,57 @@
+{
+	"name": "CD_SISBI_BI_Estacionalidad_creditos",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_gtu",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.BI_Estacionalidad_creditos"
+					},
+					{
+						"name": "Destination",
+						"value": "SISBI/BI_Estacionalidad_creditos"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_BI_Estacionalidad_creditos",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_BI_Estacionalidad_creditos",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2020-08-06T14:45:37Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

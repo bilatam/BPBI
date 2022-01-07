@@ -1,0 +1,68 @@
+{
+	"name": "DestinationTransacciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "t24"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Transaction_Code",
+				"type": "UTF8"
+			},
+			{
+				"name": "Documentos_Banco_Popular",
+				"type": "UTF8"
+			},
+			{
+				"name": "Amount_Base_Currency",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "Date",
+				"type": "UTF8"
+			},
+			{
+				"name": "Identification",
+				"type": "INT64"
+			},
+			{
+				"name": "Account_Number",
+				"type": "INT64"
+			},
+			{
+				"name": "Reference_Description",
+				"type": "UTF8"
+			},
+			{
+				"name": "Amount_Original_Currency",
+				"type": "DOUBLE"
+			},
+			{
+				"name": "Currency_Original",
+				"type": "UTF8"
+			},
+			{
+				"name": "Application_Code",
+				"type": "INT64"
+			},
+			{
+				"name": "Time",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

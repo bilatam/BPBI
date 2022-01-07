@@ -1,0 +1,113 @@
+{
+	"name": "Extraer_Principal_FechaCarga",
+	"properties": {
+		"activities": [
+			{
+				"name": "Carga Historica Operaciones Mes",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_OperacionesHist_FechaCarga",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"FechaCarga": {
+							"value": "@pipeline().parameters.FechaCarga",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Carga Historico Sector Mes",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Carga Historica Operaciones Mes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_SectorCliHist_FechaCarga",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"FechaCarga": {
+							"value": "@pipeline().parameters.FechaCarga",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Carga Historica Segmenta Cliente Cierre Mes",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Carga Hsitorica Pasivos Saldos Mes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_SegmentaClientesCierreHist_FechaCarga",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"FechaCarga": {
+							"value": "@pipeline().parameters.FechaCarga",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Carga Hsitorica Pasivos Saldos Mes",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Carga Historico Sector Mes",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_PasivosSaldosHist_FechaCarga",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"FechaCarga": {
+							"value": "@pipeline().parameters.FechaCarga",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"FechaCarga": {
+				"type": "string",
+				"defaultValue": "'2020-12-31'"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-02-16T20:28:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

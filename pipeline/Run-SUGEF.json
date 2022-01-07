@@ -1,0 +1,166 @@
+{
+	"name": "Run-SUGEF",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extraer_SUGEF",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer_SUGEF",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Extraer_SUGEF",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer_SUGEF",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extraer_SUGEF",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_SUGEFDeudor",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Extraer_SUGEF",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SUGEFDeudor",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_SUGEFEntidad",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SUGEFDeudor",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SUGEFEntidad",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_SUGEFFechaFormalizacion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SUGEFEntidad",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SUGEFFechaFormalizacion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_SUGEFFechaVencimiento",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SUGEFFechaFormalizacion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_SUGEFFechaVencimiento",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_SUGEFOperacionesActivas",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_SUGEFFechaVencimiento",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_SUGEFOperacionesActivas",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_SUGEFOperacionesHistoricas",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_FACT_SUGEFOperacionesActivas",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_SUGEFOperacionesHistoricas",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "SUGEF"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

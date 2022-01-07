@@ -1,0 +1,39 @@
+{
+	"name": "ExcelListaOficinas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "DATA",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "listaoficinas",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "OFICINA_NOMBRE",
+				"type": "String"
+			},
+			{
+				"name": "OFICINA",
+				"type": "String"
+			},
+			{
+				"name": "DIVISION TEMPORAL",
+				"type": "String"
+			},
+			{
+				"name": "SUCURSAL",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

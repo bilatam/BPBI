@@ -1,0 +1,77 @@
+{
+	"name": "Copiar_BI_Clientes",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_BI_CLIENTES",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "sisbi//dbo.BI_Clientes.parquet"
+					},
+					{
+						"name": "Destination",
+						"value": "sisbi/clientes/BI_Clientes.parquet"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": "DATE_LOADED",
+								"value": {
+									"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+									"type": "Expression"
+								}
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceBIClientes",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationBIClientesParquet",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,63 @@
+{
+	"name": "DestinationReporteCombinadoParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "reportecombinado",
+				"fileSystem": "finanzas"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Cuenta",
+				"type": "UTF8"
+			},
+			{
+				"name": "TipoCatalogoSUGEF",
+				"type": "INT32"
+			},
+			{
+				"name": "Debito",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "Credito",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "SaldoFinal",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "NotaTexto",
+				"type": "UTF8"
+			},
+			{
+				"name": "NotaArchivo",
+				"type": "UTF8"
+			},
+			{
+				"name": "DATE_LOADED",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

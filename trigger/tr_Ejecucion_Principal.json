@@ -1,0 +1,25 @@
+{
+	"name": "tr_Ejecucion_Principal",
+	"properties": {
+		"description": "Ejecución diaria del proceso de carga",
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Ejecucion_Principal",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2020-08-31T20:00:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

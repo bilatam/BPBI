@@ -1,0 +1,20 @@
+{
+	"name": "SourceBICaptacionFinalRest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_CaptacionFinalResp"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

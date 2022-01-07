@@ -1,0 +1,526 @@
+{
+	"name": "Copiar_TSE_PADRON",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_Distelec",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Unzip Padron",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FILEPATH",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.Distelec.txt",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "Codigo_Postal",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "Provincia",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "Canton",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 4
+								},
+								"sink": {
+									"name": "Distrito",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "FILEPATH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILEPATH",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDistelec",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDistelectParquet",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "CD_Padron",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Unzip Padron",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FILEPATH",
+								"value": "$$FILEPATH"
+							},
+							{
+								"name": "EMPTY",
+								"value": " "
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*.PADRON_COMPLETO.txt",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"name": "CEDULA",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 2
+								},
+								"sink": {
+									"name": "CODELEC",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 3
+								},
+								"sink": {
+									"name": "RELLENO",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 4
+								},
+								"sink": {
+									"name": "FECHACADUC",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 6
+								},
+								"sink": {
+									"name": "NOMBRE",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 7
+								},
+								"sink": {
+									"name": "APELLIDO_1",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"physicalType": "String",
+									"ordinal": 8
+								},
+								"sink": {
+									"name": "APELLIDO_2",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 5
+								},
+								"sink": {
+									"name": "JUNTA",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "EMPTY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NROELECTOR"
+								}
+							},
+							{
+								"source": {
+									"name": "FILEPATH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILEPATH",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourcePadronTXT",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationPadronCompletoParquet",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DeleteDistelec",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CD_Distelec",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "CD_Padron",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceDistelec",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.Distelec.txt",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "DeletePadronCompleto",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "DeleteDistelec",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "SourceDistelec",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.PADRON_COMPLETO.txt",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Unzip Distelec",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "SharepointDownloadFiles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "unzip",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "padron/*.padron_completo.zip",
+						"fileToUnzipName": "Distelec.txt",
+						"deleteFile": "no"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Unzip Padron",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "Unzip Distelec",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "unzip",
+					"method": "POST",
+					"body": {
+						"connectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"fileName": "*.padron_completo.zip",
+						"fileToUnzipName": "PADRON_COMPLETO.txt",
+						"deleteFile": "yes"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeletePadronCompleto",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "TSE/Padron Electoral"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "SharepointDownloadFiles",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointDownloadFiles",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "TSE/Padron Electoral",
+						"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+						"containerName": "sharepoint",
+						"pathDestiny": "padron"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

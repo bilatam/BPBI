@@ -1,0 +1,473 @@
+{
+	"name": "SourceBIMaestroOpe",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "dbo.BI_MaestroOpe.parquet",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Mvd_PK_NumOperacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_PK_IdCliente",
+				"type": "INT64"
+			},
+			{
+				"name": "Mvd_FK_CodLinea",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_FK_CodAgencia",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_MontoPrincipal",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Opr_MontoSaldo",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_SaldoEmi",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_PolVid",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_PolInc",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_PolGan",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_PolVeh",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Comision",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Otro01",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Otro02",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Cuota",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Exceso",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_AhoCP",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_AhoRR",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_AhoAC",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_AhPrev",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_AcPrev",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Int180",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Int181",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_MonRem",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_MonVen",
+				"type": "DECIMAL",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_FechaCReal",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaConstitucion",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaUltPago",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaUltTr",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaUltMov",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaUltTa",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaUltTav",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaCreMa",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_FechaVent",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_TasaR",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 3
+			},
+			{
+				"name": "Mvd_Tasa",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 3
+			},
+			{
+				"name": "Mvd_Ponder",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 3
+			},
+			{
+				"name": "Mvd_Alfa",
+				"type": "DECIMAL",
+				"precision": 6,
+				"scale": 4
+			},
+			{
+				"name": "Mvd_Plazo",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_CuotasPag",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_FrePag",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_AtraPe",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_MesesGracia",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_SeguiM",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_Suspen",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_CdActi",
+				"type": "DECIMAL",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_CodDestino",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_NumRem",
+				"type": "DECIMAL",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_PreVis",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_Celula",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Codigo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_NoCode",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_2DOAVI",
+				"type": "INT32"
+			},
+			{
+				"name": "Mvd_TipGar",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_NumerR",
+				"type": "DECIMAL",
+				"precision": 7,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_Banda",
+				"type": "DECIMAL",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Mvd_Formato",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_ImpAvi",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_AvisEmi",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_EstinD",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_TipPag",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Estado",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_TipoTasa",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_SusRem",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_EstadoPig",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Banvhi",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Partid",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Baja",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Ventan",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_CapacidadPago",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_HistSUG",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_HistBCO",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_GeneradorDivisas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_CRspec",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_ReClas",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_EstadoAnt",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Rollo",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_Fefilm",
+				"type": "DECIMAL",
+				"precision": 9,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_Atraso",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_CuotaAtraso",
+				"type": "DECIMAL",
+				"precision": 5,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_Criter",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_CategoriaRiesgo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_360Dias",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_MONEDA",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_CANCELA",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_TipoCuota",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_Filler",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_NOFIAD",
+				"type": "DECIMAL",
+				"precision": 3,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_LAG1",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_LAG2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Mvd_E2ANT",
+				"type": "DECIMAL",
+				"precision": 2,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_TPLUS",
+				"type": "DECIMAL",
+				"precision": 3,
+				"scale": 0
+			},
+			{
+				"name": "Mvd_FCarga",
+				"type": "DATE"
+			},
+			{
+				"name": "Mvd_Cedula",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

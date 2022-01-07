@@ -1,0 +1,785 @@
+{
+	"name": "Copiar_BCO_Mensual",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_BCO_Carga_DLS",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "FILEPATH",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "bcomensual",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FILEPATH",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FILEPATH",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D28OPERAC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OPERACION"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CEDULA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CEDULA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28NOMBRE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NOMBRE"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PRINCIP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PRINCIP"
+								}
+							},
+							{
+								"source": {
+									"name": "D28SALDO",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SALDO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CUOTA",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CUOTA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28INTERES",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INTERES"
+								}
+							},
+							{
+								"source": {
+									"name": "D28TASA",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TASA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECREAL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECREAL"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECONST",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECONST"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECULTP",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECULTP"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PROXPAG",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PROXPAG"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECULTM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECULTM"
+								}
+							},
+							{
+								"source": {
+									"name": "D28DESTINO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DESTINO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PATRONO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PATRONO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CUOTATR",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CUOTATR"
+								}
+							},
+							{
+								"source": {
+									"name": "D28ATRASO",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ATRASO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PLAZO",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLAZO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FREPAG",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FREPAG"
+								}
+							},
+							{
+								"source": {
+									"name": "D28ESTADO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ESTADO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CATRIES",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CATRIES"
+								}
+							},
+							{
+								"source": {
+									"name": "D28TPSBD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TPSBD"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CRITERI",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CRITERI"
+								}
+							},
+							{
+								"source": {
+									"name": "D28TIPGAR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TIPGAR"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PROVIN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PROVIN"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CANTON",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CANTON"
+								}
+							},
+							{
+								"source": {
+									"name": "D28DISTRI",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DISTRI"
+								}
+							},
+							{
+								"source": {
+									"name": "D28MESANO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MESANO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28POLIZAS",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "POLIZAS"
+								}
+							},
+							{
+								"source": {
+									"name": "D28GRACIA",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GRACIA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28INT180",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INT180"
+								}
+							},
+							{
+								"source": {
+									"name": "D28INT181",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INT181"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FRAC",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FRAC"
+								}
+							},
+							{
+								"source": {
+									"name": "D28EXCESO",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EXCESO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28ESTADO2",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ESTADO2"
+								}
+							},
+							{
+								"source": {
+									"name": "D28BAJA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BAJA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CELULA",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CELULA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CODIGO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CODIGO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CRITER2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CRITER2"
+								}
+							},
+							{
+								"source": {
+									"name": "D28ABOGADO",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ABOGADO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28GRUPO",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GRUPO",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D28DEUDSFN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DEUDSFN"
+								}
+							},
+							{
+								"source": {
+									"name": "D28OPERSFN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OPERSFN"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PVIDA",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PVIDA"
+								}
+							},
+							{
+								"source": {
+									"name": "D28DIASATY",
+									"type": "Int64",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DIASATY"
+								}
+							},
+							{
+								"source": {
+									"name": "D28IUC",
+									"type": "Int64",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IUC",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECNAC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECNAC"
+								}
+							},
+							{
+								"source": {
+									"name": "D28SEXO",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SEXO"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FECNAC2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FECNAC2"
+								}
+							},
+							{
+								"source": {
+									"name": "D28FALLECI",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FALLECI"
+								}
+							},
+							{
+								"source": {
+									"name": "D28PADRON",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PADRON"
+								}
+							},
+							{
+								"source": {
+									"name": "D28SUBSECT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SUBSECT"
+								}
+							},
+							{
+								"source": {
+									"name": "D28EDAD",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "EDAD"
+								}
+							},
+							{
+								"source": {
+									"name": "D28TASAP",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TASAP"
+								}
+							},
+							{
+								"source": {
+									"name": "D28TASAT",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TASAT"
+								}
+							},
+							{
+								"source": {
+									"name": "D28NGAS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NGAS"
+								}
+							},
+							{
+								"source": {
+									"name": "D28IBAN",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IBAN"
+								}
+							},
+							{
+								"source": {
+									"name": "D28BASE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BASE"
+								}
+							},
+							{
+								"source": {
+									"name": "D28AGECNT",
+									"type": "Int32",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AGECNT"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CTACNT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CTACNT"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CTAPXC",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CTAPXC"
+								}
+							},
+							{
+								"source": {
+									"name": "D28CTAORD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "CTAORD"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false,
+							"dateTimeFormat": "ddMMyyyy"
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_BCO_CSV_Mensual",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_BCO_Mensual_Parquet",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "DeleteBCOSourceCSV",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "CD_BCO_Carga_DLS",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "Source_BCO_CSV_Mensual",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "DeleteSharepoint",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "DeleteBCOSourceCSV",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "SharepointEmptyFolder",
+					"method": "POST",
+					"body": {
+						"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+						"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+						"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+						"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+						"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+						"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+						"paths": "BCO Mensual"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AF_AuditoriaInterna",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:12Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,44 @@
+{
+	"name": "Destination_BI_PatronosSicereDetalle",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Atm_PK_CodCajero",
+				"type": "UTF8"
+			},
+			{
+				"name": "Atm_Localizacion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Atm_TipoTerminal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Atm_TipoCajero",
+				"type": "UTF8"
+			},
+			{
+				"name": "Atm_FechaCarga",
+				"type": "DATE"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

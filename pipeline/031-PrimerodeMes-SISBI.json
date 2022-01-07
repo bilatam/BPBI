@@ -1,0 +1,39 @@
+{
+	"name": "031-PrimerodeMes-SISBI",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copiar_BI_CaptacionFinalHisto",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_BI_CaptacionFinalHisto",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Copiar_BI_CaptacionFinalRest",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Copiar_BI_CaptacionFinalRest",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:14Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

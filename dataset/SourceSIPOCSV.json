@@ -1,0 +1,288 @@
+{
+	"name": "SourceSIPOCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/Sharepoint"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Auditoría de Procesos de Negocio - SIPO Diario.sipo_diario.csv",
+				"fileSystem": "sharepoint"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "TIPO",
+				"type": "String"
+			},
+			{
+				"name": "ORIGEN",
+				"type": "String"
+			},
+			{
+				"name": "OPERACION",
+				"type": "String"
+			},
+			{
+				"name": "PATRONO",
+				"type": "String"
+			},
+			{
+				"name": "NCUOTA",
+				"type": "String"
+			},
+			{
+				"name": "CAJERO",
+				"type": "String"
+			},
+			{
+				"name": "CPTE",
+				"type": "String"
+			},
+			{
+				"name": "AGENCIAR",
+				"type": "String"
+			},
+			{
+				"name": "MONTO",
+				"type": "String"
+			},
+			{
+				"name": "IMORA",
+				"type": "String"
+			},
+			{
+				"name": "GASTOS",
+				"type": "String"
+			},
+			{
+				"name": "COSTAS",
+				"type": "String"
+			},
+			{
+				"name": "HONORARIOS",
+				"type": "String"
+			},
+			{
+				"name": "MULTAS",
+				"type": "String"
+			},
+			{
+				"name": "COMISION",
+				"type": "String"
+			},
+			{
+				"name": "OTRO0",
+				"type": "String"
+			},
+			{
+				"name": "OTRO1",
+				"type": "String"
+			},
+			{
+				"name": "OTRO2",
+				"type": "String"
+			},
+			{
+				"name": "SALDO",
+				"type": "String"
+			},
+			{
+				"name": "CUOTA",
+				"type": "String"
+			},
+			{
+				"name": "ICORR",
+				"type": "String"
+			},
+			{
+				"name": "IGAN",
+				"type": "String"
+			},
+			{
+				"name": "AMORT",
+				"type": "String"
+			},
+			{
+				"name": "PVIDA",
+				"type": "String"
+			},
+			{
+				"name": "PINC",
+				"type": "String"
+			},
+			{
+				"name": "PVEH",
+				"type": "String"
+			},
+			{
+				"name": "PGAN",
+				"type": "String"
+			},
+			{
+				"name": "EXCESO",
+				"type": "String"
+			},
+			{
+				"name": "FRACCION",
+				"type": "String"
+			},
+			{
+				"name": "REF",
+				"type": "String"
+			},
+			{
+				"name": "TERM",
+				"type": "String"
+			},
+			{
+				"name": "LIBR",
+				"type": "String"
+			},
+			{
+				"name": "CEDULA",
+				"type": "String"
+			},
+			{
+				"name": "TASA",
+				"type": "String"
+			},
+			{
+				"name": "CPAG",
+				"type": "String"
+			},
+			{
+				"name": "FCONST",
+				"type": "String"
+			},
+			{
+				"name": "FVENC",
+				"type": "String"
+			},
+			{
+				"name": "FAPLIC",
+				"type": "String"
+			},
+			{
+				"name": "FEFEC",
+				"type": "String"
+			},
+			{
+				"name": "FPLAN",
+				"type": "String"
+			},
+			{
+				"name": "FCALC",
+				"type": "String"
+			},
+			{
+				"name": "STATUS",
+				"type": "String"
+			},
+			{
+				"name": "CONSEC",
+				"type": "String"
+			},
+			{
+				"name": "PRINCIPAL",
+				"type": "String"
+			},
+			{
+				"name": "REMANENTE",
+				"type": "String"
+			},
+			{
+				"name": "NCUENTA",
+				"type": "String"
+			},
+			{
+				"name": "PLAZO",
+				"type": "String"
+			},
+			{
+				"name": "REFERENCIA",
+				"type": "String"
+			},
+			{
+				"name": "NOMBRE",
+				"type": "String"
+			},
+			{
+				"name": "ESTADO",
+				"type": "String"
+			},
+			{
+				"name": "AGECON",
+				"type": "String"
+			},
+			{
+				"name": "CTACRX",
+				"type": "String"
+			},
+			{
+				"name": "CTACRV",
+				"type": "String"
+			},
+			{
+				"name": "CTAPXC",
+				"type": "String"
+			},
+			{
+				"name": "CTAIGA",
+				"type": "String"
+			},
+			{
+				"name": "HORA",
+				"type": "String"
+			},
+			{
+				"name": "CLASIFICAC",
+				"type": "String"
+			},
+			{
+				"name": "STATUS206",
+				"type": "String"
+			},
+			{
+				"name": "LIBRETA",
+				"type": "String"
+			},
+			{
+				"name": "TIPO_TASA",
+				"type": "String"
+			},
+			{
+				"name": "GEN_PEND",
+				"type": "String"
+			},
+			{
+				"name": "COD_ARCH",
+				"type": "String"
+			},
+			{
+				"name": "SELF_AUX",
+				"type": "String"
+			},
+			{
+				"name": "MONEDA",
+				"type": "String"
+			},
+			{
+				"name": "RESTO",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

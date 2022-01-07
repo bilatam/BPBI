@@ -1,0 +1,20 @@
+{
+	"name": "RHFeriados",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "STARH",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/STARH"
+		},
+		"annotations": [],
+		"type": "OracleTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "RH",
+			"table": "SRH056"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

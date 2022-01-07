@@ -1,0 +1,40 @@
+{
+	"name": "Source_BI_ActEconomicaPatSicere",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Aes_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Aes_PK_CodActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "Aes_DescripcionActEco",
+				"type": "varchar"
+			},
+			{
+				"name": "Aes_FechaActualizacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "Sicere",
+			"table": "BI_ActEconomicaPatSicere"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

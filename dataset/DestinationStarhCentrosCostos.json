@@ -1,0 +1,121 @@
+{
+	"name": "DestinationStarhCentrosCostos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/STARH"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.centroscostos.parquet')",
+					"type": "Expression"
+				},
+				"folderPath": "srh051centroscostos",
+				"fileSystem": "starh"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "CEDULA",
+				"type": "UTF8"
+			},
+			{
+				"name": "PERIODO",
+				"type": "UTF8"
+			},
+			{
+				"name": "CCOSTO",
+				"type": "UTF8"
+			},
+			{
+				"name": "CIA",
+				"type": "UTF8"
+			},
+			{
+				"name": "PLANILLA",
+				"type": "UTF8"
+			},
+			{
+				"name": "SALARIO_DEVENGADO",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MTO_PATRONAL",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MTO_PATRONAL_ESPECIAL",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "CREADO_POR",
+				"type": "UTF8"
+			},
+			{
+				"name": "FCH_CREACION",
+				"type": "INT96"
+			},
+			{
+				"name": "MODIFICADO_POR",
+				"type": "UTF8"
+			},
+			{
+				"name": "FCH_MODIFICACION",
+				"type": "INT96"
+			},
+			{
+				"name": "MTO_ASOC1",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MTO_ASOC2",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "CALC533_PERIODO",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "ASOCIACION",
+				"type": "UTF8"
+			},
+			{
+				"name": "COMENTARIOS",
+				"type": "UTF8"
+			},
+			{
+				"name": "ASOCIACION_ORIGEN",
+				"type": "UTF8"
+			},
+			{
+				"name": "PERIODO_APLICADO",
+				"type": "UTF8"
+			},
+			{
+				"name": "DATE_LOADED",
+				"type": "UTF8"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

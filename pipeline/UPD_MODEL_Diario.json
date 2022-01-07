@@ -1,0 +1,344 @@
+{
+	"name": "UPD_MODEL_Diario",
+	"properties": {
+		"activities": [
+			{
+				"name": "UPD_MODEL_Diario_1",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Reanudar DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "UPD_MODEL_Diario_1",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Database": {
+							"value": "@pipeline().parameters.Database",
+							"type": "Expression"
+						},
+						"CredentialName": {
+							"value": "@pipeline().parameters.CredentialName",
+							"type": "Expression"
+						},
+						"AnalysisService": {
+							"value": "@pipeline().parameters.AnalysisService",
+							"type": "Expression"
+						},
+						"TableRefreshURL": {
+							"value": "@pipeline().parameters.TableRefreshURL",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "UPD_MODEL_Diario_2",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "UPD_MODEL_Diario_1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "UPD_MODEL_Diario_2",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Database": {
+							"value": "@pipeline().parameters.Database",
+							"type": "Expression"
+						},
+						"CredentialName": {
+							"value": "@pipeline().parameters.CredentialName",
+							"type": "Expression"
+						},
+						"AnalysisService": {
+							"value": "@pipeline().parameters.AnalysisService",
+							"type": "Expression"
+						},
+						"TableRefreshURL": {
+							"value": "@pipeline().parameters.TableRefreshURL",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "UPD_MODEL_Diario_3",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "UPD_MODEL_Diario_2",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "UPD_MODEL_Diario_3",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"Database": {
+							"value": "@pipeline().parameters.Database",
+							"type": "Expression"
+						},
+						"CredentialName": {
+							"value": "@pipeline().parameters.CredentialName",
+							"type": "Expression"
+						},
+						"AnalysisService": {
+							"value": "@pipeline().parameters.AnalysisService",
+							"type": "Expression"
+						},
+						"PartitionRefreshURL": {
+							"value": "@pipeline().parameters.PartitionRefreshURL",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "Database Recalc",
+				"type": "WebHook",
+				"dependsOn": [
+					{
+						"activity": "UPD_MODEL_Diario_3",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@pipeline().parameters.DatabaseRefreshURL",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"body": {
+						"CredentialName": "@pipeline().parameters.CredentialName",
+						"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+						"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+						"DatabaseRefreshType": "Calculate"
+					},
+					"timeout": "01:00:00"
+				}
+			},
+			{
+				"name": "Auth Azure",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Database Recalc",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"Accept": "*/*"
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Pausar DB",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Auth Azure",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/pause?api-version=2021-02-01-preview')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@concat(activity('Auth Azure').output.token_type, ' ', activity('Auth Azure').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Auth Azure Inicial",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded",
+						"Accept": "*/*"
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Reanudar DB",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Auth Azure Inicial",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": {
+						"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/resume?api-version=2021-02-01-preview')",
+						"type": "Expression"
+					},
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/json",
+						"Authorization": {
+							"value": "@concat(activity('Auth Azure Inicial').output.token_type, ' ', activity('Auth Azure Inicial').output.access_token)",
+							"type": "Expression"
+						}
+					},
+					"body": {
+						"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Database": {
+				"type": "string",
+				"defaultValue": "AS_Popular"
+			},
+			"CredentialName": {
+				"type": "string",
+				"defaultValue": "ProcessAnalysisService"
+			},
+			"AnalysisService": {
+				"type": "string",
+				"defaultValue": "asazure://aspaaseastus2.asazure.windows.net/cppbiase01"
+			},
+			"DatabaseRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://ef6624bc-f5bf-4353-be4d-9063adab4258.webhook.eus2.azure-automation.net/webhooks?token=7WBQPRxIPAU0enB0ZqAmhEXfOxT%2fifV9zRK12YuQxRg%3d"
+			},
+			"SUSCRIPTION_ID": {
+				"type": "string",
+				"defaultValue": "3d2e514c-f131-45e2-822a-e81c79d51b94"
+			},
+			"TENANT_ID": {
+				"type": "string",
+				"defaultValue": "6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+			},
+			"CLIENT_ID": {
+				"type": "string",
+				"defaultValue": "8fc2903a-e76b-4834-8e11-0bb640f3a707"
+			},
+			"CLIENT_SECRET": {
+				"type": "string",
+				"defaultValue": "tWh7bp~69FkPtzbtpX.f0XEY-o.2W7wG5~"
+			},
+			"RESOURCEGROUP_NAME": {
+				"type": "string",
+				"defaultValue": "RG-PR-PBI-DataServices"
+			},
+			"SERVER_NAME": {
+				"type": "string",
+				"defaultValue": "cppbisql01"
+			},
+			"DATABASE_NAME": {
+				"type": "string",
+				"defaultValue": "dwprpbi"
+			},
+			"TableRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://ef6624bc-f5bf-4353-be4d-9063adab4258.webhook.eus2.azure-automation.net/webhooks?token=pWBrkPSaN%2bYpJgruWjUZVwfWwl3yKauk8FuU5O7WCbQ%3d"
+			},
+			"PartitionRefreshURL": {
+				"type": "string",
+				"defaultValue": "https://ef6624bc-f5bf-4353-be4d-9063adab4258.webhook.eus2.azure-automation.net/webhooks?token=tyBric5oLwTmKm94EMnioVV0DVGcJvCX1dIV2oLmZPY%3d"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-08-24T18:18:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

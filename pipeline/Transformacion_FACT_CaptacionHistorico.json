@@ -1,0 +1,43 @@
+{
+	"name": "Transformacion_FACT_CaptacionHistorico",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extrae_BI_PasivosSaldosHist",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_SISBI_BI_PasivosSaldosHist",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Carga_FACT_CaptacionHistorico",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extrae_BI_PasivosSaldosHist",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_CaptacionHistorico",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2020-08-06T14:45:38Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

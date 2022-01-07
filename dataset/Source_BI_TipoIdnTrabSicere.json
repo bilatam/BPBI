@@ -1,0 +1,41 @@
+{
+	"name": "Source_BI_TipoIdnTrabSicere",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Tis_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Tis_PK_CodTipoIdn",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tis_DesTipoIden",
+				"type": "varchar"
+			},
+			{
+				"name": "Tis_FechaCarga",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "Sicere",
+			"table": "BI_TipoIdnTrabSicere"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

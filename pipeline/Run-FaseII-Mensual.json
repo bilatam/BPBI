@@ -1,0 +1,26 @@
+{
+	"name": "Run-FaseII-Mensual",
+	"properties": {
+		"activities": [
+			{
+				"name": "Run-Tarjetas-Mensual",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Run-Tarjetas-Mensual",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:06Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

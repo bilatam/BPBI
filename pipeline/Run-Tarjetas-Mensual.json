@@ -1,0 +1,106 @@
+{
+	"name": "Run-Tarjetas-Mensual",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extraer Tarjeta Mensual",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer Tarjeta Mensual",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_MCC",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Extrae_Tarjeta_Mensual",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_MCC",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_DIM_TarjetasTipoTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_MCC",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_DIM_TarjetasTipoTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Carga_FACT_TarjetaTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "SP_DWH_Carga_DIM_TarjetasTipoTransaccion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Carga_FACT_TarjetaTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "SP_DWH_Extrae_Tarjeta_Mensual",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Extraer Tarjeta Mensual",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extrae_Tarjeta_Mensual",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

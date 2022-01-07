@@ -1,0 +1,20 @@
+{
+	"name": "SourceBIUsuarioT24",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "AuditoriaInterna/SISBI"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_UsuariosT24"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,111 @@
+{
+	"name": "Source_BI_TrabajadoresSicResumen",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Tsr_Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Trs_PK_NumIdentificacion",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_PK_CedulaPat",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_PK_Periodo",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_FK_IdCliente",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Trs_SalarioTotal",
+				"type": "decimal",
+				"precision": 24,
+				"scale": 2
+			},
+			{
+				"name": "Trs_RangoMicroSegBP",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Trs_RangoMicroSeg",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Trs_CantPagos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trs_CantPatronos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trs_CodDistrito",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 0
+			},
+			{
+				"name": "Trs_NumPatPrincipal",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_DireccPatSalarioM",
+				"type": "varchar"
+			},
+			{
+				"name": "Tsr_NumPeriodo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tsr_OrdenSalario",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tsr_PeridoArchivo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trs_Sector",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_SectorEmp",
+				"type": "varchar"
+			},
+			{
+				"name": "Trs_RazonSocial",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "Sicere",
+			"table": "BI_TrabajadoresSicResumen"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

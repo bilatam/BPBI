@@ -1,0 +1,79 @@
+{
+	"name": "Source_BI_IncomComision",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Tarjetas"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Ico_FechaProceso",
+				"type": "date"
+			},
+			{
+				"name": "Ico_PK_Tarjeta",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_FK_NumeroReferencia",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_Monto",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ico_TasaCom",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 2
+			},
+			{
+				"name": "Ico_Movimiento",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_ComisionInter",
+				"type": "decimal",
+				"precision": 6,
+				"scale": 2
+			},
+			{
+				"name": "Ico_Moneda",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_FechaConsumo",
+				"type": "date"
+			},
+			{
+				"name": "Ico_CPD",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_MCC",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_Documento",
+				"type": "varchar"
+			},
+			{
+				"name": "Ico_EstadoTarjeta",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_IncomComision"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

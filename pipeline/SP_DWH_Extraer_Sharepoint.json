@@ -1,0 +1,30 @@
+{
+	"name": "SP_DWH_Extraer_Sharepoint",
+	"properties": {
+		"activities": [
+			{
+				"name": "Extrae_Sharepoint",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Extrae_Sharepoint]"
+				},
+				"linkedServiceName": {
+					"referenceName": "DW_Popular",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-24T03:20:09Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

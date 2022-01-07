@@ -1,0 +1,26 @@
+{
+	"name": "02-Semanal",
+	"properties": {
+		"activities": [
+			{
+				"name": "021-Semanal-STARH",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "021-Semanal-STARH",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "AuditoriaInterna/00-Runs"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-07-28T22:23:15Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

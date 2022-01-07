@@ -1,0 +1,164 @@
+{
+	"name": "SourceDataset_lqy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Opa_Entidad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_IdOperacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_Moneda",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_FechaVencimiento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Opa_FechaFormalizacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Opa_Saldo",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_MontoFormalizado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_MontoNoDesembolsado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_MontoAutorizado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_CuotaPrincipal",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_CuotaIntereses",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Opa_TipoOperacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_FrecuenciaPaPrincipal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_Condicion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_EstadoOperacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_DiasAtraso",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_TasaInteresNominal",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "Opa_TipoTasa",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_FechaCambioTasa",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Opa_ParametroReferencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_FrecuenciaAjusteTasa",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_ComponenteFijoTasa",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "Opa_PisoTasa",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "Opa_TechoTasa",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 2
+			},
+			{
+				"name": "Opa_Generador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Opa_EsSBD",
+				"type": "nchar"
+			},
+			{
+				"name": "Opa_ActualizadoAl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Opa_FK_IdListaOperacion",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_OperacionesActivas"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,70 @@
+{
+	"name": "CD_SISBI_BI_SectorCliHist_FechaCarga",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_4op",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "dbo.BI_SectorCliHist"
+					},
+					{
+						"name": "Destination",
+						"value": "SISBI/BI_SectorCliHist"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": {
+							"value": "select* from BI_SectorCliHist where SCH_FechaCarga = @{pipeline().parameters.FechaCarga}",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_4op",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_4op",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"FechaCarga": {
+				"type": "string",
+				"defaultValue": "'2020-12-31'"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-01-19T23:08:48Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

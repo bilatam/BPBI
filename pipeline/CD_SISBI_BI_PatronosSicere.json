@@ -1,0 +1,63 @@
+{
+	"name": "CD_SISBI_BI_PatronosSicere",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_SISBI_BI_PatronosSicere",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "Sicere.BI_PatronosSicere"
+					},
+					{
+						"name": "Destination",
+						"value": "SISBI/BI_PatronosSicere"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_BI_PatronosSicere",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_BI_PatronosSicere",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "SICERE"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-09-23T18:10:03Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
