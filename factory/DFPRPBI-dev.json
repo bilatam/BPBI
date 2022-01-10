@@ -1,0 +1,9 @@
+{
+	"name": "DFPRPBI-dev",
+	"location": "southcentralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "2cc89ff5-b8a0-4258-b6fa-7341e41e1f1a",
+		"tenantId": "2d4feb35-6363-4b6c-94e0-a60d04fa4f02"
+	}
+}
