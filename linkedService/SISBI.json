@@ -5,9 +5,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=10.18.87.156;initial catalog=SISBI",
-			"userName": "APB_Connect_To_PBI@bp.fi.cr",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlZjA4OTcxZS1jNmU3LTQzNWItYWY2NC1hNDI0ODk2NGY4MjgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"connectionString": "integrated security=True;data source=vm-devdat01;initial catalog=SISBI",
+			"userName": "BPDCdes\\sortega",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ZTE1MTI3Yi00YTRhLTRkNjctODNhNS02NDg1ZjIwYjg5MjQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IRPRPBI",
