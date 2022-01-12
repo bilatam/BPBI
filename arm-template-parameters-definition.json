@@ -122,13 +122,7 @@
         "AF_AuditoriaInterna": {
             "type": "Microsoft.DataFactory/factories/linkedservices",
             "properties": {
-                "annotations": [],
-                "type": "AzureFunction",
-                "typeProperties": {
-                    "functionAppUrl": "https://func-pr-aud-auditoria.azurewebsites.net",
-                    "authentication": "Anonymous",
-                    "encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNFUkRGQUlERVZfNjMyODZhNDgtMmY2Ni00MjdkLWI3MmItYzU1Y2FkOTIyY2I0Ig0KfQ=="
-                }
+                "url": "https://func-pr-aud-auditoria.azurewebsites.net"
             }
         },
         "Odbc": {
