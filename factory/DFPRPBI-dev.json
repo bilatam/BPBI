@@ -1,5 +1,13 @@
 {
 	"name": "DFPRPBI-dev",
+	"properties": {
+		"globalParameters": {
+			"SharepointAuthUri": {
+				"type": "string",
+				"value": "https://accounts.accesscontrol.windows.net/6e852f85-8b27-4c6b-8ee2-181db2a7f482/tokens/OAuth/2"
+			}
+		}
+	},
 	"location": "southcentralus",
 	"identity": {
 		"type": "SystemAssigned",
