@@ -119,12 +119,6 @@
                 }
             }
         },
-        "AF_AuditoriaInterna": {
-            "type": "Microsoft.DataFactory/factories/linkedservices",
-            "properties": {
-                "url": "https://func-pr-aud-auditoria.azurewebsites.net"
-            }
-        },
         "Odbc": {
             "properties": {
                 "typeProperties": {
