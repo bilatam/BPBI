@@ -1,0 +1,160 @@
+{
+    "Microsoft.DataFactory/factories": {
+        "properties": {
+            "globalParameters": {
+                "*": {
+                    "value": "="
+                }
+            },
+            "globalConfigurations": {
+                "*": "="
+            },
+            "encryption": {
+                "*": "=",
+                "identity": {
+                    "*": "="
+                }
+            }
+        },
+        "location": "=",
+        "identity": {
+            "type": "=",
+            "userAssignedIdentities": "="
+        }
+    },
+    "Microsoft.DataFactory/factories/pipelines": {},
+    "Microsoft.DataFactory/factories/integrationRuntimes": {
+        "properties": {
+            "typeProperties": {
+                "ssisProperties": {
+                    "catalogInfo": {
+                        "catalogServerEndpoint": "=",
+                        "catalogAdminUserName": "=",
+                        "catalogAdminPassword": {
+                            "value": "-::secureString"
+                        }
+                    },
+                    "customSetupScriptProperties": {
+                        "sasToken": {
+                            "value": "-::secureString"
+                        }
+                    }
+                },
+                "linkedInfo": {
+                    "key": {
+                        "value": "-::secureString"
+                    },
+                    "resourceId": "="
+                },
+                "computeProperties": {
+                    "dataFlowProperties": {
+                        "externalComputeInfo": [
+                            {
+                                "accessToken": "-::secureString"
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/triggers": {
+        "properties": {
+            "pipelines": [
+                {
+                    "parameters": {
+                        "*": "="
+                    }
+                },
+                "pipelineReference.referenceName"
+            ],
+            "pipeline": {
+                "parameters": {
+                    "*": "="
+                }
+            },
+            "typeProperties": {
+                "scope": "="
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/linkedServices": {
+        "*": {
+            "properties": {
+                "typeProperties": {
+                    "accountName": "=",
+                    "username": "=",
+                    "userName": "=",
+                    "accessKeyId": "=",
+                    "endpoint": "=",
+                    "servicePrincipalId": "=",
+                    "userId": "=",
+                    "host": "=",
+                    "clientId": "=",
+                    "clusterUserName": "=",
+                    "clusterSshUserName": "=",
+                    "hostSubscriptionId": "=",
+                    "clusterResourceGroup": "=",
+                    "subscriptionId": "=",
+                    "resourceGroupName": "=",
+                    "tenant": "=",
+                    "dataLakeStoreUri": "=",
+                    "baseUrl": "=",
+                    "database": "=",
+                    "serviceEndpoint": "=",
+                    "batchUri": "=",
+                    "poolName": "=",
+                    "databaseName": "=",
+                    "systemNumber": "=",
+                    "server": "=",
+                    "url": "=",
+                    "functionAppUrl": "=",
+                    "environmentUrl": "=",
+                    "aadResourceId": "=",
+                    "sasUri": "|:-sasUri:secureString",
+                    "sasToken": "|",
+                    "connectionString": "|:-connectionString:secureString",
+                    "hostKeyFingerprint": "=",
+                    "mlWorkspaceName": "="
+                }
+            }
+        },
+        "AF_AuditoriaInterna": {
+            "type": "Microsoft.DataFactory/factories/linkedservices",
+            "properties": {
+                "annotations": [],
+                "type": "AzureFunction",
+                "typeProperties": {
+                    "functionAppUrl": "https://auditoriainterna.azurewebsites.net",
+                    "authentication": "Anonymous",
+                    "encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIlNFUkRGQUlERVZfNjMyODZhNDgtMmY2Ni00MjdkLWI3MmItYzU1Y2FkOTIyY2I0Ig0KfQ=="
+                }
+            }
+        },
+        "Odbc": {
+            "properties": {
+                "typeProperties": {
+                    "userName": "=",
+                    "connectionString": {
+                        "secretName": "="
+                    }
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/datasets": {
+        "*": {
+            "properties": {
+                "typeProperties": {
+                    "folderPath": "=",
+                    "fileName": "="
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints": {
+        "properties": {
+            "*": "="
+        }
+    }
+}
