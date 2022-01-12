@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "DFPRPBI-dev"
+		},
+		"AF_AuditoriaInterna_functionKey": {
+			"value": ""
+		},
+		"DW_Popular_connectionString": {
+			"value": ""
+		},
+		"DW_Popular_servicePrincipalKey": {
+			"value": ""
+		},
+		"SA_Popular_accountKey": {
+			"value": ""
+		},
+		"SISBI_connectionString": {
+			"value": ""
+		},
+		"SISBI_password": {
+			"value": ""
+		},
+		"STARH_connectionString": {
+			"value": ""
+		},
+		"AF_AuditoriaInterna_properties_typeProperties_functionAppUrl": {
+			"value": "https://auditoriainterna.azurewebsites.net"
+		},
+		"DW_Popular_properties_typeProperties_servicePrincipalId": {
+			"value": "52818904-feb5-45c4-ad46-ab7f5a62c215"
+		},
+		"DW_Popular_properties_typeProperties_tenant": {
+			"value": "2d4feb35-6363-4b6c-94e0-a60d04fa4f02"
+		},
+		"KV_Popular_properties_typeProperties_baseUrl": {
+			"value": "https://AuditoriaInterna.vault.azure.net/"
+		},
+		"SA_Popular_properties_typeProperties_url": {
+			"value": "https://sersadev.dfs.core.windows.net"
+		},
+		"SISBI_properties_typeProperties_userName": {
+			"value": "BPDCdes\\sortega"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthUri_value": {
+			"value": "https://accounts.accesscontrol.windows.net/6e852f85-8b27-4c6b-8ee2-181db2a7f482/tokens/OAuth/2"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthClientId_value": {
+			"value": "e8b80854-c71f-493d-a41a-1cdea667d867@6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthClientSecret_value": {
+			"value": "2gAj0lk+sePRaZMY2y0MAZgyw1BYCobn5qCPiwhAPH8="
+		},
+		"dataFactory_properties_globalParameters_SharepointOnlineUri_value": {
+			"value": "https://bancopopularcr.sharepoint.com/sites/DATALAKEAI"
+		},
+		"dataFactory_properties_globalParameters_storageConnectionString_value": {
+			"value": "DefaultEndpointsProtocol"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthResource_value": {
+			"value": "00000003-0000-0ff1-ce00-000000000000/bancopopularcr.sharepoint.com[AT]6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+		},
+		"dataFactory_location": {
+			"value": "southcentralus"
+		},
+		"dataFactory_identity_type": {
+			"value": "SystemAssigned"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}

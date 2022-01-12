@@ -1,0 +1,1000 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationReporteCombinadoParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "reportecombinado",
+						"fileSystem": "finanzas"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Cuenta",
+						"type": "UTF8"
+					},
+					{
+						"name": "TipoCatalogoSUGEF",
+						"type": "INT32"
+					},
+					{
+						"name": "Debito",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "Credito",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "SaldoFinal",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "NotaTexto",
+						"type": "UTF8"
+					},
+					{
+						"name": "NotaArchivo",
+						"type": "UTF8"
+					},
+					{
+						"name": "DATE_LOADED",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationSIPOParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sipo"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "TIPO",
+						"type": "INT32"
+					},
+					{
+						"name": "ORIGEN",
+						"type": "INT32"
+					},
+					{
+						"name": "OPERACION",
+						"type": "INT64"
+					},
+					{
+						"name": "PATRONO",
+						"type": "INT32"
+					},
+					{
+						"name": "NCUOTA",
+						"type": "INT32"
+					},
+					{
+						"name": "CAJERO",
+						"type": "UTF8"
+					},
+					{
+						"name": "CPTE",
+						"type": "INT32"
+					},
+					{
+						"name": "AGENCIAR",
+						"type": "INT32"
+					},
+					{
+						"name": "MONTO",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "IMORA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "GASTOS",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "COSTAS",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "HONORARIOS",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "MULTAS",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "COMISION",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "OTRO0",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "OTRO1",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "OTRO2",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "SALDO",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "CUOTA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "ICORR",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "IGAN",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "AMORT",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "PVIDA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "PINC",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "PVEH",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "PGAN",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "EXCESO",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "FRACCION",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "REF",
+						"type": "INT32"
+					},
+					{
+						"name": "TERM",
+						"type": "UTF8"
+					},
+					{
+						"name": "LIBR",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "CEDULA",
+						"type": "INT64"
+					},
+					{
+						"name": "TASA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "CPAG",
+						"type": "INT32"
+					},
+					{
+						"name": "FCONST",
+						"type": "INT32"
+					},
+					{
+						"name": "FVENC",
+						"type": "INT32"
+					},
+					{
+						"name": "FAPLIC",
+						"type": "INT32"
+					},
+					{
+						"name": "FEFEC",
+						"type": "INT32"
+					},
+					{
+						"name": "FPLAN",
+						"type": "INT32"
+					},
+					{
+						"name": "FCALC",
+						"type": "INT32"
+					},
+					{
+						"name": "STATUS",
+						"type": "INT32"
+					},
+					{
+						"name": "CONSEC",
+						"type": "INT32"
+					},
+					{
+						"name": "PRINCIPAL",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "REMANENTE",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "NCUENTA",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "PLAZO",
+						"type": "INT32"
+					},
+					{
+						"name": "REFERENCIA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "NOMBRE",
+						"type": "UTF8"
+					},
+					{
+						"name": "ESTADO",
+						"type": "UTF8"
+					},
+					{
+						"name": "AGECON",
+						"type": "INT32"
+					},
+					{
+						"name": "CTACRX",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "CTACRV",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "CTAPXC",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "CTAIGA",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "HORA",
+						"type": "INT32"
+					},
+					{
+						"name": "CLASIFICAC",
+						"type": "DOUBLE"
+					},
+					{
+						"name": "STATUS206",
+						"type": "UTF8"
+					},
+					{
+						"name": "LIBRETA",
+						"type": "UTF8"
+					},
+					{
+						"name": "TIPO_TASA",
+						"type": "UTF8"
+					},
+					{
+						"name": "GEN_PEND",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "COD_ARCH",
+						"type": "INT32"
+					},
+					{
+						"name": "SELF_AUX",
+						"type": "UTF8"
+					},
+					{
+						"name": "MONEDA",
+						"type": "INT32"
+					},
+					{
+						"name": "RESTO",
+						"type": "DOUBLE"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhAportes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.aportes.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh211aportes",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhAusencias')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.ausencias.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh082ausencias",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhBancos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.bancos.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh050bancos",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhCentrosCostos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.centroscostos.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh051centroscostos",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "CEDULA",
+						"type": "UTF8"
+					},
+					{
+						"name": "PERIODO",
+						"type": "UTF8"
+					},
+					{
+						"name": "CCOSTO",
+						"type": "UTF8"
+					},
+					{
+						"name": "CIA",
+						"type": "UTF8"
+					},
+					{
+						"name": "PLANILLA",
+						"type": "UTF8"
+					},
+					{
+						"name": "SALARIO_DEVENGADO",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "MTO_PATRONAL",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "MTO_PATRONAL_ESPECIAL",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "CREADO_POR",
+						"type": "UTF8"
+					},
+					{
+						"name": "FCH_CREACION",
+						"type": "INT96"
+					},
+					{
+						"name": "MODIFICADO_POR",
+						"type": "UTF8"
+					},
+					{
+						"name": "FCH_MODIFICACION",
+						"type": "INT96"
+					},
+					{
+						"name": "MTO_ASOC1",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "MTO_ASOC2",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "CALC533_PERIODO",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 18
+					},
+					{
+						"name": "ASOCIACION",
+						"type": "UTF8"
+					},
+					{
+						"name": "COMENTARIOS",
+						"type": "UTF8"
+					},
+					{
+						"name": "ASOCIACION_ORIGEN",
+						"type": "UTF8"
+					},
+					{
+						"name": "PERIODO_APLICADO",
+						"type": "UTF8"
+					},
+					{
+						"name": "DATE_LOADED",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhEmpleadoExperiencia')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.empleadosexperiencia.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh017empleadoexperiencia",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhEmpleadoFormacion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.empleadoformacion.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh018empleadoformacion",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhEntesExternos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.entesexternos.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh053entesexternos",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhFeriados')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.feriados.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh056feriados",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhFormasPago')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.formaspago.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh081formaspago",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhGerencias')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.gerencias.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh128gerencias",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhIngresosEgresos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.ingresosegresos.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh057ingresosegresos",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhJornadas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.jornadas.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh058jornadas",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhJustificacionExtras')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.justificacionextras.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh100justificacionextras",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhMotivosSalida')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.motivossalida.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh078motivossalida",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhNivelesProfesionales')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.nivelesprofesionales.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh115nivelesprofesionales",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhPaises')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.paises.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh060paises",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhParametros')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.parametros.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh061parametros",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DestinationStarhPlanCierres')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat (formatDateTime(utcnow(), 'yyyyMMdd'),'.plancierres.parquet')",
+							"type": "Expression"
+						},
+						"folderPath": "srh200plancierres",
+						"fileSystem": "starh"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		}
+	]
+}

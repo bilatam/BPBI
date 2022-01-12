@@ -1,0 +1,3567 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_MAESTRO_DEFUNCION')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteDefuncion",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "FixedToParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceMaestroDefuncionTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"fileListPath": "sharepoint/tsemaestradefuncion",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "tsemaestradefuncion/*.txt"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteDefuncion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Defuncion"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FixedToParquet",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_SPLIT_MAESTRO_DEFUNCION",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Defuncion",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "tsemaestradefuncion"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_MAESTRO_MATRIMONIO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteMatrimonio",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "FixedToParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceMaestroMatrimonioTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"fileListPath": "sharepoint/tsemaestramatrimonio",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteMatrimonio",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Matrimonio"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FixedToParquet",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_SPLIT_MAESTRO_MATRIMONIO",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "tsemaestramatrimonio/*.txt"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Matrimonio",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "tsemaestramatrimonio"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_MAESTRO_NACIMIENTO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteMatrimonio",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "FixedToParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceMaestroMatrimonioTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"fileListPath": "sharepoint/tsemaestramatrimonio",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteMatrimonio",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Matrimonio"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FixedToParquet",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_SPLIT_MAESTRO_MATRIMONIO",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "tsemaestranacimiento/*.txt"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Nacimiento",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "tsemaestranacimiento"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_MATRIMONIO')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteMatrimonio",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "FixedToParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceMatrimonioTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.MOVWEBMAT.txt",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Unzip",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "unzip",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "*.mat_*.zip",
+								"fileToUnzipName": "MOVWEBMAT.txt",
+								"deleteFile": "yes"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteMatrimonio",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Matrimonio"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FixedToParquet",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Unzip",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_SPLIT_MATRIMONIO",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "matrimonio/*.zip"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Matrimonio",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "matrimonio"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_NACIMIENTOS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "DeleteNacimiento",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Split_Nacimientos",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceMatrimonioTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.MOVWEBNAC.txt",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Unzip",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "unzip",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "nacimientos/*.zip",
+								"fileToUnzipName": "MOVWEBNAC.txt",
+								"deleteFile": "yes"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteNacimiento",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Nacimientos",
+								"cant": 1
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "nacimientos/*.zip"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Split_Nacimientos",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [
+							{
+								"activity": "Unzip",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DF_SPLIT_NACIMIENTO",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Nacimientos",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "nacimientos"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_xdr')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_xdr",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "Comun.BI_TiposMonedas"
+							},
+							{
+								"name": "Destination",
+								"value": "DEV/Tabla de prueba"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureDataLakeStoreWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_xdr",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_xdr",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:38Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Transformacion Credito')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "SP_DWH_Eliminar_STAGE",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_NodefinidoCredito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Elimina_Stage",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Transformacion_NodefinidoCredito",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Transformacion_NodefinidoCredito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:41Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Transformacion_FACT_Captacion')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Ini_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Transformacion_DIM_Captacion",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Transformacion_DIM_Captacion",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_Captacion",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captación",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_NoDefinido",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_NoDefinido_Captacion",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_NoDefinido",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_NoDefinido_Captacion",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_Captacion",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_Captacion_error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_Captacion",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_FACT_Captacion",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Carga_NoDefinido_Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_FACT_Captacion",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_FACT_Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_FACT_Captacion",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_Captacion",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_Captación",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_Captacion_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_Captacion",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Captación",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Captacion",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:42Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Transformacion_FACT_Credito')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Ini_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Transformacion_DIM_Credito",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Transformacion_DIM_Credito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_Credito",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_NoDefinido",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_NoDefinido_Credito",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_NoDefinido",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_NoDefinido_Credito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_Credito",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_Credito_error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_Credito",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_FACT_Credito",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Carga_NoDefinido_Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_FACT_Credito",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_FACT_Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_FACT_Credito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_Credito",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_Credito_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_Credito",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Crédito",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_Credito",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:42Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Transformacion_FACT_SegmentaCliente')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Ini_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Transformacion_DIM_SegmentaCliente",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Transformacion_DIM_SegmentaCliente",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_SegmentaCliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Transformacion_DIM_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Transformacion_DIM_SegmentaCliente",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Transformación DIM SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_NoDefinido",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Transformacion_DIM",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_NoDefinido_SegmentaCliente",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_NoDefinido",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_NoDefinido_SegmentaCliente",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_SegmentaCliente",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_SegmentaCliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_NoDefinido_SegmentaCliente_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_NoDefinido_SegmentaCliente",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga No Definido DIM  SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Ini_Bitacora_Carga_FACT_SegmentaCliente",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Fin_Bitacora_Carga_NoDefinido_SegmentaCliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT Segmenta Cliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Ejecutándose",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "1",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_DWH_Carga_FACT_SegmentaCliente",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Ini_Bitacora_Carga_FACT_SegmentaCliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "SP_DWH_Carga_FACT_SegmentaCliente",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_SegmentaCliente_copy1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_SegmentaCliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Finalizado Exitosamente",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH -Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Fin_Bitacora_Carga_FACT_SegmentaCliente_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "SP_DWH_Carga_FACT_SegmentaCliente",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InformacionBitacora]",
+							"storedProcedureParameters": {
+								"Evento": {
+									"value": "Carga FACT  SegmentaCliente",
+									"type": "String"
+								},
+								"Mensaje": {
+									"value": "Proceso Fallido",
+									"type": "String"
+								},
+								"Origen": {
+									"value": "Data Factory - DWH - Transformacion_FACT_SegmentaCliente",
+									"type": "String"
+								},
+								"TipoBitacora": {
+									"value": "2",
+									"type": "Int16"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:41Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/002-Diario-SISBI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copiar_BI_CaptacionFinal",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_CaptacionFinal",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Copiar_BI_UsuariosT24",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_UsuariosT24",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/00-Runs"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:16Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/01-Diario')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "011-Diario-STARH",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "011-Diario-STARH",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/00-Runs"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-18T16:48:26Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/012-Diario-SISBI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copiar_BI_CaptacionFinal",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_CaptacionFinal",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Copiar_BI_UsuariosT24",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_UsuariosT24",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Copiar_BI_SBI_OficinasBP",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_SBI_OficinasBP",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/00-Runs"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:15Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/02-Semanal')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "021-Semanal-STARH",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "021-Semanal-STARH",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/00-Runs"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:15Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/031-PrimerodeMes-SISBI')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copiar_BI_CaptacionFinalHisto",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_CaptacionFinalHisto",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Copiar_BI_CaptacionFinalRest",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "Copiar_BI_CaptacionFinalRest",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/00-Runs"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Extrae_Captacion')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_SISBI_BI_PasivosSaldos",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_PasivosSaldos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_PasivosFechas",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "CD_SISBI_BI_PasivosSaldos",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_PasivosFechas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_Pasivos",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "CD_SISBI_BI_PasivosFechas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_Pasivos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_CuentContaCapta",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CuentContaCapta",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_DatosLocalesAZ",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_DatosLocalesAZ",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_IDPasiTranProg",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_IDPasiTranProg",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_CategoriasProd",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CategoriasProd",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_CatPostRestrict",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CatPostRestrict",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_BeneficiariosCaptacion",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_BeneficiariosCaptacion",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_CaptaCuotas",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CaptaCuotas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_IUCMetasFinanciero",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_IUCMetasFinanciero",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_CkCupones",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CkCupones",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_StandingOrder",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_StandingOrder",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-08-06T14:45:43Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Extraer Tarjeta Diario')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_SISBI_BI_TarjetasDebito",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TarjetasDebito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_TarjetasCredito",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TarjetasCredito",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_TarjetasCreditoActivas",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TarjetasCreditoActivas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_TarjetasCreditoAdic",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TarjetasCreditoAdic",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_TiposCambioBCCR",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TiposCambioBCCR",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Extraer Tarjeta Mensual')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_SISBI_BI_CodigosMCC",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CodigosMCC",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_Cajeros",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_Cajeros",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_Camaras",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_Camaras",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_VisaIncom",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_VisaIncom",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_Catalogos_BI_CodigosMovT40",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_Catalogos_BI_CodigosMovT40",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EstadosTarjetas",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EstadosTarjetas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_IncomComision",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_IncomComision",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_TransAutoriza",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_TransAutoriza",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Extraer_CIC')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BI_DetalleGIEDeudor",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_DetalleGIEDeudor",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "BI_CICDeudores",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_CICDeudores",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "BI_OperacionesActivas",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_OperacionesActivas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "BI_OperacionesActivasDeudor",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_OperacionesActivasDeudor",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "BI_OperacionesHistoricas",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_OperacionesHistoricas",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "BI_OperacionesHistoricasDeudor",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_OperacionesHistoricasDeudor",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-03-18T19:51:27Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Extraer_Canales')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_SISBI_Catalogos_BI_CodigosATM",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_Catalogos_BI_CodigosATM",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EBArreglos",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EBArreglos",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EBDerechosUsuarios",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EBDerechosUsuarios",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EBGrupoSignatario",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EBGrupoSignatario",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EBIngresosWeb",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EBIngresosWeb",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_EBUsuariosWeb",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_EBUsuariosWeb",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_BI_UsuariosT24",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_BI_UsuariosT24",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_ASTransaction",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_ASTransaction",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_FundsTransferHist",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_FundsTransferHist",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_TellerHist",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_TellerHist",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_StmtEntryHist",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_StmtEntryHist",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_SessionCustomerHist",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_SessionCustomerHist",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "CD_SISBI_TransT24_BI_SessionDetailHist",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "CD_SISBI_TransT24_BI_SessionDetailHist",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Canales"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-10-13T20:53:27Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

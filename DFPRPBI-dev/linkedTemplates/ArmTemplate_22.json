@@ -1,0 +1,2826 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/RHUsuariosModulos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "STARH",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "RH",
+					"table": "SRH076"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RHUsuariosRoles')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "STARH",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "RH",
+					"table": "SRH506"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RHVacaciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "STARH",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"type": "OracleTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "RH",
+					"table": "SRH125"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceBIClientes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "dbo.BI_Clientes.parquet",
+						"fileSystem": "sisbi"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Cli_PK_IdCliente",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Cli_IdT24",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Repetido",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Cli_CedCorta",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CedLarga",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_TipoIdCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_TipoIdDocumento",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_Nombre",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CcNombre",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Apellidos",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Apellido1",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Apellido2",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Direccion",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_CodDistrito",
+						"type": "DECIMAL",
+						"precision": 12,
+						"scale": 0
+					},
+					{
+						"name": "Cli_UbicacionPostal",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_SectorCli",
+						"type": "DECIMAL",
+						"precision": 6,
+						"scale": 0
+					},
+					{
+						"name": "Cli_FK_CodOficina",
+						"type": "INT64"
+					},
+					{
+						"name": "Cli_OtraOficina",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_ActividadEconomica",
+						"type": "DECIMAL",
+						"precision": 8,
+						"scale": 0
+					},
+					{
+						"name": "Cli_FK_Microsegmento",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Cli_FechaNacimiento",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_FechaVenciCed",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_Nacionalidad",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_EstadoCivil",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_EstadoTrabajador",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Ocupacion",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_Puesto",
+						"type": "DECIMAL",
+						"precision": 9,
+						"scale": 0
+					},
+					{
+						"name": "Cli_EmpresaTrabaja",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_EmpresaADD",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FechaInicioEmpresa",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_EgresoNeto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Cli_IngresoNeto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Cli_SalBruto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Cli_SalLiquido",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Cli_FrecuenciaSalario",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_RangoSalario",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_CodOcupacion",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_TipoResidencia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Telefono1",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Telefono2",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Telefono3",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Pasatiempos",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_OtroDetalles",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Genero",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CapPago",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_NivelHistoSugef",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_NivelHistoBco",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_GenDivisas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_CodCategRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CodGrupo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CodEstadoCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Email",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_UltSalarioPAS",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Cli_FecUltSalarioPAS",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_FK_CodPatrono",
+						"type": "INT64"
+					},
+					{
+						"name": "Cli_CodEmpresa",
+						"type": "INT32"
+					},
+					{
+						"name": "Cli_CuentaAhorro",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CuentaCorriente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Pas",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Cli_Domicilio",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_TipoRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_NivelRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_ToleranciaRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FechaRiesgo",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_ServInternetBank",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_ServCelBank",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_EstadoCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FechaContacto",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_CalificacionCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CantDependientes",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_MonedaCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CanalPreferido",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_ClienteDesde",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_TipoCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FechaUltVerificacion",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_ReferenciaLocal",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_EstadoCrediticio",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_DiasVenciCed",
+						"type": "DECIMAL",
+						"precision": 6,
+						"scale": 0
+					},
+					{
+						"name": "Cli_TPersoneriaGeneral",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_TipCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_AnoNaci",
+						"type": "DECIMAL",
+						"precision": 4,
+						"scale": 0
+					},
+					{
+						"name": "Cli_MesNaci",
+						"type": "DECIMAL",
+						"precision": 2,
+						"scale": 0
+					},
+					{
+						"name": "Cli_DiaNaci",
+						"type": "DECIMAL",
+						"precision": 2,
+						"scale": 0
+					},
+					{
+						"name": "Cli_Edad",
+						"type": "DECIMAL",
+						"precision": 4,
+						"scale": 0
+					},
+					{
+						"name": "Cli_CumpleActual",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_CumplePost",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_AnoAfilia",
+						"type": "DECIMAL",
+						"precision": 4,
+						"scale": 0
+					},
+					{
+						"name": "Cli_MesAfilia",
+						"type": "DECIMAL",
+						"precision": 2,
+						"scale": 0
+					},
+					{
+						"name": "Cli_DiaAfilia",
+						"type": "DECIMAL",
+						"precision": 2,
+						"scale": 0
+					},
+					{
+						"name": "Cli_AnosAfiliacion",
+						"type": "DECIMAL",
+						"precision": 4,
+						"scale": 0
+					},
+					{
+						"name": "Cli_RegistraJuridico",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_SectorJuridico",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_SectorEmpresarial",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_DeudaExterna",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_EsNuevo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_UsuarioAutoriza",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_PropRelCode",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_SegIngresos",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_SegBancaria",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FechaModificacion",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_FechaDatos",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_FechaCarga",
+						"type": "DATE"
+					},
+					{
+						"name": "Cli_PaisResidencia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_PostingRestric",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_CodAgenCri",
+						"type": "INT64"
+					},
+					{
+						"name": "Cli_CondCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_BancaCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_FK_NivelAcademico",
+						"type": "DECIMAL",
+						"precision": 8,
+						"scale": 0
+					},
+					{
+						"name": "Cli_CaserioBarrio",
+						"type": "UTF8"
+					},
+					{
+						"name": "cli_residencia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Alertas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_Funcionario",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Cli_RelCustomer",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cli_ReversRelCode",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceBIMaestroOpe')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "dbo.BI_MaestroOpe.parquet",
+						"fileSystem": "sisbi"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Mvd_PK_NumOperacion",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_PK_IdCliente",
+						"type": "INT64"
+					},
+					{
+						"name": "Mvd_FK_CodLinea",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_FK_CodAgencia",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_MontoPrincipal",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Opr_MontoSaldo",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_SaldoEmi",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_PolVid",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_PolInc",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_PolGan",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_PolVeh",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Comision",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Otro01",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Otro02",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Cuota",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Exceso",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_AhoCP",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_AhoRR",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_AhoAC",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_AhPrev",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_AcPrev",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Int180",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Int181",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_MonRem",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_MonVen",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_FechaCReal",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaConstitucion",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaUltPago",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaUltTr",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaUltMov",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaUltTa",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaUltTav",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaCreMa",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_FechaVent",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_TasaR",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 3
+					},
+					{
+						"name": "Mvd_Tasa",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 3
+					},
+					{
+						"name": "Mvd_Ponder",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 3
+					},
+					{
+						"name": "Mvd_Alfa",
+						"type": "DECIMAL",
+						"precision": 6,
+						"scale": 4
+					},
+					{
+						"name": "Mvd_Plazo",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_CuotasPag",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_FrePag",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_AtraPe",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_MesesGracia",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_SeguiM",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_Suspen",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_CdActi",
+						"type": "DECIMAL",
+						"precision": 9,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_CodDestino",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_NumRem",
+						"type": "DECIMAL",
+						"precision": 9,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_PreVis",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_Celula",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Codigo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_NoCode",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_2DOAVI",
+						"type": "INT32"
+					},
+					{
+						"name": "Mvd_TipGar",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_NumerR",
+						"type": "DECIMAL",
+						"precision": 7,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_Banda",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Mvd_Formato",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_ImpAvi",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_AvisEmi",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_EstinD",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_TipPag",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Estado",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_TipoTasa",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_SusRem",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_EstadoPig",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Banvhi",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Partid",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Baja",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Ventan",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_CapacidadPago",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_HistSUG",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_HistBCO",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_GeneradorDivisas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_CRspec",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_ReClas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_EstadoAnt",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Rollo",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_Fefilm",
+						"type": "DECIMAL",
+						"precision": 9,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_Atraso",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_CuotaAtraso",
+						"type": "DECIMAL",
+						"precision": 5,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_Criter",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_CategoriaRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_360Dias",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_MONEDA",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_CANCELA",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_TipoCuota",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_Filler",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_NOFIAD",
+						"type": "DECIMAL",
+						"precision": 3,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_LAG1",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_LAG2",
+						"type": "UTF8"
+					},
+					{
+						"name": "Mvd_E2ANT",
+						"type": "DECIMAL",
+						"precision": 2,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_TPLUS",
+						"type": "DECIMAL",
+						"precision": 3,
+						"scale": 0
+					},
+					{
+						"name": "Mvd_FCarga",
+						"type": "DATE"
+					},
+					{
+						"name": "Mvd_Cedula",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceBIOperacionesDiarias')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "dbo.BI_OperacionesDiarias.parquet",
+						"fileSystem": "sisbi"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Opr_PK_IdOperacion",
+						"type": "INT64"
+					},
+					{
+						"name": "Opr_PK_NumOperacion",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FK_IdCliente",
+						"type": "INT64"
+					},
+					{
+						"name": "Opr_FK_CodBanca",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_CodLinea",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_MontoPrincipal",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_MontoSaldo",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_MontoSaldoPasado",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_MontoCuota",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_MontoInteres",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_TasaInteres",
+						"type": "DECIMAL",
+						"precision": 15,
+						"scale": 5
+					},
+					{
+						"name": "Opr_TasaRige",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_TasaRef",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FechaFormalizacion",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_FechaConstitucion",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_FechaUltimoPago",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_FechaProximoPago",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_FechaUltimoMov",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_FK_CodDestino",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_Fk_CodPatrono",
+						"type": "INT64"
+					},
+					{
+						"name": "Opr_CuotasAtrasadas",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_DiasAtraso",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_RangoAtraso",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_RangoMora",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_RangoCancelacion",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_PlazoCredito",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_MesesGracia",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FrecuenciaPago",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_CodEstadoCredito",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FK_CodEstadoAdmin",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FK_CodTipoGarantia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Intereses180Dias",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Intereses181Dias",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_CuotasPagadas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FK_CodAnalista",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_CodigoVentanilla",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_MontoComision",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_FK_CodVendedor",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_DeudaTotal",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_MontoMitigacion",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_PorcentComision",
+						"type": "DECIMAL",
+						"precision": 15,
+						"scale": 2
+					},
+					{
+						"name": "Opr_OperacionEspecial",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Opr_FK_CodCategoriaRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FK_CodAgencia",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_Aval",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_MontoAvaluo",
+						"type": "DECIMAL",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "Opr_FecAvaluo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_OperacionMadre",
+						"type": "INT64"
+					},
+					{
+						"name": "Opr_FK_CodTipDeduccion",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_FK_CodTipResumen",
+						"type": "INT32"
+					},
+					{
+						"name": "Opr_CriterioRiesgo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Fracciones",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Excesos",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Criter2",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Abogado",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Entrega",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Grupo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Ahorro",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Bono",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Vencid",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Banda",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Ponder",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Girado",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Limite",
+						"type": "DECIMAL",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Mitiga",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_Estimacion",
+						"type": "DECIMAL",
+						"precision": 16,
+						"scale": 2
+					},
+					{
+						"name": "Opr_CapacidadPago",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_GenDiv",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Crspec",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Reclas",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FecRige",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Vale",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_TVisa",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_SaldoAvalado",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_PerdidaReal",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_PerdidaRealAnterior",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Opr_CodigoDestino",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Alfa",
+						"type": "DECIMAL",
+						"precision": 12,
+						"scale": 4
+					},
+					{
+						"name": "Opr_FechaActualizacion",
+						"type": "DATE"
+					},
+					{
+						"name": "Opr_Multiple",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Tamano",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Origen",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Sexo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Cedula",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_AgeSoli",
+						"type": "UTF8"
+					},
+					{
+						"name": "opr_idcliente",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "opr_poliVida",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "opr_poliInc",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "opr_poliVeh",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "opr_poliGan",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "opr_Seguro",
+						"type": "DECIMAL",
+						"precision": 14,
+						"scale": 2
+					},
+					{
+						"name": "opr_EstadoProd",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_IUC",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Opr_E2ANT",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_TPLUS",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_Asalari",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_TP",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_TP2",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_FecUltG",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_SinUso",
+						"type": "UTF8"
+					},
+					{
+						"name": "Opr_CtaIBAN",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceBIPasivosParquet')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "dbo.BI_Pasivos.parquet",
+						"fileSystem": "sisbi"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "Pvo_PK_Identificador",
+						"type": "DECIMAL",
+						"precision": 10,
+						"scale": 0
+					},
+					{
+						"name": "Pvo_FechaDatos",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_IDPasivo",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_FK_IDCliente",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Pvo_Moneda",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_FK_OficinaProd",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_ID390",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_UltCredFecha",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_UltCredMonto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_UltCredCodigo",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_UltTCredBancoFecha",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_UltTCredBancoMonto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_UltTCredBancoCodigo",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_UltDebFecha",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_UltDebMonto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_UltDebCodigo",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_UltTDebBancoFecha",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_UltTDebBancoMonto",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_UltTDebBancoCodigo",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_CredCargoCapFecha",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_CredIntCapFecha",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_Cred2IntCapFecha",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_DebIntCapFecha",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_Deb2IntCapFecha",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_CategContable",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_TCodPagoInt",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_FechaApertProd",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_CatApertProd",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Pvo_MonePagoInt",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_IDAutorizados",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_CodRelacAutor",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_Observaciones",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_FechaBloqFond",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_MontoBloqFond",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_CtaCteProducto",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_CantModfCuenta",
+						"type": "INT64"
+					},
+					{
+						"name": "Pvo_FechaUltModfCta",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_Estado",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Pvo_ReferenciaLocal",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_UsuarioAutoriza",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_FechaCarga",
+						"type": "DATE"
+					},
+					{
+						"name": "Pvo_SobreGiro",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "Pvo_GrupoInt",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 0
+					},
+					{
+						"name": "Pvo_fk_IDpasivoPadre",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_NombreCorto",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_CtaLiqInt",
+						"type": "UTF8"
+					},
+					{
+						"name": "Pvo_Restricciones",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceBISegmentaClientes')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "dbo.BI_SegmentaClientes.parquet",
+						"fileSystem": "sisbi"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "FecActualiza",
+						"type": "DATE"
+					},
+					{
+						"name": "IdCliente",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "IUC",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "PoliticAct",
+						"type": "UTF8"
+					},
+					{
+						"name": "EstadoCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "CondicionCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "EstadoCivil",
+						"type": "UTF8"
+					},
+					{
+						"name": "ValiEstCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "CondiSegCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "FechaDefuncion",
+						"type": "DATE"
+					},
+					{
+						"name": "AñoDefuncion",
+						"type": "INT32"
+					},
+					{
+						"name": "TieneProd",
+						"type": "UTF8"
+					},
+					{
+						"name": "CodTipoCliente",
+						"type": "INT32"
+					},
+					{
+						"name": "TipoCliente",
+						"type": "UTF8"
+					},
+					{
+						"name": "Cedula",
+						"type": "UTF8"
+					},
+					{
+						"name": "CedLarga",
+						"type": "UTF8"
+					},
+					{
+						"name": "NombreCli",
+						"type": "UTF8"
+					},
+					{
+						"name": "Sexo",
+						"type": "UTF8"
+					},
+					{
+						"name": "FecNacimiento",
+						"type": "DATE"
+					},
+					{
+						"name": "Edad",
+						"type": "DECIMAL",
+						"precision": 4,
+						"scale": 0
+					},
+					{
+						"name": "FecNacimientoTSE",
+						"type": "DATE"
+					},
+					{
+						"name": "EdadTSE",
+						"type": "INT32"
+					},
+					{
+						"name": "RangoEdadTSE",
+						"type": "UTF8"
+					},
+					{
+						"name": "SegGeneracional",
+						"type": "UTF8"
+					},
+					{
+						"name": "Celular",
+						"type": "UTF8"
+					},
+					{
+						"name": "OtrosTel",
+						"type": "UTF8"
+					},
+					{
+						"name": "CorreoElectronico",
+						"type": "UTF8"
+					},
+					{
+						"name": "SalarioCORE",
+						"type": "DECIMAL",
+						"precision": 25,
+						"scale": 2
+					},
+					{
+						"name": "SalarioSICERE",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 0
+					},
+					{
+						"name": "%Endeuda",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 21
+					},
+					{
+						"name": "%EndeudaT24",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 19
+					},
+					{
+						"name": "Apalancamiento",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "ApalancamientoT24",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "DireccionPatrono",
+						"type": "UTF8"
+					},
+					{
+						"name": "CodDistritoPatrono",
+						"type": "DECIMAL",
+						"precision": 6,
+						"scale": 0
+					},
+					{
+						"name": "Provincia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Canton",
+						"type": "UTF8"
+					},
+					{
+						"name": "Distrito",
+						"type": "UTF8"
+					},
+					{
+						"name": "OcupacionLab",
+						"type": "UTF8"
+					},
+					{
+						"name": "OrigenIngre",
+						"type": "UTF8"
+					},
+					{
+						"name": "OrigenPatri",
+						"type": "UTF8"
+					},
+					{
+						"name": "NumPatrono",
+						"type": "UTF8"
+					},
+					{
+						"name": "CedulaPatrono",
+						"type": "UTF8"
+					},
+					{
+						"name": "Patrono",
+						"type": "UTF8"
+					},
+					{
+						"name": "DeduccionPlanilla",
+						"type": "UTF8"
+					},
+					{
+						"name": "Sector",
+						"type": "UTF8"
+					},
+					{
+						"name": "SectorEmp",
+						"type": "UTF8"
+					},
+					{
+						"name": "TipoEmpresa",
+						"type": "UTF8"
+					},
+					{
+						"name": "SolicitoExclu",
+						"type": "UTF8"
+					},
+					{
+						"name": "OficinaCORE",
+						"type": "INT64"
+					},
+					{
+						"name": "CodAgencia",
+						"type": "INT32"
+					},
+					{
+						"name": "Agencia",
+						"type": "UTF8"
+					},
+					{
+						"name": "Sucursal",
+						"type": "UTF8"
+					},
+					{
+						"name": "Region",
+						"type": "UTF8"
+					},
+					{
+						"name": "DIVISION",
+						"type": "UTF8"
+					},
+					{
+						"name": "TipoAgen",
+						"type": "UTF8"
+					},
+					{
+						"name": "NombreEjecutivo",
+						"type": "UTF8"
+					},
+					{
+						"name": "AreaComercial",
+						"type": "UTF8"
+					},
+					{
+						"name": "Ubicacion",
+						"type": "UTF8"
+					},
+					{
+						"name": "FechaVinculacion",
+						"type": "DATE"
+					},
+					{
+						"name": "SegBancaria",
+						"type": "UTF8"
+					},
+					{
+						"name": "SegIngresos",
+						"type": "UTF8"
+					},
+					{
+						"name": "Banca",
+						"type": "UTF8"
+					},
+					{
+						"name": "Grupo",
+						"type": "INT32"
+					},
+					{
+						"name": "TasaProm",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 6
+					},
+					{
+						"name": "CarteraActiva",
+						"type": "UTF8"
+					},
+					{
+						"name": "TotalActi",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "SaldoAct",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "CarteraPasiva",
+						"type": "UTF8"
+					},
+					{
+						"name": "TotalPasi",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "EstadoCredito",
+						"type": "UTF8"
+					},
+					{
+						"name": "NivelBCO",
+						"type": "INT32"
+					},
+					{
+						"name": "NivelSUG",
+						"type": "INT32"
+					},
+					{
+						"name": "FechaDatosCIC",
+						"type": "UTF8"
+					},
+					{
+						"name": "Ind",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 4
+					},
+					{
+						"name": "FecAutor",
+						"type": "DATE"
+					},
+					{
+						"name": "DeudaMN",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "DeudaME",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "MonFianza",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "CuotaMN",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "CuotaME",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "DeudaTot",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "CuotaTot",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "CuotaBP",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "CuotaEx",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "SaldoBP",
+						"type": "DECIMAL",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "TienePAS",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantPAS",
+						"type": "INT32"
+					},
+					{
+						"name": "TieneCC",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantCC",
+						"type": "INT32"
+					},
+					{
+						"name": "CC",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneAhVol",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantAhVol",
+						"type": "INT32"
+					},
+					{
+						"name": "AhVol",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneAhProgra",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantAhProgra",
+						"type": "INT32"
+					},
+					{
+						"name": "AhProgra",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneAhPlazo",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantAhPlazo",
+						"type": "INT32"
+					},
+					{
+						"name": "AhPlazo",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneCkGerencia",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantCkGerencia",
+						"type": "INT32"
+					},
+					{
+						"name": "CkGerencia",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneCuponVenci",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantCuponVenci",
+						"type": "INT32"
+					},
+					{
+						"name": "CuponVenci",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneFinanciera",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantFinanciera",
+						"type": "INT32"
+					},
+					{
+						"name": "Financiera",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneDesarrollo",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantDesarrollo",
+						"type": "INT32"
+					},
+					{
+						"name": "Desarrollo",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneSocial",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantSocial",
+						"type": "INT32"
+					},
+					{
+						"name": "Social",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneVISA",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantVISA",
+						"type": "INT32"
+					},
+					{
+						"name": "VISA",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TienePerHipotec",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantPerHipotec",
+						"type": "INT32"
+					},
+					{
+						"name": "PerHipotec",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneOtros",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantOtros",
+						"type": "INT32"
+					},
+					{
+						"name": "Otros",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TienePersonalH",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantPersonalH",
+						"type": "INT32"
+					},
+					{
+						"name": "PersonalH",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneVivienda",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantVivienda",
+						"type": "INT32"
+					},
+					{
+						"name": "Vivienda",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneCtaNaranja",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantCtaNaranja",
+						"type": "INT32"
+					},
+					{
+						"name": "saldoCtaNarana",
+						"type": "DECIMAL",
+						"precision": 38,
+						"scale": 2
+					},
+					{
+						"name": "TieneTrjDeb",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantTrjDeb",
+						"type": "INT32"
+					},
+					{
+						"name": "TieneVehiculo",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantidadVeh",
+						"type": "INT32"
+					},
+					{
+						"name": "ContClie",
+						"type": "INT32"
+					},
+					{
+						"name": "SectorEco",
+						"type": "DECIMAL",
+						"precision": 6,
+						"scale": 0
+					},
+					{
+						"name": "DescSectorEco",
+						"type": "UTF8"
+					},
+					{
+						"name": "TieneUserWeb",
+						"type": "UTF8"
+					},
+					{
+						"name": "CantUserWeb",
+						"type": "INT32"
+					},
+					{
+						"name": "TipoClase",
+						"type": "UTF8"
+					},
+					{
+						"name": "Naturaleza",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDefuncionTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceDistelec')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceEstadosContablesXML')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "Xml",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceMaestroDefuncionTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "tsemaestradefuncion",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceMaestroMatrimonioCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "tsemaestramatrimonio",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceMaestroMatrimonioTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "tsemaestramatrimonio",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": "",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceMaestroNacimientoTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "tsemaestranacimiento",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": "",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceMatrimonioTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceNacimientoTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "nacimientos",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourcePadronTXT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceReporteCombinado')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceSIPOBinary')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

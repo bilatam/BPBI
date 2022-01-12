@@ -1,0 +1,3195 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Plazas')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Plazas",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHPlazas",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhPlazas",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Profesiones')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Profesiones",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHProfesiones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhProfesiones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Provincias')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Provincias",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHProvincias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhProvincias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Puestos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Puestos",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHPuestos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhPuestos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_PuestosCategorias')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_PuestosCategorias",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHPuestosCategorias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhPuestosCategorias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_PuestosClasificacion')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_PuestosClasificacion",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHPuestosClasificacion",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhPuestosClasificacion",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Roles')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Roles",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHRoles",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhRoles",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Salarios')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Salarios",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHSalarios",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhSalarios",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_SalariosDetallado')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_SalariosDetallado",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHSalariosDetallado",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhSalariosDetallado",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_TiempoLaborado')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_TiempoLaborado",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHTiempoLaborado",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhTiempoLaborado",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Tramites')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Tramites",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHTramites",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhTramites",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Transacciones')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Transacciones",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHTransacciones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhTransacciones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Ubicacion')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Ubicacion",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHUbicacion",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhUbicacion",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Usuarios')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Usuarios",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHUsuarios",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhUsuarios",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_UsuariosModulos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_UsuariosModulos",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHUsuariosModulos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhUsuariosModulos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_UsuariosRoles')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_UsuariosRoles",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHUsuariosRoles",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhUsuariosRoles",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Vacaciones')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Vacaciones",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHVacaciones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhVacaciones",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SIPO_Diario')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ConvertToCVS",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Rename_File",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "ConvertDBFtoCSV",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "sipo/*.sipo_diario.dbf"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "CleanSIPO",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "ConvertToCVS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "CleanCSVSIPO",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "@activity('ConvertToCVS').output.file"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "CD_SIPO_CSVtoParquet",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "CleanSIPO",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@substring(activity('ConvertToCVS').output.file, 0, 8)",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": {
+										"value": "@activity('ConvertToCVS').output.file",
+										"type": "Expression"
+									},
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": {
+										"value": "@activity('ConvertToCVS').output.file",
+										"type": "Expression"
+									}
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "DATE_LOADED",
+											"type": "String"
+										},
+										"sink": {
+											"name": "DATE_LOADED"
+										}
+									},
+									{
+										"source": {
+											"name": "TIPO",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "TIPO"
+										}
+									},
+									{
+										"source": {
+											"name": "ORIGEN",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "ORIGEN"
+										}
+									},
+									{
+										"source": {
+											"name": "OPERACION",
+											"type": "String"
+										},
+										"sink": {
+											"name": "OPERACION"
+										}
+									},
+									{
+										"source": {
+											"name": "PATRONO",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "PATRONO"
+										}
+									},
+									{
+										"source": {
+											"name": "NCUOTA",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "NCUOTA"
+										}
+									},
+									{
+										"source": {
+											"name": "CAJERO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CAJERO"
+										}
+									},
+									{
+										"source": {
+											"name": "CPTE",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "CPTE"
+										}
+									},
+									{
+										"source": {
+											"name": "AGENCIAR",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "AGENCIAR"
+										}
+									},
+									{
+										"source": {
+											"name": "MONTO",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "MONTO"
+										}
+									},
+									{
+										"source": {
+											"name": "IMORA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "IMORA"
+										}
+									},
+									{
+										"source": {
+											"name": "GASTOS",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "GASTOS"
+										}
+									},
+									{
+										"source": {
+											"name": "COSTAS",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "COSTAS"
+										}
+									},
+									{
+										"source": {
+											"name": "HONORARIOS",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "HONORARIOS"
+										}
+									},
+									{
+										"source": {
+											"name": "MULTAS",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "MULTAS"
+										}
+									},
+									{
+										"source": {
+											"name": "COMISION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "COMISION"
+										}
+									},
+									{
+										"source": {
+											"name": "OTRO0",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "OTRO0"
+										}
+									},
+									{
+										"source": {
+											"name": "OTRO1",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "OTRO1"
+										}
+									},
+									{
+										"source": {
+											"name": "OTRO2",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "OTRO2"
+										}
+									},
+									{
+										"source": {
+											"name": "SALDO",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "SALDO"
+										}
+									},
+									{
+										"source": {
+											"name": "CUOTA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "CUOTA"
+										}
+									},
+									{
+										"source": {
+											"name": "ICORR",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "ICORR"
+										}
+									},
+									{
+										"source": {
+											"name": "IGAN",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "IGAN"
+										}
+									},
+									{
+										"source": {
+											"name": "AMORT",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "AMORT"
+										}
+									},
+									{
+										"source": {
+											"name": "PVIDA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PVIDA"
+										}
+									},
+									{
+										"source": {
+											"name": "PINC",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PINC"
+										}
+									},
+									{
+										"source": {
+											"name": "PVEH",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PVEH"
+										}
+									},
+									{
+										"source": {
+											"name": "PGAN",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PGAN"
+										}
+									},
+									{
+										"source": {
+											"name": "EXCESO",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "EXCESO"
+										}
+									},
+									{
+										"source": {
+											"name": "FRACCION",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "FRACCION"
+										}
+									},
+									{
+										"source": {
+											"name": "REF",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "REF"
+										}
+									},
+									{
+										"source": {
+											"name": "TERM",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TERM"
+										}
+									},
+									{
+										"source": {
+											"name": "LIBR",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "LIBR"
+										}
+									},
+									{
+										"source": {
+											"name": "CEDULA",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "CEDULA"
+										}
+									},
+									{
+										"source": {
+											"name": "TASA",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "TASA"
+										}
+									},
+									{
+										"source": {
+											"name": "CPAG",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "CPAG"
+										}
+									},
+									{
+										"source": {
+											"name": "FCONST",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FCONST"
+										}
+									},
+									{
+										"source": {
+											"name": "FVENC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FVENC"
+										}
+									},
+									{
+										"source": {
+											"name": "FAPLIC",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FAPLIC"
+										}
+									},
+									{
+										"source": {
+											"name": "FEFEC",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FEFEC"
+										}
+									},
+									{
+										"source": {
+											"name": "FPLAN",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FPLAN"
+										}
+									},
+									{
+										"source": {
+											"name": "FCALC",
+											"type": "DateTime"
+										},
+										"sink": {
+											"name": "FCALC"
+										}
+									},
+									{
+										"source": {
+											"name": "STATUS",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "STATUS"
+										}
+									},
+									{
+										"source": {
+											"name": "CONSEC",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "CONSEC"
+										}
+									},
+									{
+										"source": {
+											"name": "PRINCIPAL",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "PRINCIPAL"
+										}
+									},
+									{
+										"source": {
+											"name": "REMANENTE",
+											"type": "Decimal"
+										},
+										"sink": {
+											"name": "REMANENTE"
+										}
+									},
+									{
+										"source": {
+											"name": "NCUENTA",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "NCUENTA"
+										}
+									},
+									{
+										"source": {
+											"name": "PLAZO",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "PLAZO"
+										}
+									},
+									{
+										"source": {
+											"name": "REFERENCIA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "REFERENCIA"
+										}
+									},
+									{
+										"source": {
+											"name": "NOMBRE",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NOMBRE"
+										}
+									},
+									{
+										"source": {
+											"name": "ESTADO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "ESTADO"
+										}
+									},
+									{
+										"source": {
+											"name": "AGECON",
+											"type": "Int32"
+										},
+										"sink": {
+											"name": "AGECON"
+										}
+									},
+									{
+										"source": {
+											"name": "CTACRX",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTACRX"
+										}
+									},
+									{
+										"source": {
+											"name": "CTACRV",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTACRV"
+										}
+									},
+									{
+										"source": {
+											"name": "CTAPXC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTAPXC"
+										}
+									},
+									{
+										"source": {
+											"name": "CTAIGA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CTAIGA"
+										}
+									},
+									{
+										"source": {
+											"name": "HORA",
+											"type": "Int64"
+										},
+										"sink": {
+											"name": "HORA"
+										}
+									},
+									{
+										"source": {
+											"name": "CLASIFICAC",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CLASIFICAC"
+										}
+									},
+									{
+										"source": {
+											"name": "STATUS206",
+											"type": "String"
+										},
+										"sink": {
+											"name": "STATUS206"
+										}
+									},
+									{
+										"source": {
+											"name": "LIBRETA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "LIBRETA"
+										}
+									},
+									{
+										"source": {
+											"name": "TIPO_TASA",
+											"type": "String"
+										},
+										"sink": {
+											"name": "TIPO_TASA"
+										}
+									},
+									{
+										"source": {
+											"name": "GEN_PEND",
+											"type": "String"
+										},
+										"sink": {
+											"name": "GEN_PEND"
+										}
+									},
+									{
+										"source": {
+											"name": "COD_ARCH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "COD_ARCH"
+										}
+									},
+									{
+										"source": {
+											"name": "SELF_AUX",
+											"type": "String"
+										},
+										"sink": {
+											"name": "SELF_AUX"
+										}
+									},
+									{
+										"source": {
+											"name": "MONEDA",
+											"type": "Int16"
+										},
+										"sink": {
+											"name": "MONEDA"
+										}
+									},
+									{
+										"source": {
+											"name": "RESTO",
+											"type": "String"
+										},
+										"sink": {
+											"name": "RESTO"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceSIPOCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationSIPOParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteSIPOSource",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_SIPO_CSVtoParquet",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceSIPOBinary",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"fileListPath": "sharepoint/sipo",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteSIPOSource",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "Sipo Diario"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Rename_File",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "sipo/*"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "SIPO Diario",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "sipo"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_MAESTRO_PADRON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Padron",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "FixedToCSV",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "tsemaestrapadron",
+									"wildcardFileName": "*.PADRON_COMPLETO.txt",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "CEDULA",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "CODELEC",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "RELLENO",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "FECHACADUC",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 5
+										},
+										"sink": {
+											"name": "NOMBRE",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 6
+										},
+										"sink": {
+											"name": "APELLIDO_1",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 7
+										},
+										"sink": {
+											"name": "APELLIDO_2",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 8
+										},
+										"sink": {
+											"name": "JUNTA",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 9
+										},
+										"sink": {
+											"name": "NROELECTOR"
+										}
+									},
+									{
+										"source": {
+											"name": "FILEPATH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FILEPATH",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourcePadronTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationPadronCompletoParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeletePadronCompleto",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_Padron",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourcePadronTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": {
+									"value": "@{activity('FixedToCSV').output.file}",
+									"type": "Expression"
+								},
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeletePadronCompleto",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Padron Electoral"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "FixedToCSV",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "ConvertFixedtoCSV",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "tsemaestrapadron/*.PADRON_COMPLETO.txt",
+								"format": "9,6,1,8,30,26,26,5,3",
+								"encoding": "iso-8859-1"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "tsemaestrapadron/*.txt"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE Maestra/Padron Electoral",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "tsemaestrapadron"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_TSE_PADRON')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Distelec",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Unzip Padron",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.Distelec.txt",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "Codigo_Postal",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "Provincia",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "Canton",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "Distrito",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "FILEPATH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FILEPATH",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDistelec",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDistelectParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "CD_Padron",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Unzip Padron",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									},
+									{
+										"name": "EMPTY",
+										"value": " "
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.PADRON_COMPLETO.txt",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 1
+										},
+										"sink": {
+											"name": "CEDULA",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 2
+										},
+										"sink": {
+											"name": "CODELEC",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 3
+										},
+										"sink": {
+											"name": "RELLENO",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 4
+										},
+										"sink": {
+											"name": "FECHACADUC",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 6
+										},
+										"sink": {
+											"name": "NOMBRE",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 7
+										},
+										"sink": {
+											"name": "APELLIDO_1",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"physicalType": "String",
+											"ordinal": 8
+										},
+										"sink": {
+											"name": "APELLIDO_2",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"type": "String",
+											"ordinal": 5
+										},
+										"sink": {
+											"name": "JUNTA",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "EMPTY",
+											"type": "String"
+										},
+										"sink": {
+											"name": "NROELECTOR"
+										}
+									},
+									{
+										"source": {
+											"name": "FILEPATH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FILEPATH",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourcePadronTXT",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationPadronCompletoParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteDistelec",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_Distelec",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "CD_Padron",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceDistelec",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.Distelec.txt",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeletePadronCompleto",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "DeleteDistelec",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceDistelec",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.PADRON_COMPLETO.txt",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Unzip Distelec",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "SharepointDownloadFiles",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "unzip",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "padron/*.padron_completo.zip",
+								"fileToUnzipName": "Distelec.txt",
+								"deleteFile": "no"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Unzip Padron",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Unzip Distelec",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "unzip",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "*.padron_completo.zip",
+								"fileToUnzipName": "PADRON_COMPLETO.txt",
+								"deleteFile": "yes"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeletePadronCompleto",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Padron Electoral"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SharepointDownloadFiles",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointDownloadFiles",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "TSE/Padron Electoral",
+								"storageConnectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"pathDestiny": "padron"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		}
+	]
+}

@@ -1,0 +1,4201 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_SessionDetailHist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Canales"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Ftf_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Ftf_PK_FT",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FTId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TransactionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTDR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_DebitValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_In_DebitVdate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_DebitTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTCR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CreditValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_TreasuryRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NegDealerRefNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProcessingDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_OrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChequeNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Payment_Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_PaymentDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BCBankSortCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReceiverBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntmedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Mailing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PayMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IN_benOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargesAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeComDisplay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommisionFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustomerSpread",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BaseCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnToDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PriotityTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_INBKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExposureDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_FedFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PositionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NoOfBatchItems",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FreeTextMsgto",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Message",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocalRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebitedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_AmountCreditedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalChargeAmountMon",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalChargeAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalTaxAmountMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalTaxAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CustomerRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwardPayType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TelexFromCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryInRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryOutRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrdCustCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBKAcNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocAmtDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocAmtCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocTotaTaxAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocalChargeAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocPosChgsAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_MktgExchProfit",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateInputMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustGroupLevel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendPaymentYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealMarket",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargedCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InReasonOve",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealerDesk",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecalcFWDRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnCheque",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Drawn_Account",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AccountingDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstrctnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CollRemBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedRecsID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecComm",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCommLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCHG",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CheqType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InTimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendToParty",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKOut",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MessageType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReversalMkr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InInstrCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InProcessErr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSwiftMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctwithBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstructedAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InExchRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoverMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MT103Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendFormat",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixingInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwSendBic",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcChgReqId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotSndChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_ChgAdviceMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedCoverID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NettingStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuthDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_BKOperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AMInflowRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ParentTxnId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RoundType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BeneficiaryId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Signatory",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardTxnDetail",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCOrdBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCIntMedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCAccWitBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCBKTBKIn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Reserved1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_StmtNos",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Overdrive",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecordStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Inputter",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Ftf_Authoriser",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditorCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditDateTime",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LRTfsStoId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRT24FsRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsChequeDrawn",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsPayeeDets",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRReferencePoint",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployPhon1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRAcBenefName",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtNotesTransf",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRBenefRelati",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtBankCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginTrans",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtCheckDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftName",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReason",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRStatusCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBranchCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInterCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichA",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichB",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichC",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuPersonType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRACBenefID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpdcResponse",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal3",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntChannel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCardNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpcrCholder",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtLcyAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtFcaConv",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDestDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRExtFinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRepayAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnNumInsPay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAmtToCollect",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReferenceId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployFax",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployNatio",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillingCuId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillCuIdDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmAuthNum",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRecalcRepay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCrrCalc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneIdType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRTrack2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPinblock",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtUniqueId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtAuthCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBalAftTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmTerminalId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRDisplayTotal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneOrdent",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCustCorresp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnUncAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROarDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROriginOfFounds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInputtSession",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_AcquiresId",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_JmsResp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FechaCarga",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LT_PaymentDetails",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "TransT24",
+					"table": "BI_SessionDetailHist"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_StmtEntryHist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Canales"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Ftf_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Ftf_PK_FT",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FTId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TransactionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTDR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_DebitValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_In_DebitVdate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_DebitTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTCR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CreditValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_TreasuryRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NegDealerRefNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProcessingDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_OrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChequeNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Payment_Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_PaymentDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BCBankSortCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReceiverBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntmedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Mailing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PayMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IN_benOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargesAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeComDisplay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommisionFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustomerSpread",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BaseCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnToDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PriotityTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_INBKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExposureDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_FedFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PositionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NoOfBatchItems",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FreeTextMsgto",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Message",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocalRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebitedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_AmountCreditedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalChargeAmountMon",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalChargeAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalTaxAmountMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalTaxAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CustomerRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwardPayType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TelexFromCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryInRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryOutRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrdCustCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBKAcNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocAmtDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocAmtCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocTotaTaxAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocalChargeAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocPosChgsAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_MktgExchProfit",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateInputMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustGroupLevel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendPaymentYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealMarket",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargedCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InReasonOve",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealerDesk",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecalcFWDRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnCheque",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Drawn_Account",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AccountingDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstrctnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CollRemBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedRecsID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecComm",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCommLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCHG",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CheqType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InTimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendToParty",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKOut",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MessageType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReversalMkr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InInstrCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InProcessErr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSwiftMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctwithBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstructedAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InExchRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoverMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MT103Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendFormat",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixingInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwSendBic",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcChgReqId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotSndChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_ChgAdviceMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedCoverID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NettingStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuthDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_BKOperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AMInflowRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ParentTxnId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RoundType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BeneficiaryId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Signatory",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardTxnDetail",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCOrdBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCIntMedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCAccWitBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCBKTBKIn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Reserved1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_StmtNos",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Overdrive",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecordStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Inputter",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Ftf_Authoriser",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditorCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditDateTime",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LRTfsStoId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRT24FsRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsChequeDrawn",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsPayeeDets",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRReferencePoint",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployPhon1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRAcBenefName",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtNotesTransf",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRBenefRelati",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtBankCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginTrans",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtCheckDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftName",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReason",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRStatusCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBranchCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInterCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichA",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichB",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichC",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuPersonType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRACBenefID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpdcResponse",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal3",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntChannel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCardNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpcrCholder",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtLcyAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtFcaConv",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDestDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRExtFinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRepayAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnNumInsPay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAmtToCollect",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReferenceId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployFax",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployNatio",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillingCuId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillCuIdDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmAuthNum",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRecalcRepay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCrrCalc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneIdType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRTrack2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPinblock",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtUniqueId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtAuthCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBalAftTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmTerminalId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRDisplayTotal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneOrdent",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCustCorresp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnUncAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROarDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROriginOfFounds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInputtSession",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_AcquiresId",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_JmsResp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FechaCarga",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LT_PaymentDetails",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "TransT24",
+					"table": "BI_StmtEntryHist"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TarjetasCredito')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TarjetasCredito"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TarjetasCreditoActivas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TarjetasCreditoActivas"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TarjetasCreditoAdic')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TarjetasCreditoAdic"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TarjetasDebito')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TarjetasDebito"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TellerHist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Canales"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Ftf_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Ftf_PK_FT",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FTId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TransactionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_DebitAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTDR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_DebitValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_In_DebitVdate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_DebitTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditTheirRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrencyMKTCR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CreditValueDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_TreasuryRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NegDealerRefNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProcessingDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_OrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InOrderingBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctWithBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InBenBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChequeNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Payment_Details",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In_PaymentDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BCBankSortCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReceiverBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntmedBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Mailing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PayMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BenOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IN_benOurChargers",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargesAcctNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeComDisplay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommissionAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CommisionFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargeFor",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustomerSpread",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BaseCurrency",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ProfitCentreDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnToDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PriotityTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_INBKToBKInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExposureDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_FedFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_PositionType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NoOfBatchItems",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FreeTextMsgto",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Message",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocalRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TaxAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebitedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_AmountCreditedMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AmountCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalChargeAmountMon",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalChargeAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotalTaxAmountMoneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotalTaxAmount",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_CustomerRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwardPayType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendCorrBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TelexFromCust",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryInRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryOutRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCompCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Status",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeliveryMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_OrdCustCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctWithBKAcNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LocAmtDebited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocAmtCredited",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocTotaTaxAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocalChargeAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_LocPosChgsAmt",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_MktgExchProfit",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateInputMKR",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CustGroupLevel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DebitCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CreditCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendPaymentYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CRAdviceReqdYN",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealMarket",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ChargedCustomer",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InReasonOve",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DealerDesk",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecalcFWDRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReturnCheque",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Drawn_Account",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AccountingDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstrctnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CollRemBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedRecsID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecComm",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCommLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecCHG",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgLCL",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CheqType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InTimeInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_SendToParty",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BKToBKOut",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MessageType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ReversalMkr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RelatedRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InInstrCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InProcessErr",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSwiftMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcctwithBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InAcctBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecCorrBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecCorrAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_IntermedBankAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InstructedAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InIntermedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InExchRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixing",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoverMethod",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_In3RDReimBAcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MT103Type",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendFormat",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExtendInfo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RateFixingInd",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InwSendBic",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InSendChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InRecChg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AcChgReqId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_TotRecChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_TotSndChgCRCCY",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Ftf_ChgAdviceMsg",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ExpectedCoverID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_NettingStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuthDate",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_BKOperationCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AMInflowRate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_ParentTxnId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RoundType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_BeneficiaryId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_MsgDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Signatory",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardNumber",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CardTxnDetail",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCOrdBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCIntMedBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCAccWitBK",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_InCBKTBKIn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Reserved1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_StmtNos",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Overdrive",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_RecordStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CurrNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_Inputter",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DateTime",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Ftf_Authoriser",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_CoCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_DeptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditorCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_AuditDateTime",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LRTfsStoId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRT24FsRef",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsChequeDrawn",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRUsPayeeDets",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRReferencePoint",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRCoPrintSigna2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployPhon1",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRAcBenefName",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginFunds",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtNotesTransf",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRBenefRelati",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtBankCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_LRFtOriginTrans",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtCheckDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftBank",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDraftName",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReason",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRStatusCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBranchCheck",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInterCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichA",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichB",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCCEnrichC",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuPersonType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRACBenefID",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpdcResponse",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal1",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAcctBal3",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntChannel",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCardNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRIntTxnType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBpcrCholder",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtLcyAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtFcaConv",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRFtDestDept",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRExtFinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRepayAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnNumInsPay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRConceptDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetNam",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPaymentDetVal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAmtToCollect",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRReferenceId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployFax",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCuEmployNatio",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillingCuId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBillCuIdDate",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmAuthNum",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnRecalcRepay",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCrrCalc",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneIdType",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRTrack2",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRPinblock",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtUniqueId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtAuthCode",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBalAftTxn",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRAtmTerminalId",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBinNo",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRDisplayTotal",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRBeneOrdent",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRCustCorresp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRLnUncAmt",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROarDetails",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LROriginOfFounds",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_LRInputtSession",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_AcquiresId",
+						"type": "varchar"
+					},
+					{
+						"name": "Fts_JmsResp",
+						"type": "varchar"
+					},
+					{
+						"name": "Ftf_FechaCarga",
+						"type": "date"
+					},
+					{
+						"name": "Ftf_LT_PaymentDetails",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "TransT24",
+					"table": "BI_TellerHist"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TipoIdnTrabSicere')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SICERE"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Tis_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Tis_PK_CodTipoIdn",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tis_DesTipoIden",
+						"type": "varchar"
+					},
+					{
+						"name": "Tis_FechaCarga",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "Sicere",
+					"table": "BI_TipoIdnTrabSicere"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TiposCambioBCCR')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Tcb_Id",
+						"type": "bigint"
+					},
+					{
+						"name": "Tcb_CompraBCCR",
+						"type": "decimal"
+					},
+					{
+						"name": "Tcb_VentaBCCR",
+						"type": "decimal"
+					},
+					{
+						"name": "Tcb_FechaBCCR",
+						"type": "date"
+					},
+					{
+						"name": "Tcb_CompraT24",
+						"type": "decimal"
+					},
+					{
+						"name": "Tcb_VentaT24",
+						"type": "decimal"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TiposCambioBCCR"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TrabajadoresSicResumen')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SICERE"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Tsr_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Trs_PK_NumIdentificacion",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_PK_CedulaPat",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_PK_Periodo",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_FK_IdCliente",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Trs_SalarioTotal",
+						"type": "decimal",
+						"precision": 24,
+						"scale": 2
+					},
+					{
+						"name": "Trs_RangoMicroSegBP",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Trs_RangoMicroSeg",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Trs_CantPagos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Trs_CantPatronos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Trs_CodDistrito",
+						"type": "decimal",
+						"precision": 6,
+						"scale": 0
+					},
+					{
+						"name": "Trs_NumPatPrincipal",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_DireccPatSalarioM",
+						"type": "varchar"
+					},
+					{
+						"name": "Tsr_NumPeriodo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tsr_OrdenSalario",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tsr_PeridoArchivo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Trs_Sector",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_SectorEmp",
+						"type": "varchar"
+					},
+					{
+						"name": "Trs_RazonSocial",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "Sicere",
+					"table": "BI_TrabajadoresSicResumen"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TrabajadoresSicere')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "SICERE"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Trb_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Trb_PK_CedulaTrb",
+						"type": "varchar"
+					},
+					{
+						"name": "Trb_FK_CodTipoIdn",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Trb_NombreTrabajador",
+						"type": "varchar"
+					},
+					{
+						"name": "Trb_PrimerApellidoTrab",
+						"type": "varchar"
+					},
+					{
+						"name": "Trb_SegApellidoTrab",
+						"type": "varchar"
+					},
+					{
+						"name": "Trb_Iuc",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Trb_IdCliente",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Trb_FechaCarga",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "Sicere",
+					"table": "BI_TrabajadoresSicere"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_TransAutoriza')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Tra_PANNumeroTarjeta",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_CodigoP",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_FechaTransac",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_HoraTransac",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_FechaAdquiriente",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_NumAutorizacion",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_Moneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_MontoTransac",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_DescripcionAdquirente",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_NumeroReferencia",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_FK_MCC",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_PEM",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_MontoColones",
+						"type": "varchar"
+					},
+					{
+						"name": "Tra_MontoDolares",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_TransAutoriza"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_UsuariosT24')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Canales"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Usr_FechaDatos",
+						"type": "date"
+					},
+					{
+						"name": "Usr_IdUsuario",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_NombreUsr",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_FirmaUsr",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_Clasificacion",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_CodIdioma",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_AgenciasAuth",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_CodDepto",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_FechaVenciPswrd",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_FechaIniPerfil",
+						"type": "date"
+					},
+					{
+						"name": "Usr_FechaFinPerfil",
+						"type": "date"
+					},
+					{
+						"name": "Usr_FechaUltIngreso",
+						"type": "date"
+					},
+					{
+						"name": "Usr_TiempoUltIngreso",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Usr_ClaseAlerta",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_DatosLocales",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_Alertas",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_EstadoRegistro",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_CantModificaciones",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_Digitador",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_FechaHoraUltModf",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Usr_Autorizador",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_Agencia",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_CodDeptoReg",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_CodigoAuditor",
+						"type": "varchar"
+					},
+					{
+						"name": "Usr_FechaHoraAuditor",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Application",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_UsuariosT24"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BI_VisaIncom')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SISBI",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "Tarjetas"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Vin_PK_Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Vin_IdCliente",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 0
+					},
+					{
+						"name": "Vin_FechaDatos",
+						"type": "date"
+					},
+					{
+						"name": "Vin_Tarjeta",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_BinTarjeta",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Referencia",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_FechaTransaccion",
+						"type": "date"
+					},
+					{
+						"name": "Vin_Monto",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Vin_Moneda",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Mcc",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_VisaCrEst",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Razon",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Autorizacion",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_NombreAfiliado",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Ciudad",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Pais",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_MontoFuente",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Vin_MonedaFuente",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Sec",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_Reversion",
+						"type": "varchar"
+					},
+					{
+						"name": "Vin_FechaCarga",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "BI_VisaIncom"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_COPY_REPORTE_COMBINADO')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceReporteCombinado",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationReporteCombinadoParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string,\n\t\t{_col1_} as string,\n\t\t{_col2_} as string,\n\t\t{_col3_} as string,\n\t\t{_col4_} as string,\n\t\t{_col5_} as string,\n\t\t{_col6_} as string,\n\t\t{_col7_} as string,\n\t\t{_col8_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: true,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILENAME',\n\twildcardPaths:['estadosfinancierosreporte/*']) ~> source1\nsource1 derive(CodigoContable = {_col0_},\n\t\tNombreCuenta = {_col1_},\n\t\tSaldoAnteriorDebito = {_col2_},\n\t\tSaldoAnteriorCredito = {_col3_},\n\t\tMovimientosMesDebito = {_col4_},\n\t\tMovimientosMesCredito = {_col5_},\n\t\tSaldoDebito = {_col6_},\n\t\tSaldoCredito = {_col7_},\n\t\tCodigoUnico = {_col8_},\n\t\tDATE_LOADED = replace(replace(FILENAME, '.reportecombinado.txt', ''), '/estadosfinancierosreporte/', ''),\n\t\tFILENAME = concat('reportecombinado/',replace(replace(FILENAME, '/estadosfinancierosreporte/', ''), '.txt', '.parquet'))) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tCodigoContable,\n\t\tNombreCuenta,\n\t\tSaldoAnteriorDebito,\n\t\tSaldoAnteriorCredito,\n\t\tMovimientosMesDebito,\n\t\tMovimientosMesCredito,\n\t\tSaldoDebito,\n\t\tSaldoCredito,\n\t\tCodigoUnico,\n\t\tDATE_LOADED,\n\t\tFILENAME\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinput(\n\t\tCuenta as string,\n\t\tTipoCatalogoSUGEF as integer,\n\t\tDebito as decimal(38,18),\n\t\tCredito as decimal(38,18),\n\t\tSaldoFinal as decimal(38,18),\n\t\tNotaTexto as string,\n\t\tNotaArchivo as string,\n\t\tDATE_LOADED as string\n\t),\n\tformat: 'parquet',\n\trowUrlColumn:'FILENAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_SPLIT_DEFUNCION')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceDefuncionTXT",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationDefuncionParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SplitColumns"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['defuncion/*.txt']) ~> source1\nsource1 derive(CITA_DEFUNCION = substring({_col0_},3,12),\n\t\tCEDULA = substring({_col0_},15,20),\n\t\tCONOCIDO_COMO = substring({_col0_},146,20),\n\t\tNOMBRE = substring({_col0_},44,50),\n\t\tAPELLIDO_1_CONOCIDO = substring({_col0_},166,13),\n\t\tAPELLIDO_1 = substring({_col0_},94,26),\n\t\tAPELLIDO_2_CONOCIDO = substring({_col0_},179,13),\n\t\tAPELLIDO_2 = substring({_col0_},120,26),\n\t\tLUGAR = '',\n\t\tFECHA = substring({_col0_},36,8),\n\t\tHORA = '',\n\t\tES_EXTRANJERO = '',\n\t\tES_NACIMIENTO = '',\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/defuncion/', ''), 1, 8),\n\t\tFILE_NAME = replace(FILE_NAME, '.txt', '.parquet'),\n\t\tTIPO_MOVIMIENTO = 'U') ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tFILE_NAME,\n\t\tCITA_DEFUNCION,\n\t\tCEDULA,\n\t\tCONOCIDO_COMO,\n\t\tNOMBRE,\n\t\tAPELLIDO_1_CONOCIDO,\n\t\tAPELLIDO_1,\n\t\tAPELLIDO_2_CONOCIDO,\n\t\tAPELLIDO_2,\n\t\tLUGAR,\n\t\tFECHA,\n\t\tHORA,\n\t\tES_EXTRANJERO,\n\t\tES_NACIMIENTO,\n\t\tDATE_LOADED,\n\t\tTIPO_MOVIMIENTO\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_SPLIT_MAESTRO_DEFUNCION')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceMaestroDefuncionTXT",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationDefuncionParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SplitColumns"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['tsemaestradefuncion/*.txt']) ~> source1\nsource1 derive(CITA_DEFUNCION = substring({_col0_},1,12),\n\t\tCEDULA = substring({_col0_},13,20),\n\t\tCONOCIDO_COMO = substring({_col0_},33,20),\n\t\tNOMBRE = substring({_col0_},53,20),\n\t\tAPELLIDO_1_CONOCIDO = substring({_col0_},103,13),\n\t\tAPELLIDO_1 = substring({_col0_},116,26),\n\t\tAPELLIDO_2_CONOCIDO = substring({_col0_},142,13),\n\t\tAPELLIDO_2 = substring({_col0_},155,26),\n\t\tLUGAR = substring({_col0_},181,29),\n\t\tFECHA = substring({_col0_},210,8),\n\t\tHORA = substring({_col0_},218,4),\n\t\tES_EXTRANJERO = substring({_col0_},222,1),\n\t\tES_NACIMIENTO = substring({_col0_},223,1),\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/tsemaestradefuncion/', ''), 1, 8),\n\t\tFILE_NAME = concat('/defuncion/', replace(replace(FILE_NAME, '.txt', '.parquet'), '/tsemaestradefuncion/', '')),\n\t\tTIPO_MOVIMIENTO = 'O') ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tFILE_NAME,\n\t\tCITA_DEFUNCION,\n\t\tCEDULA,\n\t\tCONOCIDO_COMO,\n\t\tNOMBRE,\n\t\tAPELLIDO_1_CONOCIDO,\n\t\tAPELLIDO_1,\n\t\tAPELLIDO_2_CONOCIDO,\n\t\tAPELLIDO_2,\n\t\tLUGAR,\n\t\tFECHA,\n\t\tHORA,\n\t\tES_EXTRANJERO,\n\t\tES_NACIMIENTO,\n\t\tDATE_LOADED,\n\t\tTIPO_MOVIMIENTO\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_SPLIT_MAESTRO_MATRIMONIO')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceMaestroMatrimonioTXT",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationMatrimonioParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SplitColumns"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['tsemaestramatrimonio/*.txt']) ~> source1\nsource1 derive(CITA_MATRIMONIO = substring({_col0_},1,13),\n\t\tID_CONTRAYENTE_1 = substring({_col0_},14,20),\n\t\tNOMBRE_CONTRAYENTE_1 = substring({_col0_},34,50),\n\t\tAPELLIDO_1_CONTRAYENTE_1 = substring({_col0_},84,26),\n\t\tAPELLIDO_2_CONTRAYENTE_1 = substring({_col0_},110,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_1 = substring({_col0_},136,29),\n\t\tPROGENITOR_1_CONTRAYENTE_1 = substring({_col0_},165,50),\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_1 = substring({_col0_},215,3),\n\t\tPROGENITOR_2_CONTRAYENTE_1 = substring({_col0_},218,50),\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_1 = substring({_col0_},268,3),\n\t\tES_EXTRANJERO_CONTRAYENTE_1 = substring({_col0_},271,1),\n\t\tNACIONALIDAD_CONTRAYENTE_1 = substring({_col0_},272,3),\n\t\tESTADO_CIVIL_CONTRAYENTE_1 = substring({_col0_},275,1),\n\t\tEDAD_CONTRAYENTE_1 = substring({_col0_},276,2),\n\t\tDEFUNCION_CONTRAYENTE_1 = substring({_col0_},278,1),\n\t\tID_CONTRAYENTE_2 = substring({_col0_},279,20),\n\t\tNOMBRE_CONTRAYENTE_2 = substring({_col0_},299,50),\n\t\tAPELLIDO_1_CONTRAYENTE_2 = substring({_col0_},349,26),\n\t\tAPELLIDO_2_CONTRAYENTE_2 = substring({_col0_},375,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_2 = substring({_col0_},401,29),\n\t\tPROGENITOR_1_CONTRAYENTE_2 = substring({_col0_},430,50),\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_2 = substring({_col0_},480,3),\n\t\tPROGENITOR_2_CONTRAYENTE_2 = substring({_col0_},483,50),\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_2 = substring({_col0_},533,3),\n\t\tES_EXTRANJERO_CONTRAYENTE_2 = substring({_col0_},536,1),\n\t\tNACIONALIDAD_CONTRAYENTE_2 = substring({_col0_},537,3),\n\t\tESTADO_CIVIL_CONTRAYENTE_2 = substring({_col0_},540,1),\n\t\tEDAD_CONTRAYENTE_2 = substring({_col0_},541,2),\n\t\tDEFUNCION_CONTRAYENTE_2 = substring({_col0_},543,1),\n\t\tLUGAR_SUCESO = substring({_col0_},544,29),\n\t\tFECHA_ENTRADA = substring({_col0_},573,8),\n\t\tFECHA_SUCESO = substring({_col0_},581,8),\n\t\tPROVINCIA = substring({_col0_},589,1),\n\t\tCODIGO_CANTON = substring({_col0_},590,2),\n\t\tDISTRITO_ADMINISTRATIVO = substring({_col0_},592,2),\n\t\tTIPO_MATRIMONIO = substring({_col0_},594,1),\n\t\tTIPO_RELACION = substring({_col0_},595,1),\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/tsemaestramatrimonio/', ''), 1, 8),\n\t\tFILE_NAME = concat('/matrimonio/', replace(replace(FILE_NAME, '.txt', '.parquet'), '/tsemaestramatrimonio/', '')),\n\t\tTIPO_MOVIMIENTO = 'O') ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tCITA_MATRIMONIO,\n\t\tID_CONTRAYENTE_1,\n\t\tNOMBRE_CONTRAYENTE_1,\n\t\tAPELLIDO_1_CONTRAYENTE_1,\n\t\tAPELLIDO_2_CONTRAYENTE_1,\n\t\tCONOCIDO_COMO_CONTRAYENTE_1,\n\t\tPROGENITOR_1_CONTRAYENTE_1,\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_1,\n\t\tPROGENITOR_2_CONTRAYENTE_1,\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_1,\n\t\tES_EXTRANJERO_CONTRAYENTE_1,\n\t\tNACIONALIDAD_CONTRAYENTE_1,\n\t\tESTADO_CIVIL_CONTRAYENTE_1,\n\t\tEDAD_CONTRAYENTE_1,\n\t\tDEFUNCION_CONTRAYENTE_1,\n\t\tID_CONTRAYENTE_2,\n\t\tNOMBRE_CONTRAYENTE_2,\n\t\tAPELLIDO_1_CONTRAYENTE_2,\n\t\tAPELLIDO_2_CONTRAYENTE_2,\n\t\tCONOCIDO_COMO_CONTRAYENTE_2,\n\t\tPROGENITOR_1_CONTRAYENTE_2,\n\t\tNACIONALIDAD_PROGENITOR_1_CONTRAYENTE_2,\n\t\tPROGENITOR_2_CONTRAYENTE_2,\n\t\tNACIONALIDAD_PROGENITOR_2_CONTRAYENTE_2,\n\t\tES_EXTRANJERO_CONTRAYENTE_2,\n\t\tNACIONALIDAD_CONTRAYENTE_2,\n\t\tESTADO_CIVIL_CONTRAYENTE_2,\n\t\tEDAD_CONTRAYENTE_2,\n\t\tDEFUNCION_CONTRAYENTE_2,\n\t\tLUGAR_SUCESO,\n\t\tFECHA_ENTRADA,\n\t\tFECHA_SUCESO,\n\t\tPROVINCIA,\n\t\tCODIGO_CANTON,\n\t\tDISTRITO_ADMINISTRATIVO,\n\t\tTIPO_MATRIMONIO,\n\t\tTIPO_RELACION,\n\t\tDATE_LOADED,\n\t\tFILE_NAME,\n\t\tTIPO_MOVIMIENTO\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_SPLIT_MAESTRO_NACIMIENTO')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceMaestroNacimientoTXT",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationNacimientoParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SplitColumns"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['tsemaestranacimiento/*.txt']) ~> source1\nsource1 derive(CEDULA = substring({_col0_},1,9),\n\t\tNRO_FOLIO = substring({_col0_},10,3),\n\t\tCEDULA_PROGENITOR_1 = substring({_col0_},13,9),\n\t\tCEDULA_PROGENITOR_2 = substring({_col0_},22,9),\n\t\tCOD_HOSPITAL = substring({_col0_},31,3),\n\t\tHORA = substring({_col0_},34,4),\n\t\tFECHA = substring({_col0_},38,8),\n\t\tNACIONALIDAD = substring({_col0_},47,1),\n\t\tINDICADOR_DEFUNCION = substring({_col0_},48,1),\n\t\tPAIS_PROGENITOR_1 = substring({_col0_},49,3),\n\t\tPAIS_PROGENITOR_2 = substring({_col0_},54,3),\n\t\tPROVINCIA = substring({_col0_},57,3),\n\t\tFECHA_NATURALIZACION = substring({_col0_},60,8),\n\t\tAPELLIDO_1 = substring({_col0_},69,26),\n\t\tAPELLIDO_2 = substring({_col0_},95,26),\n\t\tNOMBRE = substring({_col0_},121,50),\n\t\tNOMBRE_PROGENITOR_1 = substring({_col0_},171,29),\n\t\tNOMBRE_PROGENITOR_2 = substring({_col0_},200,29),\n\t\tLUGAR = substring({_col0_},229,29),\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/tsemaestranacimiento/', ''), 1, 8),\n\t\tFILE_NAME = concat('/nacimiento/', replace(replace(FILE_NAME, '.txt', '.parquet'), '/tsemaestranacimiento/', ''))) ~> SplitColumns\nSplitColumns select(mapColumn(\n\t\tFILE_NAME,\n\t\tCEDULA,\n\t\tNRO_FOLIO,\n\t\tCEDULA_PROGENITOR_1,\n\t\tCEDULA_PROGENITOR_2,\n\t\tCOD_HOSPITAL,\n\t\tHORA,\n\t\tFECHA,\n\t\tNACIONALIDAD,\n\t\tINDICADOR_DEFUNCION,\n\t\tPAIS_PROGENITOR_1,\n\t\tPAIS_PROGENITOR_2,\n\t\tPROVINCIA,\n\t\tFECHA_NATURALIZACION,\n\t\tAPELLIDO_1,\n\t\tAPELLIDO_2,\n\t\tNOMBRE,\n\t\tNOMBRE_PROGENITOR_1,\n\t\tNOMBRE_PROGENITOR_2,\n\t\tLUGAR,\n\t\tDATE_LOADED\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DF_SPLIT_MATRIMONIO')]",
+			"type": "Microsoft.DataFactory/factories/dataflows",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "SourceMatrimonioTXT",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"dataset": {
+								"referenceName": "DestinationMatrimonioParquet",
+								"type": "DatasetReference"
+							},
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DerivedColumn1"
+						},
+						{
+							"name": "Select1"
+						}
+					],
+					"script": "source(output(\n\t\t{_col0_} as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100,\n\tignoreNoFilesFound: false,\n\trowUrlColumn: 'FILE_NAME',\n\twildcardPaths:['matrimonio/*.MOVWEBMAT.txt']) ~> source1\nsource1 derive(TIPO_MOVIMIENTO = substring({_col0_},1,2),\n\t\tTIPO_MATRIMONIO = substring({_col0_},3,1),\n\t\tCITA_MATRIMONIO = substring({_col0_},4,13),\n\t\tFECHA_SUCESO = substring({_col0_},17,8),\n\t\tID_CONTRAYENTE_1 = substring({_col0_},25,20),\n\t\tID_CONTRAYENTE_2 = substring({_col0_},41,20),\n\t\tNOMBRE_CONTRAYENTE_1 = substring({_col0_},62,50),\n\t\tAPELLIDO_1_CONTRAYENTE_1 = substring({_col0_},112,26),\n\t\tAPELLIDO_2_CONTRAYENTE_1 = substring({_col0_},138,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_1 = substring({_col0_},164,29),\n\t\tNOMBRE_CONTRAYENTE_2 = substring({_col0_},193,50),\n\t\tAPELLIDO_1_CONTRAYENTE_2 = substring({_col0_},243,26),\n\t\tAPELLIDO_2_CONTRAYENTE_2 = substring({_col0_},269,26),\n\t\tCONOCIDO_COMO_CONTRAYENTE_2 = substring({_col0_},295,29),\n\t\tFILE_NAME = concat('/matrimonio/', replace(replace(FILE_NAME, '.txt', '.parquet'), '/', '')),\n\t\tDATE_LOADED = substring(replace(FILE_NAME, '/matrimonio/', ''), 1, 8)) ~> DerivedColumn1\nDerivedColumn1 select(mapColumn(\n\t\tFILE_NAME,\n\t\tTIPO_MOVIMIENTO,\n\t\tTIPO_MATRIMONIO,\n\t\tCITA_MATRIMONIO,\n\t\tFECHA_SUCESO,\n\t\tID_CONTRAYENTE_1,\n\t\tID_CONTRAYENTE_2,\n\t\tNOMBRE_CONTRAYENTE_1,\n\t\tAPELLIDO_1_CONTRAYENTE_1,\n\t\tAPELLIDO_2_CONTRAYENTE_1,\n\t\tCONOCIDO_COMO_CONTRAYENTE_1,\n\t\tNOMBRE_CONTRAYENTE_2,\n\t\tAPELLIDO_1_CONTRAYENTE_2,\n\t\tAPELLIDO_2_CONTRAYENTE_2,\n\t\tCONOCIDO_COMO_CONTRAYENTE_2,\n\t\tDATE_LOADED\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Select1\nSelect1 sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tformat: 'parquet',\n\trowUrlColumn:'FILE_NAME',\n\tumask: 0022,\n\tpreCommands: [],\n\tpostCommands: [],\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> sink1"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}

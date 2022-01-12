@@ -1,0 +1,26 @@
+{
+	"SharepointAuthUri": {
+		"type": "string",
+		"value": "https://accounts.accesscontrol.windows.net/6e852f85-8b27-4c6b-8ee2-181db2a7f482/tokens/OAuth/2"
+	},
+	"SharepointAuthClientId": {
+		"type": "string",
+		"value": "e8b80854-c71f-493d-a41a-1cdea667d867@6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+	},
+	"SharepointAuthClientSecret": {
+		"type": "string",
+		"value": "2gAj0lk+sePRaZMY2y0MAZgyw1BYCobn5qCPiwhAPH8="
+	},
+	"SharepointOnlineUri": {
+		"type": "string",
+		"value": "https://bancopopularcr.sharepoint.com/sites/DATALAKEAI"
+	},
+	"storageConnectionString": {
+		"type": "string",
+		"value": "DefaultEndpointsProtocol"
+	},
+	"SharepointAuthResource": {
+		"type": "string",
+		"value": "00000003-0000-0ff1-ce00-000000000000/bancopopularcr.sharepoint.com[AT]6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+	}
+}

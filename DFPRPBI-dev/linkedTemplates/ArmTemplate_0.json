@@ -1,0 +1,3115 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		},
+		"AF_AuditoriaInterna_functionKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'functionKey' of 'AF_AuditoriaInterna'"
+		},
+		"DW_Popular_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DW_Popular'"
+		},
+		"DW_Popular_servicePrincipalKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'servicePrincipalKey' of 'DW_Popular'"
+		},
+		"SA_Popular_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'SA_Popular'"
+		},
+		"STARH_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'STARH'"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthUri_value": {
+			"type": "string",
+			"defaultValue": "https://accounts.accesscontrol.windows.net/6e852f85-8b27-4c6b-8ee2-181db2a7f482/tokens/OAuth/2"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthClientId_value": {
+			"type": "string",
+			"defaultValue": "e8b80854-c71f-493d-a41a-1cdea667d867@6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthClientSecret_value": {
+			"type": "string",
+			"defaultValue": "2gAj0lk+sePRaZMY2y0MAZgyw1BYCobn5qCPiwhAPH8="
+		},
+		"dataFactory_properties_globalParameters_SharepointOnlineUri_value": {
+			"type": "string",
+			"defaultValue": "https://bancopopularcr.sharepoint.com/sites/DATALAKEAI"
+		},
+		"dataFactory_properties_globalParameters_storageConnectionString_value": {
+			"type": "string",
+			"defaultValue": "DefaultEndpointsProtocol"
+		},
+		"dataFactory_properties_globalParameters_SharepointAuthResource_value": {
+			"type": "string",
+			"defaultValue": "00000003-0000-0ff1-ce00-000000000000/bancopopularcr.sharepoint.com[AT]6e852f85-8b27-4c6b-8ee2-181db2a7f482"
+		},
+		"dataFactory_location": {
+			"type": "string",
+			"defaultValue": "southcentralus"
+		},
+		"dataFactory_identity_type": {
+			"type": "string",
+			"defaultValue": "SystemAssigned"
+		},
+		"AF_AuditoriaInterna_properties_typeProperties_functionAppUrl": {
+			"type": "string",
+			"defaultValue": "https://auditoriainterna.azurewebsites.net"
+		},
+		"DW_Popular_properties_typeProperties_servicePrincipalId": {
+			"type": "string",
+			"defaultValue": "52818904-feb5-45c4-ad46-ab7f5a62c215"
+		},
+		"DW_Popular_properties_typeProperties_tenant": {
+			"type": "string",
+			"defaultValue": "2d4feb35-6363-4b6c-94e0-a60d04fa4f02"
+		},
+		"KV_Popular_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://AuditoriaInterna.vault.azure.net/"
+		},
+		"SA_Popular_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sersadev.dfs.core.windows.net"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[parameters('factoryName')]",
+			"type": "Microsoft.DataFactory/factories",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"globalParameters": {
+					"SharepointAuthUri": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_SharepointAuthUri_value')]"
+					},
+					"SharepointAuthClientId": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_SharepointAuthClientId_value')]"
+					},
+					"SharepointAuthClientSecret": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_SharepointAuthClientSecret_value')]"
+					},
+					"SharepointOnlineUri": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_SharepointOnlineUri_value')]"
+					},
+					"storageConnectionString": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_storageConnectionString_value')]"
+					},
+					"SharepointAuthResource": {
+						"type": "string",
+						"value": "[parameters('dataFactory_properties_globalParameters_SharepointAuthResource_value')]"
+					}
+				}
+			},
+			"dependsOn": [],
+			"location": "[parameters('dataFactory_location')]",
+			"identity": {
+				"type": "[parameters('dataFactory_identity_type')]"
+			}
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UPD_MODEL_Diario_1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Table Abogado",
+						"type": "WebHook",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Abogado",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Actividad Economica",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Abogado",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Actividad Económica",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Agencia",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Actividad Economica",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Agencia",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Agencia Desarrollo",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Agencia",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Agencia Desarrollo",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Agencia Saldo Critico",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Agencia Desarrollo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Agencia Saldo Crítico",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Analista",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Agencia Saldo Critico",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Analista",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Banca",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Analista",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Banca",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Beneficiario Captacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Banca",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Beneficiario Captación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Cartera Restringida",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Beneficiario Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Cartera Restringida",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Categoria Producto",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Cartera Restringida",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Categoría Producto",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Categoria Restriccion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Categoria Producto",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Categoría Restricción",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Cliente",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Categoria Restriccion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Cliente",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Cuenta Contable Captacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Cliente",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Cuenta Contable Captación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Destino",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Cuenta Contable Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Destino",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Ejecutivo BP Global",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Destino",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Ejecutivo BP Global",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Ejecutivo Desarrollo",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Ejecutivo BP Global",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Ejecutivo Desarrollo",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Estado Administracion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Ejecutivo Desarrollo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Estado Administración",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Estado Credito",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Estado Administracion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Estado Crédito",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Estado Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Apertura Producto",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Apertura Producto",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Avaluo",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Apertura Producto",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Avalúo",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Bloqueo Fondo",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Avaluo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Bloqueo Fondo",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Constitucion Captacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Bloqueo Fondo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Constitución Captación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Constitucion Credito",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Constitucion Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Constitución Crédito",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Emision Producto",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Constitucion Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Emisión Producto",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Formalizacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Emision Producto",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Formalización",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Meta Captacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Formalizacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Meta Captación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Meta Credito",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Meta Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Meta Crédito",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Proximo Pago",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Meta Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Próximo Pago",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Rige",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Proximo Pago",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Rige",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultima Acreditacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Rige",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Última Acreditacion",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultima Acreditacion Banco",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultima Acreditacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Última Acreditacion Banco",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultima Modificacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultima Acreditacion Banco",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Última Modificación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultimo Debito",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultima Modificacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Último Debito",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultimo Movimiento",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultimo Debito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Último Movimiento",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Ultimo Pago",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultimo Movimiento",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Último Pago",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Vencimiento",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Ultimo Pago",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Vencimiento",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table Fecha Vencimiento Final",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Vencimiento",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Fecha Vencimiento Final",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					},
+					{
+						"name": "Table FechaAutor",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Fecha Vencimiento Final",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "FechaAutor",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00",
+							"reportStatusOnCallBack": true
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Database": {
+						"type": "String",
+						"defaultValue": "AS_Popular"
+					},
+					"CredentialName": {
+						"type": "string",
+						"defaultValue": "SQLDW-Cred-cjavier"
+					},
+					"AnalysisService": {
+						"type": "string",
+						"defaultValue": "asazure://aspaaseastus2.asazure.windows.net/cppbiase01"
+					},
+					"TableRefreshURL": {
+						"type": "string",
+						"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=QdCdrVanUyTh281HG0SQfXNfO2UEQMnkn3st7guYuwo%3d"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-24T04:14:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UPD_MODEL_Diario_2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Table Moneda",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Meta Credito",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Moneda",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Meta Credito",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Meta Captacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Meta Crédito",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Meta Captacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Linea",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Meta Captación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table FechaCIC",
+						"type": "WebHook",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "FechaCIC",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Linea",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table FechaCIC",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Línea",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Operacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Moneda",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Operación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Origen",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Operacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Origen",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Patrono SICERE",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Origen",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Patrono SICERE",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Patrono SIPO",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Patrono SICERE",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Patrono SIPO",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Rango Atraso",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Patrono SIPO",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Rango Atraso",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Rango Cancelacion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Rango Atraso",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Rango Cancelación",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Rango Mora",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Rango Cancelacion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Rango Mora",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Responsable",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Rango Mora",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Responsable",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Sector Economico BCCR",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Responsable",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Sector Económico BCCR",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tamano",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Sector Economico BCCR",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tamano",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tipo Aval",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tamano",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tipo Aval",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tipo Cartera",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tipo Aval",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tipo Cartera",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tipo Deduccion",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tipo Cartera",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tipo Deduccion",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tipo Garantia",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tipo Deduccion",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tipo Garantía",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Tipo Resumen",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tipo Garantia",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Tipo Resumen",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Vehiculo",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Tipo Resumen",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Vehiculo",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					},
+					{
+						"name": "Table Vendedor",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Table Vehiculo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.TableRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Vendedor",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "00:10:00"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Database": {
+						"type": "string",
+						"defaultValue": "AS_Popular"
+					},
+					"CredentialName": {
+						"type": "string",
+						"defaultValue": "SQLDW-Cred-cjavier"
+					},
+					"AnalysisService": {
+						"type": "string",
+						"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+					},
+					"TableRefreshURL": {
+						"type": "string",
+						"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=QdCdrVanUyTh281HG0SQfXNfO2UEQMnkn3st7guYuwo%3d"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-24T04:14:11Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UPD_MODEL_Diario_3')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Partition Datos Segmenta Cliente Ultimo Cierre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Captacion Ultimo Cierre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Datos Segmenta Cliente",
+								"AnalysisServicesParititionName": "Datos Segmenta Cliente Ultimo Cierre",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Captacion Ultimo Cierre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Credito Ultimo Cierre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Captación",
+								"AnalysisServicesParititionName": "Captación Ultimo Cierre",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Credito Ultimo Cierre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Segmenta Cliente Ultimo Cierre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Crédito",
+								"AnalysisServicesParititionName": "Crédito Ultimo Cierre",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Segmenta Cliente Ultimo Cierre",
+						"type": "WebHook",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Segmenta Cliente",
+								"AnalysisServicesParititionName": "Segmenta Cliente Último Cierre",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00",
+							"reportStatusOnCallBack": false
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Database": {
+						"type": "string",
+						"defaultValue": "AS_Popular"
+					},
+					"CredentialName": {
+						"type": "string",
+						"defaultValue": "SQLDW-Cred-cjavier"
+					},
+					"AnalysisService": {
+						"type": "string",
+						"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+					},
+					"PartitionRefreshURL": {
+						"type": "string",
+						"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=dN5LvKfZP64EjHbGwueI%2beawl%2bXbzMdFwVEZ7eaBlPI%3d"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-24T04:14:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/UPD_MODEL_Trimestral')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Partition Datos Segmenta Cliente Cierre Trimestre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Captacion Cierre Trimestre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Datos Segmenta Cliente",
+								"AnalysisServicesParititionName": "@concat('Datos Segmenta ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Captacion Cierre Trimestre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Credito Cierre Trimestre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Captación",
+								"AnalysisServicesParititionName": "@concat('Captación ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Credito Cierre Trimestre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Partition Segmenta Cliente Cierre Trimestre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Crédito",
+								"AnalysisServicesParititionName": "@concat('Crédito ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00"
+						}
+					},
+					{
+						"name": "Partition Segmenta Cliente Cierre Trimestre",
+						"type": "WebHook",
+						"dependsOn": [
+							{
+								"activity": "Set Trimestre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@pipeline().parameters.PartitionRefreshURL",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"CredentialName": "@pipeline().parameters.CredentialName",
+								"AnalysisServicesDatabaseName": "@pipeline().parameters.Database",
+								"AnalysisServicesServer": "@pipeline().parameters.AnalysisService",
+								"AnalysisServicesTableName": "Segmenta Cliente",
+								"AnalysisServicesParititionName": "@concat('Segmenta Cliente ',variables('Trimestre'),' Trimestre ',variables('Anio'))",
+								"DatabaseRefreshType": "Full"
+							},
+							"timeout": "01:00:00",
+							"reportStatusOnCallBack": false
+						}
+					},
+					{
+						"name": "Set Trimestre",
+						"type": "Switch",
+						"dependsOn": [
+							{
+								"activity": "Set anio",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"on": {
+								"value": "@formatDateTime(utcnow(), 'MM')",
+								"type": "Expression"
+							},
+							"cases": [
+								{
+									"value": "01",
+									"activities": [
+										{
+											"name": "Set 1er Trimestre",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "01"
+											}
+										}
+									]
+								},
+								{
+									"value": "02",
+									"activities": [
+										{
+											"name": "Set 1er Trimestre_2",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "01"
+											}
+										}
+									]
+								},
+								{
+									"value": "03",
+									"activities": [
+										{
+											"name": "Set 1er Trimestre_3",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "01"
+											}
+										}
+									]
+								},
+								{
+									"value": "04",
+									"activities": [
+										{
+											"name": "Set 2do Trimestre",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "02"
+											}
+										}
+									]
+								},
+								{
+									"value": "05",
+									"activities": [
+										{
+											"name": "Set 2do Trimestre_2",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "02"
+											}
+										}
+									]
+								},
+								{
+									"value": "06",
+									"activities": [
+										{
+											"name": "Set 2do Trimestre_3",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "02"
+											}
+										}
+									]
+								},
+								{
+									"value": "07",
+									"activities": [
+										{
+											"name": "Set 3er Trimestre",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "03"
+											}
+										}
+									]
+								},
+								{
+									"value": "08",
+									"activities": [
+										{
+											"name": "Set 3er Trimestre_2",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "03"
+											}
+										}
+									]
+								},
+								{
+									"value": "09",
+									"activities": [
+										{
+											"name": "Set 3er Trimestre_3",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "03"
+											}
+										}
+									]
+								},
+								{
+									"value": "10",
+									"activities": [
+										{
+											"name": "Set 4to Trimestre",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "04"
+											}
+										}
+									]
+								},
+								{
+									"value": "11",
+									"activities": [
+										{
+											"name": "Set 4to Trimestre_2",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "04"
+											}
+										}
+									]
+								},
+								{
+									"value": "12",
+									"activities": [
+										{
+											"name": "Set 4to Trimestre_3",
+											"type": "SetVariable",
+											"dependsOn": [],
+											"userProperties": [],
+											"typeProperties": {
+												"variableName": "Trimestre",
+												"value": "04"
+											}
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"name": "Set anio",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Reanudar DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "Anio",
+							"value": {
+								"value": "@formatDateTime(utcnow(), 'yyyy')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Auth Azure Inicial",
+						"type": "WebActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/x-www-form-urlencoded",
+								"Accept": "*/*"
+							},
+							"body": {
+								"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Reanudar DB",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Auth Azure Inicial",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/resume?api-version=2021-02-01-preview')",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json",
+								"Authorization": {
+									"value": "@concat(activity('Auth Azure Inicial').output.token_type, ' ', activity('Auth Azure Inicial').output.access_token)",
+									"type": "Expression"
+								}
+							},
+							"body": {
+								"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Auth Azure",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Partition Datos Segmenta Cliente Cierre Trimestre",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://login.microsoftonline.com/',pipeline().parameters.TENANT_ID,'/oauth2/token')",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/x-www-form-urlencoded",
+								"Accept": "*/*"
+							},
+							"body": {
+								"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Pausar DB",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Auth Azure",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": {
+								"value": "@concat('https://management.azure.com/subscriptions/',pipeline().parameters.SUSCRIPTION_ID,'/resourceGroups/',pipeline().parameters.RESOURCEGROUP_NAME,'/providers/Microsoft.Sql/servers/',pipeline().parameters.SERVER_NAME,'/databases/',pipeline().parameters.DATABASE_NAME,'/pause?api-version=2021-02-01-preview')",
+								"type": "Expression"
+							},
+							"method": "POST",
+							"headers": {
+								"Content-Type": "application/json",
+								"Authorization": {
+									"value": "@concat(activity('Auth Azure').output.token_type, ' ', activity('Auth Azure').output.access_token)",
+									"type": "Expression"
+								}
+							},
+							"body": {
+								"value": "@concat('grant_type=client_credentials&client_id=',pipeline().parameters.CLIENT_ID,'&client_secret=',pipeline().parameters.CLIENT_SECRET,'&resource=https%3A%2F%2Fmanagement.azure.com%2F')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"Database": {
+						"type": "string",
+						"defaultValue": "AS_Popular"
+					},
+					"CredentialName": {
+						"type": "string",
+						"defaultValue": "SQLDW-Cred-cjavier"
+					},
+					"AnalysisService": {
+						"type": "string",
+						"defaultValue": "asazure://eastus.asazure.windows.net/serasdev"
+					},
+					"PartitionRefreshURL": {
+						"type": "string",
+						"defaultValue": "https://bee3ebe2-65cf-4f4e-a639-d675178aa0f2.webhook.eus.azure-automation.net/webhooks?token=dN5LvKfZP64EjHbGwueI%2beawl%2bXbzMdFwVEZ7eaBlPI%3d"
+					},
+					"SUSCRIPTION_ID": {
+						"type": "string",
+						"defaultValue": "51eba0b9-05dd-461f-828f-5eae2263a095"
+					},
+					"TENANT_ID": {
+						"type": "string",
+						"defaultValue": "2d4feb35-6363-4b6c-94e0-a60d04fa4f02"
+					},
+					"CLIENT_ID": {
+						"type": "string",
+						"defaultValue": "943fb614-373d-4cb8-8a30-34d893b84508"
+					},
+					"CLIENT_SECRET": {
+						"type": "string",
+						"defaultValue": "8bAD0iB.6Ut5ak~-p0w8Ph2_OGQxNCurP_"
+					},
+					"RESOURCEGROUP_NAME": {
+						"type": "string",
+						"defaultValue": "ProyectoBIRG"
+					},
+					"SERVER_NAME": {
+						"type": "string",
+						"defaultValue": "sersqldwdev"
+					},
+					"DATABASE_NAME": {
+						"type": "string",
+						"defaultValue": "SQLDWDEV"
+					}
+				},
+				"variables": {
+					"Trimestre": {
+						"type": "String"
+					},
+					"Anio": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-24T04:14:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AF_AuditoriaInterna')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureFunction",
+				"typeProperties": {
+					"functionAppUrl": "[parameters('AF_AuditoriaInterna_properties_typeProperties_functionAppUrl')]",
+					"functionKey": {
+						"type": "SecureString",
+						"value": "[parameters('AF_AuditoriaInterna_functionKey')]"
+					},
+					"authentication": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DW_Popular')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('DW_Popular_connectionString')]",
+					"servicePrincipalId": "[parameters('DW_Popular_properties_typeProperties_servicePrincipalId')]",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "[parameters('DW_Popular_servicePrincipalKey')]"
+					},
+					"tenant": "[parameters('DW_Popular_properties_typeProperties_tenant')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/KV_Popular')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('KV_Popular_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SA_Popular')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('SA_Popular_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('SA_Popular_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/STARH')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "Oracle",
+				"typeProperties": {
+					"connectionString": "[parameters('STARH_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CreditosTrigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Creditos update",
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 1,
+						"startTime": "2019-11-15T11:20:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IRPRPBI')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PopularLocal')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_EstadosFinancieros_DBCuentas_process_one')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CCDatabaseGenerator",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "CCDatabaseGenerator",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"',pipeline().parameters.startwith,'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+								"type": "Expression"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"filedate": {
+						"type": "string"
+					},
+					"startwith": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"counter1": {
+						"type": "String",
+						"defaultValue": "1"
+					}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-01T03:59:30Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AF_AuditoriaInterna')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_10_FACT_Rentabilidad')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_FACT_Rentabilidad",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_FACT_Rentabilidad]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:01Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_AUX_10_RentabilidadGastosAdministrativos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_Aux_GastosAdministrativos",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_AUX_RentabilidadGastosAdministrativos]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:01Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_AUX_1_RentabilidadDiferencialCambiario')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_Aux_RentabilidadDiferencialCambiario",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_AUX_RentabilidadDiferencialCambiario]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:02Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_AUX_2_RentabilidadTasaPonderada')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_Aux_TasaPonderada",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_AUX_RentabilidadTasaPonderada]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:01Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_AUX_3_RentabilidadTasaActiva')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_Aux_TasaActiva",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_AUX_RentabilidadTasaActiva]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:02Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SP_DWH_Carga_AUX_4_RentabilidadTasaPonderadaPasiva')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Carga_Aux_TasaPonderadaPasiva",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Carga_AUX_RentabilidadTasaPonderadaPasiva]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DW_Popular",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "Rentabilidad"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-23T18:10:04Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DW_Popular')]"
+			]
+		}
+	]
+}

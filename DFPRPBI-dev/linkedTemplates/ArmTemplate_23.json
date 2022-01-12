@@ -1,0 +1,5860 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "DFPRPBI-dev"
+		},
+		"SISBI_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SISBI'"
+		},
+		"SISBI_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SISBI'"
+		},
+		"SISBI_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "BPDCdes\\sortega"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceSIPOCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Auditoría de Procesos de Negocio - SIPO Diario.sipo_diario.csv",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "TIPO",
+						"type": "String"
+					},
+					{
+						"name": "ORIGEN",
+						"type": "String"
+					},
+					{
+						"name": "OPERACION",
+						"type": "String"
+					},
+					{
+						"name": "PATRONO",
+						"type": "String"
+					},
+					{
+						"name": "NCUOTA",
+						"type": "String"
+					},
+					{
+						"name": "CAJERO",
+						"type": "String"
+					},
+					{
+						"name": "CPTE",
+						"type": "String"
+					},
+					{
+						"name": "AGENCIAR",
+						"type": "String"
+					},
+					{
+						"name": "MONTO",
+						"type": "String"
+					},
+					{
+						"name": "IMORA",
+						"type": "String"
+					},
+					{
+						"name": "GASTOS",
+						"type": "String"
+					},
+					{
+						"name": "COSTAS",
+						"type": "String"
+					},
+					{
+						"name": "HONORARIOS",
+						"type": "String"
+					},
+					{
+						"name": "MULTAS",
+						"type": "String"
+					},
+					{
+						"name": "COMISION",
+						"type": "String"
+					},
+					{
+						"name": "OTRO0",
+						"type": "String"
+					},
+					{
+						"name": "OTRO1",
+						"type": "String"
+					},
+					{
+						"name": "OTRO2",
+						"type": "String"
+					},
+					{
+						"name": "SALDO",
+						"type": "String"
+					},
+					{
+						"name": "CUOTA",
+						"type": "String"
+					},
+					{
+						"name": "ICORR",
+						"type": "String"
+					},
+					{
+						"name": "IGAN",
+						"type": "String"
+					},
+					{
+						"name": "AMORT",
+						"type": "String"
+					},
+					{
+						"name": "PVIDA",
+						"type": "String"
+					},
+					{
+						"name": "PINC",
+						"type": "String"
+					},
+					{
+						"name": "PVEH",
+						"type": "String"
+					},
+					{
+						"name": "PGAN",
+						"type": "String"
+					},
+					{
+						"name": "EXCESO",
+						"type": "String"
+					},
+					{
+						"name": "FRACCION",
+						"type": "String"
+					},
+					{
+						"name": "REF",
+						"type": "String"
+					},
+					{
+						"name": "TERM",
+						"type": "String"
+					},
+					{
+						"name": "LIBR",
+						"type": "String"
+					},
+					{
+						"name": "CEDULA",
+						"type": "String"
+					},
+					{
+						"name": "TASA",
+						"type": "String"
+					},
+					{
+						"name": "CPAG",
+						"type": "String"
+					},
+					{
+						"name": "FCONST",
+						"type": "String"
+					},
+					{
+						"name": "FVENC",
+						"type": "String"
+					},
+					{
+						"name": "FAPLIC",
+						"type": "String"
+					},
+					{
+						"name": "FEFEC",
+						"type": "String"
+					},
+					{
+						"name": "FPLAN",
+						"type": "String"
+					},
+					{
+						"name": "FCALC",
+						"type": "String"
+					},
+					{
+						"name": "STATUS",
+						"type": "String"
+					},
+					{
+						"name": "CONSEC",
+						"type": "String"
+					},
+					{
+						"name": "PRINCIPAL",
+						"type": "String"
+					},
+					{
+						"name": "REMANENTE",
+						"type": "String"
+					},
+					{
+						"name": "NCUENTA",
+						"type": "String"
+					},
+					{
+						"name": "PLAZO",
+						"type": "String"
+					},
+					{
+						"name": "REFERENCIA",
+						"type": "String"
+					},
+					{
+						"name": "NOMBRE",
+						"type": "String"
+					},
+					{
+						"name": "ESTADO",
+						"type": "String"
+					},
+					{
+						"name": "AGECON",
+						"type": "String"
+					},
+					{
+						"name": "CTACRX",
+						"type": "String"
+					},
+					{
+						"name": "CTACRV",
+						"type": "String"
+					},
+					{
+						"name": "CTAPXC",
+						"type": "String"
+					},
+					{
+						"name": "CTAIGA",
+						"type": "String"
+					},
+					{
+						"name": "HORA",
+						"type": "String"
+					},
+					{
+						"name": "CLASIFICAC",
+						"type": "String"
+					},
+					{
+						"name": "STATUS206",
+						"type": "String"
+					},
+					{
+						"name": "LIBRETA",
+						"type": "String"
+					},
+					{
+						"name": "TIPO_TASA",
+						"type": "String"
+					},
+					{
+						"name": "GEN_PEND",
+						"type": "String"
+					},
+					{
+						"name": "COD_ARCH",
+						"type": "String"
+					},
+					{
+						"name": "SELF_AUX",
+						"type": "String"
+					},
+					{
+						"name": "MONEDA",
+						"type": "String"
+					},
+					{
+						"name": "RESTO",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SourceTransaccionesXML')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "Xml",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sharepoint"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BCO_CSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "BCO",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "D28OPERAC",
+						"type": "String"
+					},
+					{
+						"name": "D28CEDULA",
+						"type": "String"
+					},
+					{
+						"name": "D28NOMBRE",
+						"type": "String"
+					},
+					{
+						"name": "D28PRINCIP",
+						"type": "String"
+					},
+					{
+						"name": "D28SALDO",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOTA",
+						"type": "String"
+					},
+					{
+						"name": "D28INTERES",
+						"type": "String"
+					},
+					{
+						"name": "D28TASA",
+						"type": "String"
+					},
+					{
+						"name": "D28FECREAL",
+						"type": "String"
+					},
+					{
+						"name": "D28FECONST",
+						"type": "String"
+					},
+					{
+						"name": "D28FECULTP",
+						"type": "String"
+					},
+					{
+						"name": "D28PROXPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28FECULTM",
+						"type": "String"
+					},
+					{
+						"name": "D28DESTINO",
+						"type": "String"
+					},
+					{
+						"name": "D28PATRONO",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOTATR",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRASO",
+						"type": "String"
+					},
+					{
+						"name": "D28PLAZO",
+						"type": "String"
+					},
+					{
+						"name": "D28FREPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTADO",
+						"type": "String"
+					},
+					{
+						"name": "D28CATRIES",
+						"type": "String"
+					},
+					{
+						"name": "D28TPSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28CRITERI",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPGAR",
+						"type": "String"
+					},
+					{
+						"name": "D28PROVIN",
+						"type": "String"
+					},
+					{
+						"name": "D28CANTON",
+						"type": "String"
+					},
+					{
+						"name": "D28DISTRI",
+						"type": "String"
+					},
+					{
+						"name": "D28MESANO",
+						"type": "String"
+					},
+					{
+						"name": "D28POLIZAS",
+						"type": "String"
+					},
+					{
+						"name": "D28GRACIA",
+						"type": "String"
+					},
+					{
+						"name": "D28INT180",
+						"type": "String"
+					},
+					{
+						"name": "D28INT181",
+						"type": "String"
+					},
+					{
+						"name": "D28FRAC",
+						"type": "String"
+					},
+					{
+						"name": "D28EXCESO",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTADO2",
+						"type": "String"
+					},
+					{
+						"name": "D28BAJA",
+						"type": "String"
+					},
+					{
+						"name": "D28CELULA",
+						"type": "String"
+					},
+					{
+						"name": "D28CODIGO",
+						"type": "String"
+					},
+					{
+						"name": "D28CRITER2",
+						"type": "String"
+					},
+					{
+						"name": "D28ABOGADO",
+						"type": "String"
+					},
+					{
+						"name": "D28GRUPO",
+						"type": "String"
+					},
+					{
+						"name": "D28ENTREGA",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDSFN",
+						"type": "String"
+					},
+					{
+						"name": "D28OPERSFN",
+						"type": "String"
+					},
+					{
+						"name": "D28AVALUO",
+						"type": "String"
+					},
+					{
+						"name": "D28FAVALUO",
+						"type": "String"
+					},
+					{
+						"name": "D28PARTID",
+						"type": "String"
+					},
+					{
+						"name": "D28GESTOR",
+						"type": "String"
+					},
+					{
+						"name": "D28AHORRO",
+						"type": "String"
+					},
+					{
+						"name": "D28VENT",
+						"type": "String"
+					},
+					{
+						"name": "D28PVIDA",
+						"type": "String"
+					},
+					{
+						"name": "D28PINC",
+						"type": "String"
+					},
+					{
+						"name": "D28PVEH",
+						"type": "String"
+					},
+					{
+						"name": "D28PGAN",
+						"type": "String"
+					},
+					{
+						"name": "D28COMIS",
+						"type": "String"
+					},
+					{
+						"name": "D28SEGURO",
+						"type": "String"
+					},
+					{
+						"name": "D28ADIC",
+						"type": "String"
+					},
+					{
+						"name": "D28BONO",
+						"type": "String"
+					},
+					{
+						"name": "D28VENCID",
+						"type": "String"
+					},
+					{
+						"name": "D28REMAN",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTPIG",
+						"type": "String"
+					},
+					{
+						"name": "D28BANDA",
+						"type": "String"
+					},
+					{
+						"name": "D28ALFA",
+						"type": "String"
+					},
+					{
+						"name": "D28PONDER",
+						"type": "String"
+					},
+					{
+						"name": "D28VEND",
+						"type": "String"
+					},
+					{
+						"name": "D28FULTG",
+						"type": "String"
+					},
+					{
+						"name": "D28FLAG1",
+						"type": "String"
+					},
+					{
+						"name": "D28FLAG2",
+						"type": "String"
+					},
+					{
+						"name": "D28E2ANT",
+						"type": "String"
+					},
+					{
+						"name": "D28TPLUS",
+						"type": "String"
+					},
+					{
+						"name": "D28ASALARI",
+						"type": "String"
+					},
+					{
+						"name": "D28SINUSO",
+						"type": "String"
+					},
+					{
+						"name": "D28COMPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28DIASATP",
+						"type": "String"
+					},
+					{
+						"name": "D28DIASATY",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOATRP",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDAT",
+						"type": "String"
+					},
+					{
+						"name": "D28MITIGA",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA3",
+						"type": "String"
+					},
+					{
+						"name": "D28PCOMIS",
+						"type": "String"
+					},
+					{
+						"name": "D28CAPPAGO",
+						"type": "String"
+					},
+					{
+						"name": "D28HSTSUG",
+						"type": "String"
+					},
+					{
+						"name": "D28HSTBCO",
+						"type": "String"
+					},
+					{
+						"name": "D28GENDIV",
+						"type": "String"
+					},
+					{
+						"name": "D28CRSPEC",
+						"type": "String"
+					},
+					{
+						"name": "D28RECLAS",
+						"type": "String"
+					},
+					{
+						"name": "D28FECRIGE",
+						"type": "String"
+					},
+					{
+						"name": "D28TASARIG",
+						"type": "String"
+					},
+					{
+						"name": "D28MADRE",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAREF",
+						"type": "String"
+					},
+					{
+						"name": "D28AVAL",
+						"type": "String"
+					},
+					{
+						"name": "D28MULTIPL",
+						"type": "String"
+					},
+					{
+						"name": "D28AGSOLIC",
+						"type": "String"
+					},
+					{
+						"name": "D28SW24M",
+						"type": "String"
+					},
+					{
+						"name": "D28SWPLAN",
+						"type": "String"
+					},
+					{
+						"name": "D28SWPAS",
+						"type": "String"
+					},
+					{
+						"name": "D28SWVALE",
+						"type": "String"
+					},
+					{
+						"name": "D28SWVISA",
+						"type": "String"
+					},
+					{
+						"name": "D28TPVISA",
+						"type": "String"
+					},
+					{
+						"name": "D28SWO2",
+						"type": "String"
+					},
+					{
+						"name": "D28SWO3",
+						"type": "String"
+					},
+					{
+						"name": "D28SWEXON",
+						"type": "String"
+					},
+					{
+						"name": "D28SWAHPLA",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVENC",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVARR",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVEDA",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRASOR",
+						"type": "String"
+					},
+					{
+						"name": "D28IUC",
+						"type": "String"
+					},
+					{
+						"name": "D28FECNAC",
+						"type": "String"
+					},
+					{
+						"name": "D28SEXO",
+						"type": "String"
+					},
+					{
+						"name": "D28FECNAC2",
+						"type": "String"
+					},
+					{
+						"name": "D28TPENTID",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPSOCI",
+						"type": "String"
+					},
+					{
+						"name": "D28SECTOR2",
+						"type": "String"
+					},
+					{
+						"name": "D28DIMEX",
+						"type": "String"
+					},
+					{
+						"name": "D28FALLECI",
+						"type": "String"
+					},
+					{
+						"name": "D28PADRON",
+						"type": "String"
+					},
+					{
+						"name": "D28SUBSECT",
+						"type": "String"
+					},
+					{
+						"name": "D28TPCLIEN",
+						"type": "String"
+					},
+					{
+						"name": "D28TAMANO",
+						"type": "String"
+					},
+					{
+						"name": "D28ORIGEN",
+						"type": "String"
+					},
+					{
+						"name": "D28EJECT",
+						"type": "String"
+					},
+					{
+						"name": "D28EDAD",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAP",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAT",
+						"type": "String"
+					},
+					{
+						"name": "D28NGAS",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPOCVD",
+						"type": "String"
+					},
+					{
+						"name": "D28SBD",
+						"type": "String"
+					},
+					{
+						"name": "D28FPD",
+						"type": "String"
+					},
+					{
+						"name": "D28FRT",
+						"type": "String"
+					},
+					{
+						"name": "D28CPHSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28CATSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRMSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28IBAN",
+						"type": "String"
+					},
+					{
+						"name": "D28BASE",
+						"type": "String"
+					},
+					{
+						"name": "D28AGECNT",
+						"type": "String"
+					},
+					{
+						"name": "D28CTACNT",
+						"type": "String"
+					},
+					{
+						"name": "D28CTAPXC",
+						"type": "String"
+					},
+					{
+						"name": "D28CTAORD",
+						"type": "String"
+					},
+					{
+						"name": "D28PLANPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28OPESP9",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID1",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID2",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID3",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID4",
+						"type": "String"
+					},
+					{
+						"name": "D28TP",
+						"type": "String"
+					},
+					{
+						"name": "D28TP2",
+						"type": "String"
+					},
+					{
+						"name": "D28CODEUDO",
+						"type": "String"
+					},
+					{
+						"name": "F",
+						"type": "String"
+					},
+					{
+						"name": "F2",
+						"type": "String"
+					},
+					{
+						"name": "DIAS2",
+						"type": "String"
+					},
+					{
+						"name": "C2",
+						"type": "String"
+					},
+					{
+						"name": "FEC",
+						"type": "String"
+					},
+					{
+						"name": "DIAULTPAG",
+						"type": "String"
+					},
+					{
+						"name": "CR195",
+						"type": "String"
+					},
+					{
+						"name": "CA195",
+						"type": "String"
+					},
+					{
+						"name": "MESES",
+						"type": "String"
+					},
+					{
+						"name": "INT",
+						"type": "String"
+					},
+					{
+						"name": "SALDOT",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA4",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTCONT",
+						"type": "String"
+					},
+					{
+						"name": "GRUPO",
+						"type": "String"
+					},
+					{
+						"name": "MITIG",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTGEND",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTGENC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSCD",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSCC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSDD",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSDC",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRAMAX",
+						"type": "String"
+					},
+					{
+						"name": "SA",
+						"type": "String"
+					},
+					{
+						"name": "D28MITDIR",
+						"type": "String"
+					},
+					{
+						"name": "D28MITCON",
+						"type": "String"
+					},
+					{
+						"name": "PORC",
+						"type": "String"
+					},
+					{
+						"name": "LC",
+						"type": "String"
+					},
+					{
+						"name": "MONEDA",
+						"type": "String"
+					},
+					{
+						"name": "D28PORC2",
+						"type": "String"
+					},
+					{
+						"name": "D28HONO",
+						"type": "String"
+					},
+					{
+						"name": "D28POLINC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA5",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA6",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA7",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA8",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA9",
+						"type": "String"
+					},
+					{
+						"name": "D28HIJAS",
+						"type": "String"
+					},
+					{
+						"name": "F3",
+						"type": "String"
+					},
+					{
+						"name": "CARTERA",
+						"type": "String"
+					},
+					{
+						"name": "D28SECTOR",
+						"type": "String"
+					},
+					{
+						"name": "FX4",
+						"type": "String"
+					},
+					{
+						"name": "FX5",
+						"type": "String"
+					},
+					{
+						"name": "FXF",
+						"type": "String"
+					},
+					{
+						"name": "CAR",
+						"type": "String"
+					},
+					{
+						"name": "OXCN",
+						"type": "String"
+					},
+					{
+						"name": "BAN",
+						"type": "String"
+					},
+					{
+						"name": "TCH",
+						"type": "String"
+					},
+					{
+						"name": "FTIEMPO",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAAC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAAN",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISADI",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPAN",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPAC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPDI",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISARC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISASG",
+						"type": "String"
+					},
+					{
+						"name": "CONTAGIO",
+						"type": "String"
+					},
+					{
+						"name": "CEDCODE",
+						"type": "String"
+					},
+					{
+						"name": "CEDCODM",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDATC",
+						"type": "String"
+					},
+					{
+						"name": "GRUPO1C",
+						"type": "String"
+					},
+					{
+						"name": "D28CATANT",
+						"type": "String"
+					},
+					{
+						"name": "NEW105",
+						"type": "String"
+					},
+					{
+						"name": "TIPOMIT",
+						"type": "String"
+					},
+					{
+						"name": "AVALUOORG",
+						"type": "String"
+					},
+					{
+						"name": "PCCSDORG",
+						"type": "String"
+					},
+					{
+						"name": "PCCSDREAL",
+						"type": "String"
+					},
+					{
+						"name": "CODGENERAD",
+						"type": "String"
+					},
+					{
+						"name": "RIESGOCAMB",
+						"type": "String"
+					},
+					{
+						"name": "TIPOINGRES",
+						"type": "String"
+					},
+					{
+						"name": "MONEDAINGR",
+						"type": "String"
+					},
+					{
+						"name": "MONTORENTA",
+						"type": "String"
+					},
+					{
+						"name": "FECHARENTA",
+						"type": "String"
+					},
+					{
+						"name": "DECLARAREN",
+						"type": "String"
+					},
+					{
+						"name": "PCESTADIC1",
+						"type": "String"
+					},
+					{
+						"name": "PCESTADIC2",
+						"type": "String"
+					},
+					{
+						"name": "CSDCM",
+						"type": "String"
+					},
+					{
+						"name": "CSDCNS",
+						"type": "String"
+					},
+					{
+						"name": "SBRUTO",
+						"type": "String"
+					},
+					{
+						"name": "PONGSPD",
+						"type": "String"
+					},
+					{
+						"name": "PONGSPC",
+						"type": "String"
+					},
+					{
+						"name": "PONNGSPD",
+						"type": "String"
+					},
+					{
+						"name": "PONNGSPC",
+						"type": "String"
+					},
+					{
+						"name": "INDLTV",
+						"type": "String"
+					},
+					{
+						"name": "INDLTVD",
+						"type": "String"
+					},
+					{
+						"name": "INDLTVC",
+						"type": "String"
+					},
+					{
+						"name": "VISA",
+						"type": "String"
+					},
+					{
+						"name": "RECNOVISA",
+						"type": "String"
+					},
+					{
+						"name": "SOLICITUD",
+						"type": "String"
+					},
+					{
+						"name": "GND0",
+						"type": "String"
+					},
+					{
+						"name": "GNC0",
+						"type": "String"
+					},
+					{
+						"name": "GND1",
+						"type": "String"
+					},
+					{
+						"name": "GND2",
+						"type": "String"
+					},
+					{
+						"name": "GNC1",
+						"type": "String"
+					},
+					{
+						"name": "GNC2",
+						"type": "String"
+					},
+					{
+						"name": "TPSECTORPR",
+						"type": "String"
+					},
+					{
+						"name": "TASAANT",
+						"type": "String"
+					},
+					{
+						"name": "VTI",
+						"type": "String"
+					},
+					{
+						"name": "ST",
+						"type": "String"
+					},
+					{
+						"name": "TPBENEF",
+						"type": "String"
+					},
+					{
+						"name": "PLZRESID",
+						"type": "String"
+					},
+					{
+						"name": "PCPLZADIC",
+						"type": "String"
+					},
+					{
+						"name": "MM",
+						"type": "String"
+					},
+					{
+						"name": "IUC",
+						"type": "String"
+					},
+					{
+						"name": "LEGAL",
+						"type": "String"
+					},
+					{
+						"name": "FECVENCO",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Source_BCO_CSV_Mensual')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SA_Popular",
+					"type": "LinkedServiceReference"
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "bcomensual",
+						"fileSystem": "sharepoint"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "D28OPERAC",
+						"type": "String"
+					},
+					{
+						"name": "D28CEDULA",
+						"type": "String"
+					},
+					{
+						"name": "D28NOMBRE",
+						"type": "String"
+					},
+					{
+						"name": "D28PRINCIP",
+						"type": "String"
+					},
+					{
+						"name": "D28SALDO",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOTA",
+						"type": "String"
+					},
+					{
+						"name": "D28INTERES",
+						"type": "String"
+					},
+					{
+						"name": "D28TASA",
+						"type": "String"
+					},
+					{
+						"name": "D28FECREAL",
+						"type": "String"
+					},
+					{
+						"name": "D28FECONST",
+						"type": "String"
+					},
+					{
+						"name": "D28FECULTP",
+						"type": "String"
+					},
+					{
+						"name": "D28PROXPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28FECULTM",
+						"type": "String"
+					},
+					{
+						"name": "D28DESTINO",
+						"type": "String"
+					},
+					{
+						"name": "D28PATRONO",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOTATR",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRASO",
+						"type": "String"
+					},
+					{
+						"name": "D28PLAZO",
+						"type": "String"
+					},
+					{
+						"name": "D28FREPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTADO",
+						"type": "String"
+					},
+					{
+						"name": "D28CATRIES",
+						"type": "String"
+					},
+					{
+						"name": "D28TPSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28CRITERI",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPGAR",
+						"type": "String"
+					},
+					{
+						"name": "D28PROVIN",
+						"type": "String"
+					},
+					{
+						"name": "D28CANTON",
+						"type": "String"
+					},
+					{
+						"name": "D28DISTRI",
+						"type": "String"
+					},
+					{
+						"name": "D28MESANO",
+						"type": "String"
+					},
+					{
+						"name": "D28POLIZAS",
+						"type": "String"
+					},
+					{
+						"name": "D28GRACIA",
+						"type": "String"
+					},
+					{
+						"name": "D28INT180",
+						"type": "String"
+					},
+					{
+						"name": "D28INT181",
+						"type": "String"
+					},
+					{
+						"name": "D28FRAC",
+						"type": "String"
+					},
+					{
+						"name": "D28EXCESO",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTADO2",
+						"type": "String"
+					},
+					{
+						"name": "D28BAJA",
+						"type": "String"
+					},
+					{
+						"name": "D28CELULA",
+						"type": "String"
+					},
+					{
+						"name": "D28CODIGO",
+						"type": "String"
+					},
+					{
+						"name": "D28CRITER2",
+						"type": "String"
+					},
+					{
+						"name": "D28ABOGADO",
+						"type": "String"
+					},
+					{
+						"name": "D28GRUPO",
+						"type": "String"
+					},
+					{
+						"name": "D28ENTREGA",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDSFN",
+						"type": "String"
+					},
+					{
+						"name": "D28OPERSFN",
+						"type": "String"
+					},
+					{
+						"name": "D28AVALUO",
+						"type": "String"
+					},
+					{
+						"name": "D28FAVALUO",
+						"type": "String"
+					},
+					{
+						"name": "D28PARTID",
+						"type": "String"
+					},
+					{
+						"name": "D28GESTOR",
+						"type": "String"
+					},
+					{
+						"name": "D28AHORRO",
+						"type": "String"
+					},
+					{
+						"name": "D28VENT",
+						"type": "String"
+					},
+					{
+						"name": "D28PVIDA",
+						"type": "String"
+					},
+					{
+						"name": "D28PINC",
+						"type": "String"
+					},
+					{
+						"name": "D28PVEH",
+						"type": "String"
+					},
+					{
+						"name": "D28PGAN",
+						"type": "String"
+					},
+					{
+						"name": "D28COMIS",
+						"type": "String"
+					},
+					{
+						"name": "D28SEGURO",
+						"type": "String"
+					},
+					{
+						"name": "D28ADIC",
+						"type": "String"
+					},
+					{
+						"name": "D28BONO",
+						"type": "String"
+					},
+					{
+						"name": "D28VENCID",
+						"type": "String"
+					},
+					{
+						"name": "D28REMAN",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTPIG",
+						"type": "String"
+					},
+					{
+						"name": "D28BANDA",
+						"type": "String"
+					},
+					{
+						"name": "D28ALFA",
+						"type": "String"
+					},
+					{
+						"name": "D28PONDER",
+						"type": "String"
+					},
+					{
+						"name": "D28VEND",
+						"type": "String"
+					},
+					{
+						"name": "D28FULTG",
+						"type": "String"
+					},
+					{
+						"name": "D28FLAG1",
+						"type": "String"
+					},
+					{
+						"name": "D28FLAG2",
+						"type": "String"
+					},
+					{
+						"name": "D28E2ANT",
+						"type": "String"
+					},
+					{
+						"name": "D28TPLUS",
+						"type": "String"
+					},
+					{
+						"name": "D28ASALARI",
+						"type": "String"
+					},
+					{
+						"name": "D28SINUSO",
+						"type": "String"
+					},
+					{
+						"name": "D28COMPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28DIASATP",
+						"type": "String"
+					},
+					{
+						"name": "D28DIASATY",
+						"type": "String"
+					},
+					{
+						"name": "D28CUOATRP",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDAT",
+						"type": "String"
+					},
+					{
+						"name": "D28MITIGA",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA3",
+						"type": "String"
+					},
+					{
+						"name": "D28PCOMIS",
+						"type": "String"
+					},
+					{
+						"name": "D28CAPPAGO",
+						"type": "String"
+					},
+					{
+						"name": "D28HSTSUG",
+						"type": "String"
+					},
+					{
+						"name": "D28HSTBCO",
+						"type": "String"
+					},
+					{
+						"name": "D28GENDIV",
+						"type": "String"
+					},
+					{
+						"name": "D28CRSPEC",
+						"type": "String"
+					},
+					{
+						"name": "D28RECLAS",
+						"type": "String"
+					},
+					{
+						"name": "D28FECRIGE",
+						"type": "String"
+					},
+					{
+						"name": "D28TASARIG",
+						"type": "String"
+					},
+					{
+						"name": "D28MADRE",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAREF",
+						"type": "String"
+					},
+					{
+						"name": "D28AVAL",
+						"type": "String"
+					},
+					{
+						"name": "D28MULTIPL",
+						"type": "String"
+					},
+					{
+						"name": "D28AGSOLIC",
+						"type": "String"
+					},
+					{
+						"name": "D28SW24M",
+						"type": "String"
+					},
+					{
+						"name": "D28SWPLAN",
+						"type": "String"
+					},
+					{
+						"name": "D28SWPAS",
+						"type": "String"
+					},
+					{
+						"name": "D28SWVALE",
+						"type": "String"
+					},
+					{
+						"name": "D28SWVISA",
+						"type": "String"
+					},
+					{
+						"name": "D28TPVISA",
+						"type": "String"
+					},
+					{
+						"name": "D28SWO2",
+						"type": "String"
+					},
+					{
+						"name": "D28SWO3",
+						"type": "String"
+					},
+					{
+						"name": "D28SWEXON",
+						"type": "String"
+					},
+					{
+						"name": "D28SWAHPLA",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVENC",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVARR",
+						"type": "String"
+					},
+					{
+						"name": "D28FECVEDA",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRASOR",
+						"type": "String"
+					},
+					{
+						"name": "D28IUC",
+						"type": "String"
+					},
+					{
+						"name": "D28FECNAC",
+						"type": "String"
+					},
+					{
+						"name": "D28SEXO",
+						"type": "String"
+					},
+					{
+						"name": "D28FECNAC2",
+						"type": "String"
+					},
+					{
+						"name": "D28TPENTID",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPSOCI",
+						"type": "String"
+					},
+					{
+						"name": "D28SECTOR2",
+						"type": "String"
+					},
+					{
+						"name": "D28DIMEX",
+						"type": "String"
+					},
+					{
+						"name": "D28FALLECI",
+						"type": "String"
+					},
+					{
+						"name": "D28PADRON",
+						"type": "String"
+					},
+					{
+						"name": "D28SUBSECT",
+						"type": "String"
+					},
+					{
+						"name": "D28TPCLIEN",
+						"type": "String"
+					},
+					{
+						"name": "D28TAMANO",
+						"type": "String"
+					},
+					{
+						"name": "D28ORIGEN",
+						"type": "String"
+					},
+					{
+						"name": "D28EJECT",
+						"type": "String"
+					},
+					{
+						"name": "D28EDAD",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAP",
+						"type": "String"
+					},
+					{
+						"name": "D28TASAT",
+						"type": "String"
+					},
+					{
+						"name": "D28NGAS",
+						"type": "String"
+					},
+					{
+						"name": "D28TIPOCVD",
+						"type": "String"
+					},
+					{
+						"name": "D28SBD",
+						"type": "String"
+					},
+					{
+						"name": "D28FPD",
+						"type": "String"
+					},
+					{
+						"name": "D28FRT",
+						"type": "String"
+					},
+					{
+						"name": "D28CPHSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28CATSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRMSBD",
+						"type": "String"
+					},
+					{
+						"name": "D28IBAN",
+						"type": "String"
+					},
+					{
+						"name": "D28BASE",
+						"type": "String"
+					},
+					{
+						"name": "D28AGECNT",
+						"type": "String"
+					},
+					{
+						"name": "D28CTACNT",
+						"type": "String"
+					},
+					{
+						"name": "D28CTAPXC",
+						"type": "String"
+					},
+					{
+						"name": "D28CTAORD",
+						"type": "String"
+					},
+					{
+						"name": "D28PLANPAG",
+						"type": "String"
+					},
+					{
+						"name": "D28OPESP9",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID1",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID2",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID3",
+						"type": "String"
+					},
+					{
+						"name": "D28COVID4",
+						"type": "String"
+					},
+					{
+						"name": "D28TP",
+						"type": "String"
+					},
+					{
+						"name": "D28TP2",
+						"type": "String"
+					},
+					{
+						"name": "D28CODEUDO",
+						"type": "String"
+					},
+					{
+						"name": "F",
+						"type": "String"
+					},
+					{
+						"name": "F2",
+						"type": "String"
+					},
+					{
+						"name": "DIAS2",
+						"type": "String"
+					},
+					{
+						"name": "C2",
+						"type": "String"
+					},
+					{
+						"name": "FEC",
+						"type": "String"
+					},
+					{
+						"name": "DIAULTPAG",
+						"type": "String"
+					},
+					{
+						"name": "CR195",
+						"type": "String"
+					},
+					{
+						"name": "CA195",
+						"type": "String"
+					},
+					{
+						"name": "MESES",
+						"type": "String"
+					},
+					{
+						"name": "INT",
+						"type": "String"
+					},
+					{
+						"name": "SALDOT",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA4",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTCONT",
+						"type": "String"
+					},
+					{
+						"name": "GRUPO",
+						"type": "String"
+					},
+					{
+						"name": "MITIG",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTGEND",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTGENC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSCD",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSCC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSDD",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTSDC",
+						"type": "String"
+					},
+					{
+						"name": "D28ATRAMAX",
+						"type": "String"
+					},
+					{
+						"name": "SA",
+						"type": "String"
+					},
+					{
+						"name": "D28MITDIR",
+						"type": "String"
+					},
+					{
+						"name": "D28MITCON",
+						"type": "String"
+					},
+					{
+						"name": "PORC",
+						"type": "String"
+					},
+					{
+						"name": "LC",
+						"type": "String"
+					},
+					{
+						"name": "MONEDA",
+						"type": "String"
+					},
+					{
+						"name": "D28PORC2",
+						"type": "String"
+					},
+					{
+						"name": "D28HONO",
+						"type": "String"
+					},
+					{
+						"name": "D28POLINC",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA5",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA6",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA7",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA8",
+						"type": "String"
+					},
+					{
+						"name": "D28ESTIMA9",
+						"type": "String"
+					},
+					{
+						"name": "D28HIJAS",
+						"type": "String"
+					},
+					{
+						"name": "F3",
+						"type": "String"
+					},
+					{
+						"name": "CARTERA",
+						"type": "String"
+					},
+					{
+						"name": "D28SECTOR",
+						"type": "String"
+					},
+					{
+						"name": "FX4",
+						"type": "String"
+					},
+					{
+						"name": "FX5",
+						"type": "String"
+					},
+					{
+						"name": "FXF",
+						"type": "String"
+					},
+					{
+						"name": "CAR",
+						"type": "String"
+					},
+					{
+						"name": "OXCN",
+						"type": "String"
+					},
+					{
+						"name": "BAN",
+						"type": "String"
+					},
+					{
+						"name": "TCH",
+						"type": "String"
+					},
+					{
+						"name": "FTIEMPO",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAAC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAAN",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISADI",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPAN",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPAC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISAPDI",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISARC",
+						"type": "String"
+					},
+					{
+						"name": "LIMVISASG",
+						"type": "String"
+					},
+					{
+						"name": "CONTAGIO",
+						"type": "String"
+					},
+					{
+						"name": "CEDCODE",
+						"type": "String"
+					},
+					{
+						"name": "CEDCODM",
+						"type": "String"
+					},
+					{
+						"name": "D28DEUDATC",
+						"type": "String"
+					},
+					{
+						"name": "GRUPO1C",
+						"type": "String"
+					},
+					{
+						"name": "D28CATANT",
+						"type": "String"
+					},
+					{
+						"name": "NEW105",
+						"type": "String"
+					},
+					{
+						"name": "TIPOMIT",
+						"type": "String"
+					},
+					{
+						"name": "AVALUOORG",
+						"type": "String"
+					},
+					{
+						"name": "PCCSDORG",
+						"type": "String"
+					},
+					{
+						"name": "PCCSDREAL",
+						"type": "String"
+					},
+					{
+						"name": "CODGENERAD",
+						"type": "String"
+					},
+					{
+						"name": "RIESGOCAMB",
+						"type": "String"
+					},
+					{
+						"name": "TIPOINGRES",
+						"type": "String"
+					},
+					{
+						"name": "MONEDAINGR",
+						"type": "String"
+					},
+					{
+						"name": "MONTORENTA",
+						"type": "String"
+					},
+					{
+						"name": "FECHARENTA",
+						"type": "String"
+					},
+					{
+						"name": "DECLARAREN",
+						"type": "String"
+					},
+					{
+						"name": "PCESTADIC1",
+						"type": "String"
+					},
+					{
+						"name": "PCESTADIC2",
+						"type": "String"
+					},
+					{
+						"name": "CSDCM",
+						"type": "String"
+					},
+					{
+						"name": "CSDCNS",
+						"type": "String"
+					},
+					{
+						"name": "SBRUTO",
+						"type": "String"
+					},
+					{
+						"name": "PONGSPD",
+						"type": "String"
+					},
+					{
+						"name": "PONGSPC",
+						"type": "String"
+					},
+					{
+						"name": "PONNGSPD",
+						"type": "String"
+					},
+					{
+						"name": "PONNGSPC",
+						"type": "String"
+					},
+					{
+						"name": "INDLTV",
+						"type": "String"
+					},
+					{
+						"name": "INDLTVD",
+						"type": "String"
+					},
+					{
+						"name": "INDLTVC",
+						"type": "String"
+					},
+					{
+						"name": "VISA",
+						"type": "String"
+					},
+					{
+						"name": "RECNOVISA",
+						"type": "String"
+					},
+					{
+						"name": "SOLICITUD",
+						"type": "String"
+					},
+					{
+						"name": "GND0",
+						"type": "String"
+					},
+					{
+						"name": "GNC0",
+						"type": "String"
+					},
+					{
+						"name": "GND1",
+						"type": "String"
+					},
+					{
+						"name": "GND2",
+						"type": "String"
+					},
+					{
+						"name": "GNC1",
+						"type": "String"
+					},
+					{
+						"name": "GNC2",
+						"type": "String"
+					},
+					{
+						"name": "TPSECTORPR",
+						"type": "String"
+					},
+					{
+						"name": "TASAANT",
+						"type": "String"
+					},
+					{
+						"name": "VTI",
+						"type": "String"
+					},
+					{
+						"name": "ST",
+						"type": "String"
+					},
+					{
+						"name": "TPBENEF",
+						"type": "String"
+					},
+					{
+						"name": "PLZRESID",
+						"type": "String"
+					},
+					{
+						"name": "PCPLZADIC",
+						"type": "String"
+					},
+					{
+						"name": "MM",
+						"type": "String"
+					},
+					{
+						"name": "IUC",
+						"type": "String"
+					},
+					{
+						"name": "LEGAL",
+						"type": "String"
+					},
+					{
+						"name": "FECVENCO",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SISBI')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SISBI_connectionString')]",
+					"userName": "[parameters('SISBI_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SISBI_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "IRPRPBI",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CD_ConexionBP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BI_ConexionBP",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "conexionbp",
+									"wildcardFileName": "*.xlsx",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ExcelConexionBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetConexionBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteExcel",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "BI_ConexionBP",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ExcelConexionBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.xlsx",
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-26T17:38:27Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CD_ListaOficinas')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BI_ListaOficinas",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "listaoficinas",
+									"wildcardFileName": "*.xlsx",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "OFICINA_NOMBRE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OFICINA_NOMBRE",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "OFICINA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OFICINA",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "DIVISION TEMPORAL",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DIVISION_TEMPORAL",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "SUCURSAL",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SUCURSAL",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ExcelListaOficinas",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetListaOficina",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "ExcelListaOficinas",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "BI_ListaOficinas",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ExcelListaOficinas",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"logStorageSettings": {
+								"linkedServiceName": {
+									"referenceName": "SA_Popular",
+									"type": "LinkedServiceReference"
+								}
+							},
+							"enableLogging": true,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.xlsx",
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-26T17:04:22Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CD_PuntoBP')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "BI_PuntoBP",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "ExcelSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "puntobp",
+									"wildcardFileName": "*.xlsx",
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "MergeFiles"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ExcelPuntoBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ParquetPuntoBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteExcel",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "BI_PuntoBP",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "ExcelPuntoBP",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.xlsx",
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-08-24T03:15:45Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BCO_Diario')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BCO_Carga_DLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "BCO",
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FILEPATH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FILEPATH",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28OPERAC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OPERACION"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CEDULA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CEDULA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28NOMBRE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NOMBRE"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PRINCIP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PRINCIP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SALDO",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SALDO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CUOTA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CUOTA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INTERES",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INTERES"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECREAL",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECREAL"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECONST",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECONST"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECULTP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECULTP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PROXPAG",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PROXPAG"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECULTM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECULTM"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DESTINO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DESTINO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PATRONO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PATRONO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CUOTATR",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CUOTATR"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ATRASO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ATRASO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PLAZO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PLAZO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FREPAG",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FREPAG"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ESTADO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ESTADO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CATRIES",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CATRIES"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TPSBD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TPSBD"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CRITERI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CRITERI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TIPGAR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TIPGAR"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PROVIN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PROVIN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CANTON",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CANTON"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DISTRI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DISTRI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28MESANO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MESANO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28POLIZAS",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "POLIZAS"
+										}
+									},
+									{
+										"source": {
+											"name": "D28GRACIA",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "GRACIA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INT180",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INT180"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INT181",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INT181"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FRAC",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FRAC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28EXCESO",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EXCESO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ESTADO2",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ESTADO2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28BAJA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BAJA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CELULA",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CELULA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CODIGO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CODIGO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CRITER2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CRITER2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ABOGADO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ABOGADO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28GRUPO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "GRUPO",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DEUDSFN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DEUDSFN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28OPERSFN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OPERSFN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PVIDA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PVIDA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DIASATY",
+											"type": "Int64",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DIASATY"
+										}
+									},
+									{
+										"source": {
+											"name": "D28IUC",
+											"type": "Int64",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "IUC",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECNAC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECNAC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SEXO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SEXO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECNAC2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECNAC2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FALLECI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FALLECI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PADRON",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PADRON"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SUBSECT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SUBSECT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28EDAD",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EDAD"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASAP",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASAP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASAT",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASAT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28NGAS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NGAS"
+										}
+									},
+									{
+										"source": {
+											"name": "D28IBAN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "IBAN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28BASE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BASE"
+										}
+									},
+									{
+										"source": {
+											"name": "D28AGECNT",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AGECNT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTACNT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTACNT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTAPXC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTAPXC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTAORD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTAORD"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "ddMMyyyy"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Source_BCO_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Destination_BCO_Parquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "Delete",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "BCO"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Delete",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_BCO_Carga_DLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Source_BCO_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.csv",
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Source_BCO_CSV')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BCO_Mensual')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BCO_Carga_DLS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "bcomensual",
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "FILEPATH",
+											"type": "String"
+										},
+										"sink": {
+											"name": "FILEPATH",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28OPERAC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OPERACION"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CEDULA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CEDULA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28NOMBRE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NOMBRE"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PRINCIP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PRINCIP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SALDO",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SALDO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CUOTA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CUOTA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INTERES",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INTERES"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECREAL",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECREAL"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECONST",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECONST"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECULTP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECULTP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PROXPAG",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PROXPAG"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECULTM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECULTM"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DESTINO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DESTINO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PATRONO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PATRONO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CUOTATR",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CUOTATR"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ATRASO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ATRASO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PLAZO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PLAZO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FREPAG",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FREPAG"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ESTADO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ESTADO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CATRIES",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CATRIES"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TPSBD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TPSBD"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CRITERI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CRITERI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TIPGAR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TIPGAR"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PROVIN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PROVIN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CANTON",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CANTON"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DISTRI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DISTRI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28MESANO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "MESANO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28POLIZAS",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "POLIZAS"
+										}
+									},
+									{
+										"source": {
+											"name": "D28GRACIA",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "GRACIA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INT180",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INT180"
+										}
+									},
+									{
+										"source": {
+											"name": "D28INT181",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INT181"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FRAC",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FRAC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28EXCESO",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EXCESO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ESTADO2",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ESTADO2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28BAJA",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BAJA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CELULA",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CELULA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CODIGO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CODIGO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CRITER2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CRITER2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28ABOGADO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ABOGADO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28GRUPO",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "GRUPO",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DEUDSFN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DEUDSFN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28OPERSFN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OPERSFN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PVIDA",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PVIDA"
+										}
+									},
+									{
+										"source": {
+											"name": "D28DIASATY",
+											"type": "Int64",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DIASATY"
+										}
+									},
+									{
+										"source": {
+											"name": "D28IUC",
+											"type": "Int64",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "IUC",
+											"type": "String",
+											"physicalType": "UTF8"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECNAC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECNAC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SEXO",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SEXO"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FECNAC2",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FECNAC2"
+										}
+									},
+									{
+										"source": {
+											"name": "D28FALLECI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "FALLECI"
+										}
+									},
+									{
+										"source": {
+											"name": "D28PADRON",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PADRON"
+										}
+									},
+									{
+										"source": {
+											"name": "D28SUBSECT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SUBSECT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28EDAD",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "EDAD"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASAP",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASAP"
+										}
+									},
+									{
+										"source": {
+											"name": "D28TASAT",
+											"type": "Decimal",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "TASAT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28NGAS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NGAS"
+										}
+									},
+									{
+										"source": {
+											"name": "D28IBAN",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "IBAN"
+										}
+									},
+									{
+										"source": {
+											"name": "D28BASE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BASE"
+										}
+									},
+									{
+										"source": {
+											"name": "D28AGECNT",
+											"type": "Int32",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "AGECNT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTACNT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTACNT"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTAPXC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTAPXC"
+										}
+									},
+									{
+										"source": {
+											"name": "D28CTAORD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CTAORD"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false,
+									"dateTimeFormat": "ddMMyyyy"
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Source_BCO_CSV_Mensual",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Destination_BCO_Mensual_Parquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteBCOSourceCSV",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_BCO_Carga_DLS",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Source_BCO_CSV_Mensual",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*.csv",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteBCOSourceCSV",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "BCO Mensual"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Source_BCO_CSV_Mensual')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BI_Clientes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BI_CLIENTES",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "sisbi//dbo.BI_Clientes.parquet"
+							},
+							{
+								"name": "Destination",
+								"value": "sisbi/clientes/BI_Clientes.parquet"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceBIClientes",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationBIClientesParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BI_MaestroOpe')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BI_MaestroOpe",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "sisbi//dbo.BI_MaestroOpe.parquet"
+							},
+							{
+								"name": "Destination",
+								"value": "sisbi/maestrooperaciones/BI_MaestroOpe"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@utcnow()",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceBIMaestroOpe",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationBIMaestroOpe",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:11Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BI_OperacionesDiarias')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BI_OperacionesDiarias",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "sisbi//dbo.BI_OperacionesDiarias.parquet"
+							},
+							{
+								"name": "Destination",
+								"value": "sisbi/operacionesdiarias/BI_OperacionesDiarias"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@utcnow()",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceBIOperacionesDiarias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationBIOperacionesDiarias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BI_Pasivos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BI_PASIVOS",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "sisbi//dbo.BI_Pasivos.parquet"
+							},
+							{
+								"name": "Destination",
+								"value": "sisbi/pasivos/BI_Pasivos.parquet"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@utcnow()",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceBIPasivosParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationBIPasivosParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:12Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_BI_SegmentaClientes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_BI_SegmentaClientes",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "sisbi//dbo.BI_SegmentaClientes.parquet"
+							},
+							{
+								"name": "Destination",
+								"value": "//"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "ParquetSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@utcnow()",
+											"type": "Expression"
+										}
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"validateDataConsistency": false
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceBISegmentaClientes",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationBISegmentaClientes",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/SISBI"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:11Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_EstadosFinancieros_DBCuentas_process')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "ForEach2",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator2",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"2',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach1",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator1",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"1',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach3",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator3",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"3',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach4",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator4",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"4',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach5",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator5",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"5',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach6",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator6",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"6',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach7",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator7",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"7',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach8",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator8",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"8',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "ForEach9",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Clean Date",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@range(0,10)",
+								"type": "Expression"
+							},
+							"batchCount": 3,
+							"activities": [
+								{
+									"name": "CCDatabaseGenerator9",
+									"type": "AzureFunctionActivity",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "7.00:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"functionName": "CCDatabaseGenerator",
+										"method": "POST",
+										"headers": {},
+										"body": {
+											"value": "@concat('{\"connectionString\":\"',pipeline().globalParameters.storageConnectionString,'\",\"containerName\":\"finanzas\",\"fileName\":\"BDCuentas.xlsx.parquet\",\"sourceContainerName\":\"finanzas\",\"sourceFileName\":\"reportecombinado/*.reportecombinado.parquet\",\"sourceExcelContainerName\":\"sharepoint\",\"sourceExcelFileName\":\"estadosfinancierosdbcuentas/BDCuentas.xlsx\",\"startwith\":\"9',item(),'\",\"filedate\":\"',pipeline().parameters.filedate,'\"}')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "AF_AuditoriaInterna",
+										"type": "LinkedServiceReference"
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Clean Date",
+						"type": "Delete",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DBCuentasParquet",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": {
+									"value": "@{concat(pipeline().parameters.filedate, '.*.BDCuentas.xlsx.parquet')}",
+									"type": "Expression"
+								},
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"filedate": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"counter1": {
+						"type": "String",
+						"defaultValue": "1"
+					}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-01T03:59:30Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_EstadosFinancieros_XML')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_EstadosContables",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Rename_Files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "XmlSource",
+								"additionalColumns": [
+									{
+										"name": "FILEPATH",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "estadosfinancierosxml",
+									"wildcardFileName": "*.Contable_Estados.xml",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "XmlReadSettings",
+									"validationMode": "none",
+									"detectDataType": true,
+									"namespaces": false
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "[['Cuenta']"
+										},
+										"sink": {
+											"name": "Cuenta",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['TipoCatalogoSUGEF']"
+										},
+										"sink": {
+											"name": "TipoCatalogoSUGEF",
+											"type": "Int16"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Debito']"
+										},
+										"sink": {
+											"name": "Debito",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"path": "[['Credito']"
+										},
+										"sink": {
+											"name": "Credito",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"path": "[['SaldoFinal']"
+										},
+										"sink": {
+											"name": "SaldoFinal",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"path": "[['NotaTexto']"
+										},
+										"sink": {
+											"name": "NotaTexto",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "[['NotaArchivo']"
+										},
+										"sink": {
+											"name": "NotaArchivo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['FILEPATH']"
+										},
+										"sink": {
+											"name": "DATE_LOADED",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "$['ArchivoSICVECA']['Datos']['Registro']"
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceEstadosContablesXML",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationEstadosContables",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "DeleteEstadosContables",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "CD_EstadosContables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "SourceEstadosContablesXML",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": {
+									"value": "@{activity('Rename_Files').output.file}",
+									"type": "Expression"
+								},
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "DeleteSharepoint",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [
+							{
+								"activity": "DeleteEstadosContables",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "SharepointEmptyFolder",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"authUri": "@pipeline().globalParameters.SharepointAuthUri",
+								"authClientId": "@pipeline().globalParameters.SharepointAuthClientId",
+								"authClientSecret": "@pipeline().globalParameters.SharepointAuthClientSecret",
+								"authResource": "@replace(pipeline().globalParameters.SharepointAuthResource, '[AT]', '@')",
+								"onlineUri": "@pipeline().globalParameters.SharepointOnlineUri",
+								"pathPrefix": "/sites/DATALAKEAI/DATALAKE/",
+								"paths": "Auditoría Financiera - Estados Financieros/XML"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Rename_Files",
+						"type": "AzureFunctionActivity",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"functionName": "addDateToFile",
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"connectionString": "@pipeline().globalParameters.storageConnectionString",
+								"containerName": "sharepoint",
+								"fileName": "estadosfinancierosxml/*.xml"
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "AF_AuditoriaInterna",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/Sharepoint"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-09-01T03:59:30Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Aportes')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Aportes",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHAportes",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhAportes",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Ausencias')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Ausencias",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHAusencias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhAusencias",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:13Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Copiar_SH_Bancos')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "CD_Bancos",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "OracleSource",
+								"additionalColumns": [
+									{
+										"name": "DATE_LOADED",
+										"value": {
+											"value": "@formatDateTime(utcnow(), 'yyyy-MM-dd')",
+											"type": "Expression"
+										}
+									}
+								],
+								"partitionOption": "None",
+								"queryTimeout": "02:00:00"
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "RHBancos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationStarhBancos",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "AuditoriaInterna/STARH"
+				},
+				"annotations": [],
+				"lastPublishTime": "2021-07-28T22:23:14Z"
+			},
+			"dependsOn": []
+		}
+	]
+}
