@@ -18,7 +18,14 @@
 			{
 				"name": "CD_SISBI_BI_PersonalBP",
 				"type": "ExecutePipeline",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CD_SISBI_BI_Agencias",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
