@@ -5,8 +5,8 @@
 		"annotations": [],
 		"type": "AzureBlobFS",
 		"typeProperties": {
-			"url": "https://sersadev.dfs.core.windows.net",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEVCRkIwMEVBLTZFMzYtNEVGRC1COTRELUQyNDNFMUE0OTdCRF9lNDZkZTU4NS04ZDk0LTQxMTYtYjRlNC1mYzVmM2NiMmY5MmUiDQp9"
+			"url": "https://sadevbidata.dfs.core.windows.net",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEI4MUEwRkRDLTdCQzktNEMzMC05OUU2LUQ2Q0RGODY5MUU4RF9lZTg1ZWY2NS04NjAyLTQ0ZDktODU4NS0wNTI1ZDVjMmM4ZDgiDQp9"
 		}
 	}
 }
