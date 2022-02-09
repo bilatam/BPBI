@@ -1,0 +1,42 @@
+{
+	"name": "ExcelScoreDistrito",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Score Distrito",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Scores.xlsx",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "N_DISTRITO",
+				"type": "String"
+			},
+			{
+				"name": "WOE calculado",
+				"type": "String"
+			},
+			{
+				"name": "Grupo",
+				"type": "String"
+			},
+			{
+				"name": "11- Score Distrito",
+				"type": "String"
+			},
+			{
+				"name": "DISTRITO.DES_DISTRITO",
+				"type": "String"
+			}
+		]
+	}
+}
