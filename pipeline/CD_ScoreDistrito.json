@@ -1,0 +1,152 @@
+{
+	"name": "CD_ScoreDistrito",
+	"properties": {
+		"activities": [
+			{
+				"name": "BI_ScoreDistrito",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"fileListPath": "sharepoint/Scores.xlsx",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "OFICINA_NOMBRE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OFICINA_NOMBRE",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "OFICINA",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OFICINA",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DIVISION TEMPORAL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DIVISION_TEMPORAL",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SUCURSAL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SUCURSAL",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ExcelScoreDistrito",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ParquetListaOficina",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ExcelListaOficinas",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "BI_ScoreDistrito",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "ExcelListaOficinas",
+						"type": "DatasetReference"
+					},
+					"logStorageSettings": {
+						"linkedServiceName": {
+							"referenceName": "SA_Popular",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"enableLogging": true,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.xlsx",
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-26T17:04:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
