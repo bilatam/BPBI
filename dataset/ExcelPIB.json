@@ -1,0 +1,38 @@
+{
+	"name": "ExcelPIB",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Hoja2",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "PIB.xlsx",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "FECHA_DESDE",
+				"type": "String"
+			},
+			{
+				"name": "FECHA_HASTA",
+				"type": "String"
+			},
+			{
+				"name": "Producto_Interno_Bruto",
+				"type": "String"
+			},
+			{
+				"name": "Variación",
+				"type": "String"
+			}
+		]
+	}
+}
