@@ -88,12 +88,12 @@
 							},
 							{
 								"source": {
-									"name": "DISTRITO.DES_DISTRITO",
+									"name": "DES_DISTRITO",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DISTRITO.DES_DISTRITO",
+									"name": "DES_DISTRITO",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
