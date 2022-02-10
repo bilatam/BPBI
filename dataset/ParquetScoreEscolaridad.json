@@ -1,0 +1,19 @@
+{
+	"name": "ParquetScoreEscolaridad",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sharepoint"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
