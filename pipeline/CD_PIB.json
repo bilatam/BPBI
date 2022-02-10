@@ -76,12 +76,12 @@
 							},
 							{
 								"source": {
-									"name": "Variación",
+									"name": "Variacion",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Variación",
+									"name": "Variacion",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
