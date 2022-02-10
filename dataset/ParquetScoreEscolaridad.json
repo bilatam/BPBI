@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "scoreescolaridad.parquet",
 				"fileSystem": "sharepoint"
 			},
 			"compressionCodec": "snappy"
