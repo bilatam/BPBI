@@ -64,24 +64,24 @@
 							},
 							{
 								"source": {
-									"name": "WOE calculado",
+									"name": "WOE_calculado",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "WOE calculado",
+									"name": "WOE_calculado",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "12- Score Escolaridad",
+									"name": "ScoreEscolaridad",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "12- Score Escolaridad",
+									"name": "ScoreEscolaridad",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
