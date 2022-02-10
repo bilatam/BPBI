@@ -76,24 +76,24 @@
 							},
 							{
 								"source": {
-									"name": "11- Score Distrito",
+									"name": "Score Distrito",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "11- Score Distrito",
+									"name": "Score Distrito",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "DISTRITO.DES_DISTRITO",
+									"name": "DES_DISTRITO",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DISTRITO.DES_DISTRITO",
+									"name": "DES_DISTRITO",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
