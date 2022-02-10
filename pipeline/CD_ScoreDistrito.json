@@ -19,7 +19,8 @@
 						"type": "ExcelSource",
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"fileListPath": "sharepoint/Scores.xlsx",
+							"recursive": true,
+							"wildcardFileName": "Score.xlsx",
 							"enablePartitionDiscovery": false
 						}
 					},
