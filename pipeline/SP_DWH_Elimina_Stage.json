@@ -23,31 +23,11 @@
 				}
 			},
 			{
-				"name": "SP_DWH_Elimina_Stage_Cliente",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "SP_DWH_Elimina_Stage_General",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "SP_DWH_Elimina_Stage_Cliente",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "SP_DWH_Elimina_Stage_Credito",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "SP_DWH_Elimina_Stage_Cliente",
+						"activity": "SP_DWH_Elimina_Stage_General",
 						"dependencyConditions": [
 							"Succeeded"
 						]
