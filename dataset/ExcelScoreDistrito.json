@@ -8,12 +8,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Score Distrito",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Scores.xlsx",
+				"fileName": "scores.xlsx",
+				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
+			"sheetIndex": 3,
 			"firstRowAsHeader": true
 		},
 		"schema": [
@@ -22,7 +23,7 @@
 				"type": "String"
 			},
 			{
-				"name": "WOE calculado",
+				"name": "WOE_calculado",
 				"type": "String"
 			},
 			{
@@ -30,11 +31,11 @@
 				"type": "String"
 			},
 			{
-				"name": "11- Score Distrito",
+				"name": "ScoreDistrito",
 				"type": "String"
 			},
 			{
-				"name": "DISTRITO.DES_DISTRITO",
+				"name": "DES_DISTRITO",
 				"type": "String"
 			}
 		]
