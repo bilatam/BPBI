@@ -20,7 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFileName": "Scores.xlsx",
+							"wildcardFolderPath": "scores",
+							"wildcardFileName": "scores.xlsx",
 							"enablePartitionDiscovery": false
 						}
 					},
@@ -52,12 +53,12 @@
 							},
 							{
 								"source": {
-									"name": "WOE calculado",
+									"name": "WOE_calculado",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "WOE calculado",
+									"name": "WOE_calculado",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
@@ -76,12 +77,12 @@
 							},
 							{
 								"source": {
-									"name": "Score Distrito",
+									"name": "ScoreDistrito",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Score Distrito",
+									"name": "ScoreDistrito",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
