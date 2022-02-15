@@ -8,12 +8,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Score Escolaridad",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "Scores.xlsx",
+				"fileName": "scores.xlsx",
+				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
+			"sheetIndex": 4,
 			"firstRowAsHeader": true
 		},
 		"schema": [
