@@ -211,19 +211,6 @@
 				}
 			},
 			{
-				"name": "CD_SISBI_BI_PeriodosSalariosSicere",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "CD_SISBI_BI_PeriodosSalariosSicere",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "CD_SISBI_BI_PPPResumen",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
