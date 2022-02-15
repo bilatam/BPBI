@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "pib.parquet",
+				"fileName": "pib.xlsx",
+				"folderPath": "pib",
 				"fileSystem": "sharepoint"
 			},
 			"compressionCodec": "snappy"
