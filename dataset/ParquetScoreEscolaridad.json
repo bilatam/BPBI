@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "scoreescolaridad.parquet",
+				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
 			"compressionCodec": "snappy"
