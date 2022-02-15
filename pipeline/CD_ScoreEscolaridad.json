@@ -20,7 +20,7 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFileName": "Scores.xlsx",
+							"wildcardFileName": "*.xlsx",
 							"enablePartitionDiscovery": false
 						}
 					},
@@ -88,12 +88,12 @@
 							},
 							{
 								"source": {
-									"name": "ESCOLARIDAD.DES_NIVEL_ESCOLARIDAD",
+									"name": "DES_NIVEL_ESCOLARIDAD",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "ESCOLARIDAD.DES_NIVEL_ESCOLARIDAD",
+									"name": "DES_NIVEL_ESCOLARIDAD",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
