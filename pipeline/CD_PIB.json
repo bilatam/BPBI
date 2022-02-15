@@ -20,7 +20,8 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"wildcardFileName": "PIB.xlsx",
+							"wildcardFolderPath": "pib",
+							"wildcardFileName": "*.xlsx",
 							"enablePartitionDiscovery": false
 						}
 					},
