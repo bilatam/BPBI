@@ -1,0 +1,152 @@
+{
+	"name": "CD_ScoreOrigenFondos",
+	"properties": {
+		"activities": [
+			{
+				"name": "BI_ScoreOrigenFondos",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "scores",
+							"wildcardFileName": "*.xlsx",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "N_ORI_FND_G_CM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "N_ORI_FND_G_CM",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Grupo",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Grupo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "WOE_calculado",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WOE_calculado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "ScoreOrigenFondos",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ScoreOrigenFondos",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "COD_ORIGEN_FONDOS",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "COD_ORIGEN_FONDOS",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DES_ORIGEN_FONDOS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DES_ORIGEN_FONDOS",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "AGRUPACION",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AGRUPACION",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ExcelOrigenFondos",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ParquetOrigenFondos",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-26T17:04:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
