@@ -1,0 +1,152 @@
+{
+	"name": "CD_ScoreOcupacionLaboral",
+	"properties": {
+		"activities": [
+			{
+				"name": "BI_ScoreOcupacionLaboral",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "ExcelSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "scores",
+							"wildcardFileName": "*.xlsx",
+							"enablePartitionDiscovery": false
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings",
+							"copyBehavior": "MergeFiles"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "N_OCU_LAB_G_CM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "N_OCU_LAB_G_CM",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Grupo",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Grupo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "WOE_calculado",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WOE_calculado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "ScoreOcupacionLaboral",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ScoreOcupacionLaboral",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DES_OCUPACION_LABORAL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DES_OCUPACION_LABORAL",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "AGRUPACION",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AGRUPACION",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "COD_OCUPACION_LABORAL",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "COD_OCUPACION_LABORAL",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ExcelScoreOcupacionLaboral",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ParquetScoreOcupacionLaboral",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-26T17:04:22Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

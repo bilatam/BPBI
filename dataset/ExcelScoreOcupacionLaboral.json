@@ -1,0 +1,51 @@
+{
+	"name": "ExcelScoreOcupacionLaboral",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Score - Ocupación Laboral",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scores.xlsx",
+				"folderPath": "scores",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "N_OCU_LAB_G_CM",
+				"type": "String"
+			},
+			{
+				"name": "Grupo",
+				"type": "String"
+			},
+			{
+				"name": "WOE_calculado",
+				"type": "String"
+			},
+			{
+				"name": "ScoreOcupacionLaboral",
+				"type": "String"
+			},
+			{
+				"name": "DES_OCUPACION_LABORAL",
+				"type": "String"
+			},
+			{
+				"name": "AGRUPACION",
+				"type": "String"
+			},
+			{
+				"name": "COD_OCUPACION_LABORAL",
+				"type": "String"
+			}
+		]
+	}
+}
