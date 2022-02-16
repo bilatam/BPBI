@@ -1,0 +1,44 @@
+{
+	"name": "ParquetScoreCodigoAgencia",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scorecodigoagencia.parquet",
+				"folderPath": "scores",
+				"fileSystem": "sharepoint"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "N_DISTRITO",
+				"type": "UTF8"
+			},
+			{
+				"name": "WOE_calculado",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "Grupo",
+				"type": "INT32"
+			},
+			{
+				"name": "ScoreDistrito",
+				"type": "INT32"
+			},
+			{
+				"name": "DES_DISTRITO",
+				"type": "UTF8"
+			}
+		]
+	}
+}
