@@ -1,0 +1,43 @@
+{
+	"name": "ExcelCodigoAgencia",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "Score-CodAgencia",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scores.xlsx",
+				"folderPath": "scores",
+				"fileSystem": "sharepoint"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "N_UNI_FIN_CM",
+				"type": "String"
+			},
+			{
+				"name": "Grupo",
+				"type": "String"
+			},
+			{
+				"name": "WOE calculado",
+				"type": "String"
+			},
+			{
+				"name": "ScoreCard",
+				"type": "String"
+			},
+			{
+				"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
+				"type": "String"
+			}
+		]
+	}
+}
