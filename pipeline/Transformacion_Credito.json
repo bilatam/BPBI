@@ -828,10 +828,6 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"pipeline": {
-						"referenceName": "SP_DWH_Elimina_Stage_Credito",
-						"type": "PipelineReference"
-					},
 					"waitOnCompletion": true
 				}
 			},
