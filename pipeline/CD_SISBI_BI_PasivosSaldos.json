@@ -26,6 +26,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT * FROM dbo.BI_PasivosSaldos WHERE Pvs_FechaDatos = CAST(GETDATE() - 1 AS DATE)",
 						"partitionOption": "None"
 					},
 					"sink": {
