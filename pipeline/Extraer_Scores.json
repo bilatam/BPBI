@@ -68,6 +68,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Sharepoint"
+		},
 		"annotations": []
 	}
 }
