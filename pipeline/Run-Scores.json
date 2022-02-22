@@ -1,0 +1,21 @@
+{
+	"name": "Run-Scores",
+	"properties": {
+		"activities": [
+			{
+				"name": "SP_DWH_Extraer_Sharepoint",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SP_DWH_Extraer_Sharepoint",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
