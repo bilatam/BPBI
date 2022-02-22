@@ -23,6 +23,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Sharepoint"
+		},
 		"annotations": [],
 		"lastPublishTime": "2020-08-06T14:45:36Z"
 	},
