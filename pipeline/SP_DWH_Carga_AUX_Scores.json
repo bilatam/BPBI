@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Carga_AUX_Scores",
+				"name": "SP_DWH_Carga_AUX_Scores",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
