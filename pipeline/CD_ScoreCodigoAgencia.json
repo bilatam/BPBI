@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ScoreCodigoAgencia",
+				"name": "CD_ScoreCodigoAgencia",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

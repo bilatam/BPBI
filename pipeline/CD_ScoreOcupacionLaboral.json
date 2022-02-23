@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ScoreOcupacionLaboral",
+				"name": "CD_ScoreOcupacionLaboral",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

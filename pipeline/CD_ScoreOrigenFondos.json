@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ScoreOrigenFondos",
+				"name": "CD_ScoreOrigenFondos",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

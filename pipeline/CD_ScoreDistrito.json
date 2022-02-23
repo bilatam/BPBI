@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ScoreDistrito",
+				"name": "CD_ScoreDistrito",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ScoreEscolaridad",
+				"name": "CD_ScoreEscolaridad",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
