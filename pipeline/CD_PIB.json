@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_PIB",
+				"name": "CD_PIB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
