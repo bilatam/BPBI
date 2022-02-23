@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ConexionBP",
+				"name": "CD_ConexionBP",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -63,7 +63,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "BI_ConexionBP",
+						"activity": "CD_ConexionBP",
 						"dependencyConditions": [
 							"Succeeded"
 						]
