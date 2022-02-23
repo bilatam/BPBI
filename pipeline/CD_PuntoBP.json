@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_PuntoBP",
+				"name": "CD_PuntoBP",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -63,7 +63,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "BI_PuntoBP",
+						"activity": "CD_PuntoBP",
 						"dependencyConditions": [
 							"Succeeded"
 						]
