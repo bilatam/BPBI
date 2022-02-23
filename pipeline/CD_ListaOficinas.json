@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ListaOficinas",
+				"name": "CD_ListaOficinas",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -112,7 +112,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "BI_ListaOficinas",
+						"activity": "CD_ListaOficinas",
 						"dependencyConditions": [
 							"Succeeded"
 						]
