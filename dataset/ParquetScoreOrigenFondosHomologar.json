@@ -1,0 +1,44 @@
+{
+	"name": "ParquetScoreOrigenFondosHomologar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scoreorigenfondoshomologar.parquet",
+				"folderPath": "scores",
+				"fileSystem": "sharepoint"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "N_UNI_FIN_CM",
+				"type": "INT32"
+			},
+			{
+				"name": "Grupo",
+				"type": "INT32"
+			},
+			{
+				"name": "WOE_calculado",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "ScoreCard",
+				"type": "INT32"
+			},
+			{
+				"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
+				"type": "UTF8"
+			}
+		]
+	}
+}
