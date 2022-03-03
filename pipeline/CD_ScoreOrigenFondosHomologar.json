@@ -41,84 +41,24 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "N_ORI_FND_G_CM",
+									"name": "Cedula",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "N_ORI_FND_G_CM",
+									"name": "Cedula",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "Grupo",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "Grupo",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "WOE_calculado",
-									"type": "Decimal",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "WOE_calculado",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "ScoreOrigenFondos",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "ScoreOrigenFondos",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "COD_ORIGEN_FONDOS",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "COD_ORIGEN_FONDOS",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "DES_ORIGEN_FONDOS",
+									"name": "CodigoOrigen",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DES_ORIGEN_FONDOS",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "AGRUPACION",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "AGRUPACION",
+									"name": "CodigoOrigen",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
@@ -139,7 +79,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "ParquetOrigenFondos",
+						"referenceName": "ParquetScoreOrigenFondosHomologar",
 						"type": "DatasetReference"
 					}
 				]
