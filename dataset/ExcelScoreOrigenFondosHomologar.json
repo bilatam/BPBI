@@ -19,12 +19,15 @@
 		},
 		"schema": [
 			{
+				"name": "Cedula",
 				"type": "String"
 			},
 			{
+				"name": "CodigoOrigen",
 				"type": "String"
 			},
 			{
+				"name": "DescripcionOrigen",
 				"type": "String"
 			}
 		]
