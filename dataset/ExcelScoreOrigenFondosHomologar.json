@@ -14,7 +14,8 @@
 				"fileName": "scores.xlsx",
 				"folderPath": "scores",
 				"fileSystem": "sharepoint"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
