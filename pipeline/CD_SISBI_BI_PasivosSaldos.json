@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_7wc",
+				"name": "CD_SISBI_BI_PasivosSaldos",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -26,12 +26,16 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT * FROM dbo.BI_PasivosSaldos WHERE Pvs_FechaDatos = CAST(GETDATE() - 1 AS DATE)",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureDataLakeStoreWriteSettings"
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
 						}
 					},
 					"enableStaging": false
