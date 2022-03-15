@@ -43,31 +43,11 @@
 				}
 			},
 			{
-				"name": "SP_DWH_Carga_FACT_SICEREAntiguedad",
-				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "SP_DWH_Carga_DIM_SICEREPatron",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "SP_DWH_Carga_FACT_SICEREAntiguedad",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "SP_DWH_Carga_FACT_SICEREPeriodo",
 				"type": "ExecutePipeline",
 				"dependsOn": [
 					{
-						"activity": "SP_DWH_Carga_FACT_SICEREAntiguedad",
+						"activity": "SP_DWH_Carga_DIM_SICEREPatron",
 						"dependencyConditions": [
 							"Succeeded"
 						]
