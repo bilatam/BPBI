@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "scoredistrito.parquet",
+				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
 			"compressionCodec": "snappy"

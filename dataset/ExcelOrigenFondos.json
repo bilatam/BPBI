@@ -1,5 +1,5 @@
 {
-	"name": "ExcelScoreEscolaridad",
+	"name": "ExcelOrigenFondos",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
@@ -8,35 +8,42 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Score- Origen de fondos",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "scores.xlsx",
 				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
-			"sheetIndex": 4,
 			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
+				"name": "N_ORI_FND_G_CM",
 				"type": "String"
 			},
 			{
+				"name": "Grupo",
 				"type": "String"
 			},
 			{
+				"name": "WOE_calculado",
 				"type": "String"
 			},
 			{
+				"name": "ScoreOrigenFondos",
 				"type": "String"
 			},
 			{
+				"name": "COD_ORIGEN_FONDOS",
 				"type": "String"
 			},
 			{
+				"name": "DES_ORIGEN_FONDOS",
 				"type": "String"
 			},
 			{
+				"name": "AGRUPACION",
 				"type": "String"
 			}
 		]

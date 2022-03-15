@@ -1,5 +1,5 @@
 {
-	"name": "ExcelScoreEscolaridad",
+	"name": "ExcelCodigoAgencia",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
@@ -8,35 +8,34 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Score-CodAgencia",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "scores.xlsx",
 				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
-			"sheetIndex": 4,
 			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
+				"name": "N_UNI_FIN_CM",
 				"type": "String"
 			},
 			{
+				"name": "Grupo",
 				"type": "String"
 			},
 			{
+				"name": "WOE calculado",
 				"type": "String"
 			},
 			{
+				"name": "ScoreCard",
 				"type": "String"
 			},
 			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
+				"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
 				"type": "String"
 			}
 		]

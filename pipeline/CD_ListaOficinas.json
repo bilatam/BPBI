@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_ListaOficinas",
+				"name": "CD_ListaOficinas",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -112,7 +112,7 @@
 				"type": "Delete",
 				"dependsOn": [
 					{
-						"activity": "BI_ListaOficinas",
+						"activity": "CD_ListaOficinas",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -147,6 +147,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Sharepoint"
+		},
 		"annotations": [],
 		"lastPublishTime": "2021-08-26T17:04:22Z"
 	},

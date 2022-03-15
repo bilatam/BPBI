@@ -1,9 +1,9 @@
 {
-	"name": "CD_ScoreDistrito",
+	"name": "CD_ScoreCodigoAgencia",
 	"properties": {
 		"activities": [
 			{
-				"name": "CD_ScoreDistrito",
+				"name": "CD_ScoreCodigoAgencia",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -41,12 +41,24 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "N_DISTRITO",
-									"type": "String",
+									"name": "N_UNI_FIN_CM",
+									"type": "Int16",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "N_DISTRITO",
+									"name": "N_UNI_FIN_CM",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Grupo",
+									"type": "Int16",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Grupo",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
@@ -65,36 +77,24 @@
 							},
 							{
 								"source": {
-									"name": "Grupo",
+									"name": "ScoreCard",
 									"type": "Int16",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "Grupo",
+									"name": "ScoreCard",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "ScoreDistrito",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "ScoreDistrito",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "DES_DISTRITO",
+									"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DES_DISTRITO",
+									"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
@@ -109,13 +109,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ExcelScoreDistrito",
+						"referenceName": "ExcelCodigoAgencia",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ParquetScoreDistrito",
+						"referenceName": "ParquetScoreCodigoAgencia",
 						"type": "DatasetReference"
 					}
 				]

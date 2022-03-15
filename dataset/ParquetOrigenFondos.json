@@ -1,0 +1,42 @@
+{
+	"name": "ParquetOrigenFondos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "scoreorigenfondos.parquet",
+				"folderPath": "scores",
+				"fileSystem": "sharepoint"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "N_UNI_FIN_CM",
+				"type": "UTF8"
+			},
+			{
+				"name": "Grupo",
+				"type": "UTF8"
+			},
+			{
+				"name": "WOE_calculado",
+				"type": "UTF8"
+			},
+			{
+				"name": "ScoreCard",
+				"type": "UTF8"
+			},
+			{
+				"name": "DES_NOMBRE_UNIDAD_FINANCIERA",
+				"type": "UTF8"
+			}
+		]
+	}
+}

@@ -8,12 +8,13 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "Hoja2",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "PIB.xlsx",
+				"fileName": "pib.xlsx",
+				"folderPath": "pib",
 				"fileSystem": "sharepoint"
 			},
+			"sheetIndex": 1,
 			"firstRowAsHeader": true
 		},
 		"schema": [

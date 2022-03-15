@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "pib.parquet",
+				"folderPath": "pib",
 				"fileSystem": "sharepoint"
 			},
 			"compressionCodec": "snappy"

@@ -1,5 +1,5 @@
 {
-	"name": "ExcelScoreEscolaridad",
+	"name": "ExcelScoreOrigenFondosHomologar",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
@@ -8,35 +8,26 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Score-Origdefondos-homologar",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "scores.xlsx",
 				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
-			"sheetIndex": 4,
 			"firstRowAsHeader": true
 		},
 		"schema": [
 			{
+				"name": "Cedula",
 				"type": "String"
 			},
 			{
+				"name": "CodigoOrigen",
 				"type": "String"
 			},
 			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
-				"type": "String"
-			},
-			{
+				"name": "DescripcionOrigen",
 				"type": "String"
 			}
 		]

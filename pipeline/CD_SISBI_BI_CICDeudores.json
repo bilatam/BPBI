@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "BI_CICDeudores",
+				"name": "CD_SISBI_BI_CICDeudores",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {

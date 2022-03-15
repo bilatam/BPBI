@@ -1,9 +1,9 @@
 {
-	"name": "CD_ScoreDistrito",
+	"name": "CD_ScoreOrigenFondosHomologar",
 	"properties": {
 		"activities": [
 			{
-				"name": "CD_ScoreDistrito",
+				"name": "CD_ScoreOrigenFondosHomologar",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -41,60 +41,24 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "N_DISTRITO",
+									"name": "Cedula",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "N_DISTRITO",
+									"name": "Cedula",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
 							},
 							{
 								"source": {
-									"name": "WOE_calculado",
-									"type": "Decimal",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "WOE_calculado",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "Grupo",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "Grupo",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "ScoreDistrito",
-									"type": "Int16",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "ScoreDistrito",
-									"type": "String",
-									"physicalType": "UTF8"
-								}
-							},
-							{
-								"source": {
-									"name": "DES_DISTRITO",
+									"name": "CodigoOrigen",
 									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
-									"name": "DES_DISTRITO",
+									"name": "CodigoOrigen",
 									"type": "String",
 									"physicalType": "UTF8"
 								}
@@ -109,13 +73,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ExcelScoreDistrito",
+						"referenceName": "ExcelScoreOrigenFondosHomologar",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "ParquetScoreDistrito",
+						"referenceName": "ParquetScoreOrigenFondosHomologar",
 						"type": "DatasetReference"
 					}
 				]

@@ -1,9 +1,9 @@
 {
-	"name": "SP_DWH_Extraer_Sharepoint",
+	"name": "SP_DWH_Carga_AUX_Scores",
 	"properties": {
 		"activities": [
 			{
-				"name": "Extrae_Sharepoint",
+				"name": "Carga_AUX_Scores",
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [],
 				"policy": {
@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[Extrae_Sharepoint]"
+					"storedProcedureName": "[dbo].[Carga_AUX_Scores]"
 				},
 				"linkedServiceName": {
 					"referenceName": "DW_Popular",
@@ -27,7 +27,7 @@
 			"name": "Sharepoint"
 		},
 		"annotations": [],
-		"lastPublishTime": "2021-08-24T03:20:09Z"
+		"lastPublishTime": "2020-08-06T14:45:36Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

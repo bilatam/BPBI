@@ -1,42 +1,43 @@
 {
-	"name": "ExcelScoreDistrito",
+	"name": "ParquetScoreCodigoAgencia",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
-		"type": "Excel",
+		"type": "Parquet",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "scores.xlsx",
+				"fileName": "scorecodigoagencia.parquet",
 				"folderPath": "scores",
 				"fileSystem": "sharepoint"
 			},
-			"sheetIndex": 3,
-			"firstRowAsHeader": true
+			"compressionCodec": "snappy"
 		},
 		"schema": [
 			{
 				"name": "N_DISTRITO",
-				"type": "String"
+				"type": "UTF8"
 			},
 			{
 				"name": "WOE_calculado",
-				"type": "String"
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
 			},
 			{
 				"name": "Grupo",
-				"type": "String"
+				"type": "INT32"
 			},
 			{
 				"name": "ScoreDistrito",
-				"type": "String"
+				"type": "INT32"
 			},
 			{
 				"name": "DES_DISTRITO",
-				"type": "String"
+				"type": "UTF8"
 			}
 		]
 	}
