@@ -41,7 +41,7 @@
 				"typeProperties": {
 					"variableName": "FechaProc",
 					"value": {
-						"value": "@uriComponent(formatDateTime(utcnow(), 'MM/yyyy'))",
+						"value": "@formatDateTime(utcnow(), 'MM/yyyy')",
 						"type": "Expression"
 					}
 				}
