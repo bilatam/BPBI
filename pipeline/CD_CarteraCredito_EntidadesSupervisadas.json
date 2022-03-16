@@ -60,7 +60,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@activity('SetFileToDownload').output.Mensaje==\"\"",
+						"value": "@equals(trim(activity('SetFileToDownload').output.Mensaje),'')",
 						"type": "Expression"
 					},
 					"ifFalseActivities": [
