@@ -13,6 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [],
 				"typeProperties": {
 					"url": "https://www.sugef.fi.cr/ReportesSUGEF/InformacionCrediticia/ReporteCrediticioInicio",
 					"method": "POST",
