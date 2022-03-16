@@ -63,29 +63,9 @@
 				}
 			},
 			{
-				"name": "Extraer_SICERE",
-				"type": "ExecutePipeline",
-				"dependsOn": [],
-				"userProperties": [],
-				"typeProperties": {
-					"pipeline": {
-						"referenceName": "Extraer_SICERE",
-						"type": "PipelineReference"
-					},
-					"waitOnCompletion": true
-				}
-			},
-			{
 				"name": "SP_DWH_Extraer_SICERE",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "Extraer_SICERE",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
