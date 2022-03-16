@@ -45,6 +45,40 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "If Mensaje Error",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "SetFileToDownload",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@activity('SetFileToDownload').output.Mensaje==\"\"",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Mensaje error",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": {
+									"value": "@activity('SetFileToDownload').output.Mensaje",
+									"type": "Expression"
+								},
+								"errorCode": "500"
+							}
+						}
+					]
+				}
 			}
 		],
 		"variables": {
