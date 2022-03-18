@@ -26,11 +26,324 @@
 							"type": "DelimitedTextReadSettings"
 						}
 					},
-					"enableStaging": false
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Cps_Pk_IdClienteSipo",
+									"type": "Int64",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Cps_Pk_IdClienteSipo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_FK_IdCliente",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_FK_IdCliente",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Cedula",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Cedula",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Nombre",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Nombre",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Direccion",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Direccion",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_CodDist",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_CodDist",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Telefono1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Telefono1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Telefono2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Telefono2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Telefono3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Telefono3",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Postal",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Postal",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Email",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Email",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Apartado",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Apartado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Patron",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Patron",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Bruto",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Bruto",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Liquido",
+									"type": "Decimal",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Liquido",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_Sexo",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_Sexo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_EstCiv",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_EstCiv",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_CedulaSuge",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_CedulaSuge",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_FechaNacimiento",
+									"type": "DateTime",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_FechaNacimiento",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_CodOri",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_CodOri",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_DesOri",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_DesOri",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_CodOcu",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_CodOcu",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_DesOcu",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_DesOcu",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Csp_FechaCarga",
+									"type": "DateTime",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Csp_FechaCarga",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
 						"referenceName": "SourceDataset_BI_ClientesSIPO",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_BI_ClientesSIPO",
 						"type": "DatasetReference"
 					}
 				]
