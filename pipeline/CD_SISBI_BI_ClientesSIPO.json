@@ -198,7 +198,7 @@
 							{
 								"source": {
 									"name": "Csp_Bruto",
-									"type": "String",
+									"type": "Double",
 									"physicalType": "String"
 								},
 								"sink": {
@@ -210,7 +210,7 @@
 							{
 								"source": {
 									"name": "Csp_Liquido",
-									"type": "String",
+									"type": "Double",
 									"physicalType": "String"
 								},
 								"sink": {
