@@ -198,7 +198,7 @@
 							{
 								"source": {
 									"name": "Csp_Bruto",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
