@@ -210,7 +210,7 @@
 							{
 								"source": {
 									"name": "Csp_Liquido",
-									"type": "Decimal",
+									"type": "String",
 									"physicalType": "String"
 								},
 								"sink": {
