@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "BI_ClientesSipo.csv",
+				"fileName": "BI_ClientesSIPO.csv",
 				"fileSystem": "sisbi"
 			},
 			"columnDelimiter": "|",
