@@ -1,0 +1,80 @@
+{
+	"name": "CLEAN_SLDPRINCIPALESCRDIRECTOS",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "EXCEL_saldosprincipalcreditosdirectos",
+						"type": "DatasetReference"
+					},
+					"name": "CSVsaldosprincipalcreditosdirectos"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "PARQUET_SLDPRINCIPALESCRDIRECTOS",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Sector as string,",
+				"          Entidad as string,",
+				"          ActividadEconomica as string,",
+				"          AlDia as string,",
+				"          {1a30Dias} as string,",
+				"          {31a61Dias} as string,",
+				"          {61a90Dias} as string,",
+				"          {91a180Dias} as string,",
+				"          Mas180Dias as string,",
+				"          CobroJudicial as string,",
+				"          Total as string,",
+				"          Column_12 as string,",
+				"          Column_13 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     fileList: true,",
+				"     rowUrlColumn: 'FILENAME',",
+				"     wildcardPaths:['*.saldosprincipalcreditosdirectos.sugef.csv']) ~> CSVsaldosprincipalcreditosdirectos",
+				"CSVsaldosprincipalcreditosdirectos select(mapColumn(",
+				"          Sector,",
+				"          Entidad,",
+				"          ActividadEconomica,",
+				"          AlDia,",
+				"          {1a30Dias},",
+				"          {31a61Dias},",
+				"          {61a90Dias},",
+				"          {91a180Dias},",
+				"          Mas180Dias,",
+				"          CobroJudicial,",
+				"          Total,",
+				"          Column_12,",
+				"          Column_13,",
+				"          FILENAME",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

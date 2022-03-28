@@ -1,0 +1,62 @@
+{
+	"name": "EXCEL_saldosprincipalcreditosdirectos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "ActividadEconomicayDiasAtraso",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "022022.saldosprincipalcreditosdirectos.sugef.xls",
+				"folderPath": "csvsaldosprincipalcreditosdirectos",
+				"fileSystem": "sugef"
+			},
+			"firstRowAsHeader": false
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
