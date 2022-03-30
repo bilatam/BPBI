@@ -1,0 +1,120 @@
+{
+	"name": "SourceDataset_BI_ClientesSIPO",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "BI_ClientesSIPO.csv",
+				"fileSystem": "sisbi"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Cps_Pk_IdClienteSipo",
+				"type": "String"
+			},
+			{
+				"name": "Csp_FK_IdCliente",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Cedula",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Nombre",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Direccion",
+				"type": "String"
+			},
+			{
+				"name": "Csp_CodDist",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Telefono1",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Telefono2",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Telefono3",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Postal",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Email",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Apartado",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Patron",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Bruto",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Liquido",
+				"type": "String"
+			},
+			{
+				"name": "Csp_Sexo",
+				"type": "String"
+			},
+			{
+				"name": "Csp_EstCiv",
+				"type": "String"
+			},
+			{
+				"name": "Csp_CedulaSuge",
+				"type": "String"
+			},
+			{
+				"name": "Csp_FechaNacimiento",
+				"type": "String"
+			},
+			{
+				"name": "Csp_CodOri",
+				"type": "String"
+			},
+			{
+				"name": "Csp_DesOri",
+				"type": "String"
+			},
+			{
+				"name": "Csp_CodOcu",
+				"type": "String"
+			},
+			{
+				"name": "Csp_DesOcu",
+				"type": "String"
+			},
+			{
+				"name": "Csp_FechaCarga",
+				"type": "String"
+			}
+		]
+	}
+}
