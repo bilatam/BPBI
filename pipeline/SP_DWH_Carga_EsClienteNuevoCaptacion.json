@@ -15,7 +15,7 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[Carga_AUX_EsClienteNuevoCaptacion]"
+					"storedProcedureName": "dbo.Carga_FACT_ClienteNuevoCaptacion"
 				},
 				"linkedServiceName": {
 					"referenceName": "DW_Popular",
