@@ -31,6 +31,2486 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "CodActividad",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodActividad",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Actividad",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Actividad",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodSubActividad",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodSubActividad",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SubActividad",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SubActividad",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Linea",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Linea",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo Linea",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Codigo Linea",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Producto",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Producto",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Cartera",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Cartera",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Banca",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Banca",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodBanca",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CodBanca",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "IdAgencia",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IdAgencia",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "CodAgencia",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodAgencia",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodAgenciaOrg",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodAgenciaOrg",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreAgencia",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NombreAgencia",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IdSucursal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IdSucursal",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Sucursal",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Sucursal",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Division",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Division",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoAgencia",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TipoAgencia",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo Resumen",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tipo Resumen",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "FecOperacion",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecOperacion",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "idcliente",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								},
+								"sink": {
+									"name": "idcliente",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "IUC",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								},
+								"sink": {
+									"name": "IUC",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Cedula",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Cedula",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TIPOPERS",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TIPOPERS",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreComp",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NombreComp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "PriApellido",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PriApellido",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SegApellido",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SegApellido",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel1",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tel1",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tel2",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tel2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Provincia",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Provincia",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Canton",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Canton",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Distrito",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Distrito",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Direccion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Direccion",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Direccion2",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Direccion2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Genero",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Genero",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "F_Nacimiento",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "F_Nacimiento",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "Email",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Email",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Domicilio",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Domicilio",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Operación",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Operación",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TasaInt",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 5,
+									"precision": 15
+								},
+								"sink": {
+									"name": "TasaInt",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Principal",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Principal",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "PRINCIPAL_AVALADO",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 8,
+									"precision": 37
+								},
+								"sink": {
+									"name": "PRINCIPAL_AVALADO",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Saldo",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Saldo",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "SALDO_AVALADO",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 8,
+									"precision": 37
+								},
+								"sink": {
+									"name": "SALDO_AVALADO",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Cuota",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Cuota",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Interes",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Interes",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Al día",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Al día",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora Mayor 1",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora Mayor 1",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora Mayor 30",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora Mayor 30",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora Mayor 60",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora Mayor 60",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora Mayor 90",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora Mayor 90",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora 31 a 90",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora 31 a 90",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Mora Mayor 180",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mora Mayor 180",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "CobroJudicial",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "CobroJudicial",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Int180",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Int180",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Int181",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Int181",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Amortización",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 19
+								},
+								"sink": {
+									"name": "Amortización",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Deuda Total",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Deuda Total",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Monto del Avaluo",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								},
+								"sink": {
+									"name": "Monto del Avaluo",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "SaldoAnterior",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "SaldoAnterior",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Excesos",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 14
+								},
+								"sink": {
+									"name": "Excesos",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Fracciones",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 14
+								},
+								"sink": {
+									"name": "Fracciones",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Moneda",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Moneda",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Region",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Region",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "IngrFinan",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 11,
+									"precision": 38
+								},
+								"sink": {
+									"name": "IngrFinan",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Part %",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 20,
+									"precision": 38
+								},
+								"sink": {
+									"name": "Part %",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "PerdReal",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "PerdReal",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo Destino",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Codigo Destino",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Saldo_Integrado",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Saldo_Integrado",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Corp_Ejecutivo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Corp_Ejecutivo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Abogado",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Abogado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Ahorro",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 14
+								},
+								"sink": {
+									"name": "Ahorro",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "FecAvaluo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "FecAvaluo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Aval",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Aval",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Banda",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								},
+								"sink": {
+									"name": "Banda",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Bono",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 14
+								},
+								"sink": {
+									"name": "Bono",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "CapPago",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CapPago",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Ventanilla",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Ventanilla",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Criter2",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Criter2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CriterioRiesgo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CriterioRiesgo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Crspec",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Crspec",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CuotasAtraso",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CuotasAtraso",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "CuotasPagas",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CuotasPagas",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CuotasPendientes",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CuotasPendientes",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "DiasAtraso",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DiasAtraso",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Entrega",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Entrega",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Estima",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								},
+								"sink": {
+									"name": "Estima",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "FecConsti",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecConsti",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "AñoConsti",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AñoConsti",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "MesConsti",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MesConsti",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaConsti",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DiaConsti",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "FecForma",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecForma",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "AñoForma",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AñoForma",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "MesForma",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MesForma",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "DiaForma",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DiaForma",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "FecProxPago",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecProxPago",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "FecUltMov",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecUltMov",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "FecUltPago",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FecUltPago",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "FecRige",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "FecRige",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodAnalista",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodAnalista",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Analista",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Analista",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CatRiesgo",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "CatRiesgo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Estado",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Estado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Estado2",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Estado2",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Patrono",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Patrono",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "NombrePatSipo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NombrePatSipo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Garantia",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Garantia",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodVendedor",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodVendedor",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Vendedor",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Vendedor",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "OPIDVendedor",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "OPIDVendedor",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "GestCobro",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "GestCobro",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RangAtra",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "RangAtra",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RangMora",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "RangMora",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "FrecPago",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "FrecPago",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "GenDiv",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "GenDiv",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Girado",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Girado",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Limite",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 16
+								},
+								"sink": {
+									"name": "Limite",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "MesesGracia",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MesesGracia",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Mitiga",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Mitiga",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Comision",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "Comision",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "MontoMitiga",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "MontoMitiga",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "OperacMadre",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "OperacMadre",
+									"type": "Int64",
+									"physicalType": "INT_64"
+								}
+							},
+							{
+								"source": {
+									"name": "Plazo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Plazo",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "%aval",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 14
+								},
+								"sink": {
+									"name": "%aval",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "%Comisión",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 15
+								},
+								"sink": {
+									"name": "%Comisión",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Reclas",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Reclas",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SaldoAvalado",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "SaldoAvalado",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "TasaRef",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "TasaRef",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TasaRige",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 18
+								},
+								"sink": {
+									"name": "TasaRige",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "TVisa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TVisa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TVale",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TVale",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Vencid",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 2,
+									"precision": 10
+								},
+								"sink": {
+									"name": "Vencid",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "CodPatronSIC",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodPatronSIC",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NomPatronoSIC",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NomPatronoSIC",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SalarioSIC",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 38
+								},
+								"sink": {
+									"name": "SalarioSIC",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "ClienteTipo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ClienteTipo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CarteraTipo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CarteraTipo",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CedVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CedVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NombreVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NombreVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "EstadoVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "EstadoVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "OPDVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "OPDVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "PerfilVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "PerfilVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CorreoVendDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CorreoVendDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "NombPatrono",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "NombPatrono",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CatPagoPatrono",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CatPagoPatrono",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "MedPagoPatrono",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "MedPagoPatrono",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Segmento",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Segmento",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo_Cartera",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tipo_Cartera",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo_Gestion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tipo_Gestion",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "OficinaResp",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "OficinaResp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SucursalResp",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SucursalResp",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Responsable",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Responsable",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Region/Banca",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Region/Banca",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SegBancaria",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SegBancaria",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SegIngresos",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SegIngresos",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Cod_Dest",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Cod_Dest",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Hist_BCO",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Hist_BCO",
+									"type": "Byte",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Hist_SUGEF",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "Hist_SUGEF",
+									"type": "Byte",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo_Aval",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tipo_Aval",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Multiple",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Multiple",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "C_Especial",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "C_Especial",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodCli",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								},
+								"sink": {
+									"name": "CodCli",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "CodCliT24",
+									"type": "Decimal",
+									"physicalType": "decimal",
+									"scale": 0,
+									"precision": 18
+								},
+								"sink": {
+									"name": "CodCliT24",
+									"type": "Decimal",
+									"physicalType": "DECIMAL"
+								}
+							},
+							{
+								"source": {
+									"name": "Sector",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Sector",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SectorEco",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SectorEco",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Grupo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Grupo",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "AgenciaDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "AgenciaDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "AgeNomDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "AgeNomDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SucursalDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SucursalDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RegionDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "RegionDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SubRegionDesa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SubRegionDesa",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Tamaño",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tamaño",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Origen",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Origen",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "GeneroBCO",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "GeneroBCO",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SectorSicere",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SectorSicere",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SectorEmpSicere",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SectorEmpSicere",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoEmpresaSicere",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TipoEmpresaSicere",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodProvincia",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CodProvincia",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "CodCanton",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CodCanton",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "CodDistrito",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CodDistrito",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "ProvDestino",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "ProvDestino",
+									"type": "Int16",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "CantonDestino",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "CantonDestino",
+									"type": "Int16",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "DistritoDestino",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "DistritoDestino",
+									"type": "Int16",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaVenciCred",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaVenciCred",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoNaturalezaGasto",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "TipoNaturalezaGasto",
+									"type": "Int32",
+									"physicalType": "INT_32"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "INT_96"
+								}
+							},
+							{
+								"source": {
+									"name": "ActividadOPE",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "ActividadOPE",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "AgenciaSoli",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "AgenciaSoli",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "AgeNomSoli",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "AgeNomSoli",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "SucursalSoli",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "SucursalSoli",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "RegionSoli",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "RegionSoli",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "DivisionSoli",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "DivisionSoli",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoClase",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TipoClase",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Naturaleza",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Naturaleza",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "CodConvenio",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "CodConvenio",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "E2Ant",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "E2Ant",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "TPlus",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "TPlus",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							},
+							{
+								"source": {
+									"name": "Asalari",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Asalari",
+									"type": "String",
+									"physicalType": "UTF8"
+								}
+							}
+						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
