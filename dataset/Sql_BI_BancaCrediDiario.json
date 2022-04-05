@@ -1,0 +1,931 @@
+{
+	"name": "Sql_BI_BancaCrediDiario",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SISBI",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "CodActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "Actividad",
+				"type": "varchar"
+			},
+			{
+				"name": "CodSubActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "SubActividad",
+				"type": "varchar"
+			},
+			{
+				"name": "Linea",
+				"type": "varchar"
+			},
+			{
+				"name": "Codigo Linea",
+				"type": "varchar"
+			},
+			{
+				"name": "Producto",
+				"type": "varchar"
+			},
+			{
+				"name": "Cartera",
+				"type": "varchar"
+			},
+			{
+				"name": "Banca",
+				"type": "varchar"
+			},
+			{
+				"name": "CodBanca",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IdAgencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CodAgencia",
+				"type": "varchar"
+			},
+			{
+				"name": "CodAgenciaOrg",
+				"type": "varchar"
+			},
+			{
+				"name": "NombreAgencia",
+				"type": "varchar"
+			},
+			{
+				"name": "IdSucursal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sucursal",
+				"type": "varchar"
+			},
+			{
+				"name": "Division",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoAgencia",
+				"type": "varchar"
+			},
+			{
+				"name": "Tipo Resumen",
+				"type": "varchar"
+			},
+			{
+				"name": "FecOperacion",
+				"type": "date"
+			},
+			{
+				"name": "idcliente",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "IUC",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Cedula",
+				"type": "varchar"
+			},
+			{
+				"name": "TIPOPERS",
+				"type": "varchar"
+			},
+			{
+				"name": "Nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "NombreComp",
+				"type": "varchar"
+			},
+			{
+				"name": "PriApellido",
+				"type": "varchar"
+			},
+			{
+				"name": "SegApellido",
+				"type": "varchar"
+			},
+			{
+				"name": "Tel1",
+				"type": "varchar"
+			},
+			{
+				"name": "Tel2",
+				"type": "varchar"
+			},
+			{
+				"name": "Provincia",
+				"type": "varchar"
+			},
+			{
+				"name": "Canton",
+				"type": "varchar"
+			},
+			{
+				"name": "Distrito",
+				"type": "varchar"
+			},
+			{
+				"name": "Direccion",
+				"type": "varchar"
+			},
+			{
+				"name": "Direccion2",
+				"type": "varchar"
+			},
+			{
+				"name": "Genero",
+				"type": "varchar"
+			},
+			{
+				"name": "F_Nacimiento",
+				"type": "date"
+			},
+			{
+				"name": "Email",
+				"type": "varchar"
+			},
+			{
+				"name": "Domicilio",
+				"type": "varchar"
+			},
+			{
+				"name": "Operación",
+				"type": "varchar"
+			},
+			{
+				"name": "TasaInt",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 5
+			},
+			{
+				"name": "Principal",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "PRINCIPAL_AVALADO",
+				"type": "decimal",
+				"precision": 37,
+				"scale": 8
+			},
+			{
+				"name": "Saldo",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "SALDO_AVALADO",
+				"type": "decimal",
+				"precision": 37,
+				"scale": 8
+			},
+			{
+				"name": "Cuota",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Interes",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Al día",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora Mayor 1",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora Mayor 30",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora Mayor 60",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora Mayor 90",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora 31 a 90",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Mora Mayor 180",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "CobroJudicial",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Int180",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Int181",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Amortización",
+				"type": "decimal",
+				"precision": 19,
+				"scale": 2
+			},
+			{
+				"name": "Deuda Total",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Monto del Avaluo",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "SaldoAnterior",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Excesos",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Fracciones",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "Moneda",
+				"type": "varchar"
+			},
+			{
+				"name": "Region",
+				"type": "varchar"
+			},
+			{
+				"name": "IngrFinan",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 11
+			},
+			{
+				"name": "Part %",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 20
+			},
+			{
+				"name": "PerdReal",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Codigo Destino",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Saldo_Integrado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Corp_Ejecutivo",
+				"type": "varchar"
+			},
+			{
+				"name": "Abogado",
+				"type": "varchar"
+			},
+			{
+				"name": "Ahorro",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "FecAvaluo",
+				"type": "varchar"
+			},
+			{
+				"name": "Aval",
+				"type": "varchar"
+			},
+			{
+				"name": "Banda",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Bono",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "CapPago",
+				"type": "varchar"
+			},
+			{
+				"name": "Ventanilla",
+				"type": "varchar"
+			},
+			{
+				"name": "Criter2",
+				"type": "varchar"
+			},
+			{
+				"name": "CriterioRiesgo",
+				"type": "varchar"
+			},
+			{
+				"name": "Crspec",
+				"type": "varchar"
+			},
+			{
+				"name": "CuotasAtraso",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CuotasPagas",
+				"type": "varchar"
+			},
+			{
+				"name": "CuotasPendientes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DiasAtraso",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Entrega",
+				"type": "varchar"
+			},
+			{
+				"name": "Estima",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "FecConsti",
+				"type": "date"
+			},
+			{
+				"name": "AñoConsti",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MesConsti",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DiaConsti",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FecForma",
+				"type": "date"
+			},
+			{
+				"name": "AñoForma",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MesForma",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DiaForma",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FecProxPago",
+				"type": "date"
+			},
+			{
+				"name": "FecUltMov",
+				"type": "date"
+			},
+			{
+				"name": "FecUltPago",
+				"type": "date"
+			},
+			{
+				"name": "FecRige",
+				"type": "varchar"
+			},
+			{
+				"name": "CodAnalista",
+				"type": "varchar"
+			},
+			{
+				"name": "Analista",
+				"type": "varchar"
+			},
+			{
+				"name": "CatRiesgo",
+				"type": "char"
+			},
+			{
+				"name": "Estado",
+				"type": "varchar"
+			},
+			{
+				"name": "Estado2",
+				"type": "char"
+			},
+			{
+				"name": "Patrono",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "NombrePatSipo",
+				"type": "varchar"
+			},
+			{
+				"name": "Garantia",
+				"type": "char"
+			},
+			{
+				"name": "CodVendedor",
+				"type": "varchar"
+			},
+			{
+				"name": "Vendedor",
+				"type": "varchar"
+			},
+			{
+				"name": "OPIDVendedor",
+				"type": "varchar"
+			},
+			{
+				"name": "GestCobro",
+				"type": "varchar"
+			},
+			{
+				"name": "RangAtra",
+				"type": "varchar"
+			},
+			{
+				"name": "RangMora",
+				"type": "varchar"
+			},
+			{
+				"name": "FrecPago",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GenDiv",
+				"type": "varchar"
+			},
+			{
+				"name": "Girado",
+				"type": "varchar"
+			},
+			{
+				"name": "Limite",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "MesesGracia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mitiga",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Comision",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "MontoMitiga",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "OperacMadre",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Plazo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "%aval",
+				"type": "decimal",
+				"precision": 14,
+				"scale": 2
+			},
+			{
+				"name": "%Comisión",
+				"type": "decimal",
+				"precision": 15,
+				"scale": 2
+			},
+			{
+				"name": "Reclas",
+				"type": "varchar"
+			},
+			{
+				"name": "SaldoAvalado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "TasaRef",
+				"type": "char"
+			},
+			{
+				"name": "TasaRige",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "TVisa",
+				"type": "varchar"
+			},
+			{
+				"name": "TVale",
+				"type": "varchar"
+			},
+			{
+				"name": "Vencid",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "CodPatronSIC",
+				"type": "varchar"
+			},
+			{
+				"name": "NomPatronoSIC",
+				"type": "varchar"
+			},
+			{
+				"name": "SalarioSIC",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "ClienteTipo",
+				"type": "varchar"
+			},
+			{
+				"name": "CarteraTipo",
+				"type": "varchar"
+			},
+			{
+				"name": "CedVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "NombreVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "EstadoVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "OPDVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "PerfilVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "CorreoVendDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "NombPatrono",
+				"type": "varchar"
+			},
+			{
+				"name": "CatPagoPatrono",
+				"type": "varchar"
+			},
+			{
+				"name": "MedPagoPatrono",
+				"type": "varchar"
+			},
+			{
+				"name": "Segmento",
+				"type": "varchar"
+			},
+			{
+				"name": "Tipo_Cartera",
+				"type": "varchar"
+			},
+			{
+				"name": "Tipo_Gestion",
+				"type": "varchar"
+			},
+			{
+				"name": "OficinaResp",
+				"type": "varchar"
+			},
+			{
+				"name": "SucursalResp",
+				"type": "varchar"
+			},
+			{
+				"name": "Responsable",
+				"type": "varchar"
+			},
+			{
+				"name": "Region/Banca",
+				"type": "varchar"
+			},
+			{
+				"name": "SegBancaria",
+				"type": "varchar"
+			},
+			{
+				"name": "SegIngresos",
+				"type": "varchar"
+			},
+			{
+				"name": "Cod_Dest",
+				"type": "varchar"
+			},
+			{
+				"name": "Hist_BCO",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Hist_SUGEF",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Tipo_Aval",
+				"type": "varchar"
+			},
+			{
+				"name": "Multiple",
+				"type": "varchar"
+			},
+			{
+				"name": "C_Especial",
+				"type": "varchar"
+			},
+			{
+				"name": "CodCli",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "CodCliT24",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Sector",
+				"type": "varchar"
+			},
+			{
+				"name": "SectorEco",
+				"type": "varchar"
+			},
+			{
+				"name": "Grupo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AgenciaDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "AgeNomDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "SucursalDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "RegionDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "SubRegionDesa",
+				"type": "varchar"
+			},
+			{
+				"name": "Tamaño",
+				"type": "varchar"
+			},
+			{
+				"name": "Origen",
+				"type": "varchar"
+			},
+			{
+				"name": "GeneroBCO",
+				"type": "varchar"
+			},
+			{
+				"name": "SectorSicere",
+				"type": "varchar"
+			},
+			{
+				"name": "SectorEmpSicere",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoEmpresaSicere",
+				"type": "varchar"
+			},
+			{
+				"name": "CodProvincia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CodCanton",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CodDistrito",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProvDestino",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "CantonDestino",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "DistritoDestino",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaVenciCred",
+				"type": "date"
+			},
+			{
+				"name": "TipoNaturalezaGasto",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaDefuncion",
+				"type": "date"
+			},
+			{
+				"name": "ActividadOPE",
+				"type": "varchar"
+			},
+			{
+				"name": "AgenciaSoli",
+				"type": "varchar"
+			},
+			{
+				"name": "AgeNomSoli",
+				"type": "varchar"
+			},
+			{
+				"name": "SucursalSoli",
+				"type": "varchar"
+			},
+			{
+				"name": "RegionSoli",
+				"type": "varchar"
+			},
+			{
+				"name": "DivisionSoli",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoClase",
+				"type": "varchar"
+			},
+			{
+				"name": "Naturaleza",
+				"type": "varchar"
+			},
+			{
+				"name": "CodConvenio",
+				"type": "varchar"
+			},
+			{
+				"name": "E2Ant",
+				"type": "varchar"
+			},
+			{
+				"name": "TPlus",
+				"type": "varchar"
+			},
+			{
+				"name": "Asalari",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "BI_BancaCrediDiario"
+		}
+	}
+}

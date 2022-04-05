@@ -1,9 +1,9 @@
 {
-	"name": "CD_SISBI_BI_AfiCapAge",
+	"name": "CD_SISBI_BI_BancaCrediDiario",
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_e1c",
+				"name": "Copy BI_BancaCrediDiario",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -13,16 +13,7 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "Source",
-						"value": "dbo.BI_AfiCapAge"
-					},
-					{
-						"name": "Destination",
-						"value": "SISBI/BI_AfiCapAge"
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
@@ -37,24 +28,30 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_BI_AfiCapAge",
+						"referenceName": "Sql_BI_BancaCrediDiario",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_AfiCapAge",
+						"referenceName": "Destination_BI_BancaCrediDiario",
 						"type": "DatasetReference"
 					}
 				]
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2020-08-06T14:45:37Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }

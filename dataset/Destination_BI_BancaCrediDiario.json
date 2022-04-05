@@ -1,0 +1,120 @@
+{
+	"name": "Destination_BI_BancaCrediDiario",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sisbi"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "Cps_Pk_IdClienteSipo",
+				"type": "INT64"
+			},
+			{
+				"name": "Csp_FK_IdCliente",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "Csp_Cedula",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Nombre",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Direccion",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_CodDist",
+				"type": "DECIMAL",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "Csp_Telefono1",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Telefono2",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Telefono3",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Postal",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Email",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Apartado",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Patron",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Bruto",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Liquido",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_Sexo",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_EstCiv",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_CedulaSuge",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_FechaNacimiento",
+				"type": "INT96"
+			},
+			{
+				"name": "Csp_CodOri",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_DesOri",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_CodOcu",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_DesOcu",
+				"type": "UTF8"
+			},
+			{
+				"name": "Csp_FechaCarga",
+				"type": "INT96"
+			}
+		]
+	}
+}
