@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=vm-devdat01;initial catalog=SISBI",
 			"userName": "BPDCdes\\sortega",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1ZWFiNmEyYi0yNzdjLTRiNjktOTVkZS1lM2M4YmRhNzVjNGQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIxYjA0ZTRlNS04NjkyLTQyZjctYTc4YS02MDgwZjFmYTFjY2QiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IRPRPBI",
