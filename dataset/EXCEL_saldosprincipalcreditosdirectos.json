@@ -8,12 +8,14 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "ActividadEconomicayDiasAtraso",
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "saldosprincipalcreditosdirectos.sugef.xls",
 				"folderPath": "creditosdirectos",
 				"fileSystem": "sugef"
 			},
+			"range": "A10:L1000",
 			"firstRowAsHeader": false
 		},
 		"schema": [
