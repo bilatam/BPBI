@@ -1,4 +1,28 @@
 {
+    "Microsoft.DataFactory/factories": {
+        "properties": {
+            "globalParameters": {
+                "*": {
+                    "value": "="
+                }
+            },
+            "globalConfigurations": {
+                "*": "="
+            },
+            "encryption": {
+                "*": "=",
+                "identity": {
+                    "*": "="
+                }
+            }
+        },
+        "location": "=",
+        "identity": {
+            "type": "=",
+            "userAssignedIdentities": "="
+        }
+    },
+    "Microsoft.DataFactory/factories/pipelines": {},
     "Microsoft.DataFactory/factories/integrationRuntimes": {
         "properties": {
             "typeProperties": {
@@ -31,6 +55,26 @@
                         ]
                     }
                 }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/triggers": {
+        "properties": {
+            "pipelines": [
+                {
+                    "parameters": {
+                        "*": "="
+                    }
+                },
+                "pipelineReference.referenceName"
+            ],
+            "pipeline": {
+                "parameters": {
+                    "*": "="
+                }
+            },
+            "typeProperties": {
+                "scope": "="
             }
         }
     },
@@ -82,6 +126,16 @@
                     "connectionString": {
                         "secretName": "="
                     }
+                }
+            }
+        }
+    },
+    "Microsoft.DataFactory/factories/datasets": {
+        "*": {
+            "properties": {
+                "typeProperties": {
+                    "folderPath": "=",
+                    "fileName": "="
                 }
             }
         }
