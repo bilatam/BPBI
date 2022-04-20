@@ -65,14 +65,15 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"EXCELsaldosprincipalcreditosdirectos filter(not(equals(Column_3, 'Total'))) ~> filter1",
-				"select1 sink(allowSchemaDrift: true,",
+				"select1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sink1"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1) ~> sink1"
 			]
 		}
 	}
