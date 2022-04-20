@@ -1,0 +1,20 @@
+{
+	"name": "Parquet_Sujef_CreditoDirecto",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "saldosprincipalcreditosdirectos.parquet",
+				"fileSystem": "sugef"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
