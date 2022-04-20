@@ -59,6 +59,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"ProcessDate": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "SUGEF"
 		},
