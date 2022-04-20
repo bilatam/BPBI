@@ -14,7 +14,8 @@
 				"fileName": "saldosprincipalcreditosdirectos.sugef.xls",
 				"folderPath": "creditosdirectos",
 				"fileSystem": "sugef"
-			}
+			},
+			"firstRowAsHeader": true
 		},
 		"schema": []
 	}
