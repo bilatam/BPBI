@@ -8,11 +8,10 @@
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
-			"sheetName": "ActividadEconomicayDiasAtraso",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "022022.saldosprincipalcreditosdirectos.sugef.xls",
-				"folderPath": "csvsaldosprincipalcreditosdirectos",
+				"fileName": "saldosprincipalcreditosdirectos.sugef.xls",
+				"folderPath": "creditosdirectos",
 				"fileSystem": "sugef"
 			},
 			"firstRowAsHeader": false
