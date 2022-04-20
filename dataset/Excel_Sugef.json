@@ -15,8 +15,8 @@
 				"folderPath": "creditosdirectos",
 				"fileSystem": "sugef"
 			},
-			"range": "A8:L1000",
-			"firstRowAsHeader": false
+			"range": "A9:L1000",
+			"firstRowAsHeader": true
 		},
 		"schema": []
 	}
