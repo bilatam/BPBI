@@ -1,0 +1,21 @@
+{
+	"name": "Excel_Sugef",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SA_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"sheetName": "ActividadEconomicayDiasAtraso",
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "saldosprincipalcreditosdirectos.sugef.xls",
+				"folderPath": "creditosdirectos",
+				"fileSystem": "sugef"
+			}
+		},
+		"schema": []
+	}
+}
