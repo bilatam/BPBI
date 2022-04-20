@@ -64,7 +64,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"EXCELsaldosprincipalcreditosdirectos filter(not(equals(Entidad, 'Total'))) ~> filter1",
+				"EXCELsaldosprincipalcreditosdirectos filter(not(equals(Column_3, 'Total'))) ~> filter1",
 				"select1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'parquet',",
