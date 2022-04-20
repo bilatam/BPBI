@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "creditosdirectos.parquet",
+				"folderPath": "creditosdirectorparquet",
 				"fileSystem": "sugef"
 			},
 			"compressionCodec": "snappy"
