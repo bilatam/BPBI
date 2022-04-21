@@ -27,7 +27,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM TransT24.BI_SessionDetailHist WHERE YEAR(Ssd_Datetime) = YEAR(GETDATE()) AND MONTH(Ssd_Datetime) >= 9",
+						"sqlReaderQuery": "SELECT * FROM TransT24.BI_SessionDetailHist",
 						"partitionOption": "None"
 					},
 					"sink": {

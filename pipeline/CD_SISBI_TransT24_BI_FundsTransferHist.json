@@ -27,7 +27,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM TransT24.BI_FundsTransferHist WHERE YEAR(Ftf_FechaCarga) = YEAR(GETDATE()) AND MONTH(Ftf_FechaCarga) >= 9",
+						"sqlReaderQuery": "SELECT * FROM TransT24.BI_FundsTransferHist",
 						"partitionOption": "None"
 					},
 					"sink": {

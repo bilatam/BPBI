@@ -27,7 +27,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
-						"sqlReaderQuery": "SELECT * FROM TransT24.BI_StmtEntryHist WHERE YEAR(Ste_FechaCarga) = YEAR(GETDATE()) AND MONTH(Ste_FechaCarga) >= 9",
+						"sqlReaderQuery": "SELECT * FROM TransT24.BI_StmtEntryHist",
 						"partitionOption": "None"
 					},
 					"sink": {
