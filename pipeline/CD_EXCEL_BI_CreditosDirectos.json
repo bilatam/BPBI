@@ -27,7 +27,7 @@
 						"type": "DataFlowReference",
 						"parameters": {
 							"FechaProc": {
-								"value": "'@{pipeline().parameters.ProcessDate}'",
+								"value": "'@{replace(pipeline().parameters.ProcessDate, '/', '')}'",
 								"type": "Expression"
 							}
 						}
