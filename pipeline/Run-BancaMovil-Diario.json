@@ -8,6 +8,10 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Extraer Banca Movil Diario",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			}
