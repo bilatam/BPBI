@@ -18,18 +18,24 @@
 			{
 				"name": "CD_BancaMovil_Spm_UsuariosAPP",
 				"type": "ExecutePipeline",
-				"dependsOn": [
-					{
-						"activity": "CD_BancaMovil_Bmv_Estados",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "Spm_UsuariosAPP",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_BancaMovil_Bmv_TarjetasCliente",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Bmv_TarjetasCliente",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true

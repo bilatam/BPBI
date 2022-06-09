@@ -1,0 +1,34 @@
+{
+	"name": "Source_Bmv_TarjetasCliente",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Usu_cocUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Tct_codTarjetaCliente",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tct_cocTarjeta",
+				"type": "char"
+			},
+			{
+				"name": "Tct_cocTarjetaCifrado",
+				"type": "char"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_TarjetasCliente"
+		}
+	}
+}
