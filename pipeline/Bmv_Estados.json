@@ -1,9 +1,9 @@
 {
-	"name": "Prueba",
+	"name": "Bmv_Estados",
 	"properties": {
 		"activities": [
 			{
-				"name": "Prueba",
+				"name": "Bmv_Estados",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
