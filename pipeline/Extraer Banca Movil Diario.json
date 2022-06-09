@@ -1,0 +1,24 @@
+{
+	"name": "Extraer Banca Movil Diario",
+	"properties": {
+		"activities": [
+			{
+				"name": "CD_BancaMovil_Bmv_Estados",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Bmv_Estados",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "BancaMovil"
+		},
+		"annotations": []
+	}
+}
