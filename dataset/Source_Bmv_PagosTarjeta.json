@@ -1,0 +1,66 @@
+{
+	"name": "Source_Bmv_PagosTarjeta",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Mon_codMoneda",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Mon_nomMoneda",
+				"type": "varchar"
+			},
+			{
+				"name": "Mon_indPermiteTranExterna",
+				"type": "bit"
+			},
+			{
+				"name": "Mon_indPermiteTranInterna",
+				"type": "bit"
+			},
+			{
+				"name": "Mon_cocSigno",
+				"type": "varchar"
+			},
+			{
+				"name": "Mon_IdMoneda",
+				"type": "char"
+			},
+			{
+				"name": "Mon_fecIngreso",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Mon_usrIngreso",
+				"type": "varchar"
+			},
+			{
+				"name": "Mon_fecModificacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Mon_usrModifico",
+				"type": "varchar"
+			},
+			{
+				"name": "Mon_indManejaComision",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_PagosTarjeta"
+		}
+	}
+}
