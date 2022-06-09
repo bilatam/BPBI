@@ -40,6 +40,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "CD_Bmv_PagosTarjeta",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Bmv_PagosTarjeta",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
