@@ -1,0 +1,16 @@
+{
+	"name": "Source_Spm_UsuariosAPP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Spm_UsuariosAPP"
+		}
+	}
+}
