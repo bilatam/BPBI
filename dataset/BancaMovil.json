@@ -1,0 +1,30 @@
+{
+	"name": "BancaMovil",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Esb_codEstado",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Esb_nomEstado",
+				"type": "varchar"
+			},
+			{
+				"name": "Esb_cocEstado",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_Estados"
+		}
+	}
+}
