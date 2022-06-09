@@ -1,0 +1,17 @@
+{
+	"name": "BancaMovil",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=True;data source=arenal,5292;initial catalog=BM_DEV_INCIDENTES",
+			"userName": "kechaves@bpdcdes.com",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlZDI4NGVjZi0zZTlmLTRlMjMtYTkxYS0xY2M2YzM3ODQ3ZTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "IRPRPBI",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
