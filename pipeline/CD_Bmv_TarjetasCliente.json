@@ -1,9 +1,9 @@
 {
-	"name": "Bmv_TarjetasCliente",
+	"name": "CD_Bmv_TarjetasCliente",
 	"properties": {
 		"activities": [
 			{
-				"name": "Bmv_TarjetasCliente",
+				"name": "CD_Bmv_TarjetasCliente",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
