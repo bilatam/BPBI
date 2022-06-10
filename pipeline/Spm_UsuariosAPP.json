@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Spm_UsuariosAPP",
+				"name": "CD_Spm_UsuariosAPP",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
