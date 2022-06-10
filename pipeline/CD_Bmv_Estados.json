@@ -1,9 +1,9 @@
 {
-	"name": "Bmv_Estados",
+	"name": "CD_Bmv_Estados",
 	"properties": {
 		"activities": [
 			{
-				"name": "Bmv_Estados",
+				"name": "CD_Bmv_Estados",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
