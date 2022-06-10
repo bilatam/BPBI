@@ -9,7 +9,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "Bmv_Estados",
+						"referenceName": "CD_Bmv_Estados",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -22,7 +22,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "Spm_UsuariosAPP",
+						"referenceName": "CD_Spm_UsuariosAPP",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -35,7 +35,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "Bmv_TarjetasCliente",
+						"referenceName": "CD_Bmv_TarjetasCliente",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
@@ -49,6 +49,19 @@
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "CD_Bmv_PagosTarjeta",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "CD_Bmv_Ingresos",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Bmv_Ingresos",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
