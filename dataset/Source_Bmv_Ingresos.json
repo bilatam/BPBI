@@ -1,0 +1,52 @@
+{
+	"name": "Source_Bmv_Ingresos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Ing_nId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ing_dtFecha",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ing_strUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Ing_strEstado",
+				"type": "varchar"
+			},
+			{
+				"name": "Ing_desLongitud",
+				"type": "varchar"
+			},
+			{
+				"name": "Ing_desLatitud",
+				"type": "varchar"
+			},
+			{
+				"name": "Ing_desIP",
+				"type": "varchar"
+			},
+			{
+				"name": "Ing_desVersionAPP",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_Ingresos"
+		}
+	}
+}
