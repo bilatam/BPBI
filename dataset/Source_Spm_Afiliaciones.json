@@ -1,0 +1,103 @@
+{
+	"name": "Source_Spm_Afiliaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Afl_conAfiliacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Afl_cocOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "Usa_cocUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Mon_codMoneda",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Afl_cocTelefono",
+				"type": "varchar"
+			},
+			{
+				"name": "Afl_cocCuentaIBAN",
+				"type": "char"
+			},
+			{
+				"name": "Afl_mtoMaximoPase",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Afl_fecIngreso",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "afl_aceptaTerminos",
+				"type": "bit"
+			},
+			{
+				"name": "afl_UsuarioDominio",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_idUsuarioAfilia",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_nombreUsuariAfilia",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_idUsuarioDueñoCuenta",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_nombreUsuarDueñoCuenta",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_Alias",
+				"type": "varchar"
+			},
+			{
+				"name": "Usa_afiUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_Ip",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_Ubicacion",
+				"type": "varchar"
+			},
+			{
+				"name": "afl_Juridico",
+				"type": "bit"
+			},
+			{
+				"name": "afl_Correo",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Spm_Afiliaciones"
+		}
+	}
+}
