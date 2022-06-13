@@ -66,6 +66,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "CD_Spm_Afiliaciones",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Spm_Afiliaciones",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
