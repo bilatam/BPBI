@@ -1,0 +1,94 @@
+{
+	"name": "Source_Spm_Desafiliaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Daf_conDesafiliacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Daf_cocOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "Usa_cocUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_cocTelefono",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_cocCuentaIBAN",
+				"type": "char"
+			},
+			{
+				"name": "Daf_mtoMaximoPase",
+				"type": "decimal",
+				"precision": 10,
+				"scale": 2
+			},
+			{
+				"name": "Daf_fecDesafiliacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Daf_desMotivoDesafilia",
+				"type": "varchar"
+			},
+			{
+				"name": "Sda_indExterna",
+				"type": "bit"
+			},
+			{
+				"name": "Sda_conSolicitudDesafilia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Etd_codEntidad",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Daf_cocIdAfiliado",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_nomAfiliado",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_fecAfiliacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Usa_desUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_Ip",
+				"type": "varchar"
+			},
+			{
+				"name": "Daf_Ubicacion",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Spm_Desafiliaciones"
+		}
+	}
+}
