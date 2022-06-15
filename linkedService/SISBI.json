@@ -7,7 +7,7 @@
 		"typeProperties": {
 			"connectionString": "integrated security=True;data source=arenal,5292;initial catalog=SISBI",
 			"userName": "BPDCdes\\jonmadriz",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhNTczNTUxNy0wM2NmLTQ2ODktYmQ5MS1mMTg3OTIxZjUzYWEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI3NjVmNDZmYi1hNDg2LTRkZTktOTI0Zi0wMWNhOWFmZjIyZDIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IRPRPBI",
