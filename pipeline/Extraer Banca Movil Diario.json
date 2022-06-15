@@ -92,6 +92,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "CD_Bmv_TiposTransaccion",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Bmv_TiposTransaccion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
