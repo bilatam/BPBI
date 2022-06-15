@@ -40,7 +40,7 @@
 						}
 					},
 					"enableStaging": false,
-					"dataIntegrationUnits": 32
+					"dataIntegrationUnits": 256
 				},
 				"inputs": [
 					{
