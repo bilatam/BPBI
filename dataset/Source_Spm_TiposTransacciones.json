@@ -1,0 +1,38 @@
+{
+	"name": "Source_Spm_TiposTransacciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Ttr_codTipoTransaccion",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Ttr_nomTipoTransaccion",
+				"type": "varchar"
+			},
+			{
+				"name": "Ttr_indAfectaSaldo",
+				"type": "bit"
+			},
+			{
+				"name": "Ttr_indSumaSaldo",
+				"type": "bit"
+			},
+			{
+				"name": "Ttr_cocTipoTransaccion",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Spm_TiposTransacciones"
+		}
+	}
+}
