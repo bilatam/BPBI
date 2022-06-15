@@ -26,12 +26,14 @@
 				"typeProperties": {
 					"source": {
 						"type": "SqlServerSource",
+						"queryTimeout": "03:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
 						"type": "ParquetSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
+							"type": "AzureBlobFSWriteSettings",
+							"blockSizeInMB": 100
 						},
 						"formatSettings": {
 							"type": "ParquetWriteSettings"
