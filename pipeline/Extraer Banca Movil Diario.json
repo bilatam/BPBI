@@ -105,6 +105,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "CD_Spm_TiposTransacciones",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Spm_TiposTransacciones",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
