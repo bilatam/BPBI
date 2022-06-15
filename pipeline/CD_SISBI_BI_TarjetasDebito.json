@@ -39,7 +39,8 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"dataIntegrationUnits": 32
 				},
 				"inputs": [
 					{
