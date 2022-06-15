@@ -1,0 +1,54 @@
+{
+	"name": "Source_Bmv_TiposTransaccion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Tis_codTipoTransaccion",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Tis_desTipoTransaccion",
+				"type": "varchar"
+			},
+			{
+				"name": "Tis_cocTipoTransaccion",
+				"type": "varchar"
+			},
+			{
+				"name": "Tis_usrIngreso",
+				"type": "varchar"
+			},
+			{
+				"name": "Tis_fecIngreso",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Tis_fecModificacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Tis_usrModifico",
+				"type": "varchar"
+			},
+			{
+				"name": "Tis_aplicaLimite",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_TiposTransaccion"
+		}
+	}
+}
