@@ -5,9 +5,9 @@
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
-			"connectionString": "integrated security=True;data source=arenal,5292;initial catalog=BM_DEV_INCIDENTES",
+			"connectionString": "integrated security=True;data source=arenal,5292;initial catalog=BM_TRANSMIT_IONIC5",
 			"userName": "kechaves@bpdcdes.com",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlZDI4NGVjZi0zZTlmLTRlMjMtYTkxYS0xY2M2YzM3ODQ3ZTIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJiZTAyMzhhOS1lZGZiLTQ3YmQtODUxMi0wNGUxMmRhYjViMzQiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "IRPRPBI",
