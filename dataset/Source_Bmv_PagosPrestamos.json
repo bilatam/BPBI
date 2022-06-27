@@ -1,0 +1,293 @@
+{
+	"name": "Source_Bmv_PagosPrestamos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ppt_nId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_dtFecha",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ppt_nDocumento1",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_nDocumento2",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_strOperacion",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strCedulaDeudor",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strNombreDeudor",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strCedulaCliente",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strNombreCliente",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strCuenta",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strAgencia",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strDescripcion",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strComprobante",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strMonedaCuenta",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strMonedaOperacion",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_nSaldoAnterior",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nSaldoActual",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nCuotasPagadas",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_nCuotasDesde",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_nCuotasHasta",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Ppt_dtProximoPago",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ppt_nAmortizacion",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nIntereses",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nInteresesMora",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nTotalPagar",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nTipoCambio",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nInteresesGanados",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nCobro",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nComision",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nCheque",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nMontoPagado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nMontoPagadoConvertido",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nMontoCuota",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nMontoCuotaNueva",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nPolizaVida",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nPolizaVehiculo",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nPolizaIncendio",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nPolizaGanado",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nOtros1",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nOtros2",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nGastos",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_bPropio",
+				"type": "bit"
+			},
+			{
+				"name": "Ppt_nTipoPago",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Ppt_strCodigoRespuesta",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_nRespuestaSistema",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Ppt_strComprobanteFT",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_strMensaje",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_nCodEstado",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Ppt_dtIngresa",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ppt_dtModifica",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Ppt_strEstadoSipo",
+				"type": "varchar"
+			},
+			{
+				"name": "Ppt_nTasaInteres",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Ppt_nPlazoMeses",
+				"type": "smallint",
+				"precision": 5
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_PagosPrestamos"
+		}
+	}
+}
