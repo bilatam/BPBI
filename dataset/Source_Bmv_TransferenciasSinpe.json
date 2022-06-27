@@ -1,0 +1,202 @@
+{
+	"name": "Source_Bmv_TransferenciasSinpe",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TrfS_IdTransferenciaSinpe",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TrfS_cocUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strCedulaClienteOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strCuentaClienteOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strNombreClienteOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strEntidadOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strMonedaOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_nCodMonedaOrigen",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "TrfS_nTipoIdentificacionOrigen",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TrfS_nMontoDebitar",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_nMontoComision",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_nTipoIdentificacionDestino",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TrfS_strCedulaClienteDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strCuentaClienteDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strEntidadDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strNombreClienteDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_numPin",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_numIntentos",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "TrfS_fecCaducidad",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TrfS_strMonedaDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_nCodMonedaDestino",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "TrfS_nMontoDepositar",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_strDescripcion",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_nCodigoRespuesta",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_strMensajeRespuesta",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_dtFechaHora",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "TrfS_strRefenciaSinpe",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strComprobanteFT",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_nTipoCambioOrigen",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_nTipoCambioDestino",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_strCanal",
+				"type": "char"
+			},
+			{
+				"name": "TrfS_nMontoAcreditar",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "TrfS_strTipoTransferencia",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_nCodEstado",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "TrfS_dtFechaIngreso",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_dtFechaModifica",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strMotivoDevolucion",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strNomProducto",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strPaisOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "TrfS_strPaisDestino",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_TransferenciasSinpe"
+		}
+	}
+}
