@@ -33,7 +33,7 @@
 						},
 						"formatSettings": {
 							"type": "DelimitedTextReadSettings",
-							"skipLineCount": 9
+							"skipLineCount": 8
 						}
 					},
 					"sink": {
