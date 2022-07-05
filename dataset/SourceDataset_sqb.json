@@ -19,55 +19,6 @@
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "Prop_0",
-				"type": "String"
-			},
-			{
-				"name": "Prop_1",
-				"type": "String"
-			},
-			{
-				"name": "B-Pesca y  acuacultura",
-				"type": "String"
-			},
-			{
-				"name": "Prop_3",
-				"type": "String"
-			},
-			{
-				"name": "45 3334",
-				"type": "String"
-			},
-			{
-				"name": "05",
-				"type": "String"
-			},
-			{
-				"name": "06",
-				"type": "String"
-			},
-			{
-				"name": "07",
-				"type": "String"
-			},
-			{
-				"name": "08",
-				"type": "String"
-			},
-			{
-				"name": "09",
-				"type": "String"
-			},
-			{
-				"name": "010",
-				"type": "String"
-			},
-			{
-				"name": "45 33311",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
