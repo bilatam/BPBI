@@ -16,58 +16,9 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
-			"firstRowAsHeader": false,
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "Sector",
-				"type": "String"
-			},
-			{
-				"name": "Entidad y Periodo",
-				"type": "String"
-			},
-			{
-				"name": "C GRUPO",
-				"type": "String"
-			},
-			{
-				"name": "C CATEGORIA RIESGO",
-				"type": "String"
-			},
-			{
-				"name": "Al día",
-				"type": "String"
-			},
-			{
-				"name": "1 a 30 días",
-				"type": "String"
-			},
-			{
-				"name": "31 a 60 días",
-				"type": "String"
-			},
-			{
-				"name": "61 a 90 días",
-				"type": "String"
-			},
-			{
-				"name": "91 a 180 días",
-				"type": "String"
-			},
-			{
-				"name": "Más de 180 días",
-				"type": "String"
-			},
-			{
-				"name": "Cobro Judicial",
-				"type": "String"
-			},
-			{
-				"name": "Total",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
