@@ -1,0 +1,158 @@
+{
+	"name": "Source_Bmv_Transferencias",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BancaMovil",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Usu_cocUsuario",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_conTransferencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trf_conIdTransferencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Trf_fecTransferencia",
+				"type": "date"
+			},
+			{
+				"name": "Trf_cocComprobante",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_indPropia",
+				"type": "bit"
+			},
+			{
+				"name": "Trf_codMonedaOrigen",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Trf_codMonedaDestino",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Trf_cocCuentaOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_cocCuentaDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_mtoDebito",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Trf_mtoCredito",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Trf_mtoaAcumular",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Trf_mtoTransferencia",
+				"type": "decimal",
+				"precision": 16,
+				"scale": 2
+			},
+			{
+				"name": "Trf_nomOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_nomDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_mtoTipoCambio",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 4
+			},
+			{
+				"name": "Trf_desDetalle",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_desReferenciaConcilia",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_fecProceso",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Trf_fecCaducidad",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Trf_fecContable",
+				"type": "date"
+			},
+			{
+				"name": "Trf_desResultado",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_fecIngreso",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Esb_codEstado",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Trf_cocIDDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_cocIDOrigen",
+				"type": "varchar"
+			},
+			{
+				"name": "Usu_cocUsuarioDestino",
+				"type": "varchar"
+			},
+			{
+				"name": "Trf_indDestino",
+				"type": "bit"
+			},
+			{
+				"name": "Trf_indDonacion",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Bmv_Transferencias"
+		}
+	}
+}
