@@ -157,6 +157,19 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "CD_Bmv_SolicitudValePopular",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "CD_Bmv_SolicitudValePopular",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"folder": {
