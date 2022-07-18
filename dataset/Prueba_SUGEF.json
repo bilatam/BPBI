@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "SUGEF.xml",
+				"fileName": "Archivo_Descargable_POPULAR_2022-05-01.xml",
 				"fileSystem": "sugef"
 			}
 		}
