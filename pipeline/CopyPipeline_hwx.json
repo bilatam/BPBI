@@ -52,7 +52,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['IdPersona']"
+									"path": "$['ArchivoCIC']['Deudor'][1]['IdPersona']"
 								},
 								"sink": {
 									"name": "IdPersona",
@@ -84,24 +84,6 @@
 								"sink": {
 									"name": "NivelCompPagoHist",
 									"type": "Int16"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorReqAut1-05']"
-								},
-								"sink": {
-									"name": "IndicadorReqAut1-05",
-									"type": "Guid"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorAutorizacion']"
-								},
-								"sink": {
-									"name": "IndicadorAutorizacion",
-									"type": "String"
 								}
 							},
 							{
