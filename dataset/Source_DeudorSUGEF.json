@@ -1,5 +1,5 @@
 {
-	"name": "SourceDataset_hwx",
+	"name": "Source_DeudorSUGEF",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
