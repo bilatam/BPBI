@@ -33,25 +33,290 @@
 						},
 						"formatSettings": {
 							"type": "XmlReadSettings",
-							"validationMode": "none"
+							"validationMode": "none",
+							"detectDataType": true,
+							"namespaces": false
 						}
 					},
 					"sink": {
 						"type": "AzureSqlSink",
-						"tableOption": "autoCreate"
+						"writeBehavior": "upsert",
+						"upsertSettings": {
+							"useTempDB": true
+						},
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
-					"validateDataConsistency": false
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['IdPersona']"
+								},
+								"sink": {
+									"name": "IdPersona",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['TipoPersona']"
+								},
+								"sink": {
+									"name": "TipoPersona",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorNumericoDeudor']"
+								},
+								"sink": {
+									"name": "IndicadorNumericoDeudor",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['NivelCompPagoHist']"
+								},
+								"sink": {
+									"name": "NivelCompPagoHist",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorReqAut1-05']"
+								},
+								"sink": {
+									"name": "IndicadorReqAut1-05",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorAutorizacion']"
+								},
+								"sink": {
+									"name": "IndicadorAutorizacion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['FechaInicioReqAutorizacion']"
+								},
+								"sink": {
+									"name": "FechaInicioReqAutorizacion",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoTotalAdeudado_MN']"
+								},
+								"sink": {
+									"name": "SaldoTotalAdeudado_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoTotalAdeudado_ME']"
+								},
+								"sink": {
+									"name": "SaldoTotalAdeudado_ME",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsado_MN']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsado_ME']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado_ME",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCredito_MN']"
+								},
+								"sink": {
+									"name": "TotalCuotaCredito_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCredito_ME']"
+								},
+								"sink": {
+									"name": "TotalCuotaCredito_ME",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoFiado']"
+								},
+								"sink": {
+									"name": "MontoFiado",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorNumericoDeudorSBD']"
+								},
+								"sink": {
+									"name": "IndicadorNumericoDeudorSBD",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['NivelCompPagoHistSBD']"
+								},
+								"sink": {
+									"name": "NivelCompPagoHistSBD",
+									"type": "Int16"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoAdeudadoSBD_MN']"
+								},
+								"sink": {
+									"name": "SaldoAdeudadoSBD_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoAdeudadoSBD_ME']"
+								},
+								"sink": {
+									"name": "SaldoAdeudadoSBD_ME",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsadoSBD_MN']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsadoSBD_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsadoSBD_ME']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsadoSBD_ME",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCreditoSBD_MN']"
+								},
+								"sink": {
+									"name": "TotalCuotaCreditoSBD_MN",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCreditoSBD_ME']"
+								},
+								"sink": {
+									"name": "TotalCuotaCreditoSBD_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['MontoFiadoSBD']"
+								},
+								"sink": {
+									"name": "MontoFiadoSBD",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD_12']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD_12",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD_24']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD_24",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['PorcentajeDolarizacion']"
+								},
+								"sink": {
+									"name": "PorcentajeDolarizacion",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Deudor'][0]['PorcentajeTasavariable']"
+								},
+								"sink": {
+									"name": "PorcentajeTasavariable",
+									"type": "Decimal"
+								}
+							}
+						],
+						"collectionReference": ""
+					}
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_hwx",
+						"referenceName": "Source_DeudorSUGEF",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_hwx",
+						"referenceName": "Destination_SUGEFDeudor",
 						"type": "DatasetReference"
 					}
 				]
