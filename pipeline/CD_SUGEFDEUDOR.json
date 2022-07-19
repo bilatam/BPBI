@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy_hwx",
+				"name": "CD_SUGEFDEUDOR",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
