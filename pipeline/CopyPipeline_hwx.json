@@ -92,7 +92,7 @@
 								},
 								"sink": {
 									"name": "IndicadorReqAut1-05",
-									"type": "String"
+									"type": "Single"
 								}
 							},
 							{
