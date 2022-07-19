@@ -1,0 +1,308 @@
+{
+	"name": "pipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "XmlSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "XmlReadSettings",
+							"validationMode": "none",
+							"namespaces": true
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['Entidad']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['Entidad",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['IdOperacion']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['IdOperacion",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['Moneda']"
+								},
+								"sink": {
+									"name": "Moneda",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['FechaVencimiento']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['FechaVencimiento",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['FechaFormalizacion']"
+								},
+								"sink": {
+									"name": "FechaFormalizacion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Saldo']"
+								},
+								"sink": {
+									"name": "Saldo",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoFormalizado']"
+								},
+								"sink": {
+									"name": "MontoFormalizado",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoNoDesembolsado']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoAutorizado']"
+								},
+								"sink": {
+									"name": "MontoAutorizado",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['CuotaPrincipal']"
+								},
+								"sink": {
+									"name": "CuotaPrincipal",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['CuotaIntereses']"
+								},
+								"sink": {
+									"name": "CuotaIntereses",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['TipoOperacion']"
+								},
+								"sink": {
+									"name": "TipoOperacion",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['FrecuenciaPagoPrincipal']"
+								},
+								"sink": {
+									"name": "FrecuenciaPagoPrincipal",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['Condicion']"
+								},
+								"sink": {
+									"name": "Condicion",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['EstadoOperacion']"
+								},
+								"sink": {
+									"name": "EstadoOperacion",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['DiasAtraso']"
+								},
+								"sink": {
+									"name": "DiasAtraso",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['TasaInteresNominal']"
+								},
+								"sink": {
+									"name": "TasaInteresNominal",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['TipoTasa']"
+								},
+								"sink": {
+									"name": "TipoTasa",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['FechaCambioTipoTasa']"
+								},
+								"sink": {
+									"name": "FechaCambioTipoTasa",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "['ParametroReferencia']"
+								},
+								"sink": {
+									"name": "ParametroReferencia",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['FrecuenciaAjusteTasa']"
+								},
+								"sink": {
+									"name": "FrecuenciaAjusteTasa",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['ComponenteFijoTasaVariable']"
+								},
+								"sink": {
+									"name": "ComponenteFijoTasaVariable",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['PisoTasa']"
+								},
+								"sink": {
+									"name": "PisoTasa",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['TechoTasa']"
+								},
+								"sink": {
+									"name": "TechoTasa",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['Generador']"
+								},
+								"sink": {
+									"name": "Generador",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['EsSBD']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['EsSBD",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['ActualizadoAl']"
+								},
+								"sink": {
+									"name": "ActualizadoAl",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['ArchivoCIC']['Deudor'][0]['ListaOperacionesActivas']['OperacionActiva']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Source_SUGEF",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Destination_OperacionesActivasSugef",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"folder": {
+			"name": "SUGEF"
+		},
+		"annotations": []
+	}
+}
