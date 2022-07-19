@@ -1,5 +1,5 @@
 {
-	"name": "CD_Prueba_SUGEF",
+	"name": "Destination_OperacionesActivasSugef",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "DW_Popular",
@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "STAGE",
-			"table": "PRUEBASUGEF"
+			"table": "SUGEFOperacionesActivas"
 		}
 	}
 }
