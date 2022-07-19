@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_hwx",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DW_Popular",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "STAGE",
+			"table": "SUGEFPRUEBA"
+		}
+	}
+}
