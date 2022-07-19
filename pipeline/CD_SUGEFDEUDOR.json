@@ -291,7 +291,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Source_DeudorSUGEF",
+						"referenceName": "Source_SUGEF",
 						"type": "DatasetReference"
 					}
 				],
