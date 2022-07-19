@@ -1,5 +1,5 @@
 {
-	"name": "Source_DeudorSUGEF",
+	"name": "Source_SUGEF",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SA_Popular",
