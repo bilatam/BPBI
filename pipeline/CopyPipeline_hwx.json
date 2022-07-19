@@ -40,19 +40,19 @@
 					},
 					"sink": {
 						"type": "AzureSqlSink",
+						"preCopyScript": "delete from STAGE.SUGEFDeudor",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
 						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
-					"validateDataConsistency": false,
 					"translator": {
 						"type": "TabularTranslator",
 						"mappings": [
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][1]['IdPersona']"
+									"path": "['IdPersona']"
 								},
 								"sink": {
 									"name": "IdPersona",
@@ -61,7 +61,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['TipoPersona']"
+									"path": "['TipoPersona']"
 								},
 								"sink": {
 									"name": "TipoPersona",
@@ -70,7 +70,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorNumericoDeudor']"
+									"path": "['IndicadorNumericoDeudor']"
 								},
 								"sink": {
 									"name": "IndicadorNumericoDeudor",
@@ -79,7 +79,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['NivelCompPagoHist']"
+									"path": "['NivelCompPagoHist']"
 								},
 								"sink": {
 									"name": "NivelCompPagoHist",
@@ -88,7 +88,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['FechaInicioReqAutorizacion']"
+									"path": "['FechaInicioReqAutorizacion']"
 								},
 								"sink": {
 									"name": "FechaInicioReqAutorizacion",
@@ -97,7 +97,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoTotalAdeudado_MN']"
+									"path": "['SaldoTotalAdeudado_MN']"
 								},
 								"sink": {
 									"name": "SaldoTotalAdeudado_MN",
@@ -106,7 +106,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoTotalAdeudado_ME']"
+									"path": "['SaldoTotalAdeudado_ME']"
 								},
 								"sink": {
 									"name": "SaldoTotalAdeudado_ME",
@@ -115,7 +115,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsado_MN']"
+									"path": "['MontoNoDesembolsado_MN']"
 								},
 								"sink": {
 									"name": "MontoNoDesembolsado_MN",
@@ -124,7 +124,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsado_ME']"
+									"path": "['MontoNoDesembolsado_ME']"
 								},
 								"sink": {
 									"name": "MontoNoDesembolsado_ME",
@@ -133,7 +133,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCredito_MN']"
+									"path": "['TotalCuotaCredito_MN']"
 								},
 								"sink": {
 									"name": "TotalCuotaCredito_MN",
@@ -142,7 +142,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCredito_ME']"
+									"path": "['TotalCuotaCredito_ME']"
 								},
 								"sink": {
 									"name": "TotalCuotaCredito_ME",
@@ -151,7 +151,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoFiado']"
+									"path": "['MontoFiado']"
 								},
 								"sink": {
 									"name": "MontoFiado",
@@ -160,7 +160,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['IndicadorNumericoDeudorSBD']"
+									"path": "['IndicadorNumericoDeudorSBD']"
 								},
 								"sink": {
 									"name": "IndicadorNumericoDeudorSBD",
@@ -169,7 +169,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['NivelCompPagoHistSBD']"
+									"path": "['NivelCompPagoHistSBD']"
 								},
 								"sink": {
 									"name": "NivelCompPagoHistSBD",
@@ -178,7 +178,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoAdeudadoSBD_MN']"
+									"path": "['SaldoAdeudadoSBD_MN']"
 								},
 								"sink": {
 									"name": "SaldoAdeudadoSBD_MN",
@@ -187,7 +187,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['SaldoAdeudadoSBD_ME']"
+									"path": "['SaldoAdeudadoSBD_ME']"
 								},
 								"sink": {
 									"name": "SaldoAdeudadoSBD_ME",
@@ -196,7 +196,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsadoSBD_MN']"
+									"path": "['MontoNoDesembolsadoSBD_MN']"
 								},
 								"sink": {
 									"name": "MontoNoDesembolsadoSBD_MN",
@@ -205,7 +205,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoNoDesembolsadoSBD_ME']"
+									"path": "['MontoNoDesembolsadoSBD_ME']"
 								},
 								"sink": {
 									"name": "MontoNoDesembolsadoSBD_ME",
@@ -214,7 +214,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCreditoSBD_MN']"
+									"path": "['TotalCuotaCreditoSBD_MN']"
 								},
 								"sink": {
 									"name": "TotalCuotaCreditoSBD_MN",
@@ -223,15 +223,16 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['TotalCuotaCreditoSBD_ME']"
+									"path": "['TotalCuotaCreditoSBD_ME']"
 								},
 								"sink": {
-									"name": "TotalCuotaCreditoSBD_ME"
+									"name": "TotalCuotaCreditoSBD_ME",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['MontoFiadoSBD']"
+									"path": "['MontoFiadoSBD']"
 								},
 								"sink": {
 									"name": "MontoFiadoSBD",
@@ -240,7 +241,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD']"
+									"path": "['AtrasoMaximodiasSBD']"
 								},
 								"sink": {
 									"name": "AtrasoMaximodiasSBD",
@@ -249,7 +250,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD_12']"
+									"path": "['AtrasoMaximodiasSBD_12']"
 								},
 								"sink": {
 									"name": "AtrasoMaximodiasSBD_12",
@@ -258,7 +259,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['AtrasoMaximodiasSBD_24']"
+									"path": "['AtrasoMaximodiasSBD_24']"
 								},
 								"sink": {
 									"name": "AtrasoMaximodiasSBD_24",
@@ -267,7 +268,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['PorcentajeDolarizacion']"
+									"path": "['PorcentajeDolarizacion']"
 								},
 								"sink": {
 									"name": "PorcentajeDolarizacion",
@@ -276,7 +277,7 @@
 							},
 							{
 								"source": {
-									"path": "$['ArchivoCIC']['Deudor'][0]['PorcentajeTasavariable']"
+									"path": "['PorcentajeTasavariable']"
 								},
 								"sink": {
 									"name": "PorcentajeTasavariable",
@@ -284,7 +285,8 @@
 								}
 							}
 						],
-						"collectionReference": ""
+						"collectionReference": "$['ArchivoCIC']['Deudor']",
+						"mapComplexValuesToString": false
 					}
 				},
 				"inputs": [
