@@ -56,7 +56,7 @@
 								},
 								"sink": {
 									"name": "IdPersona",
-									"type": "String"
+									"type": "Int64"
 								}
 							},
 							{
