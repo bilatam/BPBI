@@ -44,7 +44,7 @@
 									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Entidad']"
 								},
 								"sink": {
-									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['Entidad",
+									"name": "Entidad",
 									"type": "String"
 								}
 							},
