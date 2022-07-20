@@ -25,6 +25,7 @@
 						"formatSettings": {
 							"type": "XmlReadSettings",
 							"validationMode": "none",
+							"detectDataType": true,
 							"namespaces": true
 						}
 					},
@@ -32,10 +33,25 @@
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
-					"enableStaging": false
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['Entidad']"
+								},
+								"sink": {
+									"name": "Entidad",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['ArchivoCIC']['Deudor'][0]['ListaOperacionesActivas']['OperacionActiva']",
+						"mapComplexValuesToString": false
+					}
 				},
 				"inputs": [
 					{
