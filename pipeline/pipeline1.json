@@ -41,7 +41,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "['Entidad']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Entidad']"
 								},
 								"sink": {
 									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['Entidad",
@@ -50,160 +50,143 @@
 							},
 							{
 								"source": {
-									"path": "['IdOperacion']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['IdOperacion']"
 								},
 								"sink": {
-									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['IdOperacion",
-									"type": "Int64"
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['IdOperacion"
 								}
 							},
 							{
 								"source": {
-									"path": "['Moneda']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Moneda']"
 								},
 								"sink": {
-									"name": "Moneda",
-									"type": "String"
+									"name": "Moneda"
 								}
 							},
 							{
 								"source": {
-									"path": "['FechaVencimiento']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaVencimiento']"
 								},
 								"sink": {
-									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['FechaVencimiento",
-									"type": "String"
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['FechaVencimiento"
 								}
 							},
 							{
 								"source": {
-									"path": "['FechaFormalizacion']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaFormalizacion']"
 								},
 								"sink": {
-									"name": "FechaFormalizacion",
-									"type": "String"
+									"name": "FechaFormalizacion"
 								}
 							},
 							{
 								"source": {
-									"path": "['Saldo']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Saldo']"
 								},
 								"sink": {
-									"name": "Saldo",
-									"type": "Double"
+									"name": "Saldo"
 								}
 							},
 							{
 								"source": {
-									"path": "['MontoFormalizado']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoFormalizado']"
 								},
 								"sink": {
-									"name": "MontoFormalizado",
-									"type": "Double"
+									"name": "MontoFormalizado"
 								}
 							},
 							{
 								"source": {
-									"path": "['MontoNoDesembolsado']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoNoDesembolsado']"
 								},
 								"sink": {
-									"name": "MontoNoDesembolsado",
-									"type": "Double"
+									"name": "MontoNoDesembolsado"
 								}
 							},
 							{
 								"source": {
-									"path": "['MontoAutorizado']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoAutorizado']"
 								},
 								"sink": {
-									"name": "MontoAutorizado",
-									"type": "Double"
+									"name": "MontoAutorizado"
 								}
 							},
 							{
 								"source": {
-									"path": "['CuotaPrincipal']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['CuotaPrincipal']"
 								},
 								"sink": {
-									"name": "CuotaPrincipal",
-									"type": "Double"
+									"name": "CuotaPrincipal"
 								}
 							},
 							{
 								"source": {
-									"path": "['CuotaIntereses']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['CuotaIntereses']"
 								},
 								"sink": {
-									"name": "CuotaIntereses",
-									"type": "Double"
+									"name": "CuotaIntereses"
 								}
 							},
 							{
 								"source": {
-									"path": "['TipoOperacion']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TipoOperacion']"
 								},
 								"sink": {
-									"name": "TipoOperacion",
-									"type": "Int64"
+									"name": "TipoOperacion"
 								}
 							},
 							{
 								"source": {
-									"path": "['FrecuenciaPagoPrincipal']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FrecuenciaPagoPrincipal']"
 								},
 								"sink": {
-									"name": "FrecuenciaPagoPrincipal",
-									"type": "Int64"
+									"name": "FrecuenciaPagoPrincipal"
 								}
 							},
 							{
 								"source": {
-									"path": "['Condicion']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Condicion']"
 								},
 								"sink": {
-									"name": "Condicion",
-									"type": "String"
+									"name": "Condicion"
 								}
 							},
 							{
 								"source": {
-									"path": "['EstadoOperacion']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['EstadoOperacion']"
 								},
 								"sink": {
-									"name": "EstadoOperacion",
-									"type": "Int64"
+									"name": "EstadoOperacion"
 								}
 							},
 							{
 								"source": {
-									"path": "['DiasAtraso']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['DiasAtraso']"
 								},
 								"sink": {
-									"name": "DiasAtraso",
-									"type": "Int64"
+									"name": "DiasAtraso"
 								}
 							},
 							{
 								"source": {
-									"path": "['TasaInteresNominal']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TasaInteresNominal']"
 								},
 								"sink": {
-									"name": "TasaInteresNominal",
-									"type": "Double"
+									"name": "TasaInteresNominal"
 								}
 							},
 							{
 								"source": {
-									"path": "['TipoTasa']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TipoTasa']"
 								},
 								"sink": {
-									"name": "TipoTasa",
-									"type": "String"
+									"name": "TipoTasa"
 								}
 							},
 							{
 								"source": {
-									"path": "['FechaCambioTipoTasa']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaCambioTipoTasa']"
 								},
 								"sink": {
 									"name": "FechaCambioTipoTasa",
@@ -212,78 +195,110 @@
 							},
 							{
 								"source": {
-									"path": "['ParametroReferencia']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ParametroReferencia']"
 								},
 								"sink": {
-									"name": "ParametroReferencia",
-									"type": "Int64"
+									"name": "ParametroReferencia"
 								}
 							},
 							{
 								"source": {
-									"path": "['FrecuenciaAjusteTasa']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FrecuenciaAjusteTasa']"
 								},
 								"sink": {
-									"name": "FrecuenciaAjusteTasa",
-									"type": "Int64"
+									"name": "FrecuenciaAjusteTasa"
 								}
 							},
 							{
 								"source": {
-									"path": "['ComponenteFijoTasaVariable']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ComponenteFijoTasaVariable']"
 								},
 								"sink": {
-									"name": "ComponenteFijoTasaVariable",
-									"type": "Double"
+									"name": "ComponenteFijoTasaVariable"
 								}
 							},
 							{
 								"source": {
-									"path": "['PisoTasa']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['PisoTasa']"
 								},
 								"sink": {
-									"name": "PisoTasa",
-									"type": "Double"
+									"name": "PisoTasa"
 								}
 							},
 							{
 								"source": {
-									"path": "['TechoTasa']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TechoTasa']"
 								},
 								"sink": {
-									"name": "TechoTasa",
-									"type": "Double"
+									"name": "TechoTasa"
 								}
 							},
 							{
 								"source": {
-									"path": "['Generador']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Generador']"
 								},
 								"sink": {
-									"name": "Generador",
-									"type": "Int64"
+									"name": "Generador"
 								}
 							},
 							{
 								"source": {
-									"path": "['EsSBD']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['EsSBD']"
 								},
 								"sink": {
-									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['EsSBD",
-									"type": "String"
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['EsSBD"
 								}
 							},
 							{
 								"source": {
-									"path": "['ActualizadoAl']"
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ActualizadoAl']"
 								},
 								"sink": {
-									"name": "ActualizadoAl",
-									"type": "String"
+									"name": "ActualizadoAl"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['Entidad']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['Entidad"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['IdOperacion']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['IdOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['EsSBD']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['EsSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['FechaVencimiento']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['FechaVencimiento"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['SituacionOperacion']"
+								},
+								"sink": {
+									"name": "SituacionOperacion"
 								}
 							}
 						],
-						"collectionReference": "$['ArchivoCIC']['Deudor'][0]['ListaOperacionesActivas']['OperacionActiva']"
+						"collectionReference": "$['ArchivoCIC']['Deudor']"
 					}
 				},
 				"inputs": [
