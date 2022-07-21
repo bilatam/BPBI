@@ -26,13 +26,17 @@
 							"type": "XmlReadSettings",
 							"validationMode": "none",
 							"detectDataType": true,
-							"namespaces": true
+							"namespaces": true,
+							"namespacePrefixes": {
+								"https://sadevbidata.blob.core.windows.net/sugef/Archivo Descargable.xsd": "xs"
+							}
 						}
 					},
 					"sink": {
 						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
 						"disableMetricsCollection": false
 					},
 					"enableStaging": false,
@@ -41,16 +45,567 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "['Entidad']"
+									"path": "['TipoPersona']"
 								},
 								"sink": {
-									"name": "Entidad",
-									"type": "String"
+									"name": "TipoPersona"
+								}
+							},
+							{
+								"source": {
+									"path": "['IndicadorNumericoDeudor']"
+								},
+								"sink": {
+									"name": "IndicadorNumericoDeudor"
+								}
+							},
+							{
+								"source": {
+									"path": "['NivelCompPagoHist']"
+								},
+								"sink": {
+									"name": "NivelCompPagoHist"
+								}
+							},
+							{
+								"source": {
+									"path": "['IndicadorReqAut1-05']"
+								},
+								"sink": {
+									"name": "IndicadorReqAut1-05"
+								}
+							},
+							{
+								"source": {
+									"path": "['IndicadorAutorizacion']"
+								},
+								"sink": {
+									"name": "IndicadorAutorizacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['FechaInicioReqAutorizacion']"
+								},
+								"sink": {
+									"name": "FechaInicioReqAutorizacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['SaldoTotalAdeudado_MN']"
+								},
+								"sink": {
+									"name": "SaldoTotalAdeudado_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['SaldoTotalAdeudado_ME']"
+								},
+								"sink": {
+									"name": "SaldoTotalAdeudado_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoNoDesembolsado_MN']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoNoDesembolsado_ME']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['TotalCuotaCredito_MN']"
+								},
+								"sink": {
+									"name": "TotalCuotaCredito_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['TotalCuotaCredito_ME']"
+								},
+								"sink": {
+									"name": "TotalCuotaCredito_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoFiado']"
+								},
+								"sink": {
+									"name": "MontoFiado"
+								}
+							},
+							{
+								"source": {
+									"path": "['IndicadorNumericoDeudorSBD']"
+								},
+								"sink": {
+									"name": "IndicadorNumericoDeudorSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['NivelCompPagoHistSBD']"
+								},
+								"sink": {
+									"name": "NivelCompPagoHistSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['SaldoAdeudadoSBD_MN']"
+								},
+								"sink": {
+									"name": "SaldoAdeudadoSBD_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['SaldoAdeudadoSBD_ME']"
+								},
+								"sink": {
+									"name": "SaldoAdeudadoSBD_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoNoDesembolsadoSBD_MN']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsadoSBD_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoNoDesembolsadoSBD_ME']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsadoSBD_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['TotalCuotaCreditoSBD_MN']"
+								},
+								"sink": {
+									"name": "TotalCuotaCreditoSBD_MN"
+								}
+							},
+							{
+								"source": {
+									"path": "['TotalCuotaCreditoSBD_ME']"
+								},
+								"sink": {
+									"name": "TotalCuotaCreditoSBD_ME"
+								}
+							},
+							{
+								"source": {
+									"path": "['MontoFiadoSBD']"
+								},
+								"sink": {
+									"name": "MontoFiadoSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['AtrasoMaximodiasSBD']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['AtrasoMaximodiasSBD_12']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD_12"
+								}
+							},
+							{
+								"source": {
+									"path": "['AtrasoMaximodiasSBD_24']"
+								},
+								"sink": {
+									"name": "AtrasoMaximodiasSBD_24"
+								}
+							},
+							{
+								"source": {
+									"path": "['PorcentajeDolarizacion']"
+								},
+								"sink": {
+									"name": "PorcentajeDolarizacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['PorcentajeTasavariable']"
+								},
+								"sink": {
+									"name": "PorcentajeTasavariable"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaGrupoInteresEconomico']"
+								},
+								"sink": {
+									"name": "ListaGrupoInteresEconomico"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Encabezado']['Periodo']"
+								},
+								"sink": {
+									"name": "Periodo"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Encabezado']['IdEntidad']"
+								},
+								"sink": {
+									"name": "IdEntidad"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ArchivoCIC']['Encabezado']['Registros']"
+								},
+								"sink": {
+									"name": "Registros"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Entidad']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['Entidad"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['IdOperacion']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['IdOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Moneda']"
+								},
+								"sink": {
+									"name": "Moneda"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaVencimiento']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['FechaVencimiento"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaFormalizacion']"
+								},
+								"sink": {
+									"name": "FechaFormalizacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Saldo']"
+								},
+								"sink": {
+									"name": "Saldo"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoFormalizado']"
+								},
+								"sink": {
+									"name": "MontoFormalizado"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoNoDesembolsado']"
+								},
+								"sink": {
+									"name": "MontoNoDesembolsado"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['MontoAutorizado']"
+								},
+								"sink": {
+									"name": "MontoAutorizado"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['CuotaPrincipal']"
+								},
+								"sink": {
+									"name": "CuotaPrincipal"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['CuotaIntereses']"
+								},
+								"sink": {
+									"name": "CuotaIntereses"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TipoOperacion']"
+								},
+								"sink": {
+									"name": "TipoOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FrecuenciaPagoPrincipal']"
+								},
+								"sink": {
+									"name": "FrecuenciaPagoPrincipal"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Condicion']"
+								},
+								"sink": {
+									"name": "Condicion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['EstadoOperacion']"
+								},
+								"sink": {
+									"name": "EstadoOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['DiasAtraso']"
+								},
+								"sink": {
+									"name": "DiasAtraso"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TasaInteresNominal']"
+								},
+								"sink": {
+									"name": "TasaInteresNominal"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TipoTasa']"
+								},
+								"sink": {
+									"name": "TipoTasa"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FechaCambioTipoTasa']"
+								},
+								"sink": {
+									"name": "FechaCambioTipoTasa"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ParametroReferencia']"
+								},
+								"sink": {
+									"name": "ParametroReferencia"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['FrecuenciaAjusteTasa']"
+								},
+								"sink": {
+									"name": "FrecuenciaAjusteTasa"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ComponenteFijoTasaVariable']"
+								},
+								"sink": {
+									"name": "ComponenteFijoTasaVariable"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['PisoTasa']"
+								},
+								"sink": {
+									"name": "PisoTasa"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['TechoTasa']"
+								},
+								"sink": {
+									"name": "TechoTasa"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['Generador']"
+								},
+								"sink": {
+									"name": "Generador"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['EsSBD']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesActivas_OperacionActiva'][0]['EsSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesActivas']['OperacionActiva'][0]['ActualizadoAl']"
+								},
+								"sink": {
+									"name": "ActualizadoAl"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['Entidad']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['Entidad"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['IdOperacion']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['IdOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['EsSBD']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['EsSBD"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['FechaVencimiento']"
+								},
+								"sink": {
+									"name": "ArchivoCIC_Deudor'][0]['ListaOperacionesHistorico_OperacionHistorica'][0]['FechaVencimiento"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['SituacionOperacion']"
+								},
+								"sink": {
+									"name": "SituacionOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['MotivoNoReporteliquidacion']"
+								},
+								"sink": {
+									"name": "MotivoNoReporteliquidacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['NumMesesReportados']"
+								},
+								"sink": {
+									"name": "NumMesesReportados"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['UltimoPeriodoReportado']"
+								},
+								"sink": {
+									"name": "UltimoPeriodoReportado"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['AtrasoMaximoEnDias']"
+								},
+								"sink": {
+									"name": "AtrasoMaximoEnDias"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['AtrasoMedioEnDias']"
+								},
+								"sink": {
+									"name": "AtrasoMedioEnDias"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['PuntajeOperacion']"
+								},
+								"sink": {
+									"name": "PuntajeOperacion"
+								}
+							},
+							{
+								"source": {
+									"path": "['ListaOperacionesHistorico']['OperacionHistorica'][0]['PonderadorOperacion']"
+								},
+								"sink": {
+									"name": "PonderadorOperacion"
 								}
 							}
 						],
-						"collectionReference": "$['ArchivoCIC']['Deudor'][0]['ListaOperacionesActivas']['OperacionActiva']",
-						"mapComplexValuesToString": false
+						"collectionReference": "$['ArchivoCIC']['Deudor']",
+						"mapComplexValuesToString": true
 					}
 				},
 				"inputs": [
