@@ -69,6 +69,7 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     stagingSchemaName: 'STAGE',",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
