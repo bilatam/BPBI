@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "DestinationSynapseSugef",
+						"referenceName": "DestinatiosynSugef",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -71,22 +71,46 @@
 				"flatten1 sink(allowSchemaDrift: false,",
 				"     validateSchema: false,",
 				"     input(",
-				"          id as integer,",
-				"          Entidad as string",
+				"          Opa_IdOperacion as string,",
+				"          Opa_IdPersona as long,",
+				"          Opa_Entidad as string,",
+				"          Opa_Moneda as string,",
+				"          Opa_FechaVencimiento as timestamp,",
+				"          Opa_FechaFormalizacion as timestamp,",
+				"          Opa_Saldo as decimal(18,2),",
+				"          Opa_MontoFormalizado as decimal(18,2),",
+				"          Opa_MontoNoDesembolsado as decimal(18,2),",
+				"          Opa_MontoAutorizado as decimal(18,2),",
+				"          Opa_CuotaPrincipal as decimal(18,2),",
+				"          Opa_CuotaIntereses as decimal(18,2),",
+				"          Opa_TipoOperacion as integer,",
+				"          Opa_FrecuenciaPaPrincipal as integer,",
+				"          Opa_Condicion as string,",
+				"          Opa_EstadoOperacion as integer,",
+				"          Opa_DiasAtraso as integer,",
+				"          Opa_TasaInteresNominal as decimal(5,2),",
+				"          Opa_TipoTasa as string,",
+				"          Opa_FechaCambioTasa as timestamp,",
+				"          Opa_ParametroReferencia as integer,",
+				"          Opa_FrecuenciaAjusteTasa as integer,",
+				"          Opa_ComponenteFijoTasa as decimal(5,2),",
+				"          Opa_PisoTasa as decimal(5,2),",
+				"          Opa_TechoTasa as decimal(5,2),",
+				"          Opa_Generador as integer,",
+				"          Opa_EsSBD as string,",
+				"          Opa_ActualizadoAl as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     recreate:true,",
 				"     format: 'table',",
 				"     staged: true,",
 				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError',",
-				"     mapColumn(",
-				"          Entidad",
-				"     )) ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
 			]
 		}
 	}
