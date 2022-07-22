@@ -84,7 +84,7 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     errorHandlingOption: 'stopOnFirstError',",
 				"     mapColumn(",
-				"          Entidad",
+				"          {} = ActualizadoAl",
 				"     )) ~> sink1"
 			]
 		}
