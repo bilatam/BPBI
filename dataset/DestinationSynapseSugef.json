@@ -20,7 +20,7 @@
 		],
 		"typeProperties": {
 			"schema": "STAGE",
-			"table": "SUGEFOperacionesActivas"
+			"table": "SUGEFOperacionesActivas2"
 		}
 	}
 }
