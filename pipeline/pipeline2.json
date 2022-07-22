@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "dataF",
+				"name": "DataF",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -15,13 +15,6 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"staging": {
-						"linkedService": {
-							"referenceName": "SA_Popular",
-							"type": "LinkedServiceReference"
-						},
-						"folderPath": "sugef"
-					},
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
