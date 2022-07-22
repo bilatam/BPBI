@@ -27,7 +27,7 @@
 						"folderPath": "sugef"
 					},
 					"compute": {
-						"coreCount": 144,
+						"coreCount": 272,
 						"computeType": "MemoryOptimized"
 					},
 					"traceLevel": "Fine"
