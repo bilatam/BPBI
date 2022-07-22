@@ -27,7 +27,7 @@
 						"folderPath": "sugef"
 					},
 					"compute": {
-						"coreCount": 8,
+						"coreCount": 48,
 						"computeType": "General"
 					},
 					"traceLevel": "Fine"
