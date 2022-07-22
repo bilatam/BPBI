@@ -80,9 +80,13 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     staged: true,",
+				"     allowCopyCommand: true,",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Entidad",
+				"     )) ~> sink1"
 			]
 		}
 	}
