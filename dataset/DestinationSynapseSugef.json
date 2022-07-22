@@ -1,0 +1,26 @@
+{
+	"name": "DestinationSynapseSugef",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PruebaDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Entidad",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "STAGE",
+			"table": "SUGEFOperacionesActivas"
+		}
+	}
+}

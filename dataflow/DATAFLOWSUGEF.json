@@ -15,7 +15,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "Destination_OperacionesActivasSugef",
+						"referenceName": "DestinationSynapseSugef",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -69,11 +69,17 @@
 				"     skipDuplicateMapOutputs: false) ~> flatten1",
 				"flatten1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     input(",
+				"          id as integer,",
+				"          Entidad as string",
+				"     ),",
+				"     stagingSchemaName: 'STAGE',",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
+				"     staged: true,",
 				"     preSQLs:['ALTER INDEX ALL ON STAGE.SUGEFOperacionesActivas\\nDISABLE'],",
 				"     postSQLs:['ALTER INDEX ALL ON STAGE.SUGEFOperacionesActivas REBUILD'],",
 				"     skipDuplicateMapInputs: true,",
