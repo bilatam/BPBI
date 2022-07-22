@@ -1,0 +1,77 @@
+{
+	"name": "DestinationSynapseSUGEFOpeHist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PruebaDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "Oph_IdOperacion",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Oph_Entidad",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Oph_EsSBD",
+				"type": "nchar"
+			},
+			{
+				"name": "Oph_FechaVencimiento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Oph_SitucacionOperacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Oph_MotivoNoReporte",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Oph_MesesReportados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Oph_UltimoPeriodo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Oph_AtrasoMaximoDias",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Oph_AtrasoMedioDias",
+				"type": "decimal",
+				"precision": 9,
+				"scale": 4
+			},
+			{
+				"name": "Oph_PuntajeOperacion",
+				"type": "decimal",
+				"precision": 5,
+				"scale": 4
+			},
+			{
+				"name": "Oph_PonderadorOperacion",
+				"type": "decimal",
+				"precision": 12,
+				"scale": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "STAGE",
+			"table": "SUGEFOperacionesHistoricas"
+		}
+	}
+}

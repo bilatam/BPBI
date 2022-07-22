@@ -26,6 +26,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sinkDeudor"
+				},
+				{
+					"dataset": {
+						"referenceName": "DestinationSynapseSUGEFOpeHist",
+						"type": "DatasetReference"
+					},
+					"name": "sinkOperacionesHist"
 				}
 			],
 			"transformations": [
@@ -34,11 +41,14 @@
 				},
 				{
 					"name": "Deudor"
+				},
+				{
+					"name": "OperacionesHist"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          ArchivoCIC as (Deudor as (AtrasoMaximodiasSBD as short, AtrasoMaximodiasSBD_12 as short, AtrasoMaximodiasSBD_24 as short, FechaInicioReqAutorizacion as date, IdPersona as integer, IndicadorAutorizacion as string, IndicadorNumericoDeudor as double, IndicadorNumericoDeudorSBD as double, {IndicadorReqAut1-05} as string, ListaGrupoInteresEconomico as string, ListaOperacionesActivas as (OperacionActiva as (ActualizadoAl as string, ComponenteFijoTasaVariable as double, Condicion as string, CuotaIntereses as double, CuotaPrincipal as double, DiasAtraso as short, Entidad as string, EsSBD as string, EstadoOperacion as short, FechaCambioTipoTasa as string, FechaFormalizacion as string, FechaVencimiento as string, FrecuenciaAjusteTasa as short, FrecuenciaPagoPrincipal as short, Generador as short, IdOperacion as string, Moneda as string, MontoAutorizado as double, MontoFormalizado as double, MontoNoDesembolsado as double, ParametroReferencia as short, PisoTasa as double, Saldo as double, TasaInteresNominal as double, TechoTasa as double, TipoOperacion as short, TipoTasa as string)[]), ListaOperacionesHistorico as (OperacionHistorica as (AtrasoMaximoEnDias as short, AtrasoMedioEnDias as double, Entidad as string, EsSBD as boolean, FechaVencimiento as string, IdOperacion as string, MotivoNoReporteliquidacion as short, NumMesesReportados as short, PonderadorOperacion as double, PuntajeOperacion as double, SituacionOperacion as short, UltimoPeriodoReportado as string)[]), MontoFiado as double, MontoFiadoSBD as double, MontoNoDesembolsadoSBD_ME as double, MontoNoDesembolsadoSBD_MN as double, MontoNoDesembolsado_ME as double, MontoNoDesembolsado_MN as double, NivelCompPagoHist as short, NivelCompPagoHistSBD as short, PorcentajeDolarizacion as double, PorcentajeTasavariable as double, SaldoAdeudadoSBD_ME as double, SaldoAdeudadoSBD_MN as double, SaldoTotalAdeudado_ME as double, SaldoTotalAdeudado_MN as double, TipoPersona as boolean, TotalCuotaCreditoSBD_ME as double, TotalCuotaCreditoSBD_MN as double, TotalCuotaCredito_ME as double, TotalCuotaCredito_MN as double)[], Encabezado as (IdEntidad as long, Periodo as date, Registros as integer))",
+				"          ArchivoCIC as (Deudor as (AtrasoMaximodiasSBD as short, AtrasoMaximodiasSBD_12 as short, AtrasoMaximodiasSBD_24 as short, FechaInicioReqAutorizacion as date, IdPersona as integer, IndicadorAutorizacion as string, IndicadorNumericoDeudor as double, IndicadorNumericoDeudorSBD as double, {IndicadorReqAut1-05} as string, ListaGrupoInteresEconomico as string, ListaOperacionesActivas as (OperacionActiva as (ActualizadoAl as string, ComponenteFijoTasaVariable as double, Condicion as string, CuotaIntereses as double, CuotaPrincipal as double, DiasAtraso as short, Entidad as string, EsSBD as string, EstadoOperacion as short, FechaCambioTipoTasa as string, FechaFormalizacion as string, FechaVencimiento as string, FrecuenciaAjusteTasa as short, FrecuenciaPagoPrincipal as short, Generador as short, IdOperacion as string, Moneda as string, MontoAutorizado as double, MontoFormalizado as double, MontoNoDesembolsado as double, ParametroReferencia as short, PisoTasa as double, Saldo as double, TasaInteresNominal as double, TechoTasa as double, TipoOperacion as short, TipoTasa as string)[]), ListaOperacionesHistorico as (OperacionHistorica as (AtrasoMaximoEnDias as short, AtrasoMedioEnDias as double, Entidad as string, EsSBD as string, FechaVencimiento as string, IdOperacion as string, MotivoNoReporteliquidacion as short, NumMesesReportados as short, PonderadorOperacion as double, PuntajeOperacion as double, SituacionOperacion as short, UltimoPeriodoReportado as string)[]), MontoFiado as double, MontoFiadoSBD as double, MontoNoDesembolsadoSBD_ME as double, MontoNoDesembolsadoSBD_MN as double, MontoNoDesembolsado_ME as double, MontoNoDesembolsado_MN as double, NivelCompPagoHist as short, NivelCompPagoHistSBD as short, PorcentajeDolarizacion as double, PorcentajeTasavariable as double, SaldoAdeudadoSBD_ME as double, SaldoAdeudadoSBD_MN as double, SaldoTotalAdeudado_ME as double, SaldoTotalAdeudado_MN as double, TipoPersona as boolean, TotalCuotaCreditoSBD_ME as double, TotalCuotaCreditoSBD_MN as double, TotalCuotaCredito_ME as double, TotalCuotaCredito_MN as double)[], Encabezado as (IdEntidad as long, Periodo as date, Registros as integer))",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -114,6 +124,23 @@
 				"     ),",
 				"     skipDuplicateMapInputs: false,",
 				"     skipDuplicateMapOutputs: false) ~> Deudor",
+				"source1 foldDown(unroll(ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica, ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica),",
+				"     mapColumn(",
+				"          AtrasoMaximoEnDias = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.AtrasoMaximoEnDias,",
+				"          AtrasoMedioEnDias = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.AtrasoMedioEnDias,",
+				"          Entidad = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.Entidad,",
+				"          EsSBD = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.EsSBD,",
+				"          FechaVencimiento = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.FechaVencimiento,",
+				"          IdOperacion = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.IdOperacion,",
+				"          MotivoNoReporteliquidacion = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.MotivoNoReporteliquidacion,",
+				"          NumMesesReportados = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.NumMesesReportados,",
+				"          PonderadorOperacion = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.PonderadorOperacion,",
+				"          PuntajeOperacion = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.PuntajeOperacion,",
+				"          SituacionOperacion = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.SituacionOperacion,",
+				"          UltimoPeriodoReportado = ArchivoCIC.Deudor.ListaOperacionesHistorico.OperacionHistorica.UltimoPeriodoReportado",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> OperacionesHist",
 				"OperacionesActivas sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -255,7 +282,48 @@
 				"          AtrasoMaximodiasSBD_24,",
 				"          PorcentajeDolarizacion,",
 				"          PorcentajeTasavariable",
-				"     )) ~> sinkDeudor"
+				"     )) ~> sinkDeudor",
+				"OperacionesHist sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Oph_IdOperacion as string,",
+				"          Oph_Entidad as string,",
+				"          Oph_EsSBD as string,",
+				"          Oph_FechaVencimiento as timestamp,",
+				"          Oph_SitucacionOperacion as integer,",
+				"          Oph_MotivoNoReporte as integer,",
+				"          Oph_MesesReportados as integer,",
+				"          Oph_UltimoPeriodo as string,",
+				"          Oph_AtrasoMaximoDias as integer,",
+				"          Oph_AtrasoMedioDias as decimal(9,4),",
+				"          Oph_PuntajeOperacion as decimal(5,4),",
+				"          Oph_PonderadorOperacion as decimal(12,10)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     staged: true,",
+				"     allowCopyCommand: true,",
+				"     preSQLs:['Delete from [STAGE].[SUGEFOperacionesHistoricas]'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          Oph_IdOperacion = IdOperacion,",
+				"          Oph_Entidad = Entidad,",
+				"          Oph_EsSBD = EsSBD,",
+				"          Oph_FechaVencimiento = FechaVencimiento,",
+				"          Oph_SitucacionOperacion = SituacionOperacion,",
+				"          Oph_MotivoNoReporte = MotivoNoReporteliquidacion,",
+				"          Oph_MesesReportados = NumMesesReportados,",
+				"          Oph_UltimoPeriodo = UltimoPeriodoReportado,",
+				"          Oph_AtrasoMaximoDias = AtrasoMaximoEnDias,",
+				"          Oph_AtrasoMedioDias = AtrasoMedioEnDias,",
+				"          Oph_PuntajeOperacion = PuntajeOperacion,",
+				"          Oph_PonderadorOperacion = PonderadorOperacion",
+				"     )) ~> sinkOperacionesHist"
 			]
 		}
 	}
