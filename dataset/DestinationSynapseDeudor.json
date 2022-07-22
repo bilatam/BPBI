@@ -1,0 +1,164 @@
+{
+	"name": "DestinationSynapseDeudor",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "PruebaDW",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [
+			{
+				"name": "IdPersona",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TipoPersona",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "IndicadorNumericoDeudor",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "NivelCompPagoHist",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaInicioReqAutorizacion",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "SaldoTotalAdeudado_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "SaldoTotalAdeudado_ME",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MontoNoDesembolsado_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MontoNoDesembolsado_ME",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "TotalCuotaCredito_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "TotalCuotaCredito_ME",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MontoFiado",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "IndicadorNumericoDeudorSBD",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "NivelCompPagoHistSBD",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "SaldoAdeudadoSBD_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "SaldoAdeudadoSBD_ME",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MontoNoDesembolsadoSBD_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "MontoNoDesembolsadoSBD_ME",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "TotalCuotaCreditoSBD_MN",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "TotalCuotaCreditoSBD_ME",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "MontoFiadoSBD",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "AtrasoMaximodiasSBD",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AtrasoMaximodiasSBD_12",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AtrasoMaximodiasSBD_24",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PorcentajeDolarizacion",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			},
+			{
+				"name": "PorcentajeTasavariable",
+				"type": "decimal",
+				"precision": 38,
+				"scale": 18
+			}
+		],
+		"typeProperties": {
+			"schema": "STAGE",
+			"table": "SUGEFDeudor"
+		}
+	}
+}
